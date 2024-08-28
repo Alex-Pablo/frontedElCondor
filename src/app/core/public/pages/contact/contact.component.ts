@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  empresa: string = `<p>empresad</p>`
 
+
+  
 }
