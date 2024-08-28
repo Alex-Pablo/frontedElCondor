@@ -9,7 +9,4 @@ import { Component } from '@angular/core';
 })
 export class ContactComponent {
   empresa: string = `<p>empresad</p>`
-
-
-  
 }
