@@ -10,5 +10,7 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class PublicLayoutComponent {
-  logocondor: string = 'public/img/logo.png'
+  logocondor: string = 'img/logo.png'
+  iconcontacto: string = 'icon/contacto.png'
+  iconlogin: string = 'icon/login.png'
 }
