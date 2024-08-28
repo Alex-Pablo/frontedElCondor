@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  email: string = '';
+  password: string = '';
+
+  onSubmit(){
+    console.log('Login submitted', this.email, this.password);
+  }
 
 }
