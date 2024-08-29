@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-
+    empresael: string = 'EL';
+    empresac: string = 'CONDOR';
+    direccion: string = 'Sololá. 6ta ave 4-55 zona 2 Barrio El Calvario'
 }
