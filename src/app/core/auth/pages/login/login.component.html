@@ -2,6 +2,9 @@
     <main>
         <div class="login-form">
             <h2>Iniciar Sesión</h2>
+            <div *ngIf="formSubmitted && loginForm.invalid" class="general-error-message">
+                <small>Es necesario llenar todos los campos correctamente.</small>
+            </div>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="email">Email:</label>

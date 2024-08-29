@@ -17,6 +17,7 @@ export class LoginPageComponent {
   loginForm: FormGroup;
   imagePath: string = '/img/prueba.png';
   isLoading: boolean = false;
+  formSubmitted: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
@@ -26,6 +27,8 @@ export class LoginPageComponent {
   }
 
   onSubmit() {
+    this.formSubmitted = true;
+
     if (this.loginForm.valid) {
       this.isLoading = true;
 
