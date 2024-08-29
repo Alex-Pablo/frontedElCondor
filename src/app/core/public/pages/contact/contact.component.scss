@@ -16,10 +16,31 @@
     position: relative; 
 }
 .icon-location {
-    width: 40px; 
-    height: 40px; 
+    width: 45px; 
+    height: 45px; 
     vertical-align: middle; 
     margin-left: 15px; 
+}
+.icon-call {
+    width: 45px; 
+    height: 45px; 
+    vertical-align: middle; 
+    margin-left: 241px; 
+}
+.icon-gmail {
+    width: 45px; 
+    height: 45px; 
+    vertical-align: middle; 
+    margin-left: 158px; 
+}
+.contenedor2 {
+    position: absolute; 
+    right: 65%;
+}
+.contenedor2 img {
+    margin-left: 15px;
+    width: 50px; 
+    height: 50px;  
 }
 .map-container {
     position: absolute; /* Posiciona el contenedor absolutamente en relación con el body o un contenedor relativo */
