@@ -3,15 +3,15 @@
     color: var(--contrast-blue-color);
     width: 80vw; 
     display: flex;
-    flex-direction: row; /* Los hijos se colocan en una fila */
-    justify-content: flex-end; /* Los hijos se alinean al final (derecha) */
-    margin: 0 auto; /* Centrar el contenedor en la página */
+    flex-direction: row; 
+    justify-content: flex-end; 
+    margin: 0 auto; 
 }
 
 main{
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* Deja un espacio entre los hijos */
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
 }
@@ -71,8 +71,8 @@ main{
     justify-content: center;
     align-items: center;
     background-color: var(--primary-color); 
-    width: 10%;  /* Ajusta el ancho del contenedor al 50% del contenedor padre */
-    height: 90vh; /* Ajusta la altura del contenedor al 50% de la altura del viewport */
+    width: 10%;  
+    height: 90vh; 
     left: 40%;
 }
 
