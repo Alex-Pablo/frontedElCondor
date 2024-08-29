@@ -19,8 +19,5 @@ export class HomeComponent {
   Cat3: string = 'Albañilería';
   Cat4: string = 'Categoría X';
   Cat5: string = 'Categoría R';
- 
-
-
-
+}
 
