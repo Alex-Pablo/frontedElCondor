@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
-
+  crearUsuario(){
+    console.log('abrir modal o dialog para crear el usarios');
+  }
 }
