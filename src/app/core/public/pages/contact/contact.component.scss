@@ -1,0 +1,61 @@
+.contenedor p {
+    position: relative; /* Posiciona el contenedor de manera absoluta con respecto a su contenedor padre */
+    top: 15%; 
+    left: 21%; /* Deja un 25% de espacio desde el lado izquierdo del navegador */
+    color: var(--txt-orange-color);
+    font-family: 'PoppinsBold';
+    font-size: 50px;
+    position: relative; 
+    margin: 0
+}
+.contenedor1 p{
+    left: 10%;
+    color: var(--third-txt-color);
+    font-family: 'PoppinsMedium';
+    font-size: 15px;
+    position: relative; 
+}
+.icon-location {
+    width: 45px; 
+    height: 45px; 
+    vertical-align: middle; 
+    margin-left: 15px; 
+}
+.icon-call {
+    width: 45px; 
+    height: 45px; 
+    vertical-align: middle; 
+    margin-left: 241px; 
+}
+.icon-gmail {
+    width: 45px; 
+    height: 45px; 
+    vertical-align: middle; 
+    margin-left: 158px; 
+}
+.contenedor2 {
+    position: absolute; 
+    right: 65%;
+}
+.contenedor2 img {
+    margin-left: 15px;
+    width: 50px; 
+    height: 50px;  
+}
+.map-container {
+    position: absolute; /* Posiciona el contenedor absolutamente en relación con el body o un contenedor relativo */
+    top: 15%; 
+    right: 10%; 
+    width: 600px; 
+    height: 400px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; /* Asegura que el iframe no sobresalga del contenedor */
+}
+html, body {
+    overflow-x: hidden; /* Oculta el scroll horizontal */
+    overflow-y: hidden; /* Oculta el scroll vertical */
+    margin: 0; /* Asegura que no haya márgenes adicionales que podrían causar desplazamiento */
+    height: 100%; /* Asegura que el contenido del body use toda la altura disponible */
+}
+
+

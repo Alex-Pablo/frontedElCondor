@@ -8,6 +8,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './public-layout.component.html',
   styleUrl: './public-layout.component.scss'
 })
-export class PublicLayoutComponent {
 
+export class PublicLayoutComponent {
+  logocondor: string = 'img/logo.png'
+  iconcontacto: string = 'icon/contacto.png'
+  iconlogin: string = 'icon/login.png'
 }
