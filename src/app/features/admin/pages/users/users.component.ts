@@ -11,4 +11,6 @@ export class UsersComponent {
   crearUsuario(){
     console.log('abrir modal o dialog para crear el usarios');
   }
+
+  NombreEmpresa: string = 'EL CONDOR';
 }
