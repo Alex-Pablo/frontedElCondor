@@ -55,13 +55,15 @@ onSubmit() {
           showConfirmButton: false
         }).then(() => {
           //
+          this.router.navigate(['/admin/usuarios'])
         });
       },
       error: (error: any) => {
+        console.log(error.error);
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "Correo o contraseña incorrecta",
+          text: error.error,
           timer: 3000,
           showConfirmButton: false
         });
