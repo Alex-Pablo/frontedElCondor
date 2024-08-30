@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-
+import Swal from 'sweetalert2';
+import { AnimationBuilder } from '@angular/animations';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -27,20 +28,49 @@ export class LoginPageComponent {
     });
   }
 
-  onSubmit() {
-    this.formSubmitted = true;
 
-    if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
 
-      this.auth.login(email, password)
-        .subscribe((data:any)=> {
-          console.log(data);
+onSubmit() {
+  this.formSubmitted = true;
 
-        })
-    } else {
-      console.log('Form is not valid');
-    }
+  if (this.loginForm.valid) {
+    Swal.fire({
+      title: 'Iniciando Sesión',
+      text: 'Espere por favor....',
+      showConfirmButton: false,
+      allowOutsideClick: false
+    });
+    Swal.showLoading();
+
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+
+    this.auth.login(email, password).subscribe({
+      next: (res: any) => {
+        Swal.fire({
+          icon: "success",
+          title: "Acceso concedido",
+          text: "Accediendo al sistema",
+          timer: 1000,
+          showConfirmButton: false
+        }).then(() => {
+          //
+        });
+      },
+      error: (error: any) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Correo o contraseña incorrecta",
+          timer: 3000,
+          showConfirmButton: false
+        });
+      }
+    });
+  } else {
+    console.log('Form is not valid');
   }
+}
+
+
 }
