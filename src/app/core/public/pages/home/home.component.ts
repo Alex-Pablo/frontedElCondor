@@ -19,5 +19,11 @@ export class HomeComponent {
   Cat3: string = 'Albañilería';
   Cat4: string = 'Categoría X';
   Cat5: string = 'Categoría R';
+  imageUrl: string = 'img/Cuchara.jpg';
+  Titulo: string = 'Cuchara para albañil.';
+  Precio: string = 'Q23';
+  Disponible: number = 34;
+  Codigo: string = '#323435';
 }
+
 
