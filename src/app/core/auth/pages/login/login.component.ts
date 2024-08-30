@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginPageComponent {
   isLoading: boolean = false;
   formSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -30,13 +31,14 @@ export class LoginPageComponent {
     this.formSubmitted = true;
 
     if (this.loginForm.valid) {
-      this.isLoading = true;
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
 
-      setTimeout(() => {
-        console.log('login submitted', this.loginForm.value);
-        this.isLoading = false;
-        this.router.navigate(['/src/index.html']);
-      }, 2000);
+      this.auth.login(email, password)
+        .subscribe((data:any)=> {
+          console.log(data);
+
+        })
     } else {
       console.log('Form is not valid');
     }
