@@ -37,14 +37,6 @@
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Alex-Pablo/frontedElCondor.git"
-  },
-  "author": "Nova",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Alex-Pablo/frontedElCondor/issues"
-  },
-  "homepage": "https://github.com/Alex-Pablo/frontedElCondor#readme"
+  "author": "",
+  "license": "ISC"
 }
