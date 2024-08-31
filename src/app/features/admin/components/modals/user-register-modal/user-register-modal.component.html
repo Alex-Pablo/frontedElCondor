@@ -1,1 +1,71 @@
-<p>user-register-modal works!</p>
+<h2 mat-dialog-title>Crear usuario</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="loginForm">
+
+    <div class="wrapperForm" >
+
+      <div class="wrapperRowForm">
+        <div class="wrapperInput">
+          <label for="NombreUser">Nombre Usuario</label>
+          <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
+        </div>
+        <div class="wrapperInput" >
+          <label for="ApellidoUser">Apellidos</label>
+          <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname" >
+        </div>
+      </div>
+
+    <div class="wrapperRowForm">
+        <div class="wrapperInput">
+          <label for="TelefonoUser">Numero de telefono</label>
+          <input type="text" name="" value="" placeholder="Ingrese el numero de telefono" formControlName="phoneNumber" >
+        </div>
+        <div class="wrapperInput" >
+          <label for="EmailUser">Correo Electronico</label>
+          <input type="email" name="" value="" placeholder="Ingrese el correo Electronico"formControlName="email" >
+        </div>
+      </div>
+
+      <div class="wrapperRowForm">
+        <div class="wrapperInput">
+          <label for="RoleuserOptions">Role del usuario</label>
+          <select id="RoleuserOptions" formControlName="role">
+            <option value="1">Administrador</option>
+            <option value="2">Cajero</option>
+          </select>
+        </div>
+
+        <div class="wrapperInput">
+          <label for="EstadouserOptions">Selecione el estado</label>
+
+          <select id="EstadouserOptions"formControlName="estado" >
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+          </select>
+        </div>
+
+      </div>
+
+
+      <div class="wrapperRowForm">
+        <div class="wrapperInput">
+          <label for="ImgUser">Foto del usuario</label>
+         <input id="profileImg" type="file" (change)="onFileChange($event)">
+        </div>
+      </div>
+
+      <div class="wrapperRowForm">
+        <div class="wrapperInput">
+          <button type="button" (click)="generatePassword()">Generrar Contraseña</button>
+        </div>
+      </div>
+
+
+    </div>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar</button>
+</mat-dialog-actions>
+

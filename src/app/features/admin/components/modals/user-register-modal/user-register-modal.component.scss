@@ -1,0 +1,25 @@
+.wrapperForm{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .wrapperRowForm{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    .wrapperInput{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      input{
+        width: 100%;
+      }
+    };
+  };
+};
+
+
+
+

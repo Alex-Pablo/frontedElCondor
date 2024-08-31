@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { JWTTokenService } from './jwttoken.service';
+import {environment} from '../../../environments/environment'
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +28,11 @@ export class AuthService {
           }
         )
       )
+  }
+
+  register(formData: any){
+    console.log(formData);
+
+    return this.http.post<any>(`${environment.baseUrlApi}/User/register`,formData )
   }
 }
