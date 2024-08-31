@@ -1,0 +1,211 @@
+.container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.sidebar {
+    background-color: var( --txt-orange-color  );
+  width: 250px;
+  padding: 20px;
+  color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
+  background-color: var(--bg-color);
+}
+
+.logo-image {
+  width: 50px; /* Ajusta el tamaño según sea necesario */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.logo-text {
+  font-size: 18px; /* Ajusta el tamaño de la fuente según sea necesario */
+  font-weight: bold; /* Estilo opcional para hacer el texto más prominente */
+  color: var(--contrast-blue-color);
+}
+
+
+.menu {
+  flex-grow: 1;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  margin-bottom: 30px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: var(--bg-color);
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.menu ul li.active a {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color:var(--bg-color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center; /* Alinea el ícono y los detalles verticalmente */
+  gap: 15px; /* Espacio entre el ícono y los detalles */
+}
+
+.user-info .user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; /* Apila el nombre y el rol verticalmente */
+  align-items: flex-start; /* Alinea los detalles a la izquierda */
+}
+
+.user-details .user-name {
+  font-weight: bold;
+  margin-bottom: 5px; /* Espacio entre el nombre y el rol */
+}
+
+.user-details .user-role {
+  font-size: 12px;
+}
+
+
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls .pdf-button,
+.controls .search-button,
+.controls .add-user-button {
+  padding: 8px 12px;
+  border: none;
+  color:var(--bg-color);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.controls .pdf-button:hover,
+.controls .search-button:hover,
+.controls .add-user-button:hover {
+  background-color: var(--sky-color);
+}
+
+.controls .date-input,
+.controls .state-select,
+.controls .role-select,
+.controls .search-input {
+  padding: 8px;
+  border: 1px solid var(--bg-color);
+  border-radius: 4px;
+}
+
+.controls .add-user-button {
+  background-color: var( --txt-orange-color  );
+  font-size: 20px;
+  padding: 8px 16px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px;
+  border: 1px solid var(--txt-second-color);
+  text-align: left;
+}
+
+.user-table th {
+  background-color: var(--txt-second-color);;
+  font-weight: bold;
+}
+
+.user-table td img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.actions {
+  position: relative;
+}
+
+.actions .more-options {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.actions .dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color:var(--bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.actions .dropdown a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+}
+
+.actions .dropdown a.delete {
+  color: var(--bg-red-color);
+}
+
+.actions:hover .dropdown {
+  display: block;
+}
