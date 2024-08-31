@@ -1,3 +1,18 @@
 <!--Menu Desplegable-->
-<p>main-layout works!</p>
+<nav class="sidebar">
+    <ul>
+        <li>Inventario</li>
+        <li>Ventas</li>
+        <li>Reportes</li>
+        <li (click)="toggleConfig()">
+            <span>Configuración</span>
+            <div class="submenu" *ngIf="isConfigOpen">
+                <ul>
+                    <li>Usuarios</li>
+                    <li>Roles</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>
