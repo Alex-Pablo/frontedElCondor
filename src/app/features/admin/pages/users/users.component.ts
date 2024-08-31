@@ -1,16 +1,38 @@
 import { Component } from '@angular/core';
+import {MatDialogModule, MatDialog} from '@angular/material/dialog'
+import { UserRegisterModalComponent } from '../../components/modals/user-register-modal/user-register-modal.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [],
+  imports: [MatDialogModule],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  crearUsuario(){
-    console.log('abrir modal o dialog para crear el usarios');
-  }
 
-  NombreEmpresa: string = 'EL CONDOR';
+    constructor(private _matDialog: MatDialog){
+
+  }
+  crearUsuario(){
+    this._matDialog.open(UserRegisterModalComponent, {
+      width: '90vw',
+      height: '80vh',
+      disableClose: true
+    })
+  }
+  //datos para la tabla
+  users = [
+    {
+      no: '#1',
+      foto: 'path_to_user_image',
+      nombre: 'Edwin Alvarez',
+      role: 'Administrador',
+      ultimaActividad: '26/8/2024 3:23',
+      estado: 'activo',
+      creacion: '26/8/2024 10:23',
+    },
+    // Más usuarios
+  ];
 }
+
