@@ -13,4 +13,5 @@ export class PublicLayoutComponent {
   logocondor: string = 'img/logo.png'
   iconcontacto: string = 'icon/contacto.png'
   iconlogin: string = 'icon/login.png'
+  iconuser: string = 'icon/user.png'
 }
