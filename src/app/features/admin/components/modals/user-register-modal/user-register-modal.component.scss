@@ -1,3 +1,7 @@
+.title{
+  font-family: 'PoppinsBold';
+}
+
 .wrapperForm{
   display: flex;
   flex-direction: column;
@@ -20,6 +24,14 @@
   };
 };
 
+.btnCancel{
+  background-color: var( --bg-red-color );
+  color: white !important;
+}
 
+
+label{
+  font-family: 'PoppinsMedium';
+}
 
 

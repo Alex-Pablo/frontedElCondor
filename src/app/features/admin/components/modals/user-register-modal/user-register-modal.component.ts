@@ -50,7 +50,7 @@ export class UserRegisterModalComponent {
     if(this.loginForm.valid){
 
       Swal.fire({
-        title: 'Iniciando Sesión',
+        title: 'Creando usuario',
         text: 'Espere por favor....',
         showConfirmButton: false,
         allowOutsideClick: false

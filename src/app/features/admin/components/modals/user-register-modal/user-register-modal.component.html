@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Crear usuario</h2>
+<h2 mat-dialog-title class="title">Crear usuario</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="loginForm">
 
@@ -56,7 +56,7 @@
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
-          <button type="button" (click)="generatePassword()">Generrar Contraseña</button>
+          <button type="button" (click)="generatePassword()">Generar Contraseña</button>
         </div>
       </div>
 
@@ -65,7 +65,7 @@
 </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
   <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar</button>
 </mat-dialog-actions>
 
