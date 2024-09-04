@@ -1,137 +1,90 @@
-.login-container{
-    font-family: 'PoppinsExtraBold';
-    color: var(--contrast-blue-color);
-    width: 80vw; 
-    display: flex;
-    flex-direction: row; 
-    justify-content: flex-end; 
-    margin: 0 auto; 
+.login-container {
+  font-family: 'PoppinsExtraBold';
+  color: var(--contrast-blue-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-main{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    align-items: center;
-    width: 100%;
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
 }
 
 .login-form {
-    position: relative;
-    width: 60%; 
-    right: 10%;
-    flex: 1;
-    margin-right: 5px;
+  width: 60%;
+  flex: 1;
+
+  h2 {
+    color: var(--contrast-blue-color);
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    margin-left: 10%;
+
+    label {
+      color: var(--fourth-txt-color);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  }
+
+  .btn-enter {
+    background-color: var(--txt-blue-color);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 30%;
+    font-size: 16px;
     display: block;
     margin: 0 auto;
-
-    h2 {
-        color: var(--contrast-blue-color);
-        margin-bottom: 20px;
-        font-size: 30px;
-        text-align: center;
-    }
-
-    .form-group { 
-        margin-bottom: 15px;
-        margin-left: 10%;
-
-        label {
-            color: var(--fourth-txt-color);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 90%;
-            padding: 10px; 
-            border: 1px solid #ccc;
-            font-size: 16px; 
-        }
-    }
-
-    .btn-enter {
-        background-color: var(--txt-blue-color);
-        color: white;
-        padding: 12px 24px;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        width: 30%;
-        font-size: 16px; 
-        display: block;
-        margin: 0 auto;
-    }
+  }
 }
 
 .general-error-message {
-    color: red;
-    font-size: 16px;
-    margin-bottom: 15px;
-    text-align: center; 
+  color: red;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 
 .image-container {
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-color); 
-    width: 10%;  
-    height: 90vh; 
-    left: 40%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 100vh;
 }
 
 .image-container img {
-    max-width: 100%;         
-    max-height: 100%;        
-    height: auto;            
-    width: auto;             
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
 }
 
 .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-
-/*LOADER*/
-/* El estilo para el modal del loader */
-.loader-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* aqui el fondo semitransparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-/* Aqui el estilo del loader */
-.loader {
-    width: fit-content;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 30px;
-    background: linear-gradient(90deg,#000 50%,#0000 0) right/200% 100%;
-    animation: l21 2s infinite linear;
-}
-
-.loader::before {
-    content: "Loading...";
-    color: #0000;
-    padding: 0 5px;
-    background: inherit;
-    background-image: linear-gradient(90deg,#fff 50%,#000 0);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-@keyframes l21 {
-    100% { background-position: left; }
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
