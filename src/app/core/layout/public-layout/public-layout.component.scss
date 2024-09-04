@@ -1,67 +1,70 @@
 header {
-    font-family: 'PoppinsBold';
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--white-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'PoppinsBold';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  padding: 10px 20px;
+
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo img {
-    height: 40px;
-    margin-right: 10px;
+  height: 40px;
+  margin-right: 10px;
 }
 
 .search {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .search input {
-    padding: 8px;
-    border: 1px solid var(--primary-color);
-    border-radius: 4px;
-    margin-right: 5px;
+  padding: 8px;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  margin-right: 5px;
 }
 
 .search button {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    cursor: pointer;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
 nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 nav a {
-    display: flex;
-    margin-left: 20px;
-    align-items: center;
-    text-decoration: none;
-    color: var(--fourth-txt-color);
-    font-weight: bold;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--fourth-txt-color);
+  font-weight: bold;
 }
 
 nav a.offers {
-    color: var(--contrast-blue-color);
+  color: var(--contrast-blue-color);
 }
 
 nav a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-nav a img.icon{
-    width: 20px;
-    height: auto;
-    margin-right: 5px;
+nav a img.icon {
+  width: 20px;
+  height: auto;
+  margin-right: 5px;
 }

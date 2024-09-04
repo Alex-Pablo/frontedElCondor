@@ -1,238 +1,48 @@
-<div class="layout" >
-
+<div>
   <div class="container-principal">
-
-    <div  class="container-info">
-      <h1>{{NombreEmpresa}}</h1>
-      <p class="DescripcionP">{{Descripcion}}</p><br>
-      <button>{{Boton}}</button>
+    <div class="container-info">
+      <h1>{{ NombreEmpresa }}</h1>
+      <p class="DescripcionP">
+        Todo lo que necesitas para construir tus sueños, con herramientas de
+        confianza de la mas alta calidad.
+      </p>
+      <button>Ver productos</button>
     </div>
 
     <div class="container-imgPrincipal">
-      <img src="img/image.png" alt="">
+      <img src="img/image.png" alt="" />
     </div>
-
   </div>
 
-  <section class="Lista_de_productos"> 
-    <h2 class="SubtituloL">{{Subtitulo}}</h2><br>
-  <div class="wrapperProducto">
-
-        
-    <div class="Categorias">
-      
-        <u>
-          <h3>{{Categoria}}</h3>
-        </u><br>
-        <button class="BTN">{{Cat1}}</button><br>
-        <br><p>{{Cat2}}</p><br>
-        <p>{{Cat3}}</p><br>
-        <p>{{Cat4}}</p><br>
-        <p>{{Cat5}}</p><br>
+  <section class="Lista_de_productos">
+    <h2 class="SubtituloL">Lista de productos</h2>
+    <br />
+    <div class="wrapperProducto">
+      <div class="Categorias">
+        <h3>Categorias</h3>
+        <button>Todas</button>
+        @for (categoria of categorias; track categoria.id) {
+          <button type="button" (click)="getProducts(categoria.id)">
+            {{ categoria.name }}
+          </button>
+        }
       </div>
 
-    <div class="product-container">
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
+      <div class="product-container">
+        <div class="product-card">
+          <div class="wrapperImg">
+            <img
+              class="imagenProducto"
+              src="img/Cuchara.jpg"
+              alt="Herramienta"
+            />
+          </div>
+          <h2 class="Titulo">Cuchara para albañil.</h2>
+          <p class="Precio">Q23</p>
+          <p class="Disponible">Disponible: <span>34</span></p>
+          <p class="Codigo">Código: <span>#323435</span></p>
         </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
       </div>
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-
-
-      <div class="product-card">
-        <div class="wrapperImg">
-          <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-        </div>
-        <h2 class="Titulo">Cuchara para albañil.</h2>
-        <p class="Precio">Q23</p>
-        <p class="Disponible">Disponible: <span>34</span></p>
-        <p class="Codigo">Código: <span>#323435</span></p>
-      </div>
-  
-
     </div>
-    </div>
-    </section>
-
-  </div>
-
-
-
-<!-- <div class="layout">
-
-  <div class="contenedor">
-    &nbsp;&nbsp;&nbsp;<h1>{{NombreEmpresa}}</h1>
-    <p>{{Descripcion}}</p><br>
-    <button>{{Boton}}</button>
-  </div>
-  
-  <img src="img/image.png" alt="">
-
+  </section>
 </div>
-
-<div class="wrapperProductos layout">
-
-  <div class="Categorias">
-    <h2>{{Subtitulo}}</h2><br>
-    <u>
-      <h3>{{Categoria}}</h3>
-    </u><br>
-    <p>{{Cat1}}</p><br>
-    <p>{{Cat2}}</p><br>
-    <p>{{Cat3}}</p><br>
-    <p>{{Cat4}}</p><br>
-    <p>{{Cat5}}</p><br>
-  </div>
-
-  <div class="product-container">
-    <div class="product-card">
-      <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <img class="imagenProducto" src="img/Cuchara.jpg" alt="Herramienta">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-
-    <div class="product-card">
-      <h2 class="Titulo">Cuchara para albañil.</h2>
-      <p class="Precio">Q23</p>
-      <p class="Disponible">Disponible: <span>34</span></p>
-      <p class="Codigo">Código: <span>#323435</span></p>
-    </div>
-  </div>
-
-
-</div> -->
