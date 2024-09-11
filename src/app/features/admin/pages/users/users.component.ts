@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
-import {MatDialogModule, MatDialog} from '@angular/material/dialog'
+import { MatDialogModule, MatDialog } from '@angular/material/dialog'
 import { UserRegisterModalComponent } from '../../components/modals/user-register-modal/user-register-modal.component';
+import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, InputSearchComponent],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
 
-    constructor(private _matDialog: MatDialog){
+  searchMessage = "Buscar usuarios"
+  constructor(private _matDialog: MatDialog) {
+  }
+
+  onSearch(value: string) {
+    console.log(value);
 
   }
-  crearUsuario(){
+  crearUsuario() {
     this._matDialog.open(UserRegisterModalComponent, {
       width: '90vw',
       height: '80vh',

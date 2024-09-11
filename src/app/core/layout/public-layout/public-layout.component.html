@@ -5,9 +5,8 @@
     <img [src]="logocondor" alt="Logo" />
     <span>+45363723</span>
   </div>
-  <div class="search">
-    <input type="text" placeholder="Buscar Producto" />
-    <button type="button">🔍</button>
+  <div>
+    <app-input-search [searchMessage]="searchMessage" (searchChange)=onSearch($event)></app-input-search>
   </div>
   <nav>
     <a routerLink="#ofertas" class="offers">OFERTAS</a>

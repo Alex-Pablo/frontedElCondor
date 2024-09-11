@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ICategorias } from '../../../../shared/models/categorias';
+import { ICategorias } from '../../../../shared/models/Icategorias';
 import { NgFor } from '@angular/common';
 
 @Component({

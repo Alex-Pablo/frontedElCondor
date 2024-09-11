@@ -1,84 +1,77 @@
 <div class="container">
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="/img/logo.png" alt="EL CONDOR" class="logo-image">
-      <span class="logo-text">EL CONDOR</span>
+  <!-- <aside class="sidebar"> -->
+  <!--   <div class="logo"> -->
+  <!--     <img src="/img/logo.png" alt="EL CONDOR" class="logo-image" /> -->
+  <!--     <span class="logo-text">EL CONDOR</span> -->
+  <!--   </div> -->
+  <!---->
+  <!--   <nav class="menu"> -->
+  <!--     <ul> -->
+  <!--       <li><a href="#">Inventario</a></li> -->
+  <!--       <li><a href="#">Ventas</a></li> -->
+  <!--       <li><a href="#">Reportes</a></li> -->
+  <!--       <li class="active"><a href="#">Configuración</a></li> -->
+  <!--     </ul> -->
+  <!--   </nav> -->
+  <!-- </aside> -->
+  <main class="main-content">
+    <header>
+      <h1>Configuración/Usuarios</h1>
+    </header>
+
+    <div class="controls">
+      <button class="pdf-button">PDF</button>
+      <input type="text" placeholder="Fecha" class="date-input" />
+      <select class="state-select">
+        <option>Estado</option>
+        <!-- Opciones -->
+      </select>
+      <select class="role-select">
+        <option>Rol</option>
+        <!-- Opciones -->
+      </select>
+      <div>
+        <app-input-search
+          [searchMessage]="searchMessage"
+          (searchChange)="onSearch($event)"
+        ></app-input-search>
+      </div>
+      <button class="add-user-button" (click)="crearUsuario()">+</button>
     </div>
 
-      <nav class="menu">
-          <ul>
-              <li><a href="#">Inventario</a></li>
-              <li><a href="#">Ventas</a></li>
-              <li><a href="#">Reportes</a></li>
-              <li class="active"><a href="#">Configuración</a></li>
-          </ul>
-      </nav>
-  </aside>
-      <main class="main-content">
-
-        <header>
-          <h1>Configuración/Usuarios</h1>
-          <div class="user-info">
-            <img src="/icon/USUARIO LOGO.png" alt="User Icon" class="user-icon">
-            <div class="user-details">
-              <span class="user-name">Edwin Alvarez</span>
-              <span class="user-role">Administrador</span>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>Foto</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Última actividad</th>
+          <th>Estado</th>
+          <th>Creación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1</td>
+          <td><img src="/icon/USUARIO LOGO.png" alt="User Photo" /></td>
+          <td>Edwin Alvarez</td>
+          <td>Administrador</td>
+          <td>26/8/2024 3:23</td>
+          <td>activo</td>
+          <td>26/8/2024 10:23</td>
+          <td class="actions">
+            <button class="more-options">⋮</button>
+            <div class="dropdown">
+              <a href="#">Detalles</a>
+              <a href="#">Editar</a>
+              <a href="#" class="delete">Eliminar</a>
             </div>
-          </div>
-        </header>
-
-
-
-
-      <div class="controls">
-          <button class="pdf-button">PDF</button>
-          <input type="text" placeholder="Fecha" class="date-input">
-          <select class="state-select">
-              <option>Estado</option>
-              <!-- Opciones -->
-          </select>
-          <select class="role-select">
-              <option>Rol</option>
-              <!-- Opciones -->
-          </select>
-          <input type="text" placeholder="Buscar Usuario" class="search-input">
-          <button class="search-button">🔍</button>
-          <button class="add-user-button" (click)="crearUsuario()">+</button>
-      </div>
-
-      <table class="user-table">
-          <thead>
-              <tr>
-                  <th>NO</th>
-                  <th>Foto</th>
-                  <th>Nombre</th>
-                  <th>Rol</th>
-                  <th>Última actividad</th>
-                  <th>Estado</th>
-                  <th>Creación</th>
-                  <th>Acciones</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>#1</td>
-                  <td><img src="/icon/USUARIO LOGO.png" alt="User Photo"></td>
-                  <td>Edwin Alvarez</td>
-                  <td>Administrador</td>
-                  <td>26/8/2024 3:23</td>
-                  <td>activo</td>
-                  <td>26/8/2024 10:23</td>
-                  <td class="actions">
-                      <button class="more-options">⋮</button>
-                      <div class="dropdown">
-                          <a href="#">Detalles</a>
-                          <a href="#">Editar</a>
-                          <a href="#" class="delete">Eliminar</a>
-                      </div>
-                  </td>
-              </tr>
-              <!-- Más filas -->
-          </tbody>
-      </table>
+          </td>
+        </tr>
+        <!-- Más filas -->
+      </tbody>
+    </table>
   </main>
 </div>
