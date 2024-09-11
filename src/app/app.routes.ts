@@ -12,5 +12,9 @@ export const routes: Routes = [
   {
     path: 'incio',
     loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+  },
+  {
+    path: 'reports',
+    loadChildren: () => import('./features/reports/reports.routes').then(m => m.REPORTS_ROUTES)
   }
 ];

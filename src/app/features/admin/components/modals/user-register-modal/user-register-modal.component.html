@@ -30,8 +30,8 @@
         <div class="wrapperInput">
           <label for="RoleuserOptions">Role del usuario</label>
           <select id="RoleuserOptions" formControlName="role">
-            <option value="1">Administrador</option>
-            <option value="2">Cajero</option>
+            @for(role of roles; track role.id){
+            <option [value]="role.id">{{role.name}}</option> }
           </select>
         </div>
 
@@ -39,8 +39,8 @@
           <label for="EstadouserOptions">Selecione el estado</label>
 
           <select id="EstadouserOptions"formControlName="estado" >
-            <option value="1">Activo</option>
-            <option value="2">Inactivo</option>
+            @for(status of userstatus; track status.id){
+              <option [value]="status.id">{{status.name}}</option> }
           </select>
         </div>
 

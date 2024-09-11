@@ -5,6 +5,8 @@ import { LocalStorageService } from './local-storage.service';
 import { environment } from '../../../environments/environment'
 import { IResult } from '../../shared/models/IResult';
 import { IUser } from '../../shared/models/IUser';
+import { IRole } from '../../shared/models/IRole';
+import { IUserStatus } from '../../shared/models/IUserStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +33,9 @@ export class AuthService {
       )
   }
 
-  register(formData: any) {
-    console.log(formData);
-
-    return this.http.post<any>(`${environment.baseUrlApi}/User/register`, formData)
+  register(formData: any): Observable<IResult<boolean>> {
+    return this.http.post<IResult<boolean>>(`${environment.baseUrlApi}/User/register`, formData)
   }
-
 
   logout() {
 
@@ -44,5 +43,17 @@ export class AuthService {
 
   getProfile() {
     return this.http.get<IResult<IUser>>(`${environment.baseUrlApi}/User/perfil`);
+  }
+
+  getRoles() {
+    return this.http.get<IResult<IRole[]>>(`${environment.baseUrlApi}/Role/getAll`);
+  }
+
+  getUserStatus() {
+    return this.http.get<IResult<IUserStatus[]>>(`${environment.baseUrlApi}/UserStatus/getAll`)
+  }
+
+  getUsers() {
+    return this.http.get<IResult<IUser[]>>(`${environment.baseUrlApi}/User/getAll`);
   }
 }

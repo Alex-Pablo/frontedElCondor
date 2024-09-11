@@ -13,10 +13,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const cloneReq = currentUser
     ? req.clone({
       setHeaders: {
+
         Authorization: `Bearer ${JSON.parse(currentUser)}`
       }
     })
     : req;
+
 
 
   return next(cloneReq).pipe(
