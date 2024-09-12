@@ -38,23 +38,25 @@
         </tr>
       </thead>
       <tbody>
+        @for (user of users; track user.id){
         <tr>
-          <td>#1</td>
+          <td>{{user.id}}</td>
           <td><img src="/icon/USUARIO LOGO.png" alt="User Photo" /></td>
-          <td>Edwin Alvarez</td>
-          <td>Administrador</td>
+          <td>{{user.firstname}}</td>
+          <td>{{user.role}}</td>
           <td>26/8/2024 3:23</td>
           <td>activo</td>
           <td>26/8/2024 10:23</td>
           <td class="actions">
             <button class="more-options">⋮</button>
             <div class="dropdown">
-              <a href="#">Detalles</a>
-              <a href="#">Editar</a>
-              <a href="#" class="delete">Eliminar</a>
+              <a (click)="userDetail(user.id)" >Detalles</a>
+              <a (click)="editarUser(user.id)" >Editar</a>
+              <a  class="delete">Eliminar</a>
             </div>
           </td>
         </tr>
+        }
         <!-- Más filas -->
       </tbody>
     </table>

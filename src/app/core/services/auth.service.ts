@@ -7,6 +7,8 @@ import { IResult } from '../../shared/models/IResult';
 import { IUser } from '../../shared/models/IUser';
 import { IRole } from '../../shared/models/IRole';
 import { IUserStatus } from '../../shared/models/IUserStatus';
+import { IUserDetailDto } from '../../shared/models/IUserDetail';
+import { IUserModifyDto } from '../../shared/models/IUserModify';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,7 @@ export class AuthService {
     return this.http.get<IResult<IUser>>(`${environment.baseUrlApi}/User/perfil`);
   }
 
+
   getRoles() {
     return this.http.get<IResult<IRole[]>>(`${environment.baseUrlApi}/Role/getAll`);
   }
@@ -55,5 +58,13 @@ export class AuthService {
 
   getUsers() {
     return this.http.get<IResult<IUser[]>>(`${environment.baseUrlApi}/User/getAll`);
+  }
+
+  getUserDetail(id: number) {
+    return this.http.get<IResult<IUserDetailDto>>(`${environment.baseUrlApi}/User/detail/${id}`);
+  }
+
+  getUserById(id: number) {
+    return this.http.get<IResult<IUserModifyDto>>(`${environment.baseUrlApi}/User/User/${id}`)
   }
 }
