@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'
 import { UserRegisterModalComponent } from '../../components/modals/user-register-modal/user-register-modal.component';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
+import { AuthService } from '../../../../core/services/auth.service';
+import { IResult } from '../../../../shared/models/IResult';
+import { IUser } from '../../../../shared/models/IUser';
 
 @Component({
   selector: 'app-users',
@@ -10,15 +13,23 @@ import { InputSearchComponent } from '../../../../shared/components/input-search
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
+  users: IUser[] | undefined;
+  searchMessage = "Buscar suarios"
+  constructor(private _matDialog: MatDialog, private authService: AuthService) {
+  }
 
-  searchMessage = "Buscar usuarios"
-  constructor(private _matDialog: MatDialog) {
+  ngOnInit(): void {
+    this.authService.getUsers().subscribe((data: IResult<IUser[]>) => {
+      if (data.isSuccess) {
+        this.users = data.value;
+        console.log(this.users);
+      }
+    })
   }
 
   onSearch(value: string) {
     console.log(value);
-
   }
   crearUsuario() {
     this._matDialog.open(UserRegisterModalComponent, {
@@ -27,18 +38,5 @@ export class UsersComponent {
       disableClose: true
     })
   }
-  //datos para la tabla
-  users = [
-    {
-      no: '#1',
-      foto: 'path_to_user_image',
-      nombre: 'Edwin Alvarez',
-      role: 'Administrador',
-      ultimaActividad: '26/8/2024 3:23',
-      estado: 'activo',
-      creacion: '26/8/2024 10:23',
-    },
-    // Más usuarios
-  ];
 }
 

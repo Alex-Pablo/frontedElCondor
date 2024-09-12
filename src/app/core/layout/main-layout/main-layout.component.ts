@@ -14,6 +14,7 @@ import { IUser } from '../../../shared/models/IUser';
 })
 export class MainLayoutComponent implements OnInit {
   isConfigOpen = false;
+  userInfor: IUser | undefined;
   authService = inject(AuthService)
   toggleConfig() {
     this.isConfigOpen = !this.isConfigOpen;
@@ -22,8 +23,7 @@ export class MainLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
       next: (response: IResult<IUser>) => {
-        console.log(response.value);
-
+        this.userInfor = response.value
       },
       error: (eror: any) => { }
     })
