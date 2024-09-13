@@ -1,1 +1,41 @@
-<p>user works!</p>
+<button (click)="exportToPDF()">Exportar a PDF</button>
+
+<div id="reportContent">
+    <p>Administrador/Reportes</p>
+
+
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>CORREO</th>
+                <th>ROL</th>
+                <th>Fecha creación usuario</th>
+                <th>Última actualización</th>
+                <th>Último inicio de sesión</th>
+                <th>Ventas último mes</th>
+                <th>Ventas completadas año actual</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        @for(user of reportUsers; track user.id){
+            <tbody>
+                <td>{{ user.id }}</td>  
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td> 
+                <td>{{ user.created_at }}</td>
+                <td>{{ user.updated_at }}</td>
+                <td>{{ user.last_login_at }}</td>
+                <td>{{ user.completedSalesMonth }}</td>
+                <td>{{ user.completedSalesYear }}</td>
+                <td>{{ user.stateUser }}</td>
+          </tbody>
+      }
+  
+    </table>
+</div>
+

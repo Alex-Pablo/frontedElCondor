@@ -1,0 +1,31 @@
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 15px auto; 
+}
+
+th, td {
+  border: 1px solid #b1d5e4;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  background-color: var(--bg-second-color); 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  margin: 10px 0; 
+  float: right; /* Coloca el botón en el lado derecho */
+}
+
+button:hover {
+  background-color: var(--txt-blue-color) ; 
+}
