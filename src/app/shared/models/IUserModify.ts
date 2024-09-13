@@ -6,6 +6,6 @@ export interface IUserModifyDto {
   firstname: string;
   lastname: string;
   profile?: string;
-  id_role: number;
-  id_estado: number;
+  iD_role: number;
+  iD_Estado: number;
 }

@@ -1,15 +1,18 @@
+<div class="container">
 
-<h2 mat-dialog-title class="title">Crear usuario</h2>
+<h2 mat-dialog-title class="title">Editar usuario</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="loginForm">
 
     <div class="wrapperForm" >
 
       <div class="wrapperRowForm">
+
         <div class="wrapperInput">
           <label for="NombreUser">Nombre Usuario</label>
           <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
         </div>
+
         <div class="wrapperInput" >
           <label for="ApellidoUser">Apellidos</label>
           <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname" >
@@ -53,6 +56,10 @@
           <label for="ImgUser">Foto del usuario</label>
          <input id="profileImg" type="file" (change)="onFileChange($event)">
         </div>
+
+          <div>
+          <img src="" alt="" [src]="getImgProfile()">
+          </div>
       </div>
 
 
@@ -64,3 +71,4 @@
   <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
   <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar</button>
 </mat-dialog-actions>
+</div>

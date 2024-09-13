@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { IResult } from '../../../../../shared/models/IResult';
 import { IRole } from '../../../../../shared/models/IRole';
 import { IUserStatus } from '../../../../../shared/models/IUserStatus';
-import { publish } from 'rxjs';
+import { publish, retry } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -24,7 +24,7 @@ export class EditUserComponent implements OnInit {
   roles: IRole[] | undefined;
   userstatus: IUserStatus[] | undefined;
   loginForm: FormGroup;
-  constructor(public _matDialogRef: MatDialogRef<EditUserComponent> @ing, private fb: FormBuilder, private authService: AuthService) {
+  constructor(public _matDialogRef: MatDialogRef<EditUserComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private authService: AuthService) {
 
     this.loginForm = this.fb.group({
       firstname: ['', [Validators.required]],
@@ -51,9 +51,19 @@ export class EditUserComponent implements OnInit {
     })
 
 
-    this.authService.getUserById(idNum).subscribe((data) => {
+    this.authService.getUserById(this.data.id).subscribe((data) => {
       if (data.isSuccess) {
-        console.log(data.value);//aqui puedes ver los datos qye se trae la baase de daots
+        console.log(data);
+
+        this.loginForm.patchValue({
+          email: data.value?.email,
+          firstname: data.value?.firstname,
+          lastname: data.value?.lastname,
+          phoneNumber: data.value?.phoneNumber,
+          role: Number(data.value?.iD_role),
+          estado: data.value?.iD_Estado,
+          profileImg: data.value?.profile
+        })
       }
     })
   }
@@ -67,5 +77,7 @@ export class EditUserComponent implements OnInit {
       profileImg: file
     });
   }
-
+  getImgProfile() {
+    return this.loginForm.value.profileImg
+  }
 }

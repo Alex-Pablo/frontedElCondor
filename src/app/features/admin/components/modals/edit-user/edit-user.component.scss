@@ -1,0 +1,40 @@
+.container {
+  background-color: #FAF8F4;
+
+  .title {
+    font-family: 'PoppinsBold';
+  }
+
+  .wrapperForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .wrapperRowForm {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      .wrapperInput {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        input {
+          width: 100%;
+          border: solid #ACC2D3 1px;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  .btnCancel {
+    background-color: var(--bg-red-color);
+    color: white !important;
+  }
+
+  label {
+    font-family: 'PoppinsMedium';
+  }
+}

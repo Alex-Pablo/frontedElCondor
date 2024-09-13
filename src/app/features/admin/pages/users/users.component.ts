@@ -58,15 +58,7 @@ export class UsersComponent implements OnInit {
       width: '90vw',
       height: '80vh',
       disableClose: true,
-      data: idNum
-    })
-    //Para la jennfier que ven cochinadas
-    //Aqui tienes que llamar tu modal como  el crearUsuario
-    //tendrias que pasarle el id del usuarios idNum
-    this.authService.getUserById(idNum).subscribe((data) => {
-      if (data.isSuccess) {
-        console.log(data.value);//aqui puedes ver los datos qye se trae la baase de daots
-      }
+      data: { id: idNum }
     })
   }
 
