@@ -1,31 +1,85 @@
 <div class="container">
-  <div>
-    <p>logo</p>
-    ´<p>menu aqui</p>
-    <!-- <img [src]="userInfor?.profile" alt=""> -->
-  </div>
+
+  <header>
+    <div class="logo">
+      <img [src]="logocondor" alt="Logo" />
+      <span>+45363723</span>
+    </div>
+    <nav>
+      <img [src]="iconotificacion" alt="notificacion" class="icon">
+      <a><img [src]="userInfor?.profile" alt="userprofile"
+          class="userprofile" /></a>
+      <div class="user-info" (click)="toggleDropdown()">
+        <span class="user-name">{{userInfor?.firstname | uppercase}}
+          {{userInfor?.lastname | uppercase}}</span>
+        <span class="user-role">{{userInfor?.role}}</span>
+        <div *ngIf="isDropdownVisible" class="dropdown">
+          <button (click)="logout()">
+            <img [src]="icologout" alt="cerrar sesion" class="icon-logout" />
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
   <div class="container-main">
-  <nav class="sidebar">
-    <ul>
-        <li>Inventario</li>
-        <li>Ventas</li>
-        <li>Reportes</li>
-        <li (click)="toggleConfig()">
-            <span>Configuración</span>
-            <div class="submenu" *ngIf="isConfigOpen">
-                <ul>
-                    <li>Usuarios</li>
-                    <li>Roles</li>
-                </ul>
-            </div>
+
+    <nav class="sidebar" [class.collapsed]="isCollapsed">
+      <div class="toggle-btn" (click)="toggleSidebar()">
+        <span class="arrow" *ngIf="isCollapsed"><img [src]="icoarrow" alt="arrow"></span>
+        <span class="arrow" *ngIf="!isCollapsed"><img [src]="icoarrow" alt="arrow"></span>
+      </div>
+      <ul>
+        <li [class.active]="activeItem === 'inventario'"
+          (click)="setActive('inventario')">
+          <i><img [src]="activeItem === 'inventario' ? icoinventarioActive : icoinventario" alt="inventario" class="icon"></i>
+          <span *ngIf="!isCollapsed">Inventario</span>
         </li>
-    </ul>
-  </nav>
-  <div class="container-content">
+        <li [class.active]="activeItem === 'ventas'"
+          (click)="setActive('ventas')">
+          <i><img [src]="activeItem === 'ventas' ? icoventasActive : icoventas" alt="ventas" class="icon"></i>
+          <span *ngIf="!isCollapsed">Ventas</span>
+        </li>
+        <li (click)="toggleConfig()" 
+          [class.active]="activeItem === 'reportes'" 
+          (click)="setActive('reportes')">
+          <span><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></span>
+          <span *ngIf="!isCollapsed">Reportes</span>
+          <div id="submenurepo" class="submenu" *ngIf="isConfigOpen">
+            <ul>
+              <li [class.active]="activeItem === 'repo-usuarios'"
+                (click)="setActive('repo-usuarios')">Reportes de Usuarios</li>
+              <li [class.active]="activeItem === 'repo-ventas'"
+                (click)="setActive('repo-ventas')">Reportes de Ventas</li>
+            </ul>
+          </div>
+        </li>
+        <!-- <li [class.active]="activeItem === 'reportes'"
+          (click)="setActive('reportes')">
+          <i><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></i>
+          <span *ngIf="!isCollapsed">Reportes</span>
+        </li> -->
+        <li (click)="toggleConfig2()" 
+          [class.active]="activeItem === 'configuracion'" 
+          (click)="setActive('configuracion')">
+          <span><img [src]="activeItem === 'configuracion' ? icoconfigActive : icoconfig" alt="configuracion" class="icon"></span>
+          <span *ngIf="!isCollapsed">Configuración</span>
+          <div class="submenu" *ngIf="isConfigOpen2">
+            <ul>
+              <li [class.active]="activeItem === 'usuarios'"
+                (click)="setActive('usuarios')">Usuarios</li>
+              <li [class.active]="activeItem === 'roles'"
+                (click)="setActive('roles')">Roles</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
 
-    <router-outlet></router-outlet>
+    <div class="container-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  </div>
+
 </div>
-
-
