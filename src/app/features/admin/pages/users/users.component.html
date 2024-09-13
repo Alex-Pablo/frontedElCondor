@@ -5,13 +5,18 @@
     </header>
 
     <div class="controls">
-      <button class="pdf-button">PDF</button>
-      <input type="text" placeholder="Fecha" class="date-input" />
-      <select class="state-select">
+      <button class="pdf-button" (click)="logFieldName('PDF')">PDF</button>
+      <input 
+        type="text" 
+        placeholder="Fecha" 
+        class="date-input" 
+        (click)="logFieldName('Fecha')" 
+      />
+      <select class="state-select" (click)="logFieldName('Estado')">
         <option>Estado</option>
         <!-- Opciones -->
       </select>
-      <select class="role-select">
+      <select class="role-select" (click)="logFieldName('Rol')">
         <option>Rol</option>
         <!-- Opciones -->
       </select>
@@ -19,10 +24,12 @@
         <app-input-search
           [searchMessage]="searchMessage"
           (searchChange)="onSearch($event)"
+          (click)="logFieldName('Buscar')"
         ></app-input-search>
       </div>
-      <button class="add-user-button" (click)="crearUsuario()">+</button>
+      <button class="add-user-button" (click)="logFieldName('Agregar Usuario')">+</button>
     </div>
+    
 
     <table class="user-table">
       <thead>
@@ -48,13 +55,14 @@
           <td>activo</td>
           <td>26/8/2024 10:23</td>
           <td class="actions">
-            <button class="more-options">⋮</button>
+            <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
             <div class="dropdown">
-              <a (click)="userDetail(user.id)" >Detalles</a>
-              <a (click)="editarUser(user.id)" >Editar</a>
-              <a  class="delete">Eliminar</a>
+              <a (click)="userDetail(user.id)">Detalles</a>
+              <a (click)="editarUser(user.id)">Editar</a>
+              <a class="delete">Eliminar</a>
             </div>
           </td>
+          
         </tr>
         }
         <!-- Más filas -->

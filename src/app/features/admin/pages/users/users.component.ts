@@ -39,6 +39,18 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  toggleDropdown(event: MouseEvent) {
+    const dropdown = (event.target as HTMLElement).nextElementSibling;
+    if (dropdown) {
+      dropdown.classList.toggle('show');
+    }
+  }
+  
+  logFieldName(fieldName: string) {
+    console.log(fieldName);
+  }
+  
+
   editarUser(id: any) {
     const idNum = parseInt(id);
     //Para la jennfier que ven cochinadas
