@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder , Form, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../../core/services/auth.service';
 import Swal from 'sweetalert2';
 import { IResult } from '../../../../../shared/models/IResult';
 import { IRole } from '../../../../../shared/models/IRole';
 import { IUserStatus } from '../../../../../shared/models/IUserStatus';
+
 
 @Component({
   selector: 'app-user-register-modal',
@@ -61,7 +62,7 @@ export class UserRegisterModalComponent implements OnInit {
 
     this.loginForm.patchValue({ password: password })
   }
-
+  
   onSubmit() {
 
     console.log(this.loginForm.value.role);
@@ -138,3 +139,4 @@ export class UserRegisterModalComponent implements OnInit {
     return this.loginForm.value.password;
   }
 }
+

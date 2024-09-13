@@ -2,12 +2,14 @@
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="loginForm">
 
+
+
     <div class="wrapperForm" >
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
           <label for="NombreUser">Nombre Usuario</label>
-          <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
+          <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" required="firstname">
         </div>
         <div class="wrapperInput" >
           <label for="ApellidoUser">Apellidos</label>
@@ -49,14 +51,14 @@
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
-          <label for="ImgUser">Foto del usuario</label>
-         <input id="profileImg" type="file" (change)="onFileChange($event)">
+          <label for="ImgUser">Foto de Perfil</label>
+          <input type="file" name="myImage" accept="image/jpeg" />
         </div>
       </div>
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
-          <button type="button" (click)="generatePassword()">Generar Contraseña</button>
+          <button type="boton" (click)="generatePassword()">Generar Contraseña</button>
           <p>{{getPassword()}}</p>
         </div>
       </div>
@@ -67,6 +69,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
-  <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar</button>
+  <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar Usuario</button>
 </mat-dialog-actions>
 
