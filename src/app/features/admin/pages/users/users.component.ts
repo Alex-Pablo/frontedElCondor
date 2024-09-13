@@ -38,5 +38,30 @@ export class UsersComponent implements OnInit {
       disableClose: true
     })
   }
+
+  editarUser(id: any) {
+    const idNum = parseInt(id);
+    //Para la jennfier que ven cochinadas
+    //Aqui tienes que llamar tu modal como  el crearUsuario
+    //tendrias que pasarle el id del usuarios idNum
+    this.authService.getUserById(idNum).subscribe((data) => {
+      if (data.isSuccess) {
+        console.log(data.value);//aqui puedes ver los datos qye se trae la baase de daots
+      }
+    })
+  }
+
+  userDetail(id: any) {
+    const idNum = parseInt(id);
+    //Para Royer mi bebe
+    //aqui deberias llamar tu modal. cuando llames al modal. le pasas el id de usuarios que es idNum.
+    //Ya estando en el modal pones esta petifion este codigo
+    this.authService.getUserDetail(idNum).subscribe((data) => {
+      if (data.isSuccess) {
+        console.log(data.value);// aqui puedes ver los datos que se traer en la base de datos
+      }
+    })
+  }
+
 }
 
