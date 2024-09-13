@@ -1,9 +1,9 @@
 .container {
   display: flex;
-  height: 100%;
-  font-family: 'Oxygen', sans-serif;
-  background: red;
-  width: 100%;
+  width: 100vh;
+  height: 100vh;
+  font-family: 'PoppinsSemiBold';
+  background-color: var(--bg-color);
 }
 
 .sidebar {
@@ -69,9 +69,14 @@
 }
 
 .main-content {
+  height: 100vh;
+  width: 100vh;
   flex-grow: 1;
   background-color: var(--bg-color);
+  padding: 20px;
+  box-sizing: border-box;
 }
+
 
 header {
   display: flex;
@@ -161,20 +166,20 @@ header h1 {
 }
 
 .user-table {
-  width: 100%;
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho del contenedor */
   border-collapse: collapse;
+  table-layout: auto; /* Permite que las columnas se ajusten al contenido */
 }
 
 .user-table th,
 .user-table td {
-  padding: 12px;
-  border: 1px solid var(--txt-second-color);
+  padding: 4px 40px; /* Reduce el espacio interno de las celdas */
+  border: 0.5px solid var(--txt-second-color); /* Mantiene el borde delgado */
   text-align: left;
 }
 
 .user-table th {
   background-color: var(--txt-second-color);
-  ;
   font-weight: bold;
 }
 
@@ -200,7 +205,7 @@ header h1 {
   display: none;
   position: absolute;
   right: 0;
-  top: 100%;
+  top: 20%;
   background-color: var(--bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -217,6 +222,6 @@ header h1 {
   color: var(--bg-red-color);
 }
 
-.actions:hover .dropdown {
+.actions .dropdown.show {
   display: block;
 }
