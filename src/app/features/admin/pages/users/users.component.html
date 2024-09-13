@@ -31,42 +31,44 @@
     </div>
     
 
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>NO</th>
-          <th>Foto</th>
-          <th>Nombre</th>
-          <th>Rol</th>
-          <th>Última actividad</th>
-          <th>Estado</th>
-          <th>Creación</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users; track user.id){
-        <tr>
-          <td>{{user.id}}</td>
-          <td><img src="/icon/USUARIO LOGO.png" alt="User Photo" /></td>
-          <td>{{user.firstname}}</td>
-          <td>{{user.role}}</td>
-          <td>26/8/2024 3:23</td>
-          <td>activo</td>
-          <td>26/8/2024 10:23</td>
-          <td class="actions">
-            <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
-            <div class="dropdown">
-              <a (click)="userDetail(user.id)">Detalles</a>
-              <a (click)="editarUser(user.id)">Editar</a>
-              <a class="delete">Eliminar</a>
-            </div>
-          </td>
-          
-        </tr>
-        }
-        <!-- Más filas -->
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Última actividad</th>
+            <th>Estado</th>
+            <th>Creación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user.id){
+          <tr>
+            <td>{{user.id}}</td>
+            <td><img src="/icon/USUARIO LOGO.png" alt="User Photo" /></td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.role}}</td>
+            <td>26/8/2024 3:23</td>
+            <td>activo</td>
+            <td>26/8/2024 10:23</td>
+            <td class="actions">
+              <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
+              <div class="dropdown">
+                <a (click)="userDetail(user.id)">Detalles</a>
+                <a (click)="editarUser(user.id)">Editar</a>
+                <a class="delete">Eliminar</a>
+              </div>
+            </td>
+          </tr>
+          }
+          <!-- Más filas -->
+        </tbody>
+      </table>
+    </div>
+    
   </main>
 </div>

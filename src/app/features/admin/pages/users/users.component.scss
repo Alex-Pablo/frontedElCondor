@@ -166,22 +166,20 @@ header h1 {
 }
 
 .user-table {
-  width: 100%;
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho del contenedor */
   border-collapse: collapse;
-  table-layout: fixed; /* Ensures the table columns are evenly distributed */
+  table-layout: auto; /* Permite que las columnas se ajusten al contenido */
 }
-
 
 .user-table th,
 .user-table td {
-  padding: 12px;
-  border: 1px solid var(--txt-second-color);
+  padding: 40px; /* Ajusta el padding para reducir el espacio dentro de las celdas */
+  border: 0.5px solid var(--txt-second-color);
   text-align: left;
 }
 
 .user-table th {
   background-color: var(--txt-second-color);
-  ;
   font-weight: bold;
 }
 
@@ -207,7 +205,7 @@ header h1 {
   display: none;
   position: absolute;
   right: 0;
-  top: 20%; 
+  top: 20%;
   background-color: var(--bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -227,4 +225,3 @@ header h1 {
 .actions .dropdown.show {
   display: block;
 }
-
