@@ -173,8 +173,8 @@ header h1 {
 
 .user-table th,
 .user-table td {
-  padding: 40px; /* Ajusta el padding para reducir el espacio dentro de las celdas */
-  border: 0.5px solid var(--txt-second-color);
+  padding: 4px 40px; /* Reduce el espacio interno de las celdas */
+  border: 0.5px solid var(--txt-second-color); /* Mantiene el borde delgado */
   text-align: left;
 }
 
