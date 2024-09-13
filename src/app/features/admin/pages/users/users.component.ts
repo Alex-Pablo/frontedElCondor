@@ -5,6 +5,7 @@ import { InputSearchComponent } from '../../../../shared/components/input-search
 import { AuthService } from '../../../../core/services/auth.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { IUser } from '../../../../shared/models/IUser';
+import { EditUserComponent } from '../../components/modals/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-users',
@@ -53,6 +54,12 @@ export class UsersComponent implements OnInit {
 
   editarUser(id: any) {
     const idNum = parseInt(id);
+    this._matDialog.open(EditUserComponent, {
+      width: '90vw',
+      height: '80vh',
+      disableClose: true,
+      data: idNum
+    })
     //Para la jennfier que ven cochinadas
     //Aqui tienes que llamar tu modal como  el crearUsuario
     //tendrias que pasarle el id del usuarios idNum
