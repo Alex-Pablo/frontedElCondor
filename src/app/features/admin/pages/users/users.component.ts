@@ -79,21 +79,6 @@ export class UsersComponent implements OnInit {
   userDetail(id: any) {
     this.isOpen = true;
     this.IdUserSelect = parseInt(id);
-    //   const idNum = parseInt(id);
-    //   //Para Royer
-    //   //aqui deberias llamar tu modal. cuando llames al modal. le pasas el id de usuarios que es idNum.
-    //   //Ya estando en el modal pones esta petifion este codigo
-    //   this._matDialog.open(UserDetailComponent, {
-    //     width: '90vw',
-    //     height: '80vh',
-    //     disableClose: true
-    //   })
-
-    //   this.authService.getUserDetail(idNum).subscribe((data) => {
-    //     if (data.isSuccess) {
-    //       console.log(data.value);// aqui puedes ver los datos que se traer en la base de datos
-    //     }
-    //   })
   }
 
 }
