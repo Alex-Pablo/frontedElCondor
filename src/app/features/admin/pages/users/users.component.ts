@@ -7,7 +7,7 @@ import { IResult } from '../../../../shared/models/IResult';
 import { IUser } from '../../../../shared/models/IUser';
 import { EditUserComponent } from '../../components/modals/edit-user/edit-user.component';
 import { UserDetailComponent } from '../../components/modals/user-detail/user-detail.component';
-import { NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [MatDialogModule, InputSearchComponent,
     UserDetailComponent,
-    NgIf
+    NgIf, CurrencyPipe, DatePipe
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']

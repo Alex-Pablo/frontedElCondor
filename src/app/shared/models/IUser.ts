@@ -5,8 +5,8 @@ export interface IUser {
   phoneNumber: string;
   firstname: string;
   lastname: string;
-  profile?: string; // Campo opcional
+  profile?: string; // url de la imagne
   role: string;
   estado: string;
-  lastLogin?: Date; // Campo opcional
+  last_Login?: Date; // Campo opcional
 }

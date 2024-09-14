@@ -73,7 +73,6 @@
   width: 100vh;
   flex-grow: 1;
   background-color: var(--bg-color);
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -166,15 +165,19 @@ header h1 {
 }
 
 .user-table {
-  width: 100%; /* Asegura que la tabla ocupe todo el ancho del contenedor */
+  width: 100%;
+  /* Asegura que la tabla ocupe todo el ancho del contenedor */
   border-collapse: collapse;
-  table-layout: auto; /* Permite que las columnas se ajusten al contenido */
+  table-layout: auto;
+  /* Permite que las columnas se ajusten al contenido */
 }
 
 .user-table th,
 .user-table td {
-  padding: 4px 40px; /* Reduce el espacio interno de las celdas */
-  border: 0.5px solid var(--txt-second-color); /* Mantiene el borde delgado */
+  padding: 4px 40px;
+  /* Reduce el espacio interno de las celdas */
+  border: 0.5px solid var(--txt-second-color);
+  /* Mantiene el borde delgado */
   text-align: left;
 }
 

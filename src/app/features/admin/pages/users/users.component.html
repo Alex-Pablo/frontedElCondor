@@ -32,6 +32,7 @@
 
 
     <div class="table-container">
+
       <table class="user-table">
         <thead>
           <tr>
@@ -39,9 +40,8 @@
             <th>Foto</th>
             <th>Nombre</th>
             <th>Rol</th>
-            <th>Última actividad</th>
+            <th>Inicion sesion</th>
             <th>Estado</th>
-            <th>Creación</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -52,9 +52,8 @@
             <td><img [src]="user.profile" alt="User Photo" /></td>
             <td>{{user.firstname}}</td>
             <td>{{user.role}}</td>
-            <td>26/8/2024 3:23</td>
+            <td>{{user.last_Login | date: 'medium'}}</td>
             <td>{{user.estado}}</td>
-            <td>26/8/2024 10:23</td>
             <td class="actions">
               <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
               <div class="dropdown">
@@ -68,6 +67,8 @@
           <!-- Más filas -->
         </tbody>
       </table>
+
+
     </div>
 
   </main>
