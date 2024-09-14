@@ -20,10 +20,15 @@
         flex-direction: column;
         width: 100%;
 
-        input {
+        input,
+        select {
           width: 100%;
           border: solid #ACC2D3 1px;
           padding: 5px 10px;
+        }
+
+        .wrapperImg {
+          width: 30%;
         }
       }
     }
@@ -32,6 +37,13 @@
   .btnCancel {
     background-color: var(--bg-red-color);
     color: white !important;
+    border-radius: 5px !important;
+  }
+
+  .btnAccept {
+    background-color: #3A4DB1;
+    color: white;
+    border-radius: 5px;
   }
 
   label {

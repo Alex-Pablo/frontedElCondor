@@ -6,11 +6,11 @@
 
     <div class="controls">
       <button class="pdf-button" (click)="logFieldName('PDF')">PDF</button>
-      <input 
-        type="text" 
-        placeholder="Fecha" 
-        class="date-input" 
-        (click)="logFieldName('Fecha')" 
+      <input
+        type="text"
+        placeholder="Fecha"
+        class="date-input"
+        (click)="logFieldName('Fecha')"
       />
       <select class="state-select" (click)="logFieldName('Estado')">
         <option>Estado</option>
@@ -29,7 +29,7 @@
       </div>
       <button class="add-user-button" (click)="logFieldName('Agregar Usuario')">+</button>
     </div>
-    
+
 
     <div class="table-container">
       <table class="user-table">
@@ -49,11 +49,11 @@
           @for (user of users; track user.id){
           <tr>
             <td>{{user.id}}</td>
-            <td><img src="/icon/USUARIO LOGO.png" alt="User Photo" /></td>
+            <td><img [src]="user.profile" alt="User Photo" /></td>
             <td>{{user.firstname}}</td>
             <td>{{user.role}}</td>
             <td>26/8/2024 3:23</td>
-            <td>activo</td>
+            <td>{{user.estado}}</td>
             <td>26/8/2024 10:23</td>
             <td class="actions">
               <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
@@ -69,6 +69,6 @@
         </tbody>
       </table>
     </div>
-    
+
   </main>
 </div>

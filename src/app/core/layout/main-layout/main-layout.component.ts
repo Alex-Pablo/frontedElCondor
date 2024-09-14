@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { IResult } from '../../../shared/models/IResult';
@@ -8,12 +8,13 @@ import { IUser } from '../../../shared/models/IUser';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, RouterLink],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
 
 export class MainLayoutComponent implements OnInit {
+  constructor(private router: Router) { }
   logocondor: string = 'img/logo.png';
   iconotificacion: string = 'icon/notificacion.png'
   icologout: string = 'icon/logout.png'
@@ -27,10 +28,10 @@ export class MainLayoutComponent implements OnInit {
   icoconfig: string = 'icon/configuracion.png'
   icoconfigActive: string = 'icon/configuracionActive.png'
   isCollapsed = false; // Estado para el sidebar
-  
+
   isConfigOpen = false;
   isConfigOpen2 = false;
-  
+
   activeItem: string = ''; // Elemento activo
   isDropdownVisible = false;
   isDropdownVisible2 = false;
@@ -63,13 +64,13 @@ export class MainLayoutComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
-  
+
   // toggleDropdown2() {
   //   this.isDropdownVisible2 = !this.isDropdownVisible2;
   // }
 
   logout() {
-    console.log('Cerrar sesión');
+    this.router.navigate(['/'])
   }
 
   toggleSidebar() {

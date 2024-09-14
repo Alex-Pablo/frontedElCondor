@@ -21,6 +21,5 @@ export class PublicLayoutComponent {
 
   onSearch(searchTerm: string) {
     console.log(searchTerm);
-
   }
 }

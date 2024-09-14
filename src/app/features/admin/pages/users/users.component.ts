@@ -21,6 +21,10 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
     this.authService.getUsers().subscribe((data: IResult<IUser[]>) => {
       if (data.isSuccess) {
         this.users = data.value;
@@ -46,11 +50,12 @@ export class UsersComponent implements OnInit {
       dropdown.classList.toggle('show');
     }
   }
-  
+
   logFieldName(fieldName: string) {
     console.log(fieldName);
   }
-  
+
+
 
   editarUser(id: any) {
     const idNum = parseInt(id);
@@ -59,7 +64,9 @@ export class UsersComponent implements OnInit {
       height: '80vh',
       disableClose: true,
       data: { id: idNum }
-    })
+    }).afterClosed().subscribe(() => {
+      this.getAllUsers();
+    });
   }
 
   userDetail(id: any) {

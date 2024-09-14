@@ -78,7 +78,6 @@ export class UserRegisterModalComponent implements OnInit {
       });
       Swal.showLoading();
       const formData = new FormData();
-      console.log(this.loginForm.value.ID_Estado);
 
 
       formData.append('Email', this.loginForm.value.email),

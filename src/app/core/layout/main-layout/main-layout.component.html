@@ -41,17 +41,17 @@
           <i><img [src]="activeItem === 'ventas' ? icoventasActive : icoventas" alt="ventas" class="icon"></i>
           <span *ngIf="!isCollapsed">Ventas</span>
         </li>
-        <li (click)="toggleConfig()" 
-          [class.active]="activeItem === 'reportes'" 
+        <li (click)="toggleConfig()"
+          [class.active]="activeItem === 'reportes'"
           (click)="setActive('reportes')">
           <span><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></span>
           <span *ngIf="!isCollapsed">Reportes</span>
           <div id="submenurepo" class="submenu" *ngIf="isConfigOpen">
             <ul>
               <li [class.active]="activeItem === 'repo-usuarios'"
-                (click)="setActive('repo-usuarios')">Reportes de Usuarios</li>
+                (click)="setActive('repo-usuarios')"><a routerLink="/reports/usuarios">Reportes de usuarios</a></li>
               <li [class.active]="activeItem === 'repo-ventas'"
-                (click)="setActive('repo-ventas')">Reportes de Ventas</li>
+                (click)="setActive('repo-ventas')"><a routerLink="#">Reportes de ventas</a></li>
             </ul>
           </div>
         </li>
@@ -60,17 +60,17 @@
           <i><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></i>
           <span *ngIf="!isCollapsed">Reportes</span>
         </li> -->
-        <li (click)="toggleConfig2()" 
-          [class.active]="activeItem === 'configuracion'" 
+        <li (click)="toggleConfig2()"
+          [class.active]="activeItem === 'configuracion'"
           (click)="setActive('configuracion')">
           <span><img [src]="activeItem === 'configuracion' ? icoconfigActive : icoconfig" alt="configuracion" class="icon"></span>
           <span *ngIf="!isCollapsed">Configuración</span>
           <div class="submenu" *ngIf="isConfigOpen2">
             <ul>
               <li [class.active]="activeItem === 'usuarios'"
-                (click)="setActive('usuarios')">Usuarios</li>
+                (click)="setActive('usuarios')"><a routerLink="/admin/usuarios">Usuarios</a></li>
               <li [class.active]="activeItem === 'roles'"
-                (click)="setActive('roles')">Roles</li>
+                (click)="setActive('roles')"><a routerLink="#">Roles</a></li>
             </ul>
           </div>
         </li>

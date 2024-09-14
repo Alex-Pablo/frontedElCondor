@@ -26,11 +26,12 @@
         </div>
         <div class="wrapperInput" >
           <label for="EmailUser">Correo Electronico</label>
-          <input type="email" name="" value="" placeholder="Ingrese el correo Electronico"formControlName="email" >
+          <input  [disabled]="true"  type="email" name="" value="" placeholder="Ingrese el correo Electronico" formControlName="email" >
         </div>
       </div>
 
       <div class="wrapperRowForm">
+
         <div class="wrapperInput">
           <label for="RoleuserOptions">Role del usuario</label>
           <select id="RoleuserOptions" formControlName="role">
@@ -55,11 +56,12 @@
         <div class="wrapperInput">
           <label for="ImgUser">Foto del usuario</label>
          <input id="profileImg" type="file" (change)="onFileChange($event)">
+
+          <div class="wrapperImg">
+          <img src="" alt="" [src]="imgUrl">
+          </div>
         </div>
 
-          <div>
-          <img src="" alt="" [src]="getImgProfile()">
-          </div>
       </div>
 
 
@@ -69,6 +71,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
-  <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar</button>
+  <button mat-button cdkFocusInitial  class="btnAccept"(click)="onSubmit()">Registrar</button>
 </mat-dialog-actions>
 </div>
