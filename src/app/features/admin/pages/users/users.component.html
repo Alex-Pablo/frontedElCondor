@@ -71,4 +71,6 @@
     </div>
     
   </main>
+  <div *ngIf="isOpen"><app-user-detail [IdUser] = "IdUserSelect" (closeModalvalue)="closeModal()"></app-user-detail></div>
+  
 </div>

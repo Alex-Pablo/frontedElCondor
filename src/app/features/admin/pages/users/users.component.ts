@@ -5,15 +5,22 @@ import { InputSearchComponent } from '../../../../shared/components/input-search
 import { AuthService } from '../../../../core/services/auth.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { IUser } from '../../../../shared/models/IUser';
+import { UserDetailComponent } from '../../components/modals/user-detail/user-detail.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [MatDialogModule, InputSearchComponent],
+  imports: [MatDialogModule, InputSearchComponent,
+  UserDetailComponent,
+  NgIf
+  ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  IdUserSelect: number = 0;
+  isOpen: boolean = false;
   users: IUser[] | undefined;
   searchMessage = "Buscar suarios"
   constructor(private _matDialog: MatDialog, private authService: AuthService) {
@@ -62,17 +69,25 @@ export class UsersComponent implements OnInit {
       }
     })
   }
-
+  closeModal(){this.isOpen = false};
   userDetail(id: any) {
-    const idNum = parseInt(id);
-    //Para Royer mi bebe
-    //aqui deberias llamar tu modal. cuando llames al modal. le pasas el id de usuarios que es idNum.
-    //Ya estando en el modal pones esta petifion este codigo
-    this.authService.getUserDetail(idNum).subscribe((data) => {
-      if (data.isSuccess) {
-        console.log(data.value);// aqui puedes ver los datos que se traer en la base de datos
-      }
-    })
+    this.isOpen = true;
+    this.IdUserSelect = parseInt(id);
+  //   const idNum = parseInt(id);
+  //   //Para Royer
+  //   //aqui deberias llamar tu modal. cuando llames al modal. le pasas el id de usuarios que es idNum.
+  //   //Ya estando en el modal pones esta petifion este codigo
+  //   this._matDialog.open(UserDetailComponent, {
+  //     width: '90vw',
+  //     height: '80vh',
+  //     disableClose: true
+  //   })
+
+  //   this.authService.getUserDetail(idNum).subscribe((data) => {
+  //     if (data.isSuccess) {
+  //       console.log(data.value);// aqui puedes ver los datos que se traer en la base de datos
+  //     }
+  //   })
   }
 
 }

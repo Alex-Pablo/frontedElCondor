@@ -10,6 +10,7 @@ import { IUserStatus } from '../../shared/models/IUserStatus';
 import { IUserDetailDto } from '../../shared/models/IUserDetail';
 import { IUserModifyDto } from '../../shared/models/IUserModify';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,3 +69,5 @@ export class AuthService {
     return this.http.get<IResult<IUserModifyDto>>(`${environment.baseUrlApi}/User/User/${id}`)
   }
 }
+
+
