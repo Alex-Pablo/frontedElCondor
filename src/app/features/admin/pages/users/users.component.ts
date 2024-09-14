@@ -8,6 +8,7 @@ import { IUser } from '../../../../shared/models/IUser';
 import { EditUserComponent } from '../../components/modals/edit-user/edit-user.component';
 import { UserDetailComponent } from '../../components/modals/user-detail/user-detail.component';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -23,7 +24,7 @@ export class UsersComponent implements OnInit {
   IdUserSelect: number = 0;
   isOpen: boolean = false;
   users: IUser[] | undefined;
-  searchMessage = "Buscar suarios"
+  searchMessage = "Buscar usuarios"
   constructor(private _matDialog: MatDialog, private authService: AuthService) {
   }
 
@@ -48,6 +49,8 @@ export class UsersComponent implements OnInit {
       width: '90vw',
       height: '80vh',
       disableClose: true
+    }).afterClosed().subscribe(() => {
+      this.getAllUsers();
     })
   }
 
@@ -65,6 +68,7 @@ export class UsersComponent implements OnInit {
 
 
   editarUser(id: any) {
+    console.log(id)
     const idNum = parseInt(id);
     this._matDialog.open(EditUserComponent, {
       width: '90vw',
@@ -75,6 +79,34 @@ export class UsersComponent implements OnInit {
       this.getAllUsers();
     });
   }
+
+
+  deleteUser(id: any) {
+    const idNum = parseInt(id);
+    Swal.fire({
+      title: "¿Quieres eliminar el usuario?",
+      text: `Se eliminará el usuario con el id ${idNum}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.deleteUser(idNum).subscribe((data) => {
+          if (data.isSuccess) {
+            Swal.fire({
+              title: "Eliminado!",
+              text: "El usuario se ha eliminado",
+              icon: "success"
+            })
+            this.getAllUsers();
+          }
+        })
+      }
+    })
+  }
+
   closeModal() { this.isOpen = false };
   userDetail(id: any) {
     this.isOpen = true;

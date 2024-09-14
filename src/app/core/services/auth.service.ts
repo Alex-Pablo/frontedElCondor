@@ -72,6 +72,10 @@ export class AuthService {
   getUserById(id: number) {
     return this.http.get<IResult<IUserModifyDto>>(`${environment.baseUrlApi}/User/User/${id}`)
   }
+
+  deleteUser(id: number) {
+    return this.http.delete<IResult<string>>(`${environment.baseUrlApi}/User/delete/${id}`)
+  }
 }
 
 

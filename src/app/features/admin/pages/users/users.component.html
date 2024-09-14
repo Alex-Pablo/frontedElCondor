@@ -60,7 +60,7 @@
               <div class="dropdown">
                 <a (click)="userDetail(user.id)">Detalles</a>
                 <a (click)="editarUser(user.id)">Editar</a>
-                <a class="delete">Eliminar</a>
+                <a (click)="deleteUser(user.id)" class="delete">Eliminar</a>
               </div>
             </td>
           </tr>
@@ -72,5 +72,5 @@
 
   </main>
   <div *ngIf="isOpen"><app-user-detail [IdUser] = "IdUserSelect" (closeModalvalue)="closeModal()"></app-user-detail></div>
-  
+
 </div>

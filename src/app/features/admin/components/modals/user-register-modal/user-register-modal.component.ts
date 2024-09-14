@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { FormBuilder , Form, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Form, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../../core/services/auth.service';
 import Swal from 'sweetalert2';
@@ -62,11 +62,9 @@ export class UserRegisterModalComponent implements OnInit {
 
     this.loginForm.patchValue({ password: password })
   }
-  
-  onSubmit() {
 
-    console.log(this.loginForm.value.role);
-    console.log(this.loginForm.value.estado);
+  onSubmit() {
+    console.log(this.loginForm.value);
 
     if (this.loginForm.valid) {
 
@@ -90,6 +88,7 @@ export class UserRegisterModalComponent implements OnInit {
         formData.append('ID_role', this.loginForm.value.role),
         formData.append('ID_Estado', this.loginForm.value.estado)
 
+      console.log(formData);
 
       this.authService.register(formData).subscribe({
         next: (responsse) => {
