@@ -45,6 +45,7 @@ export class UsersComponent implements OnInit {
     console.log(value);
   }
   crearUsuario() {
+
     this._matDialog.open(UserRegisterModalComponent, {
       width: '90vw',
       height: '80vh',
@@ -68,7 +69,6 @@ export class UsersComponent implements OnInit {
 
 
   editarUser(id: any) {
-    console.log(id)
     const idNum = parseInt(id);
     this._matDialog.open(EditUserComponent, {
       width: '90vw',

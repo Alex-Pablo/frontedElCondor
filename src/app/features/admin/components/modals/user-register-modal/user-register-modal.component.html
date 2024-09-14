@@ -53,13 +53,13 @@
       <div class="wrapperRowForm">
         <div class="wrapperInput">
           <label for="ImgUser">Foto de Perfil</label>
-          <input type="file" name="myImage" accept="image/jpeg" />
+          <input type="file"  id="profileImg" (change)="onFileChange($event)">
         </div>
       </div>
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
-          <button type="boton" (click)="generatePassword()">Generar Contraseña</button>
+          <button type="button" (click)="generatePassword()">Generar Contraseña</button>
           <p>{{getPassword()}}</p>
         </div>
       </div>
