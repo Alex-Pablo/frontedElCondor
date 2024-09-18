@@ -1,133 +1,23 @@
 .container {
   display: flex;
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
   font-family: 'PoppinsSemiBold';
-  background-color: var(--bg-color);
 }
 
-.sidebar {
-  background-color: var(--txt-orange-color);
-  width: 250px;
-  padding: 20px;
-  color: var(--bg-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: var(--bg-color);
-}
-
-.logo-image {
-  width: 50px;
-  /* Ajusta el tamaño según sea necesario */
-  height: auto;
-  /* Mantiene la proporción de la imagen */
-}
-
-.logo-text {
-  font-size: 18px;
-  /* Ajusta el tamaño de la fuente según sea necesario */
-  font-weight: bold;
-  /* Estilo opcional para hacer el texto más prominente */
-  color: var(--contrast-blue-color);
-}
-
-
-.menu {
-  flex-grow: 1;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu ul li {
-  margin-bottom: 30px;
-}
-
-.menu ul li a {
-  text-decoration: none;
-  color: var(--bg-color);
-  font-size: 18px;
-  display: block;
-  padding: 10px;
-  text-align: center;
-  transition: background 0.3s ease;
-}
-
-.menu ul li.active a {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
 
 .main-content {
   height: 100vh;
-  width: 100vh;
+  width: 100%;
   flex-grow: 1;
-  background-color: var(--bg-color);
-  box-sizing: border-box;
 }
 
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 24px;
-  margin: 0;
-}
-
-
-.user-info {
-  display: flex;
-  align-items: center;
-  /* Alinea el ícono y los detalles verticalmente */
-  gap: 15px;
-  /* Espacio entre el ícono y los detalles */
-}
-
-.user-info .user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-
-}
-
-.user-details {
-  display: flex;
-  flex-direction: column;
-  /* Apila el nombre y el rol verticalmente */
-  align-items: flex-start;
-  /* Alinea los detalles a la izquierda */
-}
-
-.user-details .user-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-  /* Espacio entre el nombre y el rol */
-}
-
-.user-details .user-role {
-  font-size: 12px;
-}
 
 
 
 .controls {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -227,4 +117,99 @@ header h1 {
 
 .actions .dropdown.show {
   display: block;
+}
+
+
+
+.example-container {
+  position: relative;
+}
+
+.example-table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  width: 64px;
+}
+
+.mat-column-created {
+  width: 124px;
+}
+
+
+.imgFoto {
+  width: 70px;
+}
+
+
+.actions-container {
+  display: flex;
+  gap: 8px;
+}
+
+.actions-cell {
+  text-align: center;
+}
+
+.mat-icon-button {
+  padding: 0;
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+
+.btnVer {
+  background-color: orange;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btnEditar {
+  background-color: blue;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btnEliminar {
+  background-color: red;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+
+.mat-icon {
+  color: white;
 }

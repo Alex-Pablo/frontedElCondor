@@ -1,85 +1,60 @@
-<div class="container">
-
-  <header>
-    <div class="logo">
-      <img [src]="logocondor" alt="Logo" />
-      <span>+45363723</span>
+<mat-toolbar class="nav">
+  <div class="nav-logo">
+    <button mat-icon-button aria-label="Menu icon" (click)="collapsed.set(!collapsed())">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img [src]="logocondor" class="logo" alt="Logo" />
+  </div>
+  <div class="wrapper-profile">
+    <mat-icon>sms</mat-icon>
+    <div>
+      <img class="userprofile" [src]="userInfor?.profile" alt="">
     </div>
-    <nav>
-      <img [src]="iconotificacion" alt="notificacion" class="icon">
-      <a><img [src]="userInfor?.profile" alt="userprofile"
-          class="userprofile" /></a>
-      <div class="user-info" (click)="toggleDropdown()">
-        <span class="user-name">{{userInfor?.firstname | uppercase}}
-          {{userInfor?.lastname | uppercase}}</span>
-        <span class="user-role">{{userInfor?.role}}</span>
-        <div *ngIf="isDropdownVisible" class="dropdown">
-          <button (click)="logout()">
-            <img [src]="icologout" alt="cerrar sesion" class="icon-logout" />
-            Cerrar sesión
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <div class="container-main">
-
-    <nav class="sidebar" [class.collapsed]="isCollapsed">
-      <div class="toggle-btn" (click)="toggleSidebar()">
-        <span class="arrow" *ngIf="isCollapsed"><img [src]="icoarrow" alt="arrow"></span>
-        <span class="arrow" *ngIf="!isCollapsed"><img [src]="icoarrow" alt="arrow"></span>
-      </div>
-      <ul>
-        <li [class.active]="activeItem === 'inventario'"
-          (click)="setActive('inventario')">
-          <i><img [src]="activeItem === 'inventario' ? icoinventarioActive : icoinventario" alt="inventario" class="icon"></i>
-          <span *ngIf="!isCollapsed">Inventario</span>
-        </li>
-        <li [class.active]="activeItem === 'ventas'"
-          (click)="setActive('ventas')">
-          <i><img [src]="activeItem === 'ventas' ? icoventasActive : icoventas" alt="ventas" class="icon"></i>
-          <span *ngIf="!isCollapsed">Ventas</span>
-        </li>
-        <li (click)="toggleConfig()"
-          [class.active]="activeItem === 'reportes'"
-          (click)="setActive('reportes')">
-          <span><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></span>
-          <span *ngIf="!isCollapsed">Reportes</span>
-          <div id="submenurepo" class="submenu" *ngIf="isConfigOpen">
-            <ul>
-              <li [class.active]="activeItem === 'repo-usuarios'"
-                (click)="setActive('repo-usuarios')"><a routerLink="/reports/usuarios">Reportes de usuarios</a></li>
-              <li [class.active]="activeItem === 'repo-ventas'"
-                (click)="setActive('repo-ventas')"><a routerLink="#">Reportes de ventas</a></li>
-            </ul>
-          </div>
-        </li>
-        <!-- <li [class.active]="activeItem === 'reportes'"
-          (click)="setActive('reportes')">
-          <i><img [src]="activeItem === 'reportes' ? icoreportesActive : icoreportes" alt="reportes" class="icon"></i>
-          <span *ngIf="!isCollapsed">Reportes</span>
-        </li> -->
-        <li (click)="toggleConfig2()"
-          [class.active]="activeItem === 'configuracion'"
-          (click)="setActive('configuracion')">
-          <span><img [src]="activeItem === 'configuracion' ? icoconfigActive : icoconfig" alt="configuracion" class="icon"></span>
-          <span *ngIf="!isCollapsed">Configuración</span>
-          <div class="submenu" *ngIf="isConfigOpen2">
-            <ul>
-              <li [class.active]="activeItem === 'usuarios'"
-                (click)="setActive('usuarios')"><a routerLink="/admin/usuarios">Usuarios</a></li>
-              <li [class.active]="activeItem === 'roles'"
-                (click)="setActive('roles')"><a routerLink="#">Roles</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container-content">
-      <router-outlet></router-outlet>
+    <div class="wrapper-names">
+      <span class="user-name">{{userInfor?.firstname}}</span>
+      <span class="user-role">{{userInfor?.role}}</span>
     </div>
   </div>
+</mat-toolbar>
 
-</div>
+<mat-sidenav-container autosize="true">
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+    <mat-nav-list>
+      @for(item of menuItems(); track item.label){
+
+      <a class="item" mat-list-item [routerLink]="item.route" (click)="toggleNested(item)"
+        routerLinkActive="active-link" #rla="routerLinkActive" [activated]="rla.isActive">
+        <mat-icon matListItemIcon class="item-icon" [class.activeIcon]="rla.isActive">{{item.icon}}</mat-icon>
+        <span matListItemTitle class="item-title" [class.activeTitle]="rla.isActive">{{item.label}}</span>
+        @if(item.subItems ){
+
+        <span matListItemMeta>
+          <mat-icon class="item-icon" [class.activeIcon]="rla.isActive">{{ isItemExpanded(item) && nestedMenuOpen() ?
+            'expand_less' : 'expand_more'
+            }}</mat-icon>
+        </span>
+        }
+      </a>
+
+
+      @if(item.subItems && nestedMenuOpen() && isItemExpanded(item)){
+      <div>
+        @for(subItem of item.subItems; track subItem.label){
+        <a class="subItem" mat-list-item [routerLink]="[item.route, subItem.route]" routerLinkActive="activeSubItem"
+          #rla="routerLinkActive" [activated]="rla.isActive">
+          <mat-icon matListItemIcon [class.activeSubItemIcon]="rla.isActive">{{subItem.icon}}</mat-icon>
+          <span class="itemTitle" matListItemTitle [class.activeSubItemTitle]="rla.isActive">{{subItem.label}}</span>
+        </a>
+        }
+      </div>
+      }
+      }
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p class="titlePage">{{titlePage()}}</p>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

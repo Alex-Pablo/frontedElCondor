@@ -3,10 +3,8 @@ import { MainLayoutComponent } from "../../core/layout/main-layout/main-layout.c
 import { UsersComponent } from "./pages/users/users.component";
 
 export const ADMIN_ROUTES: Routes = [
-    {
-        path: '',  component: MainLayoutComponent, children: [
-            {path: 'usuarios', component: UsersComponent}
-        ]
-    },
-    
+  { path: 'usuarios', component: UsersComponent },
+  {
+    path: '', redirectTo: 'usuarios', pathMatch: 'full'
+  }
 ]

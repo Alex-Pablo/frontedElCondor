@@ -1,31 +1,56 @@
+.container-btn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+
+  button {
+    background-color: var(--contrast-blue-color);
+    color: white;
+    padding: 5px 10px;
+
+  }
+}
+
+.example-container {
+  position: relative;
+}
+
+.example-table-container {
+  position: relative;
+  overflow: auto;
+  min-width: 700px;
+}
+
 table {
-  width: 80%;
-  border-collapse: collapse;
-  margin: 15px auto; 
+  width: 100%;
 }
 
-th, td {
-  border: 1px solid #b1d5e4;
-  padding: 8px;
-  text-align: left;
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-th {
-  background-color: #f2f2f2;
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+  background: red;
 }
 
-button {
-  background-color: var(--bg-second-color); 
-  color: white; 
-  padding: 10px 20px; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  font-size: 16px; 
-  margin: 10px 0; 
-  float: right;
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  width: 64px;
 }
 
-button:hover {
-  background-color: var(--txt-blue-color) ; 
+.mat-column-created {
+  width: 124px;
 }

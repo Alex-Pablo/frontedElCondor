@@ -3,23 +3,35 @@ import { ReportsService } from '../../../../core/services/reports.service';
 import { IUserReportsDto } from '../../../../shared/models/IUserReports';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { DatePipe } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatIcon } from '@angular/material/icon';
+import { TitleService } from '../../../../core/services/title.service';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [DatePipe, MatTableModule, MatIcon],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
 export class UserComponent implements OnInit {
-  reportUsers: IUserReportsDto[] | undefined;
+  displayedColumns: string[] = ['id', 'email', 'firstname', 'lastname', 'stateUser', 'last_login_at', 'created_at', 'last_logout_at', 'updated_at', 'role'];
+  reportUsers: IUserReportsDto[] = [];
+  constructor(private reportsService: ReportsService, private sTitle: TitleService) {
+    this.sTitle.setTitle("Reportes-Usuarios")
+  }
 
-  constructor(private reportsService: ReportsService) { }
 
+  isLoadingResults = true;
+  isRateLimitReached = false;
+  resultsLength = 0;
+  hoveredRow: IUserReportsDto | null = null
   ngOnInit(): void {
     this.reportsService.getUserReports().subscribe((data) => {
       if (data.isSuccess) {
-        this.reportUsers = data.value;
+        this.reportUsers = data.value ?? [];
+        console.log(this.reportUsers);
       }
     });
   }

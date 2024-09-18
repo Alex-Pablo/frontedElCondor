@@ -1,226 +1,111 @@
-.container-main {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.container-content{
-  display: flex;
-  flex-grow: 1;
-  overflow: hidden;
-  padding: 30px 30px 30px 50px;
-  background-color: var(--bg-color);
-}
-
-/******************SIDEBAR********************/
-.sidebar {
-  width: 200px; /* Ancho normal */
-  height: 100%; /* Altura completa */
-  transition: width 0.3s;
-  background-color: var(--primary-color); /* Color de fondo */
-  padding: 10px;
-  display: flex;
-  flex-direction: column; /* Coloca los elementos en columna */
-  position: relative;
-  font-family: 'PoppinsSemiBold';
-}
-
-.sidebar.collapsed {
-  width: 70px; /* Ancho colapsado */
-  height: 100%;
-}
-
-.toggle-btn {
-  cursor: pointer;
-  padding: 10px;
-  text-align: center;
-  justify-self: flex-end;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px; /* Espaciado superior del menú */
-  flex-grow: 1; /* Permite que el menú ocupe el espacio restante */
-}
-
-li {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  color: var(--white-color);
-}
-
-.active {
-  background-color: var(--white-color); /* Fondo blanco al seleccionar */
-  color: var(--third-txt-color);
-  border-radius: 15px;
-}
-
-.arrow {
-  width: 30px;
-  height: auto; /* Tamaño del ícono de la flecha */
-  display: inline-block; /* Asegura que se comporte como un elemento en línea */
-  margin: 0 10px; /* Espaciado alrededor del ícono */
-  transition: transform 0.3s; /* Suaviza la animación al girar la flecha */
-}
-
-.sidebar.collapsed .arrow {
-  transform: rotate(180deg); /* Rota la flecha al colapsar */
-}
-
-.sidebar:not(.collapsed) .arrow {
-  transform: rotate(0deg); /* Restaura la posición de la flecha al expandir */
-}
-
-.icon {
-  width: 25px;
-  height: auto;
-  margin-right: 10px; /* Espaciado entre ícono y texto */
-}
-
-.submenu {
-  position: absolute; /* Para posicionar el dropdown */
-  top: 23%; /* Coloca el dropdown justo debajo del contenedor */
-  right: -55%; /* Alinea el dropdown a la derecha del contenedor */
-  background-color: var(--bg-color);
-  border: 1px solid var(--bg-color);
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  padding: 10px;
-  z-index: 1000;
-}
-
-#submenurepo{
-  top: 15% !important;
-  right: -218px !important;
-}
-
-.submenu ul {
-  list-style: none;
-  padding: 5px;
-}
-
-.submenu li {
-  padding: 5px 5px; /* Espaciado para los elementos del submenu */
-  color: var(--primary-color);
-}
-
-.submenu li:hover {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  border-radius: 25px;
-}
-
-/**************ENCABEZADO*******************/
-header {
-  font-family: 'PoppinsBold';
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--white-color);
+.nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  width: 100%;
-  padding: 10px 20px;
-}
-
-.logo {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .nav-logo {
+    display: flex;
+
+    .logo {
+      width: 40px;
+    }
+  }
+}
+
+.wrapper-profile {
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: 10px;
+
+  .userprofile {
+    width: 45px;
+    height: 45px;
+    border-radius: 25%;
+  }
+
+  .wrapper-names {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .user-name {
+    font-family: 'poppinsmedium';
+    color: var(--fourth-txt-color);
+    font-size: 1rem;
+  }
+
+  .user-role {
+    font-family: 'poppinsregular';
+    font-size: 0.8rem;
+    color: var(--third-txt-color);
+  }
 }
 
-.logo img {
-  height: 40px;
-  margin-right: 10px;
+mat-toolbar {
+  position: relative;
+  z-index: 5;
 }
 
-.icon-logout{
-  height: 25px;
+
+mat-sidenav {
+  background-color: var(--txt-orange-color);
   width: auto;
-  margin-right: 8px;
+  border-radius: 0px;
 }
 
-nav {
-  display: flex;
-  align-items: center;
+mat-nav-list {
+  padding: 0px;
 }
 
-nav a {
-  display: flex;
-  margin-left: 20px;
-  align-items: center;
-  text-decoration: none;
-  color: var(--fourth-txt-color);
-  font-weight: bold;
+mat-sidenav-content {
+  padding: 25px 10px;
+  height: calc(100vh - 65px);
 }
 
-nav a.offers {
-  color: var(--contrast-blue-color);
+.item {
+  border-radius: 0px !important;
+
+  .item-title {
+    color: white;
+  }
+
+  .item-icon {
+    color: white;
+  }
 }
 
-nav a:hover {
-  text-decoration: underline;
+//estilos cuando se activa uan ulr
+.item.active-link {
+  background-color: white !important;
 }
 
-nav a img.icon {
-  width: 20px;
-  height: auto;
-  margin-right: 5px;
+item.mat-list-item:hover {
+  background-color: #f5f5f5;
 }
 
-.user-info {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px; /* Espaciado entre icono y texto */
+
+.activeTitle {
+  color: black !important;
 }
 
-.userprofile{
-  width: 45px;
-  height: 45px;
-  margin-right: 5px;
-  border-radius: 25%;
+.activeIcon {
+  color: black !important;
 }
 
-.user-name {
-  font-family: 'PoppinsMedium';
-  color: var(--fourth-txt-color);
 
+
+.subItem {
+  border-radius: 0px !important;
 }
 
-.user-role {
-  font-family: 'PoppinsRegular';
-  font-size: 0.9em;
-  color: var(--third-txt-color);
+.subItem.activeSubItem {
+  background-color: transparent !important;
 }
 
-.dropdown {
-  position: absolute; /* Para posicionar el dropdown */
-  top: 100%; /* Coloca el dropdown justo debajo del contenedor */
-  right: 0; /* Alinea el dropdown a la derecha del contenedor */
-  background-color: var(--bg-color);
-  border: 1px solid var(--bg-color);
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  padding: 10px;
-  z-index: 1000;
-}
-
-.dropdown button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  text-align: left;
-  background: none; /* Sin fondo */
-  border: none; /* Sin borde */
-  cursor: pointer; /* Cambia el cursor al pasar */
-  color: var(--contrast-blue-color);
-}
-
-.dropdown button:hover {
-  text-decoration: underline; /* Subrayado al pasar el mouse */
+.activeSubItemIcon,
+.activeSubItemTitle {
+  color: grey !important;
 }

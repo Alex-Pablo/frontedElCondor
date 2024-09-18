@@ -1,17 +1,8 @@
 <div class="container">
   <main class="main-content">
-    <header>
-      <h1>Configuración/Usuarios</h1>
-    </header>
-
     <div class="controls">
       <button class="pdf-button" (click)="logFieldName('PDF')">PDF</button>
-      <input
-        type="text"
-        placeholder="Fecha"
-        class="date-input"
-        (click)="logFieldName('Fecha')"
-      />
+      <input type="text" placeholder="Fecha" class="date-input" (click)="logFieldName('Fecha')" />
       <select class="state-select" (click)="logFieldName('Estado')">
         <option>Estado</option>
         <!-- Opciones -->
@@ -21,57 +12,105 @@
         <!-- Opciones -->
       </select>
       <div>
-        <app-input-search
-          [searchMessage]="searchMessage"
-          (searchChange)="onSearch($event)"
-          (click)="logFieldName('Buscar')"
-        ></app-input-search>
+        <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"
+          (click)="logFieldName('Buscar')"></app-input-search>
       </div>
       <button class="add-user-button" (click)="crearUsuario()">+</button>
     </div>
 
 
     <div class="table-container">
+      <div class="example-container mat-elevation-z8">
+        <div class="example-table-container">
 
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>NO</th>
-            <th>Foto</th>
-            <th>Nombre</th>
-            <th>Rol</th>
-            <th>Inicion sesion</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (user of users; track user.id){
-          <tr>
-            <td>{{user.id}}</td>
-            <td><img [src]="user.profile" alt="User Photo" /></td>
-            <td>{{user.firstname}}</td>
-            <td>{{user.role}}</td>
-            <td>{{user.last_Login | date: 'medium'}}</td>
-            <td>{{user.estado}}</td>
-            <td class="actions">
-              <button class="more-options" (click)="toggleDropdown($event)">⋮</button>
-              <div class="dropdown">
-                <a (click)="userDetail(user.id)">Detalles</a>
-                <a (click)="editarUser(user.id)">Editar</a>
-                <a (click)="deleteUser(user.id)" class="delete">Eliminar</a>
-              </div>
-            </td>
-          </tr>
-          }
-          <!-- Más filas -->
-        </tbody>
-      </table>
+          <table mat-table [dataSource]="users" class="example-table" matSort matSortActive="created"
+            matSortDisableClear matSortDirection="desc">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let user">{{user.id}}</td>
+            </ng-container>
+
+            <!-- Foto Column -->
+            <ng-container matColumnDef="profile">
+              <th mat-header-cell *matHeaderCellDef>Foto</th>
+              <td mat-cell *matCellDef="let user"><img class="imgFoto" [src]="user.profile" alt=""></td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let user">{{user.email}}</td>
+            </ng-container>
+
+            <!-- Phone Number Column -->
+            <ng-container matColumnDef="phoneNumber">
+              <th mat-header-cell *matHeaderCellDef>Numero de telefono</th>
+              <td mat-cell *matCellDef="let user">{{user.phoneNumber}}</td>
+            </ng-container>
+
+            <!-- First Name Column -->
+            <ng-container matColumnDef="firstname">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let user">{{user.firstname}}</td>
+            </ng-container>
+
+            <!-- Last Name Column -->
+            <ng-container matColumnDef="lastname">
+              <th mat-header-cell *matHeaderCellDef>Apellido</th>
+              <td mat-cell *matCellDef="let user">{{user.lastname}}</td>
+            </ng-container>
+
+            <!-- Role Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef>Role</th>
+              <td mat-cell *matCellDef="let user">{{user.role}}</td>
+            </ng-container>
+
+            <!-- Estado Column -->
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let user">{{user.estado}}</td>
+            </ng-container>
+
+            <!-- Last Login Column -->
+            <ng-container matColumnDef="last_Login">
+              <th mat-header-cell *matHeaderCellDef>Inicio sesion</th>
+              <td mat-cell *matCellDef="let user">{{user.last_Login | date: 'short'}}</td>
+            </ng-container>
+            <!-- Last Login Column -->
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let user" class="actions-cell">
+                <div class="actions-container">
+                  <button mat-icon-button class="btnVer" (click)="onViewDetails(user.id)">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button mat-icon-button class="btnEditar" (click)="onEditUser(user.id)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button class="btnEliminar" (click)="onDeleteUser(user.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Table Headers and Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (mouseover)="hoveredRow = row"
+              (mouseleave)="hoveredRow = null">
+
+          </table>
+        </div>
+
+      </div>
 
 
     </div>
 
   </main>
-  <div *ngIf="isOpen"><app-user-detail [IdUser] = "IdUserSelect" (closeModalvalue)="closeModal()"></app-user-detail></div>
+  <div *ngIf="isOpen"><app-user-detail [IdUser]="IdUserSelect" (closeModalvalue)="closeModal()"></app-user-detail></div>
 
 </div>
