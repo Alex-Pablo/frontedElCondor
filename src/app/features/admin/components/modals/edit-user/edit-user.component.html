@@ -1,76 +1,73 @@
-<div class="container">
+<div class="modal">
 
-<h2 mat-dialog-title class="title">Editar usuario</h2>
-<mat-dialog-content class="mat-typography">
-  <form [formGroup]="loginForm">
+  <h2 mat-dialog-title class="modal-title">Editar usuario</h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="loginForm">
 
-    <div class="wrapperForm" >
+      <div class="wrapperForm">
+        <div class="wrapperRowForm">
 
-      <div class="wrapperRowForm">
+          <div class="wrapperInput">
+            <label for="NombreUser">Nombre Usuario</label>
+            <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
+          </div>
 
-        <div class="wrapperInput">
-          <label for="NombreUser">Nombre Usuario</label>
-          <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
-        </div>
-
-        <div class="wrapperInput" >
-          <label for="ApellidoUser">Apellidos</label>
-          <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname" >
-        </div>
-      </div>
-
-    <div class="wrapperRowForm">
-        <div class="wrapperInput">
-          <label for="TelefonoUser">Numero de telefono</label>
-          <input type="text" name="" value="" placeholder="Ingrese el numero de telefono" formControlName="phoneNumber" >
-        </div>
-        <div class="wrapperInput" >
-          <label for="EmailUser">Correo Electronico</label>
-          <input  [disabled]="true"  type="email" name="" value="" placeholder="Ingrese el correo Electronico" formControlName="email" >
-        </div>
-      </div>
-
-      <div class="wrapperRowForm">
-
-        <div class="wrapperInput">
-          <label for="RoleuserOptions">Role del usuario</label>
-          <select id="RoleuserOptions" formControlName="role">
-            @for(role of roles; track role.id){
-            <option [value]="role.id">{{role.name}}</option> }
-          </select>
-        </div>
-
-        <div class="wrapperInput">
-          <label for="EstadouserOptions">Selecione el estado</label>
-
-          <select id="EstadouserOptions"formControlName="estado" >
-            @for(status of userstatus; track status.id){
-              <option [value]="status.id">{{status.name}}</option> }
-          </select>
-        </div>
-
-      </div>
-
-
-      <div class="wrapperRowForm">
-        <div class="wrapperInput">
-          <label for="ImgUser">Foto del usuario</label>
-         <input id="profileImg" type="file" (change)="onFileChange($event)">
-
-          <div class="wrapperImg">
-          <img src="" alt="" [src]="imgUrl">
+          <div class="wrapperInput">
+            <label for="ApellidoUser">Apellidos</label>
+            <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname">
           </div>
         </div>
 
+        <div class="wrapperRowForm">
+          <div class="wrapperInput">
+            <label for="TelefonoUser">Numero de telefono</label>
+            <input type="text" name="" value="" placeholder="Ingrese el numero de telefono"
+              formControlName="phoneNumber">
+          </div>
+          <div class="wrapperInput">
+            <label for="EmailUser">Correo Electronico</label>
+            <input [disabled]="true" type="email" name="" value="" placeholder="Ingrese el correo Electronico"
+              formControlName="email">
+          </div>
+        </div>
+
+        <div class="wrapperRowForm">
+          <div class="wrapperInput">
+            <label for="RoleuserOptions">Role del usuario</label>
+            <select id="RoleuserOptions" formControlName="role">
+              @for(role of roles; track role.id){
+              <option [value]="role.id">{{role.name}}</option> }
+            </select>
+          </div>
+
+          <div class="wrapperInput">
+            <label for="EstadouserOptions">Selecione el estado</label>
+            <select id="EstadouserOptions" formControlName="estado">
+              @for(status of userstatus; track status.id){
+              <option [value]="status.id">{{status.name}}</option> }
+            </select>
+          </div>
+        </div>
+
+
+        <div class="wrapperRowForm">
+          <div class="wrapperInput">
+            <label for="ImgUser">Foto del usuario</label>
+            <input id="profileImg" type="file" (change)="onFileChange($event)">
+            <div class="wrapperImg">
+              <img src="" alt="" [src]="imgUrl">
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
-
-
-
-    </div>
-</form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
-  <button mat-button cdkFocusInitial  class="btnAccept"(click)="onSubmit()">Registrar</button>
-</mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <app-btn-close (click)="onCloseModal()"></app-btn-close>
+    <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+    <!-- <button mat-button cdkFocusInitial class="btnAccept" (click)="onSubmit()">Registrar</button> -->
+  </mat-dialog-actions>
 </div>

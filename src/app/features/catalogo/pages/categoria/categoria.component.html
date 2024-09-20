@@ -1,0 +1,58 @@
+<div class="flex flex-wrap justify-end gap-2 mb-4">
+  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+  <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
+</div>
+<div class="example-container mat-elevation-z8">
+  <div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc">
+
+      <ng-container matColumnDef="nombre">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.nombre }} </td>
+      </ng-container>
+
+      <!-- Descripción -->
+      <ng-container matColumnDef="descripcion">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.descripcion }} </td>
+      </ng-container>
+
+      <!-- Estado -->
+      <ng-container matColumnDef="estado">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.estado }} </td>
+      </ng-container>
+
+      <!-- Cantidad de Productos -->
+      <ng-container matColumnDef="cantidadProductos">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Cantidad de Productos </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.cantidadProductos }} </td>
+      </ng-container>
+
+      <!-- Last Login Column -->
+      <ng-container matColumnDef="acciones">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>acciones</th>
+        <td mat-cell *matCellDef="let item" class="actions-cell">
+          <div class="actions-container">
+            <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEditar" (click)="onEdit(item.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEliminar" (click)="onDelete(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+  </div>
+
+</div>

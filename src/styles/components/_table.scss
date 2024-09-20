@@ -1,0 +1,77 @@
+.example-container {
+  position: relative;
+  padding: 0px 0px 10px 0px;
+
+  .example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 500px;
+    overflow: auto;
+
+    table {
+      width: 100%;
+
+
+      .itemHeader {
+        background-color: #EFEFF1;
+        color: #223BBD;
+        font-family: 'PoppinsBold';
+        font-size: 0.85rem;
+
+
+      }
+
+      td {
+        .imgFoto {
+          width: 71px;
+        }
+
+        .actions-container {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+          align-items: center;
+
+          .mat-icon {
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+          }
+
+          .btnVer {
+            background-color: orange;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+          }
+
+          .btnEditar {
+            background-color: blue;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+          }
+
+          .btnEliminar {
+            background-color: red;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+}

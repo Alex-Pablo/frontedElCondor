@@ -1,0 +1,55 @@
+<h2 class="" mat-dialog-title>Registrar un proveedor</h2>
+<mat-dialog-content class="mat-typography w-full">
+  <form>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre del Proveedor" type="text"
+          placeholder="Ingrese el nombre del proveedor"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="NIT" type="text" placeholder="Ingrese el NIT "></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Telefono" type="text" placeholder="Numero de telefono"></app-input-field>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Correo electronico" type="text"
+          placeholder="Ingrese el correo electronico"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Direccion" type="text" placeholder="Ingrese la direccion"></app-input-field>
+      </div>
+    </div>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Pagina web" type="text" placeholder="Sitio web del proveedor"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Estado" placeholder="Selecione el estado del proveedor"
+          [options]="categorias"></app-input-select>
+      </div>
+    </div>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Numero de cuenta" type="text"
+          placeholder="Numero de cuenta del proveedor"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre de la cuenta" type="text"
+          placeholder="Ingrese el nombre de la cuenta"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre del banco" type="text"
+          placeholder="Ingrese el nombre del banco"></app-input-field>
+      </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-btn-close (click)="onCloseModal()"></app-btn-close>
+  <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+</mat-dialog-actions>

@@ -1,19 +1,18 @@
 <div class="container">
   <main class="main-content">
     <div class="controls">
-      <button class="pdf-button" (click)="logFieldName('PDF')">PDF</button>
-      <input type="text" placeholder="Fecha" class="date-input" (click)="logFieldName('Fecha')" />
-      <select class="state-select" (click)="logFieldName('Estado')">
+      <button class="pdf-button">PDF</button>
+      <input type="text" placeholder="Fecha" class="date-input" />
+      <select class="state-select">
         <option>Estado</option>
         <!-- Opciones -->
       </select>
-      <select class="role-select" (click)="logFieldName('Rol')">
+      <select class="role-select">
         <option>Rol</option>
         <!-- Opciones -->
       </select>
       <div>
-        <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"
-          (click)="logFieldName('Buscar')"></app-input-search>
+        <app-input-search [searchMessage]=" searchMessage" (searchChange)="onSearch($event)"></app-input-search>
       </div>
       <button class="add-user-button" (click)="crearUsuario()">+</button>
     </div>
@@ -28,60 +27,60 @@
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
               <td mat-cell *matCellDef="let user">{{user.id}}</td>
             </ng-container>
 
             <!-- Foto Column -->
             <ng-container matColumnDef="profile">
-              <th mat-header-cell *matHeaderCellDef>Foto</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Foto</th>
               <td mat-cell *matCellDef="let user"><img class="imgFoto" [src]="user.profile" alt=""></td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Email</th>
               <td mat-cell *matCellDef="let user">{{user.email}}</td>
             </ng-container>
 
             <!-- Phone Number Column -->
             <ng-container matColumnDef="phoneNumber">
-              <th mat-header-cell *matHeaderCellDef>Numero de telefono</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Numero de telefono</th>
               <td mat-cell *matCellDef="let user">{{user.phoneNumber}}</td>
             </ng-container>
 
             <!-- First Name Column -->
             <ng-container matColumnDef="firstname">
-              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
               <td mat-cell *matCellDef="let user">{{user.firstname}}</td>
             </ng-container>
 
             <!-- Last Name Column -->
             <ng-container matColumnDef="lastname">
-              <th mat-header-cell *matHeaderCellDef>Apellido</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Apellido</th>
               <td mat-cell *matCellDef="let user">{{user.lastname}}</td>
             </ng-container>
 
             <!-- Role Column -->
             <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef>Role</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Role</th>
               <td mat-cell *matCellDef="let user">{{user.role}}</td>
             </ng-container>
 
             <!-- Estado Column -->
             <ng-container matColumnDef="estado">
-              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
               <td mat-cell *matCellDef="let user">{{user.estado}}</td>
             </ng-container>
 
             <!-- Last Login Column -->
             <ng-container matColumnDef="last_Login">
-              <th mat-header-cell *matHeaderCellDef>Inicio sesion</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Inicio sesion</th>
               <td mat-cell *matCellDef="let user">{{user.last_Login | date: 'short'}}</td>
             </ng-container>
             <!-- Last Login Column -->
             <ng-container matColumnDef="acciones">
-              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <th class="itemHeader" mat-header-cell *matHeaderCellDef>Acciones</th>
               <td mat-cell *matCellDef="let user" class="actions-cell">
                 <div class="actions-container">
                   <button mat-icon-button class="btnVer" (click)="onViewDetails(user.id)">

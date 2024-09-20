@@ -8,12 +8,14 @@ import { IResult } from '../../../../../shared/models/IResult';
 import { IRole } from '../../../../../shared/models/IRole';
 import { IUserStatus } from '../../../../../shared/models/IUserStatus';
 import Swal from 'sweetalert2';
+import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
+import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
 @Component({
   selector: 'app-edit-user',
   standalone: true,
   imports: [MatButtonModule, MatDialogModule,
     ReactiveFormsModule,
-    CommonModule],
+    CommonModule, BtnCloseComponent, BtnAcceptComponent],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss'
 })
@@ -99,6 +101,10 @@ export class EditUserComponent implements OnInit {
         });
       }
     })
+  }
+
+  onCloseModal() {
+    this._matDialogRef.close();
   }
 
 

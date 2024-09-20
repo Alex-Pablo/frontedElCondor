@@ -51,7 +51,33 @@ mat-toolbar {
 
 
 mat-sidenav {
-  background-color: var(--txt-orange-color);
+  background-color: var(--primary-color);
+
+  .actions .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 20%;
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  .actions .dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .actions .dropdown a.delete {
+    color: var(--bg-red-color);
+  }
+
+  .actions .dropdown.show {
+    display: block;
+  }
+
   width: auto;
   border-radius: 0px;
 }
@@ -61,7 +87,7 @@ mat-nav-list {
 }
 
 mat-sidenav-content {
-  padding: 25px 10px;
+  padding: 25px 30px;
   height: calc(100vh - 65px);
 }
 

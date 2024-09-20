@@ -21,13 +21,17 @@ export const routes: Routes = [
         loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES)
       },
       {
-        path: 'reports',
+        path: 'reportes',
         loadChildren: () => import('./features/reports/reports.routes').then(m => m.REPORTS_ROUTES)
       },
       {
         path: 'dashboard',
         loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
-      }
+      },
+      {
+        path: 'catalogo',
+        loadChildren: () => import('./features/catalogo/catalogo.routes').then(m => m.CATALOGO_ROUTES)
+      },
     ]
   }
 ];

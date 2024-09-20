@@ -4,7 +4,7 @@
 
 
 
-    <div class="wrapperForm" >
+    <div class="wrapperForm">
 
       <div class="wrapperRowForm">
         <div class="wrapperInput">
@@ -12,20 +12,20 @@
           <!-- <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" required="firstname"> -->
           <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
         </div>
-        <div class="wrapperInput" >
+        <div class="wrapperInput">
           <label for="ApellidoUser">Apellidos</label>
-          <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname" >
+          <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname">
         </div>
       </div>
 
-    <div class="wrapperRowForm">
+      <div class="wrapperRowForm">
         <div class="wrapperInput">
           <label for="TelefonoUser">Numero de telefono</label>
-          <input type="text" name="" value="" placeholder="Ingrese el numero de telefono" formControlName="phoneNumber" >
+          <input type="text" name="" value="" placeholder="Ingrese el numero de telefono" formControlName="phoneNumber">
         </div>
-        <div class="wrapperInput" >
+        <div class="wrapperInput">
           <label for="EmailUser">Correo Electronico</label>
-          <input type="email" name="" value="" placeholder="Ingrese el correo Electronico"formControlName="email" >
+          <input type="email" name="" value="" placeholder="Ingrese el correo Electronico" formControlName="email">
         </div>
       </div>
 
@@ -41,9 +41,9 @@
         <div class="wrapperInput">
           <label for="EstadouserOptions">Selecione el estado</label>
 
-          <select id="EstadouserOptions"formControlName="estado" >
+          <select id="EstadouserOptions" formControlName="estado">
             @for(status of userstatus; track status.id){
-              <option [value]="status.id">{{status.name}}</option> }
+            <option [value]="status.id">{{status.name}}</option> }
           </select>
         </div>
 
@@ -53,7 +53,7 @@
       <div class="wrapperRowForm">
         <div class="wrapperInput">
           <label for="ImgUser">Foto de Perfil</label>
-          <input type="file"  id="profileImg" (change)="onFileChange($event)">
+          <input type="file" id="profileImg" (change)="onFileChange($event)">
         </div>
       </div>
 
@@ -68,10 +68,9 @@
     </div>
 
 
-</form>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="btnCancel">Cancelar</button>
   <button mat-button cdkFocusInitial (click)="onSubmit()">Registrar Usuario</button>
 </mat-dialog-actions>
-

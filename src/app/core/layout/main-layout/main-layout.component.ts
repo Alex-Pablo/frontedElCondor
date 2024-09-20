@@ -63,52 +63,94 @@ export class MainLayoutComponent {
   }
 
 
+
   menuItems = signal<IMenuitem[]>([
     {
-      icon: 'house',
+      icon: 'home', // Icono para 'Inicio'
       label: 'Inicio',
       route: '/dashboard'
     },
     {
-      icon: 'input',
+      icon: 'inventory_2', // Icono más específico para 'Inventario'
       label: 'Inventario',
-      route: 'inventario'
+      route: '/inventario'
     },
     {
-      icon: 'settings',
-      label: "Administracion",
+      icon: 'list', // Icono más general para 'Catálogo'
+      label: 'Catálogo',
+      route: '/catalogo',
+      subItems: [
+        {
+          icon: 'shopping_bag', // Icono para 'Productos'
+          label: 'Productos',
+          route: 'producto'
+        },
+        {
+          icon: 'local_shipping', // Icono para 'Proveedores'
+          label: 'Proveedores',
+          route: 'proveedores'
+        },
+        {
+          icon: 'category', // Icono específico para 'Categorías'
+          label: 'Categorías',
+          route: 'categorias'
+        },
+        {
+          icon: 'straighten', // Icono para 'Unidades de Medida'
+          label: 'Unidades de Medida',
+          route: 'unidades'
+        }
+      ]
+    },
+    {
+      icon: 'settings', // Icono para 'Administración'
+      label: 'Administración',
       route: '/admin',
       subItems: [
         {
-          icon: 'supervisor_account',
+          icon: 'people', // Icono para 'Usuarios'
           label: 'Usuarios',
           route: 'usuarios'
         },
         {
-          icon: 'account_box',
+          icon: 'security', // Icono para 'Roles'
           label: 'Roles',
           route: 'roles'
         },
         {
-          icon: 'store',
+          icon: 'store', // Icono para 'Negocio'
           label: 'Negocio',
-          route: 'Empresa'
+          route: 'empresa'
         }
       ]
     },
     {
-      icon: 'folder',
+      icon: 'bar_chart', // Icono para 'Reportes'
       label: 'Reportes',
-      route: '/reports',
+      route: '/reportes',
       subItems: [
         {
-          icon: 'account_box',
+          icon: 'people',
           label: 'Usuarios',
           route: 'usuarios'
+        },
+        {
+          icon: 'insights', // Icono para 'Ventas'
+          label: 'Ventas',
+          route: 'ventas'
+        },
+        {
+          icon: 'inventory', // Icono para 'Inventario'
+          label: 'Inventario',
+          route: 'inventario'
+        },
+        {
+          icon: 'shopping_cart', // Icono para 'Compras'
+          label: 'Compras',
+          route: 'compras'
         }
       ]
     }
-  ])
-
+  ]);
 
 }

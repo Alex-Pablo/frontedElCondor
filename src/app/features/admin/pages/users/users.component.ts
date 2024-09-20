@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon'
-import { Title } from '@angular/platform-browser';
 import { TitleService } from '../../../../core/services/title.service';
 @Component({
   selector: 'app-users',
@@ -57,8 +56,10 @@ export class UsersComponent implements OnInit {
   crearUsuario() {
 
     this._matDialog.open(UserRegisterModalComponent, {
-      width: '90vw',
+      width: '60vw',
+      maxWidth: '60vw',
       height: '80vh',
+      maxHeight: '80vh',
       disableClose: true
     }).afterClosed().subscribe(() => {
       this.getAllUsers();
@@ -72,11 +73,6 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  logFieldName(fieldName: string) {
-    console.log(fieldName);
-  }
-
-
 
   closeModal() { this.isOpen = false };
 
@@ -85,7 +81,8 @@ export class UsersComponent implements OnInit {
   onEditUser(id: any) {
     const idNum = parseInt(id);
     this._matDialog.open(EditUserComponent, {
-      width: '90vw',
+      width: '50vw',
+      maxWidth: '50vw',
       height: '80vh',
       disableClose: true,
       data: { id: idNum }
