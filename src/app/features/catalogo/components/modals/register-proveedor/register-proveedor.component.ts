@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { InputFieldComponent } from '../../../../../shared/components/input-field/input-field.component';
 import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
 import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { InputSelectComponent } from '../../../../../shared/components/input-select/input-select.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { InputSelectComponent } from '../../../../../shared/components/input-sel
 })
 export class RegisterProveedorComponent {
 
-  constructor(private _matDialogRef: MatDialogRef<RegisterProveedorComponent>) {
+  constructor(private _matDialogRef: MatDialogRef<RegisterProveedorComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
 
@@ -25,7 +25,7 @@ export class RegisterProveedorComponent {
   }
 
   onSubmit() {
-
+    this._matDialogRef.close();
   }
 
   categorias = [

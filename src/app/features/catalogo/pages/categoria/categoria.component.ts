@@ -45,6 +45,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sTitle.setTitle('Categorias de productos')
     this.getAllCategoria();
   }
 

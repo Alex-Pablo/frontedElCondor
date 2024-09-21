@@ -73,7 +73,19 @@ export class MainLayoutComponent {
     {
       icon: 'inventory_2', // Icono más específico para 'Inventario'
       label: 'Inventario',
-      route: '/inventario'
+      route: '/inventario',
+      subItems: [
+        {
+          icon: 'shopping_bag',
+          label: 'Stock',
+          route: 'inventario'
+        },
+        {
+          icon: 'shopping_cart',
+          label: 'Pedidos',
+          route: 'pedidos'
+        }
+      ]
     },
     {
       icon: 'list', // Icono más general para 'Catálogo'

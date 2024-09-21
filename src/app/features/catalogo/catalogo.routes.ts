@@ -11,5 +11,7 @@ export const CATALOGO_ROUTES: Routes = [
   },
   {
     path: 'categorias', component: CategoriaComponent
-  },
+  }, {
+    path: '', redirectTo: 'producto', pathMatch: 'full'
+  }
 ]

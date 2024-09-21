@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
 import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
@@ -23,7 +23,7 @@ export interface CategoriaProducto {
   styleUrl: './regiter-catalogo-modal.component.scss'
 })
 export class RegiterCatalogoModalComponent {
-  constructor(public _matDialogRef: MatDialogRef<RegiterCatalogoModalComponent>) {
+  constructor(public _matDialogRef: MatDialogRef<RegiterCatalogoModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
 

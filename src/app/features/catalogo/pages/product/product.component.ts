@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RegiterCatalogoModalComponent } from '../../components/modals/regiter-catalogo-modal/regiter-catalogo-modal.component';
+import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
 
 @Component({
   selector: 'app-product',
@@ -32,7 +33,8 @@ export class ProductComponent implements OnInit {
       height: '80vh',
       width: '70vw',
       maxWidth: '70vw',
-      disableClose: true
+      disableClose: true,
+      data: { title: 'Agregar producto' }
     }).afterClosed().subscribe(() => {
       this.getAllCatalogo();
     })
@@ -43,7 +45,13 @@ export class ProductComponent implements OnInit {
   }
 
   onEdit(id: any) {
-
+    this._matDialog.open(RegiterCatalogoModalComponent, {
+      height: '80vh',
+      maxWidth: '70vw',
+      width: '70vw',
+      disableClose: true,
+      data: { title: 'Editar producto' }
+    })
   }
 
   onSearch(event: any) {
@@ -166,6 +174,6 @@ export class ProductComponent implements OnInit {
     ];
   }
 
-  displayedColumns: string[] = ['id', 'img', 'nombre', 'sku', 'categoria', 'estado', 'unidad', 'Precio Compra', 'proveedor', 'acciones'];
+  displayedColumns: string[] = ['id', 'img', 'nombre', 'categoria', 'estado', 'unidad', 'Precio Compra', 'proveedor', 'acciones'];
 
 }
