@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'
 import { UserRegisterModalComponent } from '../../components/modals/user-register-modal/user-register-modal.component';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon'
 import { TitleService } from '../../../../core/services/title.service';
+import { UserPopupComponent } from '../../components/modals/user-popup/user-popup.component';
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -25,7 +26,7 @@ import { TitleService } from '../../../../core/services/title.service';
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'profile', 'email', 'phoneNumber', 'firstname', 'lastname', 'role', 'estado', 'last_Login', 'acciones'];
+  displayedColumns: string[] = ['id', 'profile', 'username', 'firstname', 'lastname', 'role', 'status', 'last_login', 'acciones'];
   isLoadingResults = true; isRateLimitReached = false;
   resultsLength = 0;
   hoveredRow: IUser | null = null
@@ -54,7 +55,6 @@ export class UsersComponent implements OnInit {
     console.log(value);
   }
   crearUsuario() {
-
     this._matDialog.open(UserRegisterModalComponent, {
       width: '60vw',
       maxWidth: '60vw',
@@ -63,6 +63,25 @@ export class UsersComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe(() => {
       this.getAllUsers();
+    })
+  }
+
+  openModalCreate() {
+    this._matDialog.open(UserPopupComponent, {
+      width: '60vw',
+      maxWidth: '60vw',
+      disableClose: true,
+      data: {}
+    })
+  }
+
+  openModalModify(user: any) {
+    console.log(user);
+    this._matDialog.open(UserPopupComponent, {
+      width: '60vw',
+      maxWidth: '60vw',
+      disableClose: true,
+      data: { payload: user }
     })
   }
 

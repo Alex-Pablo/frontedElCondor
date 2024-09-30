@@ -23,7 +23,7 @@ export class LoginPageComponent {
 
   constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -42,10 +42,10 @@ export class LoginPageComponent {
       });
       Swal.showLoading();
 
-      const email = this.loginForm.value.email;
+      const username = this.loginForm.value.username;
       const password = this.loginForm.value.password;
 
-      this.auth.login(email, password).subscribe({
+      this.auth.login(username, password).subscribe({
         next: (res: IResult<string>) => {
           if (res.isSuccess) {
 

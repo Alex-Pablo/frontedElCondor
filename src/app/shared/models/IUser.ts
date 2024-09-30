@@ -1,12 +1,14 @@
 
 export interface IUser {
   id: string;
+  username: string;
   email: string;
-  phoneNumber: string;
   firstname: string;
   lastname: string;
   profile?: string; // url de la imagne
+  phoneNumber: string;
   role: string;
-  estado: string;
-  last_Login?: Date; // Campo opcional
+  id_role: number;
+  status: string;
+  last_login?: Date; // Campo opcional
 }

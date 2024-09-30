@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,11 +7,12 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
   standalone: true,
   imports: [ReactiveFormsModule, NgIf],
   templateUrl: './input-field.component.html',
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputFieldComponent {
   @Input() label!: string;
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
-  // @Input() control!: FormControl;
+  @Input() control!: FormControl | null;
 }

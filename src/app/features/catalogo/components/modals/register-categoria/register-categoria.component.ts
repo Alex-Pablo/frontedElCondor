@@ -19,11 +19,11 @@ export class RegisterCategoriaComponent {
   estados = [
     {
       id: 1,
-      nombre: 'Activo'
+      name: 'Activo'
     },
     {
       id: 2,
-      nombre: 'Inactivo'
+      name: 'Inactivo'
     }
   ]
 

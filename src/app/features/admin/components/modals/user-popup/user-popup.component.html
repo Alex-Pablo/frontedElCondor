@@ -1,0 +1,49 @@
+<h2 class="" mat-dialog-title>{{isEditMode ? 'Editar usuario': 'Crear nuevo usuarios'}}</h2>
+<mat-dialog-content class="mat-typography w-full">
+  <form [formGroup]="loginForm">
+
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre:*" type="text" placeholder="Ingrese el nombre"
+          [control]="getFormControl('firstname')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Apellido:*" type="text" placeholder="Ingrese el apellido"
+          [control]="getFormControl('lastname')"></app-input-field>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Telefono:*" type="text" placeholder="Ingrese el numero de telefono"
+          [control]="getFormControl('phoneNumber')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Correo Electronico" type="email" placeholder="Ingrese el correo"
+          [control]="getFormControl('email')"></app-input-field>
+      </div>
+    </div>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Role" placeholder="el role que tendra el usuario" [options]="roles"
+          [control]="getFormControl('role')"></app-input-select>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <mat-radio-group formControlName="status">
+          <mat-radio-button value="I">Inactivo</mat-radio-button>
+          <mat-radio-button value="A">Activo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <app-image-uploader [control]="getFormControl('profileImg')" [imageUrl]="imgUrl"
+        label="Subir foto de perfil"></app-image-uploader>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-btn-close (click)="_MatDialgoRef.close(false)"></app-btn-close>
+  <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+</mat-dialog-actions>

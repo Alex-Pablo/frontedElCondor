@@ -15,7 +15,6 @@ import { InputSelectComponent } from '../../../../../shared/components/input-sel
 export class RegisterProveedorComponent {
 
   constructor(private _matDialogRef: MatDialogRef<RegisterProveedorComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-
   }
 
 
@@ -29,6 +28,6 @@ export class RegisterProveedorComponent {
   }
 
   categorias = [
-    { id: 1, nombre: 'Activo' },
-    { id: 2, nombre: 'Inactivo' },]
+    { id: 1, name: 'Activo' },
+    { id: 2, name: 'Inactivo' },]
 }

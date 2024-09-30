@@ -1,5 +1,5 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,12 +10,13 @@ import { IUserStatus } from '../../../../../shared/models/IUserStatus';
 import Swal from 'sweetalert2';
 import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
 import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
+import { InputFieldComponent } from '../../../../../shared/components/input-field/input-field.component';
 @Component({
   selector: 'app-edit-user',
   standalone: true,
   imports: [MatButtonModule, MatDialogModule,
     ReactiveFormsModule,
-    CommonModule, BtnCloseComponent, BtnAcceptComponent],
+    CommonModule, BtnCloseComponent, BtnAcceptComponent, InputFieldComponent],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss'
 })
@@ -39,6 +40,10 @@ export class EditUserComponent implements OnInit {
   }
 
 
+  getFormControl(controlName: string): FormControl | null {
+    const control = this.loginForm.get(controlName);
+    return control instanceof FormControl ? control : null;
+  }
 
   ngOnInit(): void {
     this.authService.getRoles().subscribe((data: IResult<IRole[]>) => {

@@ -7,12 +7,15 @@
       <div class="wrapperForm">
         <div class="wrapperRowForm">
 
-          <div class="wrapperInput">
-            <label for="NombreUser">Nombre Usuario</label>
-            <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname">
+          <div>
+            <!-- <label for="NombreUser">Nombre Usuario</label> -->
+            <!-- <input type="text" name="" value="" placeholder="Ingrese el nombre de usuario" formControlName="firstname"> -->
+            <app-input-field type="text" placeholder="Ingrese el nombre del usuario" label="Nombre"
+              [control]="getFormControl('firstname')">
+            </app-input-field>
           </div>
 
-          <div class="wrapperInput">
+          <div class=" wrapperInput">
             <label for="ApellidoUser">Apellidos</label>
             <input type="text" name="" value="" placeholder="Ingrese el apellido" formControlName="lastname">
           </div>

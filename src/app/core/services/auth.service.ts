@@ -20,8 +20,8 @@ export class AuthService {
   constructor(private http: HttpClient, private localStorageS: LocalStorageService) { }
 
 
-  login(email: string, password: string): Observable<IResult<string>> {
-    return this.http.post<IResult<string>>(`${this.baseurlApi}/User/login`, { Email: email, Password: password })
+  login(username: string, password: string): Observable<IResult<string>> {
+    return this.http.post<IResult<string>>(`${this.baseurlApi}/User/login`, { Username: username, Password: password })
       .pipe(
         tap(
           response => {
