@@ -3,4 +3,6 @@ export interface IMenuitem {
   label: string;
   route: string
   subItems?: IMenuitem[];
+  //solo es necesario cuando el menu tiene subItems
+  isExpanded?: boolean;
 }

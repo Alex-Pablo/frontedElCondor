@@ -89,7 +89,7 @@
                   <button mat-icon-button class="btnEditar" (click)="openModalModify(user)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button class="btnEliminar" (click)="onDeleteUser(user.id)">
+                  <button mat-icon-button class="btnEliminar" (click)="onDeleteUser(user)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
@@ -110,6 +110,9 @@
     </div>
 
   </main>
-  <div *ngIf="isOpen"><app-user-detail [IdUser]="IdUserSelect" (closeModalvalue)="closeModal()"></app-user-detail></div>
+  <mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+    <!-- <app-view-details [id]="selectedId"></app-view-details> -->
+    <app-user-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-user-detail-popup>
+  </mat-sidenav>
 
 </div>

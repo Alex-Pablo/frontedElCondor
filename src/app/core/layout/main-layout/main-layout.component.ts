@@ -5,14 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { IResult } from '../../../shared/models/IResult';
 import { IUser } from '../../../shared/models/IUser';
 import { TitleService } from '../../services/title.service';
-import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { IMenuitem } from '../../../shared/models/IMenuItem';
-import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
@@ -24,7 +22,7 @@ import { Title } from '@angular/platform-browser';
 export class MainLayoutComponent {
   nestedMenuOpen = signal(false);
   collapsed = signal(false);
-  sidenavWidth = computed(() => this.collapsed() ? '65px' : 'auto')
+  sidenavWidth = computed(() => this.collapsed() ? '60px' : 'auto')
   titlePage: any = '';
 
   logocondor: string = 'img/logo.png';
@@ -38,31 +36,21 @@ export class MainLayoutComponent {
 
   ngOnInit(): void {
     this.titlePage = this.titleService.getTitle()
-
     this.authService.getProfile().subscribe({
       next: (response: IResult<IUser>) => {
         this.userInfor = response.value
-        console.log(this.userInfor);
-
       },
       error: (eror: any) => { }
     })
-
   }
 
 
   toggleNested(item: IMenuitem) {
     if (item.subItems) {
       this.nestedMenuOpen.set(!this.nestedMenuOpen())
-      console.log(this.nestedMenuOpen());
+      item.isExpanded = !item.isExpanded;
     }
   }
-  isItemExpanded(item: IMenuitem): boolean {
-    const currentRoute = this.router.url;
-    return currentRoute.startsWith(item.route);
-  }
-
-
 
   menuItems = signal<IMenuitem[]>([
     {
@@ -85,7 +73,8 @@ export class MainLayoutComponent {
           label: 'Pedidos',
           route: 'pedidos'
         }
-      ]
+      ],
+      isExpanded: false
     },
     {
       icon: 'list', // Icono más general para 'Catálogo'
@@ -112,7 +101,8 @@ export class MainLayoutComponent {
           label: 'Unidades de Medida',
           route: 'unidades'
         }
-      ]
+      ],
+      isExpanded: false
     },
     {
       icon: 'settings', // Icono para 'Administración'
@@ -134,7 +124,8 @@ export class MainLayoutComponent {
           label: 'Negocio',
           route: 'empresa'
         }
-      ]
+      ],
+      isExpanded: false
     },
     {
       icon: 'bar_chart', // Icono para 'Reportes'
@@ -161,7 +152,8 @@ export class MainLayoutComponent {
           label: 'Compras',
           route: 'compras'
         }
-      ]
+      ],
+      isExpanded: false
     }
   ]);
 

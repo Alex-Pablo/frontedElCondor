@@ -36,31 +36,12 @@ export class ProveedoreComponent implements OnInit {
   }
 
   onOpenModal() {
-    this._matDialog.open(RegisterProveedorComponent, {
-      height: '80vh',
-      width: '70vw',
-      maxWidth: '70vw',
-      disableClose: true,
-      data: { title: 'Agregar un proveedor' }
-    }).afterClosed().subscribe(() => {
-      this.getAllProveedores();
-    })
   }
 
   onDelete(id: any) {
-
   }
 
   onEdit(id: any) {
-    this._matDialog.open(RegisterProveedorComponent, {
-      height: '80vh',
-      width: '70vw',
-      maxWidth: '70vw',
-      disableClose: true,
-      data: { title: 'Editar proveedor' }
-    }).afterClosed().subscribe(() => {
-      this.getAllProveedores();
-    })
   }
 
   onViewDetails(id: any) {

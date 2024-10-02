@@ -96,10 +96,15 @@ mat-sidenav-content {
 
   .item-title {
     color: white;
+    font-size: 14px;
   }
 
   .item-icon {
     color: white;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -127,11 +132,23 @@ item.mat-list-item:hover {
   border-radius: 0px !important;
 }
 
-.subItem.activeSubItem {
-  background-color: transparent !important;
+.activeSubItem {
+  background-color: white;
 }
 
 .activeSubItemIcon,
 .activeSubItemTitle {
   color: grey !important;
+  font-size: 15px;
+}
+
+.icon-subItem {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-SubItem {
+  font-size: 13px !important;
 }

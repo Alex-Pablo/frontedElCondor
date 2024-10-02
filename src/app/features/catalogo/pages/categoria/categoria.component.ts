@@ -29,19 +29,9 @@ export class CategoriaComponent implements OnInit {
   dataSource: any;
 
   onOpenModal() {
-    this._matDialog.open(RegisterCategoriaComponent, {
-      height: '60vh',
-      width: '50vw',
-      maxWidth: '70vw',
-      disableClose: true,
-      data: { title: 'Registrar categoria' }
-    }).afterClosed().subscribe(() => {
-      this.getAllCategoria();
-    })
   }
 
   onSearch(id: any) {
-
   }
 
   ngOnInit(): void {
@@ -51,20 +41,12 @@ export class CategoriaComponent implements OnInit {
 
 
   onEdit(id: any) {
-    this._matDialog.open(RegisterCategoriaComponent, {
-      height: '60vh',
-      width: '50vw',
-      maxWidth: '70vw',
-      data: { title: 'Editar categoria' }
-    })
   }
 
   onDelete(id: any) {
-
   }
 
   onViewDetails(id: any) {
-
   }
 
 

@@ -10,6 +10,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { IResult } from '../../../../../shared/models/IResult';
 import { ImageUploaderComponent } from '../../../../../shared/components/image-uploader/image-uploader.component';
 import { MatRadioModule } from '@angular/material/radio'
+import { SweealertService } from '../../../../../core/services/sweealert.service';
 @Component({
   selector: 'app-user-popup',
   standalone: true,
@@ -27,6 +28,7 @@ import { MatRadioModule } from '@angular/material/radio'
 })
 export class UserPopupComponent {
   private sAuth = inject(AuthService)
+  private sSweetAlert = inject(SweealertService);
   _MatDialgoRef = inject(MatDialogRef<UserPopupComponent>)
   _fb = inject(FormBuilder)
   isEditMode: boolean;
@@ -39,7 +41,6 @@ export class UserPopupComponent {
     this.isEditMode = !!data.payload;
 
     this.loginForm = this._fb.group({
-      // username: [{ value: data.payload?.username || '', disabled: this.isEditMode }, [Validators.required]],
       firstname: [data.payload?.firstname || '', [Validators.required]],
       lastname: [data.payload?.lastname || '', [Validators.required]],
       phoneNumber: [data.payload?.phoneNumber || '', [Validators.required]],
@@ -49,19 +50,15 @@ export class UserPopupComponent {
       profileImg: [null]
     });
     this.imgUrl = data.payload?.profile
-
   }
 
   ngOnInit(): void {
     this.getRole();
-    console.log(this.loginForm.value);
-
   }
 
   onSubmit() {
-
     if (this.loginForm.valid) {
-
+      this.sSweetAlert.showLoading();
       const formData = new FormData();
       formData.append('Email', this.loginForm.value.email),
         formData.append('PhoneNumber', this.loginForm.value.phoneNumber),
@@ -71,27 +68,37 @@ export class UserPopupComponent {
         formData.append('ID_role', this.loginForm.value.role),
         formData.append('Status', this.loginForm.value.status)
       if (this.isEditMode) {
-        this.onModify(formData);
+
+        console.log('editar');
+        const idUser = this.data.payload.id;
+        if (idUser > 0) {
+          this.sAuth.modifyUser(formData, idUser).subscribe((data: IResult<string>) => {
+            if (data.isSuccess) {
+              this.sSweetAlert.closeLoading();
+              this._MatDialgoRef.close(true)
+            } else {
+              this.sSweetAlert.showError(data.error || 'Error  al editar el usuario')
+            }
+          })
+        }
+
       } else {
+
         console.log('crear usuario');
-        this.onCreate(formData);
+        this.sAuth.register(formData).subscribe((data: IResult<boolean>) => {
+          if (data.isSuccess) {
+            this.sSweetAlert.closeLoading();
+            this._MatDialgoRef.close(true)
+          } else {
+            this.sSweetAlert.showError(data.error || "Error al crear el usuario")
+          }
+        })
+
       }
     }
   }
 
 
-  onCreate(formData: any) {
-    this.sAuth.register(formData).subscribe((data: any) => {
-      console.log(data);
-    })
-  }
-
-  onModify(formData: any) {
-    const idUser = this.data.payload.id;
-    this.sAuth.modifyUser(formData, idUser).subscribe((data: any) => {
-      console.log(data);
-    })
-  }
 
 
   getFormControl(controlName: string): FormControl | null {

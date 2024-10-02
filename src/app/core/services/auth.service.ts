@@ -40,8 +40,8 @@ export class AuthService {
     return this.http.post<IResult<boolean>>(`${environment.baseUrlApi}/User/register`, formData)
   }
 
-  modifyUser(formData: any, id: any): Observable<IResult<boolean>> {
-    return this.http.put<IResult<boolean>>(`${environment.baseUrlApi}/User/modify/${id}`, formData)
+  modifyUser(formData: any, id: any): Observable<IResult<string>> {
+    return this.http.put<IResult<string>>(`${environment.baseUrlApi}/User/modify/${id}`, formData)
   }
 
   logout() {

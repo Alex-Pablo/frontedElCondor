@@ -29,29 +29,12 @@ export class ProductComponent implements OnInit {
     console.log(this.dataSource);
   }
   onOpenModal() {
-    this._matDialog.open(RegiterCatalogoModalComponent, {
-      height: '80vh',
-      width: '70vw',
-      maxWidth: '70vw',
-      disableClose: true,
-      data: { title: 'Agregar producto' }
-    }).afterClosed().subscribe(() => {
-      this.getAllCatalogo();
-    })
   }
 
   onDelete(id: any) {
-
   }
 
   onEdit(id: any) {
-    this._matDialog.open(RegiterCatalogoModalComponent, {
-      height: '80vh',
-      maxWidth: '70vw',
-      width: '70vw',
-      disableClose: true,
-      data: { title: 'Editar producto' }
-    })
   }
 
   onSearch(event: any) {
