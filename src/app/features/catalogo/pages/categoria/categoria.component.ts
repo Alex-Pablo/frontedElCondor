@@ -1,10 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
-import { MatIcon } from '@angular/material/icon';
-import { MatDialog } from '@angular/material/dialog';
-import { TitleService } from '../../../../core/services/title.service';
 import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
-import { MatTableModule } from '@angular/material/table';
+import { CategoriaPopupComponent } from '../../components/modals/categoria-popup/categoria-popup.component';
+import { MatListItem } from '@angular/material/list';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog'
+import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
+import { AuthService } from '../../../../core/services/auth.service';
+import { IResult } from '../../../../shared/models/IResult';
+import { IUser } from '../../../../shared/models/IUser';
+import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { MatTableModule } from '@angular/material/table'
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon'
+import { TitleService } from '../../../../core/services/title.service';
+import { SweealertService } from '../../../../core/services/sweealert.service';
+import { JWTTokenService } from '../../../../core/services/jwttoken.service';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { CategoriaDetailPopupComponent } from '../../components/modals/categoria-detail-popup/categoria-detail-popup.component';
+
 
 
 export interface Categoria {
@@ -20,6 +32,7 @@ export interface Categoria {
   imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
+  
 })
 export class CategoriaComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'estado', 'cantidadProductos', 'acciones'];
@@ -27,26 +40,84 @@ export class CategoriaComponent implements OnInit {
   _matDialog = inject(MatDialog)
   searchMessage = "Buscar proveedor"
   dataSource: any;
+  selectedId: any;
+  @ViewChild('sidenav') sidenav!: MatSidenav
+  isOpen: boolean = false;
+  sSweetalert = inject(SweealertService);
 
-  onOpenModal() {
-  }
 
-  onSearch(id: any) {
-  }
+
 
   ngOnInit(): void {
     this.sTitle.setTitle('Categorias de productos')
     this.getAllCategoria();
   }
 
+  onSearch(id: any) {
+    console.log(id)
+  }
+
+  onViewDetails(id: Categoria) {
+    this.selectedId = id;
+    if (this.sidenav) {
+      this.sidenav.open();
+    } else {
+      console.error('El sidenav no está definido.');
+    }
+  }
+  
+  onOpenModal() {
+    this._matDialog.open(CategoriaPopupComponent, {
+  width:'60vw',
+  maxWidth:'60vw',
+  disableClose:true,
+  data:{}
+  }).afterClosed().subscribe((result) => {
+    if (result) {
+      this.getAllCategoria();
+    }
+  });
+}
+
+
+toggleDropdown(event: MouseEvent) {
+  const dropdown = (event.target as HTMLElement).nextElementSibling;
+  if (dropdown) {
+    dropdown.classList.toggle('show');
+  }
+}
+
+closeModal() { this.isOpen = false };
+
+onDelete(id: any) {
+  this.sSweetalert.showConfirmation(`Quieres eliminar la categoria: ${id}}`, () => {
+    this.selectedId.deleteUser(id).subscribe((data: IResult<string>) => {
+      if (data.isSuccess) {
+        this.sSweetalert.showSuccess('Categoria eliminada')
+      } else {
+        this.sSweetalert.showError("No se pudo eliminar la categoria")
+      }
+    })
+  });
+}
 
   onEdit(id: any) {
+    this._matDialog.open(CategoriaPopupComponent, {
+      width: '60vw',
+      maxWidth: '60vw',
+      disableClose: true,
+      data: { payload: id }
+    }).afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result) {
+        this.getAllCategoria();
+      }
+    })
   }
 
-  onDelete(id: any) {
-  }
 
-  onViewDetails(id: any) {
+  closeSidenav() {
+    this.dataSource.close();
   }
 
 

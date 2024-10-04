@@ -14,6 +14,7 @@ import { Component, input } from '@angular/core';
   `,
   styles: ``
 })
+
 export class InputTextAreaComponent {
   label = input.required<string>();
   placeholder = input<string>();
