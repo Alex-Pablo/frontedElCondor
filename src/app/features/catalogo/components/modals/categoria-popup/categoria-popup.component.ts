@@ -44,7 +44,7 @@ export class CategoriaPopupComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
     this.isEditMode = !!data.payload;
-  
+
     this.loginForm = this._fb.group({
       profileImg: [null],
       nombre: [data.payload?.nombre || '', [Validators.required]],
@@ -53,12 +53,12 @@ export class CategoriaPopupComponent {
     this.imgUrl = data.payload?.profile
 
   }
-  
-  ngOnInit(): void { 
+
+  ngOnInit(): void {
     this.getImgProfile();
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.loginForm.valid) {
       this.sSweetAlert.showLoading();
       const formData = new FormData();
@@ -100,14 +100,13 @@ export class CategoriaPopupComponent {
     const control = this.loginForm.get(controlName);
     return control instanceof FormControl ? control : null;
   }
-  
-  
-  onCloseModal()
-  {
+
+
+  onCloseModal() {
     this._MatDialgoRef.close();
 
   }
-  
+
 
 
   onFileChange(event: any) {

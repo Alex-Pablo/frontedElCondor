@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   getUserDetail(id: number) {
-    return this.http.get<any>(`${environment.baseUrlApi}/User/detail/${id}`);
+    return this.http.get<IResult<IUserDetailDto>>(`${environment.baseUrlApi}/User/detail/${id}`);
   }
 
   getUserById(id: number) {
