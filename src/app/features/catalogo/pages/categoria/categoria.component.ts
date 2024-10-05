@@ -17,6 +17,7 @@ import { JWTTokenService } from '../../../../core/services/jwttoken.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { CategoriaDetailPopupComponent } from '../../components/modals/categoria-detail-popup/categoria-detail-popup.component';
 import { BaseApiService } from '../../../../core/services/base-api.service';
+import { UserDetailPopupComponent } from '../../../admin/components/modals/user-detail-popup/user-detail-popup.component';
 
 
 
@@ -30,7 +31,7 @@ export interface Categoria {
 @Component({
   selector: 'app-categoria',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule],
+  imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule,MatSidenavModule,CategoriaDetailPopupComponent],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 
@@ -124,7 +125,7 @@ export class CategoriaComponent implements OnInit {
 
 
   closeSidenav() {
-    this.dataSource.close();
+    this.sidenav.close();
   }
 
 

@@ -47,8 +47,8 @@ export class CategoriaPopupComponent {
 
     this.loginForm = this._fb.group({
       profileImg: [null],
-      nombre: [data.payload?.nombre || '', [Validators.required]],
-      descripcion: [data.payload?.descripcion || '', [Validators.required]],
+      nombre: [data.payload?.name || '', [Validators.required]],
+      descripcion: [data.payload?.description || '', [Validators.required]],
     });
     this.imgUrl = data.payload?.profile
 

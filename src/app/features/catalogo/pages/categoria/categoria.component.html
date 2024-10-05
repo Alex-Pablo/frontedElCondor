@@ -49,5 +49,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </table>
   </div>
-
 </div>
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+ <app-categoria-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-categoria-detail-popup> 
+</mat-sidenav>
