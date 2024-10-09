@@ -1,10 +1,16 @@
-import { Component, inject, OnInit } from '@angular/core';
+
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 import { TitleService } from '../../../../core/services/title.service';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RegisterProveedorComponent } from '../../components/modals/register-proveedor/register-proveedor.component';
+import { ProveedorPopupComponent } from '../../components/modals/proveedor-popup/proveedor-popup.component';
+import { SweealertService } from '../../../../core/services/sweealert.service';
+import { BaseApiService } from '../../../../core/services/base-api.service';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { ProveedorDetailPopupComponent } from '../../components/modals/proveedor-detail-popup/proveedor-detail-popup.component';
 
 export interface Proveedor {
   nombre: string;
@@ -17,7 +23,7 @@ export interface Proveedor {
 @Component({
   selector: 'app-proveedore',
   standalone: true,
-  imports: [InputSearchComponent, RegisterProveedorComponent, MatIconModule, MatTableModule],
+  imports: [InputSearchComponent,RegisterProveedorComponent, MatIconModule, MatIcon, RegisterProveedorComponent, MatSidenavModule,ProveedorDetailPopupComponent, MatTableModule],
   templateUrl: './proveedore.component.html',
   styleUrl: './proveedore.component.scss'
 })
@@ -27,6 +33,10 @@ export class ProveedoreComponent implements OnInit {
   _matDialog = inject(MatDialog)
   searchMessage = "Buscar proveedor"
   dataSource: any;
+  sSweetalert = inject(SweealertService);
+  sBaseApi = inject(BaseApiService);
+  selectedId: any;
+  @ViewChild('sidenav') sidenav!: MatSidenav
   onSearch(event: any) {
   }
 
@@ -34,19 +44,63 @@ export class ProveedoreComponent implements OnInit {
     this.sTitle.setTitle("proveedores")
     this.getAllProveedores()
   }
+  closeSidenav() {
+    this.sidenav.close();
+  }
 
   onOpenModal() {
+    this._matDialog.open(ProveedorPopupComponent, {
+      width: '60vw',
+      maxWidth: '60vw',
+      disableClose: true,
+      data: {}
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.getAllProveedores();
+      }
+    });
+    
   }
 
-  onDelete(id: any) {
-  }
+    onDelete(id: any) {
+      this.sSweetalert.showConfirmation(`Quieres eliminar al proveedor: ${id}`, () => {
+        this.sBaseApi.removeItem('Category', id).subscribe((data: any) => {
+          if (data.isSuccess) {
+            // this.sSweetalert.showConfirmation('Categoria eliminada',)
+          }
+        })
+        // this.selectedId.deleteUser(id).subscribe((data: IResult<string>) => {
+        //   if (data.isSuccess) {
+        //     this.sSweetalert.showSuccess('Categoria eliminada')
+        //   } else {
+        //     this.sSweetalert.showError("No se pudo eliminar la categoria")
+        //   }
+        // })
+      });
+    }
 
   onEdit(id: any) {
+    this._matDialog.open(ProveedorPopupComponent, {
+      width: '60vw',
+      maxWidth: '60vw',
+      disableClose: true,
+      data: { payload: id}
+    }).afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result) {
+        this.getAllProveedores();
+      }
+    })
   }
 
-  onViewDetails(id: any) {
-
-  }
+  onViewDetails(id: Proveedor) {
+      this.selectedId = id;
+      if (this.sidenav) {
+        this.sidenav.open();
+      } else {
+        console.error('El sidenav no está definido.');
+      }
+    }
 
 
   getAllProveedores() {

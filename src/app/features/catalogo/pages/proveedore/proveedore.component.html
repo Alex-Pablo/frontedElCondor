@@ -59,7 +59,7 @@
             <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button mat-icon-button class="btnEditar" (click)="onEdit(item.id)">
+            <button mat-icon-button class="btnEditar" (click)="onEdit(item)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button class="btnEliminar" (click)="onDelete(item.id)">
@@ -76,3 +76,7 @@
   </div>
 
 </div>
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+  <app-proveedor-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-proveedor-detail-popup>
+ </mat-sidenav>
+ 
