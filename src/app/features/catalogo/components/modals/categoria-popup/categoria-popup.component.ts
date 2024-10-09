@@ -12,6 +12,7 @@ import { ControlContainer, ControlEvent, FormBuilder, FormControl, ReactiveForms
 import { ImageUploaderComponent } from '../../../../../shared/components/image-uploader/image-uploader.component';
 import { MatRadioModule } from '@angular/material/radio'
 import { IResult } from '../../../../../shared/models/IResult';
+import { BaseApiService } from '../../../../../core/services/base-api.service';
 
 
 @Component({
@@ -30,47 +31,38 @@ import { IResult } from '../../../../../shared/models/IResult';
   styleUrl: './categoria-popup.component.scss'
 })
 
-
-
 export class CategoriaPopupComponent {
-  private sAuth = inject(AuthService)
+  sBaseApi = inject(BaseApiService);
   private sSweetAlert = inject(SweealertService);
   _MatDialgoRef = inject(MatDialogRef<CategoriaPopupComponent>)
   _fb = inject(FormBuilder)
   isEditMode: boolean;
   loginForm: any;
-  imgUrl: any; //es una url que se pasa para visualiar la img,
-  fileToUpload: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
     this.isEditMode = !!data.payload;
-
     this.loginForm = this._fb.group({
-      profileImg: [null],
       nombre: [data.payload?.name || '', [Validators.required]],
       descripcion: [data.payload?.description || '', [Validators.required]],
     });
-    this.imgUrl = data.payload?.profile
-
   }
 
   ngOnInit(): void {
-    this.getImgProfile();
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       this.sSweetAlert.showLoading();
-      const formData = new FormData();
-      formData.append('nombre', this.loginForm.value.nombre),
-        formData.append('descripcion', this.loginForm.value.descripcion),
-        formData.append('img', this.loginForm.value.status)
+      const category = {
+        Name: this.loginForm.get('nombre')?.value,
+        Description: this.loginForm.get('descripcion')?.value
+      };
+      console.log(category)
       if (this.isEditMode) {
-
         console.log('editar');
         const idUser = this.data.payload.id;
         if (idUser > 0) {
-          this.sAuth.modifyUser(formData, idUser).subscribe((data: IResult<string>) => {
+          this.sBaseApi.updateItem('Category', category, idUser).subscribe((data: IResult<string>) => {
             if (data.isSuccess) {
               this.sSweetAlert.closeLoading();
               this._MatDialgoRef.close(true)
@@ -79,11 +71,9 @@ export class CategoriaPopupComponent {
             }
           })
         }
-
       } else {
-
         console.log('crear categoria');
-        this.sAuth.register(formData).subscribe((data: IResult<boolean>) => {
+        this.sBaseApi.addItem('Category', category).subscribe((data: IResult<boolean>) => {
           if (data.isSuccess) {
             this.sSweetAlert.closeLoading();
             this._MatDialgoRef.close(true)
@@ -95,37 +85,14 @@ export class CategoriaPopupComponent {
       }
     }
   }
-
   getFormControl(controlName: string): FormControl | null {
     const control = this.loginForm.get(controlName);
     return control instanceof FormControl ? control : null;
   }
-
-
   onCloseModal() {
     this._MatDialgoRef.close();
-
   }
 
-
-
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    this.fileToUpload = file;
-    this.loginForm.patchValue({
-      profileImg: file
-    });
-
-    let reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imgUrl = e.target.result;
-    };
-
-    reader.readAsDataURL(this.fileToUpload);
-  }
-  getImgProfile() {
-    return this.loginForm.value.profileImg
-  }
 }
 
 

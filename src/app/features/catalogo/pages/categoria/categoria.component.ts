@@ -1,23 +1,16 @@
 import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
 import { CategoriaPopupComponent } from '../../components/modals/categoria-popup/categoria-popup.component';
-import { MatListItem } from '@angular/material/list';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
-import { AuthService } from '../../../../core/services/auth.service';
 import { IResult } from '../../../../shared/models/IResult';
-import { IUser } from '../../../../shared/models/IUser';
-import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
 import { MatTableModule } from '@angular/material/table'
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon'
 import { TitleService } from '../../../../core/services/title.service';
 import { SweealertService } from '../../../../core/services/sweealert.service';
-import { JWTTokenService } from '../../../../core/services/jwttoken.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { CategoriaDetailPopupComponent } from '../../components/modals/categoria-detail-popup/categoria-detail-popup.component';
 import { BaseApiService } from '../../../../core/services/base-api.service';
-import { UserDetailPopupComponent } from '../../../admin/components/modals/user-detail-popup/user-detail-popup.component';
 
 
 
@@ -31,7 +24,7 @@ export interface Categoria {
 @Component({
   selector: 'app-categoria',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule,MatSidenavModule,CategoriaDetailPopupComponent],
+  imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule, MatSidenavModule, CategoriaDetailPopupComponent],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 
@@ -94,18 +87,14 @@ export class CategoriaComponent implements OnInit {
 
   onDelete(id: any) {
     this.sSweetalert.showConfirmation(`Quieres eliminar la categoria: ${id}`, () => {
-      this.sBaseApi.removeItem('Category', id).subscribe((data: any) => {
+      this.sBaseApi.removeItem('Category', id).subscribe((data: IResult<any>) => {
         if (data.isSuccess) {
-          // this.sSweetalert.showConfirmation('Categoria eliminada',)
+          this.sSweetalert.showSuccess('Categoria eliminada')
+          this.getAllCategoria();
+        } else {
+          this.sSweetalert.showError(data.error || 'Hubo un errro al eliminar la categoria ')
         }
       })
-      // this.selectedId.deleteUser(id).subscribe((data: IResult<string>) => {
-      //   if (data.isSuccess) {
-      //     this.sSweetalert.showSuccess('Categoria eliminada')
-      //   } else {
-      //     this.sSweetalert.showError("No se pudo eliminar la categoria")
-      //   }
-      // })
     });
   }
 
