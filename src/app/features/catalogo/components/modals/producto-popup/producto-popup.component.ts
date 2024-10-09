@@ -66,7 +66,7 @@ export class ProductoPopupComponent {
       formData.append('nombre', this.loginForm.value.nombre),
         formData.append('descripcion', this.loginForm.value.descripcion),
         formData.append('img', this.loginForm.value.status)
-        formData.append('Status', this.loginForm.value.status)
+      formData.append('Status', this.loginForm.value.status)
       if (this.isEditMode) {
 
         console.log('editar');

@@ -23,7 +23,7 @@ export interface Productos {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatIconModule,RegiterCatalogoModalComponent, InputSearchComponent, MatDialogModule, MatSidenavModule,ProductoDetailPopupComponent],
+  imports: [MatTableModule, MatIcon, MatIconModule, RegiterCatalogoModalComponent, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
