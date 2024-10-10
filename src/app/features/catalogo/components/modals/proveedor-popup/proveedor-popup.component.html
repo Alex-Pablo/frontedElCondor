@@ -1,1 +1,68 @@
-<p>proveedor-popup works!</p>
+<h2 class="" mat-dialog-title>{{isEditMode ? 'Editar Proveedor': 'Agregar Proveedor'}}</h2>
+<mat-dialog-content class="mat-typography w-full">
+  <form [formGroup]="loginForm">
+
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre de empresa:*" type="text" placeholder="Ingrese de la empresa"
+          [control]="getFormControl('name')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre del proveedor (contacto):*" type="text"
+          placeholder="Ingrese el nombre del proveedor" [control]="getFormControl('nameContact')"></app-input-field>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Numero del proveedor de contacto:*" type="text" placeholder="Ingrese el numero"
+          [control]="getFormControl('phoneNumberContact')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Numero de la empresa:" type="text" placeholder="Ingrese el numero"
+          [control]="getFormControl('phoneNumberSupplier')"></app-input-field>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Email del proveedor:" type="text" placeholder="Ingrese el email"
+          [control]="getFormControl('email')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Dirrecion de la empresa:*" type="text" placeholder="Ingrese la direccion"
+          [control]="getFormControl('address')"></app-input-field>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Pagina web:" type="text" placeholder="Ingrese la pagian web"
+          [control]="getFormControl('website')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <mat-radio-group formControlName="status">
+          <mat-radio-button value="I">Inactivo</mat-radio-button>
+          <mat-radio-button value="A">Activo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Cuenta bancaria:*" type="text" placeholder="Ingrese el numero de la cuenta"
+          [control]="getFormControl('account')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre de la cuenta:*" type="text" placeholder="Ingrese el nombre"
+          [control]="getFormControl('nameAccount')"></app-input-field>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre del banco:*" type="text" placeholder="Ingrese el nombre"
+          [control]="getFormControl('nameBanck')"></app-input-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-btn-close (click)="_MatDialgoRef.close(false)"></app-btn-close>
+  <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+</mat-dialog-actions>
