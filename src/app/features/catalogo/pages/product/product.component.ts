@@ -12,6 +12,7 @@ import { SweealertService } from '../../../../core/services/sweealert.service';
 import { RegiterCatalogoModalComponent } from '../../components/modals/regiter-catalogo-modal/regiter-catalogo-modal.component';
 import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
 import { ProductoDetailPopupComponent } from '../../components/modals/producto-detail-popup/producto-detail-popup.component';
+import { IResult } from '../../../../shared/models/IResult';
 
 export interface Productos {
   nombre: string;
@@ -37,13 +38,13 @@ export class ProductComponent implements OnInit {
   dataSource: any;
   searchMessage = "Buscar producto"
   sSweetalert = inject(SweealertService);
-
+  aProducts: any;
   constructor() {
     this.sTitle.setTitle("Catalogo - Productos")
   }
 
   ngOnInit(): void {
-    this.getAllCatalogo();
+    this.getProducts();
     console.log(this.dataSource);
   }
 
@@ -57,7 +58,7 @@ export class ProductComponent implements OnInit {
       data: {}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.getAllCategoria();
+        this.getProducts();
       }
     });
   }
@@ -65,18 +66,14 @@ export class ProductComponent implements OnInit {
 
   onDelete(id: any) {
     this.sSweetalert.showConfirmation(`Quieres eliminar el producto: ${id}`, () => {
-      this.sBaseApi.removeItem('Category', id).subscribe((data: any) => {
+      this.sBaseApi.removeItem('Product', id).subscribe((data: IResult<any>) => {
         if (data.isSuccess) {
-          // this.sSweetalert.showConfirmation('Categoria eliminada',)
+          this.sSweetalert.showSuccess('Producto eliminado');
+          this.getProducts();
+        } else {
+          this.sSweetalert.showError(data.error || 'No se pudo eliminar el producto')
         }
       })
-      // this.selectedId.deleteUser(id).subscribe((data: IResult<string>) => {
-      //   if (data.isSuccess) {
-      //     this.sSweetalert.showSuccess('Categoria eliminada')
-      //   } else {
-      //     this.sSweetalert.showError("No se pudo eliminar la categoria")
-      //   }
-      // })
     });
   }
 
@@ -90,7 +87,7 @@ export class ProductComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        this.getAllCategoria();
+        this.getProducts();
       }
     })
   }
@@ -112,107 +109,15 @@ export class ProductComponent implements OnInit {
     this.sidenav.close();
   }
 
-  getAllCategoria() {
-    this.sBaseApi.getItems('Category').subscribe((data: any) => {
+  getProducts() {
+    this.sBaseApi.getItems('Product').subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
-        this.dataSource = data.value;
+        this.dataSource = data.value
       }
     })
   }
-  getAllCatalogo() {
 
-    this.dataSource = [
-      {
-        id: 1,
-        img: 'assets/img/product1.jpg',
-        nombre: 'Martillo',
-        sku: 'SKU12345',
-        categoria: 'Herramientas',
-        estado: 'Activo',
-        unidad: 'Piezas',
-        compra: '$5.00',
-        proveedor: 'Proveedor ABC'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-      {
-        id: 2,
-        img: 'assets/img/product2.jpg',
-        nombre: 'Tornillo de acero',
-        sku: 'SKU54321',
-        categoria: 'Materiales',
-        estado: 'Fuera de Stock',
-        unidad: 'Cajas',
-        compra: '$0.10',
-        proveedor: 'Proveedor XYZ'
-      },
-    ];
-  }
 
-  displayedColumns: string[] = ['id', 'img', 'nombre', 'categoria', 'estado', 'unidad', 'Precio Compra', 'proveedor', 'acciones'];
+  displayedColumns: string[] = ['id', 'img', 'name', 'code', 'key', 'status', 'purchasePrice', 'salePrice', 'acciones'];
 
 }

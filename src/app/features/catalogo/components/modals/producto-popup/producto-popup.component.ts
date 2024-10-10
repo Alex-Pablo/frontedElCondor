@@ -12,6 +12,7 @@ import { ControlContainer, ControlEvent, FormBuilder, FormControl, ReactiveForms
 import { ImageUploaderComponent } from '../../../../../shared/components/image-uploader/image-uploader.component';
 import { MatRadioModule } from '@angular/material/radio'
 import { IResult } from '../../../../../shared/models/IResult';
+import { BaseApiService } from '../../../../../core/services/base-api.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ import { IResult } from '../../../../../shared/models/IResult';
 
 export class ProductoPopupComponent {
   private sAuth = inject(AuthService)
+  private sBaseApi = inject(BaseApiService)
   private sSweetAlert = inject(SweealertService);
   _MatDialgoRef = inject(MatDialogRef<ProductoPopupComponent>)
   _fb = inject(FormBuilder)
@@ -41,38 +43,66 @@ export class ProductoPopupComponent {
   loginForm: any;
   imgUrl: any; //es una url que se pasa para visualiar la img,
   fileToUpload: any;
-
+  aCategories: any
+  aSuppliers: any
+  aUnits: any
+  aStatus: any
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
     this.isEditMode = !!data.payload;
 
     this.loginForm = this._fb.group({
       profileImg: [null],
-      nombre: [data.payload?.name || '', [Validators.required]],
-      descripcion: [data.payload?.description || '', [Validators.required]],
-      status: [data.payload?.status || 'A', [Validators.required]],
+      name: [data.payload?.name || '', [Validators.required]],
+      code: [data.payload?.code || ''],
+      key: [data.payload?.key || ''],
+      description: [data.payload?.description || ''],
+      purchasePrice: [data.payload?.purchasePrice || ''],
+      salePrice: [data.payload?.salePrice || ''],
+      brand: [data.payload?.brand || ''],
+      idCategory: [data.payload?.id_category || '', [Validators.required]],
+      idSupplier: [data.payload?.id_suplier || '', [Validators.required]],
+      idUnit: [data.payload?.id_unit || '', [Validators.required]],
+      stock: [data.payload?.stock || ''],
+      stockMin: [data.payload?.stockMin || ''],
+      status: [data.payload?.status, [Validators.required]],
     });
-    this.imgUrl = data.payload?.profile
+    this.imgUrl = data.payload?.img
 
   }
 
   ngOnInit(): void {
     this.getImgProfile();
+    this.getCategory();
+    this.getSuppliers();
+    this.getunits();
+    this.getStatus();
   }
 
   onSubmit() {
+    console.log(this.loginForm.value)
     if (this.loginForm.valid) {
       this.sSweetAlert.showLoading();
       const formData = new FormData();
-      formData.append('nombre', this.loginForm.value.nombre),
-        formData.append('descripcion', this.loginForm.value.descripcion),
-        formData.append('img', this.loginForm.value.status)
-      formData.append('Status', this.loginForm.value.status)
+      formData.append('Name', this.loginForm.value.name)
+      formData.append('Code', this.loginForm.value.code)
+      formData.append('Key', this.loginForm.value.key)
+      formData.append('Description', this.loginForm.value.description)
+      formData.append('PurchasePrice', this.loginForm.value.purchasePrice)
+      formData.append('SalePrice', this.loginForm.value.salePrice);
+      formData.append('Brand', this.loginForm.value.brand);
+      formData.append('Id_category', this.loginForm.value.idCategory);
+      formData.append('Id_suplier', this.loginForm.value.idSupplier);
+      formData.append('Id_unit', this.loginForm.value.idUnit);
+      formData.append('Status', this.loginForm.value.status);
+      formData.append('Stock', this.loginForm.value.stock);
+      formData.append('StockMin', this.loginForm.value.stockMin);
+      formData.append('Img', this.loginForm.value.profileImg);
       if (this.isEditMode) {
 
         console.log('editar');
         const idUser = this.data.payload.id;
         if (idUser > 0) {
-          this.sAuth.modifyUser(formData, idUser).subscribe((data: IResult<string>) => {
+          this.sBaseApi.updateItem('Product', formData, idUser).subscribe((data: IResult<string>) => {
             if (data.isSuccess) {
               this.sSweetAlert.closeLoading();
               this._MatDialgoRef.close(true)
@@ -85,7 +115,7 @@ export class ProductoPopupComponent {
       } else {
 
         console.log('crear producto');
-        this.sAuth.register(formData).subscribe((data: IResult<boolean>) => {
+        this.sBaseApi.addItem('Product', formData).subscribe((data: IResult<boolean>) => {
           if (data.isSuccess) {
             this.sSweetAlert.closeLoading();
             this._MatDialgoRef.close(true)
@@ -98,6 +128,45 @@ export class ProductoPopupComponent {
     }
   }
 
+  getCategory() {
+    this.sBaseApi.getItems('Category').subscribe((data: IResult<any>) => {
+      console.log(data.value);
+      this.aCategories = data.value;
+    })
+  }
+
+  getSuppliers() {
+    this.sBaseApi.getItems('Supplier').subscribe((data: IResult<any>) => {
+      this.aSuppliers = data.value
+    })
+  }
+
+  getunits() {
+    this.aUnits = [
+      {
+        id: 1,
+        name: 'libra'
+      }
+    ]
+  }
+
+  getStatus() {
+    this.aStatus = [
+      {
+        id: 'S',
+        name: 'Disponible'
+      },
+      {
+        id: 'E',
+        name: 'En proceso'
+      },
+      {
+        id: 'F',
+        name: 'Futuro'
+      }
+    ]
+  }
+
   getFormControl(controlName: string): FormControl | null {
     const control = this.loginForm.get(controlName);
     return control instanceof FormControl ? control : null;
@@ -106,7 +175,6 @@ export class ProductoPopupComponent {
 
   onCloseModal() {
     this._MatDialgoRef.close();
-
   }
 
 
