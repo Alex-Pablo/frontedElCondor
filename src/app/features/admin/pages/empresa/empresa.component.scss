@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(252, 185, 3);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+.company-name {
+    font-size: 1.8em;
+    color: #ffd104;
+}
+
+.info {
+    font-size: 1.1em;
+}
+
+.info p {
+    margin-bottom: 10px;
+}
+
+.info strong {
+    color: #fa9805;
+}
+
+/* Estilo del botón Editar Información */
+.edit-btn {
+    background-color: #ffbb01;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.edit-btn:hover {
+    background-color: #f1e313; /* Cambio de color al pasar el cursor */
+}
