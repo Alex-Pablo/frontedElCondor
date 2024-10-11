@@ -9,8 +9,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { MatIcon } from '@angular/material/icon'
 import { SweealertService } from '../../../../core/services/sweealert.service';
-import { RegiterCatalogoModalComponent } from '../../components/modals/regiter-catalogo-modal/regiter-catalogo-modal.component';
-import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
 import { ProductoDetailPopupComponent } from '../../components/modals/producto-detail-popup/producto-detail-popup.component';
 import { IResult } from '../../../../shared/models/IResult';
 
@@ -24,7 +22,7 @@ export interface Productos {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatIconModule, RegiterCatalogoModalComponent, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent],
+  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })

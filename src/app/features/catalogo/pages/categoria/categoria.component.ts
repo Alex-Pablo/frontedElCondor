@@ -1,4 +1,3 @@
-import { RegisterCategoriaComponent } from '../../components/modals/register-categoria/register-categoria.component';
 import { CategoriaPopupComponent } from '../../components/modals/categoria-popup/categoria-popup.component';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog'
@@ -24,7 +23,7 @@ export interface Categoria {
 @Component({
   selector: 'app-categoria',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, RegisterCategoriaComponent, MatTableModule, MatSidenavModule, CategoriaDetailPopupComponent],
+  imports: [InputSearchComponent, MatIcon, MatTableModule, MatSidenavModule, CategoriaDetailPopupComponent],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 

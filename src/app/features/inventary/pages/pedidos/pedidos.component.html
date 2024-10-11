@@ -1,7 +1,7 @@
 <div class="flex flex-wrap justify-end gap-2 mb-4">
   <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
   <button type="button" class="bg-sky-500/80 px-3 py-2 text-white rounded font-bold hover:bg-sky-500/60"
-    (click)="onOpenModal()">Crear
+    (click)="newOrder()">Crear
     pedido</button>
 </div>
 <div class="example-container mat-elevation-z8">
@@ -12,33 +12,46 @@
 
 
       <!-- Número de Pedido Column -->
-      <ng-container matColumnDef="numeroPedido">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Número de Pedido </th>
-        <td mat-cell *matCellDef="let pedido"> {{pedido.numeroPedido}} </td>
+      <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Pedido </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.id}} </td>
       </ng-container>
 
       <!-- Proveedor Column -->
-      <ng-container matColumnDef="proveedor">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Proveedor </th>
-        <td mat-cell *matCellDef="let pedido"> {{pedido.proveedor}} </td>
+      <ng-container matColumnDef="supplier">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Proveedor (Empresa) </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.supplier}} </td>
       </ng-container>
 
       <!-- Total Column -->
-      <ng-container matColumnDef="total">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Total (Q) </th>
-        <td mat-cell *matCellDef="let pedido"> {{pedido.total }} </td>
+      <ng-container matColumnDef="supplierContact">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor Contacto</th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.supplierContact}} </td>
       </ng-container>
 
       <!-- Estado Column -->
-      <ng-container matColumnDef="estado">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let pedido"> {{pedido.estado}} </td>
+      <ng-container matColumnDef="products">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Productos </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.products}} </td>
       </ng-container>
 
       <!-- Fecha de Creación Column -->
-      <ng-container matColumnDef="fechaCreacion">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Fecha de Creación </th>
-        <td mat-cell *matCellDef="let pedido"> {{pedido.fechaCreacion | date}} </td>
+      <ng-container matColumnDef="total">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Total</th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.total}} </td>
+      </ng-container>
+      <!-- Fecha de Creación Column -->
+      <ng-container matColumnDef="status">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let pedido">
+          @if(pedido.status== 'C'){
+          Completado
+          }@else if(pedido.status == 'P'){
+          Pendiente
+          }@else if(pedido.status == 'E'){
+          En Proceso
+          }
+        </td>
       </ng-container>
 
       <!-- Last Login Column -->

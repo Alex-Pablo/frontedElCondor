@@ -4,7 +4,6 @@ import { TitleService } from '../../../../core/services/title.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { RegisterProveedorComponent } from '../../components/modals/register-proveedor/register-proveedor.component';
 import { ProveedorPopupComponent } from '../../components/modals/proveedor-popup/proveedor-popup.component';
 import { SweealertService } from '../../../../core/services/sweealert.service';
 import { BaseApiService } from '../../../../core/services/base-api.service';
@@ -24,7 +23,7 @@ export interface Proveedor {
 @Component({
   selector: 'app-proveedore',
   standalone: true,
-  imports: [InputSearchComponent, RegisterProveedorComponent, MatIconModule, MatIcon, RegisterProveedorComponent, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule],
+  imports: [InputSearchComponent, MatIconModule, MatIcon, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule],
   templateUrl: './proveedore.component.html',
   styleUrl: './proveedore.component.scss'
 })

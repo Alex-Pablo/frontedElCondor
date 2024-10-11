@@ -15,8 +15,8 @@ export class BaseApiService {
     return this.http.get<any>(`${environment.baseUrlApi}/${service}/getAll`);
   }
 
-  getItemBy(service: any) {
-
+  getItemBy(service: any, id: any) {
+    return this.http.get<any>(`${environment.baseUrlApi}/${service}/get/${id}`)
   }
 
   addItem(service: any, data: any) {

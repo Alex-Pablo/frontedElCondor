@@ -6,11 +6,12 @@ import { DatePipe, NgIf } from '@angular/common';
 import { TitleService } from '../../../../core/services/title.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatedOrderComponent } from '../../components/modals/created-order/created-order.component';
+import { OrderPopupComponent } from '../../components/modals/order-popup/order-popup.component';
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, MatTableModule, DatePipe, NgIf, CreatedOrderComponent],
+  imports: [InputSearchComponent, MatIcon, MatTableModule, DatePipe, NgIf, OrderPopupComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
@@ -35,15 +36,16 @@ export class PedidosComponent implements OnInit {
     ];
   }
   onSearch(id: any) {
-
   }
 
-  onOpenModal() {
-    this._matDialog.open(CreatedOrderComponent, {
-      height: '80vh',
-      width: '70vw',
-      maxWidth: '70vw',
-      disableClose: true
+  newOrder() {
+    this._matDialog.open(OrderPopupComponent, {
+      height: '890vh',
+      maxHeight: '90vh',
+      width: '85vw',
+      maxWidth: '85vw',
+      disableClose: true,
+      data: {}
     })
   }
 
@@ -59,6 +61,6 @@ export class PedidosComponent implements OnInit {
   onDelete(id: any) {
 
   }
-  displayedColumns: string[] = ['numeroPedido', 'proveedor', 'total', 'estado', 'fechaCreacion', 'acciones'];
+  displayedColumns: string[] = ['id', 'supplier', 'supplierContact', 'products', 'total', 'status', 'acciones'];
 
 }
