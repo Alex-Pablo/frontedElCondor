@@ -9,6 +9,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormArray, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputSelectComponent } from '../../../../../shared/components/input-select/input-select.component';
 import { InputFieldComponent } from '../../../../../shared/components/input-field/input-field.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-order-popup',
@@ -20,7 +22,9 @@ import { InputFieldComponent } from '../../../../../shared/components/input-fiel
     MatDividerModule,
     ReactiveFormsModule,
     InputSelectComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    MatTableModule,
+    MatIconModule
   ],
   templateUrl: './order-popup.component.html',
   styleUrl: './order-popup.component.scss'
@@ -33,6 +37,7 @@ export class OrderPopupComponent implements OnInit {
   aSuppliers: any;
   aProducts: any
   fOrder: any;
+  selectedProduct: any
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.buildForm(data);
@@ -46,17 +51,35 @@ export class OrderPopupComponent implements OnInit {
   }
   onProductSelected(id: any) {
     if (id > 0) {
-      const selectedProduct = this.aProducts.find((p: any) => p.id == id);
-      console.log(selectedProduct)
-      if (selectedProduct) {
+      this.selectedProduct = this.aProducts.find((p: any) => p.id == id);
+      console.log(this.selectedProduct)
+      if (this.selectedProduct) {
         this.fOrder.patchValue({
-          price: selectedProduct.purchasePrice
+          price: this.selectedProduct.purchasePrice
         });
       }
     }
   }
 
   onSubmit() {
+    console.log(this.fOrder.value)
+    this._sSweetalert.showLoading();
+    if (this.fOrder.valid) {
+      const order = {
+        supplierId: this.fOrder.get('idSupplier')?.value,
+        products: this.fOrder.get('products').value,
+        status: this.fOrder.get('status')?.value
+      }
+      console.log('datos enviar', order)
+      this._sBaseApi.addItem('order', order).subscribe((data: IResult<any>) => {
+        if (data.isSuccess) {
+          this._sSweetalert.closeLoading();
+          this._MatDialgoRef.close(true);
+        } else {
+          this._sSweetalert.showError("Error al crear el pedido ")
+        }
+      })
+    }
   }
 
   addSupplier(id: number) {
@@ -110,15 +133,17 @@ export class OrderPopupComponent implements OnInit {
       products: this._fb.array([]),
       selectedProductId: [null],
       price: [null],
-      quantity: [null]
+      quantity: [null, Validators.min(1)]
     });
   }
+
 
   addProductToOrder() {
     const productsArray = this.fOrder.get('products') as FormArray;
     const productToAdd = this._fb.group({
-      id: [this.fOrder.get('selectedProductId')?.value, Validators.required],
+      productId: [this.fOrder.get('selectedProductId')?.value, Validators.required],
       price: [this.fOrder.get('price')?.value, Validators.required],
+      name: this.selectedProduct.name,
       quantity: [this.fOrder.get('quantity')?.value, [Validators.required, Validators.min(1)]]
     });
 
@@ -126,6 +151,12 @@ export class OrderPopupComponent implements OnInit {
     this.resetProductForm();
     console.log(this.fOrder.get('products').value)
   }
+
+  removeProduct(index: number) {
+    const productsArray = this.fOrder.get('products') as FormArray;
+    productsArray.removeAt(index);
+  }
+
   resetProductForm() {
     this.fOrder.patchValue({
       selectedProductId: null,
@@ -138,4 +169,5 @@ export class OrderPopupComponent implements OnInit {
     const control = this.fOrder.get(controlName);
     return control instanceof FormControl ? control : null;
   }
+  displayColumns: string[] = ['name', 'price', 'quantity', 'acciones']
 }

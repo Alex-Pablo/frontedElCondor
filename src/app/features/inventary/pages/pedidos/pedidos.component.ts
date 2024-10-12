@@ -7,17 +7,19 @@ import { TitleService } from '../../../../core/services/title.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatedOrderComponent } from '../../components/modals/created-order/created-order.component';
 import { OrderPopupComponent } from '../../components/modals/order-popup/order-popup.component';
+import { BaseApiService } from '../../../../core/services/base-api.service';
+import { IResult } from '../../../../shared/models/IResult';
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, MatTableModule, DatePipe, NgIf, OrderPopupComponent],
+  imports: [InputSearchComponent, MatIcon, MatTableModule, DatePipe, NgIf, OrderPopupComponent, DatePipe],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
 export class PedidosComponent implements OnInit {
   sTitle = inject(TitleService);
-
+  _sBaseApi = inject(BaseApiService);
   constructor(private _matDialog: MatDialog,) {
   }
   searchMessage = "Buscar pedido"
@@ -26,16 +28,16 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.sTitle.setTitle("Lista de pedidos");
-    this.dataSource = [
-      { numeroPedido: 1, proveedor: 'Ferretería S.A.', total: 500, estado: 'Pendiente', fechaCreacion: '2023-09-15' },
-      { numeroPedido: 2, proveedor: 'Materiales XYZ', total: 1500, estado: 'Completado', fechaCreacion: '2023-09-16' },
-      { numeroPedido: 3, proveedor: 'Construcciones ABC', total: 1200, estado: 'En Proceso', fechaCreacion: '2023-09-17' },
-      { numeroPedido: 4, proveedor: 'Ferretería S.A.', total: 500, estado: 'Pendiente', fechaCreacion: '2023-09-15' },
-      { numeroPedido: 5, proveedor: 'Materiales XYZ', total: 1500, estado: 'Completado', fechaCreacion: '2023-09-16' },
-      { numeroPedido: 6, proveedor: 'Construcciones ABC', total: 1200, estado: 'En Proceso', fechaCreacion: '2023-09-17' }
-    ];
+    this.getOrders();
   }
   onSearch(id: any) {
+  }
+
+  getOrders() {
+    this._sBaseApi.getItems('order').subscribe((data: IResult<any>) => {
+      console.log('data', data)
+      this.dataSource = data.value;
+    })
   }
 
   newOrder() {
@@ -46,6 +48,10 @@ export class PedidosComponent implements OnInit {
       maxWidth: '85vw',
       disableClose: true,
       data: {}
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.getOrders();
+      }
     })
   }
 
@@ -61,6 +67,6 @@ export class PedidosComponent implements OnInit {
   onDelete(id: any) {
 
   }
-  displayedColumns: string[] = ['id', 'supplier', 'supplierContact', 'products', 'total', 'status', 'acciones'];
+  displayedColumns: string[] = ['id', 'supplier', 'supplierContact', 'productsTotal', 'priceTotal', 'timeOrder', 'status', 'acciones'];
 
 }

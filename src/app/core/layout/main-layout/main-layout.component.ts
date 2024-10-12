@@ -96,11 +96,11 @@ export class MainLayoutComponent {
           label: 'Categorías',
           route: 'categorias'
         },
-        {
-          icon: 'straighten', // Icono para 'Unidades de Medida'
-          label: 'Unidades de Medida',
-          route: 'unidades'
-        }
+        // {
+        //   icon: 'straighten', // Icono para 'Unidades de Medida'
+        //   label: 'Unidades de Medida',
+        //   route: 'unidades'
+        // }
       ],
       isExpanded: false
     },
@@ -114,11 +114,11 @@ export class MainLayoutComponent {
           label: 'Usuarios',
           route: 'usuarios'
         },
-        {
-          icon: 'security', // Icono para 'Roles'
-          label: 'Roles',
-          route: 'roles'
-        },
+        // {
+        //   icon: 'security', // Icono para 'Roles'
+        //   label: 'Roles',
+        //   route: 'roles'
+        // },
         {
           icon: 'store', // Icono para 'Negocio'
           label: 'Negocio',
