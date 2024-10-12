@@ -1,12 +1,15 @@
+<!-- dashboard.component.html -->
+
+
 <div class="home-content">
     <div class="overview-boxes">
     <div class="box">
         <div class="right-side">
         <div class="box-topic">Usuarios</div>
-        <div class="number">40,876</div>
+        <div class="number">5</div>
         <div class="indicator">
             <i class='bx bx-up-arrow-alt'></i>
-            <span class="text">Desde Ayer</span>
+            <!-- <span class="text">Desde Ayer</span> -->
         </div>
         </div>
         <i class='bx bx-cart-alt cart'></i>
@@ -14,10 +17,10 @@
     <div class="box">
         <div class="right-side">
         <div class="box-topic">Ventas</div>
-        <div class="number">38,876</div>
+        <div class="number">7</div>
         <div class="indicator">
             <i class='bx bx-up-arrow-alt'></i>
-            <span class="text">Desde Ayer</span>
+            <!-- <span class="text">Desde Ayer</span> -->
         </div>
         </div>
         <i class='bx bxs-cart-add cart two' ></i>
@@ -25,10 +28,10 @@
     <div class="box">
         <div class="right-side">
         <div class="box-topic">Productos</div>
-        <div class="number">11,086</div>
+        <div class="number">15</div>
         <div class="indicator">
             <i class='bx bx-down-arrow-alt down'></i>
-            <span class="text">Desde Ayer</span>
+            <!-- <span class="text">Desde Ayer</span> -->
         </div>
         </div>
         <i class='bx bxs-cart-download cart four' ></i>
@@ -38,66 +41,84 @@
     <!--==========================================================================================================================-->
     <div class="sales-boxes">
     <div class="recent-sales box">
-        <div class="title">Ventas Recientes</div>
+        <div class="title">Productos</div>
+        <br>
         <div class="sales-details">
-        <ul class="details">
-            <li class="topic">Fecha</li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-            <li><a href="#">02 Ene 2021</a></li>
-        </ul>
-        <ul class="details">
-        <li class="topic">Realizado por</li>
-        <li><a href="#">Alex Matin</a></li>
-        <li><a href="#">David Hernandez</a></li>
-        <li><a href="#">Angel Cruz</a></li>
-        <li><a href="#">Diana Sabaj</a></li>
-        <li><a href="#">Martin Alvarez</a></li>
-        <li><a href="#">Damian cruz</a></li>
-        <li><a href="#">Aiana Alonso</a></li>
-        <li><a href="#">Rexel Baltazar</a></li>
-        <li><a href="#">Tiana Lopez</a></li>
-        </ul>
-        <ul class="details">
-        <li class="topic">Venta</li>
-        <li><a href="#">Entregado</a></li>
-        <li><a href="#">Pendiente</a></li>
-        <li><a href="#">Devuelto</a></li>
-        <li><a href="#">Entregado</a></li>
-        <li><a href="#">Pendiente</a></li>
-        <li><a href="#">Devuelto</a></li>
-        <li><a href="#">Entregado</a></li>
-        <li><a href="#">Pendiente</a></li>
-        <li><a href="#">Entregado</a></li>
-        </ul>
-        <ul class="details">
-        <li class="topic">Total</li>
-        <li><a href="#">Q204.98</a></li>
-        <li><a href="#">Q24.55</a></li>
-        <li><a href="#">Q25.88</a></li>
-        <li><a href="#">Q170.66</a></li>
-        <li><a href="#">Q56.56</a></li>
-        <li><a href="#">Q44.95</a></li>
-        <li><a href="#">Q67.33</a></li>
-        <li><a href="#">Q23.53</a></li>
-        <li><a href="#">Q46.52</a></li>
-        </ul>
+            <div class="example-container mat-elevation-z8">
+            <div class="example-table-container">
+                <table mat-table [dataSource]="dataSourceProductos" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+                
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+                    <td mat-cell *matCellDef="let item">{{item.id}}</td>
+                </ng-container>
+                
+                <!-- Foto Column -->
+                <ng-container matColumnDef="img">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Imagen</th>
+                    <td mat-cell *matCellDef="let item"><img class="imgFoto" [src]="item.img" alt=""></td>
+                </ng-container>
+                
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+                    <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
+                </ng-container>
+                
+                <!-- Categoría Column -->
+                <ng-container matColumnDef="categoria">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
+                    <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
+                </ng-container>
+                
+                <!-- Estado Column -->
+                <ng-container matColumnDef="estado">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td mat-cell *matCellDef="let item">{{item.estado}}</td>
+                </ng-container>
+                
+                <!-- Unidades Column -->
+                <ng-container matColumnDef="unidad">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
+                    <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
+                </ng-container>
+                
+                <!-- Precio Compra Column -->
+                <ng-container matColumnDef="compra">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
+                    <td mat-cell *matCellDef="let item">{{item.compra}}</td>
+                </ng-container>
+                
+                <!-- Proveedor Column -->
+                <ng-container matColumnDef="proveedor">
+                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
+                    <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
+                </ng-container>
+                
+                <!-- Table Headers and Rows -->
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos;"></tr>
+                </table>
+
+                <div class="button">
+                    <a (click)="navigateToProduct()">Ver Más</a>
+                </div>
+                
+                
+            </div>
+            </div>
         </div>
-        <div class="button">
-        <a href="#">Ver Mas</a>
-        </div>
+        
+        <br>
+
+        
     </div>
     
 
     
     <!--============================================================================================================-->
-    <div class="top-sales box">
+    <!-- <div class="top-sales box">
         <div class="title">Productos Mas Vendidos</div>
         <ul class="top-sales-details">
         <li>
@@ -157,76 +178,88 @@
         </li>
         </ul>
     </div>
-    </div>
+    </div> -->
 
     <!--:::::::::::::::::::::::::::::::::::::::::::-->
     <br>
 <!--============================================================================================================-->
-<!--============================================INVENTARIO======================================================-->
+<!--============================================PROVEEDORES======================================================-->
 <!--============================================================================================================-->
     <div class="sales-boxes">
         <div class="recent-sales box">
-            <div class="title">Inventario</div>
-            <div class="sales-details">
-            <ul class="details">
-                <li class="topic">Id</li>
-                <li><a href="#">0001</a></li>
-                <li><a href="#">0002</a></li>
-                <li><a href="#">0003</a></li>
-                <li><a href="#">0004</a></li>
-                <li><a href="#">0005</a></li>
-                <li><a href="#">0006</a></li>
-                <li><a href="#">0007</a></li>
-                <li><a href="#">0008</a></li>
-                <li><a href="#">0009</a></li>
-            </ul>
-            <ul class="details">
-            <li class="topic">Nombre</li>
-            <li><a href="#">Martillo</a></li>
-            <li><a href="#">Taladro</a></li>
-            <li><a href="#">Cemento</a></li>
-            <li><a href="#">Tubos PVC</a></li>
-            <li><a href="#">Cables Calibre 17</a></li>
-            <li><a href="#">Tijeras</a></li>
-            <li><a href="#">Candado</a></li>
-            <li><a href="#">Pintura CELCO</a></li>
-            <li><a href="#">Asistin</a></li>
-            </ul>
-            <ul class="details">
-            <li class="topic">Categoría</li>
-            <li><a href="#">Herramientas Manuales</a></li>
-            <li><a href="#">Herramientas Eléctricas</a></li>
-            <li><a href="#">Materiales de Construcción</a></li>
-            <li><a href="#">Fontanería</a></li>
-            <li><a href="#">Electricidad</a></li>
-            <li><a href="#">Jardinería</a></li>
-            <li><a href="#">Seguridad</a></li>
-            <li><a href="#">Pintura y Acabados</a></li>
-            <li><a href="#">Productos de Limpieza</a></li>
-            </ul>
-            <ul class="details">
-            <li class="topic">Proveedor</li>
-            <li><a href="#">ACD</a></li>
-            <li><a href="#">BCD</a></li>
-            <li><a href="#">NBG</a></li>
-            <li><a href="#">FGZ</a></li>
-            <li><a href="#">FTG</a></li>
-            <li><a href="#">ACR</a></li>
-            <li><a href="#">WTR</a></li>
-            <li><a href="#">HTY</a></li>
-            <li><a href="#">TRE</a></li>
-            </ul>
+            <div class="title">Proveedores</div>
+            <br>
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">
+                <table mat-table [dataSource]="dataSource" class="example-table" matSort>
+                    
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+                      <td mat-cell *matCellDef="let item">{{item.id}}</td>
+                    </ng-container>
+            
+                    <!-- Foto Column -->
+                    
+            
+                    <!-- Nombre Column -->
+                    <ng-container matColumnDef="nombre">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+                      <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
+                    </ng-container>
+            
+                    <!-- Categoría Column -->
+                    <ng-container matColumnDef="categoria">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
+                      <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
+                    </ng-container>
+            
+                    <!-- Estado Column -->
+                    <ng-container matColumnDef="estado">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+                      <td mat-cell *matCellDef="let item">{{item.estado}}</td>
+                    </ng-container>
+            
+                    <!-- Unidades Column -->
+                    <ng-container matColumnDef="unidad">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
+                      <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
+                    </ng-container>
+            
+                    <!-- Precio Compra Column -->
+                    <ng-container matColumnDef="compra">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
+                      <td mat-cell *matCellDef="let item">{{item.compra}}</td>
+                    </ng-container>
+            
+                    <!-- Proveedor Column -->
+                    <ng-container matColumnDef="proveedor">
+                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
+                      <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
+                    </ng-container>
+            
+                    <!-- Table Headers and Rows -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                </div>
+                <div class="button">
+                    <a href="#">Ver Mas</a>
+                </div>
             </div>
-            <div class="button">
-            <a href="#">Ver Mas</a>
-            </div>
+            
+            
+            <!-- <div>
+                <h1>PROVEEDORES</h1>
+                <app-proveedore></app-proveedore> 
+            </div> -->
         </div>
         
     
         <!---------------------------------------------------------------------------------------------------------------->
         
         <!--============================================================================================================-->
-        <div class="top-sales box">
+        <!-- <div class="top-sales box">
             <div class="title">Stock</div>
             <ul class="top-sales-details">
             <li>
@@ -285,6 +318,6 @@
             <span class="price">5</span>
             </li>
             </ul>
-        </div>
+        </div> -->
         </div>
 </div>
