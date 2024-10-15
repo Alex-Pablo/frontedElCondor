@@ -142,12 +142,11 @@ export class ProductoPopupComponent {
   }
 
   getunits() {
-    this.aUnits = [
-      {
-        id: 1,
-        name: 'libra'
+    this.sBaseApi.getItems('unitOfMeasure').subscribe((data: IResult<any>) => {
+      if (data.isSuccess) {
+        this.aUnits = data.value;
       }
-    ]
+    })
   }
 
   getStatus() {
