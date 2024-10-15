@@ -3,11 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
-.custom-dialog-container,
-.mat-dialog-container {
-  width: 1700px !important;
-  background-color: red;
-}

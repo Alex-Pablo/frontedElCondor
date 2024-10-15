@@ -33,7 +33,7 @@ export class ProveedorPopupComponent {
     this.loginForm = this._fb.group({
       name: [data.payload?.name || '', [Validators.required]],
       nameContact: [data.payload?.nameContact || '', [Validators.required]],
-      phoneNumberContact: [data.payload?.phoneNumberContact || '', [Validators.required]],
+      phoneNumberContact: [data.payload?.phoneNumber || '', [Validators.required]],
       phoneNumberSupplier: [data.payload?.phoneNumberSupplier || ''],
       email: [data.payload?.email || '',],
       address: [data.payload?.address || '', [Validators.required]],

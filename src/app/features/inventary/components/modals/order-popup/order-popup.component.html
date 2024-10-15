@@ -10,7 +10,7 @@
         <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-500/10" (click)="addSupplier(item.id)">
           <h5 class="text-sm font-medium text-gray-900">{{item.name}}</h5>
           <p class="text-sm text-gray-500">{{item.nameContact}}</p>
-          <p class="text-sm text-gray-500">{{item.phoneNumberSupplier}}</p>
+          <p class="text-sm text-gray-500">{{item.phoneNumber}}</p>
         </div>
         }
       </div>
@@ -33,7 +33,7 @@
             [control]="getFormControl('price')"></app-input-field>
         </div>
         <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
-          <app-input-field label="Cantidad" type="text" placeholder="Cantidad del pedido"
+          <app-input-field label="Cantidad" type="number" placeholder="Cantidad del pedido"
             [control]="getFormControl('quantity')"></app-input-field>
         </div>
 
@@ -73,10 +73,13 @@
                 <!-- Last Login Column -->
                 <ng-container matColumnDef="acciones">
                   <th class="itemHeader" mat-header-cell *matHeaderCellDef>Acciones</th>
-                  <td mat-cell *matCellDef="let user; let i" class="actions-cell">
+                  <td mat-cell *matCellDef="let user; let i = index" class="actions-cell">
                     <div class="actions-container">
                       <button mat-icon-button class="btnEliminar" (click)="removeProduct(i)">
                         <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button class="btnEditar" (click)="editProduct(i)">
+                        <mat-icon>edit</mat-icon>
                       </button>
                     </div>
                   </td>

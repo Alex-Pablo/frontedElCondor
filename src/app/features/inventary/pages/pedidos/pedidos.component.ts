@@ -9,6 +9,7 @@ import { CreatedOrderComponent } from '../../components/modals/created-order/cre
 import { OrderPopupComponent } from '../../components/modals/order-popup/order-popup.component';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { IResult } from '../../../../shared/models/IResult';
+import { SweealertService } from '../../../../core/services/sweealert.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -20,6 +21,7 @@ import { IResult } from '../../../../shared/models/IResult';
 export class PedidosComponent implements OnInit {
   sTitle = inject(TitleService);
   _sBaseApi = inject(BaseApiService);
+  _sSweetalert = inject(SweealertService)
   constructor(private _matDialog: MatDialog,) {
   }
   searchMessage = "Buscar pedido"
@@ -34,9 +36,11 @@ export class PedidosComponent implements OnInit {
   }
 
   getOrders() {
+    this._sSweetalert.showLoading();
     this._sBaseApi.getItems('order').subscribe((data: IResult<any>) => {
       console.log('data', data)
       this.dataSource = data.value;
+      this._sSweetalert.closeLoading();
     })
   }
 

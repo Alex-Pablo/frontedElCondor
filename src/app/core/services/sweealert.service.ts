@@ -58,4 +58,19 @@ export class SweealertService {
       }
     });
   }
+
+  showConfirmationPDF(message: string, cancelarBtn: string = 'No', okBtn: string = 'Si'): Promise<boolean> {
+    return Swal.fire({
+      title: '¿Enviar PDF?',
+      text: message,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: cancelarBtn,
+      confirmButtonText: okBtn,
+      confirmButtonColor: 'red',
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+  }
+
 }

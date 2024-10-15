@@ -30,13 +30,13 @@ export class DashboardComponent implements OnInit {
     this.dataSource = [
       { id: 1, nombre: 'Ferretería El Tornillo', categoria: 'Ferretería', estado: 'Activo', unidad: 50, compra: 100, proveedor: 'Proveedor A' },
       { id: 2, nombre: 'Materiales y Más', categoria: 'Construcción', estado: 'Inactivo', unidad: 30, compra: 200, proveedor: 'Proveedor B' },
-      { id: 3, nombre: 'Construrama', categoria: 'Materiales', estado: 'Activo', unidad: 20, compra: 150, proveedor: 'Proveedor C' },
       { id: 4, nombre: 'Ferretería San José', categoria: 'Herramientas', estado: 'Activo', unidad: 40, compra: 300, proveedor: 'Proveedor D' }
     ];
   }
 
   getAllCatalogo() {
     this.dataSourceProductos = [
+      { id: 3, nombre: 'Construrama', categoria: 'Materiales', estado: 'Activo', unidad: 20, compra: 150, proveedor: 'Proveedor C' },
       {
         id: 1,
         img: 'assets/img/product1.jpg',
@@ -62,8 +62,8 @@ export class DashboardComponent implements OnInit {
 
   navigateToProduct() {
     // Asegúrate de que la ruta sea correcta según tu configuración de enrutamiento
-    this.router.navigate(['catalogo/pages/product']); 
-}
+    this.router.navigate(['catalogo/pages/product']);
+  }
 
 }
 

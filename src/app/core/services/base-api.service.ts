@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { IResult } from '../../shared/models/IResult';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,10 @@ export class BaseApiService {
 
   removeItem(service: any, id: number) {
     return this.http.delete<any>(`${environment.baseUrlApi}/${service}/delete/${id}`)
+  }
+
+  getDetail(service: string, id: number): Observable<IResult<any>> {
+    return this.http.get<IResult<any>>(`${environment.baseUrlApi}/${service}/detail/${id}`)
   }
 
 }

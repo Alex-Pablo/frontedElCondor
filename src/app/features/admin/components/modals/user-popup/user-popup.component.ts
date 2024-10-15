@@ -37,7 +37,7 @@ export class UserPopupComponent {
   imgUrl: any; //es una url que se pasa para visualiar la img,
   fileToUpload: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.isEditMode = !!data.payload;
 
     this.loginForm = this._fb.group({

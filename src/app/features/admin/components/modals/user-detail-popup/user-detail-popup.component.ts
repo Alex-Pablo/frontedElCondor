@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -7,6 +7,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { IResult } from '../../../../../shared/models/IResult';
 import { IUserDetailDto } from '../../../../../shared/models/IUserDetail';
 import { MatDivider } from '@angular/material/divider';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-detail-popup',
@@ -15,18 +16,17 @@ import { MatDivider } from '@angular/material/divider';
   templateUrl: './user-detail-popup.component.html',
   styleUrl: './user-detail-popup.component.scss'
 })
-export class UserDetailPopupComponent implements OnChanges {
-  @Input() id: any;
-  @Output() closeSidenav: EventEmitter<void> = new EventEmitter<void>();
+export class UserDetailPopupComponent implements OnInit {
+
+  _MatDialgoRef = inject(MatDialogRef<UserDetailPopupComponent>)
   private sAuth = inject(AuthService);
   userDetail: IUserDetailDto | undefined;
-  public close() {
-    this.closeSidenav.emit();
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['id'] && this.id) {
-      this.loadUserDetails(this.id);
-    }
+
+  ngOnInit(): void {
+    this.loadUserDetails(this.data.id)
   }
 
   loadUserDetails(id: any): void {

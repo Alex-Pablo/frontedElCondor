@@ -25,9 +25,7 @@ export class AuthService {
       .pipe(
         tap(
           response => {
-
             if (response && response.isSuccess) {
-
               const token = response.value;
               this.localStorageS.set('currentuser', JSON.stringify((token)));
             }

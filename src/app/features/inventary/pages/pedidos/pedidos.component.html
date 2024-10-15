@@ -41,7 +41,7 @@
         <td mat-cell *matCellDef="let pedido"> {{pedido.priceTotal}} </td>
       </ng-container>
       <ng-container matColumnDef="timeOrder">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Fecah pedido</th>
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Fecha pedido</th>
         <td mat-cell *matCellDef="let pedido"> {{pedido.timeOrder | date: 'short'}} </td>
       </ng-container>
       <!-- Fecha de Creación Column -->
@@ -68,10 +68,12 @@
             <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button mat-icon-button class="btnEditar"
-              *ngIf="item.estado === 'Pendiente' || item.estado === 'En Proceso'" (click)="onEdit(item.id)">
+
+            @if(item.status == 'P'){
+            <button mat-icon-button class="btnEditar">
               <mat-icon>edit</mat-icon>
             </button>
+            }
           </div>
         </td>
       </ng-container>

@@ -2,121 +2,122 @@
 
 
 <div class="home-content">
-    <div class="overview-boxes">
+  <div class="overview-boxes">
     <div class="box">
-        <div class="right-side">
+      <div class="right-side">
         <div class="box-topic">Usuarios</div>
         <div class="number">5</div>
         <div class="indicator">
-            <i class='bx bx-up-arrow-alt'></i>
-            <!-- <span class="text">Desde Ayer</span> -->
+          <i class='bx bx-up-arrow-alt'></i>
+          <!-- <span class="text">Desde Ayer</span> -->
         </div>
-        </div>
-        <i class='bx bx-cart-alt cart'></i>
+      </div>
+      <i class='bx bx-cart-alt cart'></i>
     </div>
     <div class="box">
-        <div class="right-side">
+      <div class="right-side">
         <div class="box-topic">Ventas</div>
         <div class="number">7</div>
         <div class="indicator">
-            <i class='bx bx-up-arrow-alt'></i>
-            <!-- <span class="text">Desde Ayer</span> -->
+          <i class='bx bx-up-arrow-alt'></i>
+          <!-- <span class="text">Desde Ayer</span> -->
         </div>
-        </div>
-        <i class='bx bxs-cart-add cart two' ></i>
+      </div>
+      <i class='bx bxs-cart-add cart two'></i>
     </div>
     <div class="box">
-        <div class="right-side">
+      <div class="right-side">
         <div class="box-topic">Productos</div>
         <div class="number">15</div>
         <div class="indicator">
-            <i class='bx bx-down-arrow-alt down'></i>
-            <!-- <span class="text">Desde Ayer</span> -->
+          <i class='bx bx-down-arrow-alt down'></i>
+          <!-- <span class="text">Desde Ayer</span> -->
         </div>
-        </div>
-        <i class='bx bxs-cart-download cart four' ></i>
+      </div>
+      <i class='bx bxs-cart-download cart four'></i>
     </div>
-    </div>
+  </div>
 
-    <!--==========================================================================================================================-->
-    <div class="sales-boxes">
-    <div class="recent-sales box">
-        <div class="title">Productos</div>
-        <br>
-        <div class="sales-details">
-            <div class="example-container mat-elevation-z8">
-            <div class="example-table-container">
-                <table mat-table [dataSource]="dataSourceProductos" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
-                
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
-                    <td mat-cell *matCellDef="let item">{{item.id}}</td>
-                </ng-container>
-                
-                <!-- Foto Column -->
-                <ng-container matColumnDef="img">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Imagen</th>
-                    <td mat-cell *matCellDef="let item"><img class="imgFoto" [src]="item.img" alt=""></td>
-                </ng-container>
-                
-                <!-- Nombre Column -->
-                <ng-container matColumnDef="nombre">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
-                    <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
-                </ng-container>
-                
-                <!-- Categoría Column -->
-                <ng-container matColumnDef="categoria">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
-                    <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
-                </ng-container>
-                
-                <!-- Estado Column -->
-                <ng-container matColumnDef="estado">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
-                    <td mat-cell *matCellDef="let item">{{item.estado}}</td>
-                </ng-container>
-                
-                <!-- Unidades Column -->
-                <ng-container matColumnDef="unidad">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
-                    <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
-                </ng-container>
-                
-                <!-- Precio Compra Column -->
-                <ng-container matColumnDef="compra">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
-                    <td mat-cell *matCellDef="let item">{{item.compra}}</td>
-                </ng-container>
-                
-                <!-- Proveedor Column -->
-                <ng-container matColumnDef="proveedor">
-                    <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
-                    <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
-                </ng-container>
-                
-                <!-- Table Headers and Rows -->
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos;"></tr>
-                </table>
+  <!--==========================================================================================================================-->
+  <div class="sales-boxes flex flex-col">
+    <div class="recent-sales box ">
+      <div class="title">Productos</div>
+      <br>
+      <div class="sales-details">
+        <div class="example-container mat-elevation-z8">
+          <div class="example-table-container">
+            <table mat-table [dataSource]="dataSourceProductos" class="example-table" matSort matSortActive="created"
+              matSortDisableClear matSortDirection="desc">
 
-                <div class="button">
-                    <a (click)="navigateToProduct()">Ver Más</a>
-                </div>
-                
-                
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let item">{{item.id}}</td>
+              </ng-container>
+
+              <!-- Foto Column -->
+              <ng-container matColumnDef="img">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Imagen</th>
+                <td mat-cell *matCellDef="let item"><img class="imgFoto" [src]="item.img" alt=""></td>
+              </ng-container>
+
+              <!-- Nombre Column -->
+              <ng-container matColumnDef="nombre">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
+              </ng-container>
+
+              <!-- Categoría Column -->
+              <ng-container matColumnDef="categoria">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
+                <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
+              </ng-container>
+
+              <!-- Estado Column -->
+              <ng-container matColumnDef="estado">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item">{{item.estado}}</td>
+              </ng-container>
+
+              <!-- Unidades Column -->
+              <ng-container matColumnDef="unidad">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
+                <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
+              </ng-container>
+
+              <!-- Precio Compra Column -->
+              <ng-container matColumnDef="compra">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
+                <td mat-cell *matCellDef="let item">{{item.compra}}</td>
+              </ng-container>
+
+              <!-- Proveedor Column -->
+              <ng-container matColumnDef="proveedor">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
+                <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
+              </ng-container>
+
+              <!-- Table Headers and Rows -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsProductos"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsProductos;"></tr>
+            </table>
+
+            <div class="button">
+              <a (click)="navigateToProduct()">Ver Más</a>
             </div>
-            </div>
+
+
+          </div>
         </div>
-        
-        <br>
+      </div>
 
-        
+      <br>
+
+
     </div>
-    
 
-    
+
+
     <!--============================================================================================================-->
     <!-- <div class="top-sales box">
         <div class="title">Productos Mas Vendidos</div>
@@ -182,84 +183,84 @@
 
     <!--:::::::::::::::::::::::::::::::::::::::::::-->
     <br>
-<!--============================================================================================================-->
-<!--============================================PROVEEDORES======================================================-->
-<!--============================================================================================================-->
+    <!--============================================================================================================-->
+    <!--============================================PROVEEDORES======================================================-->
+    <!--============================================================================================================-->
     <div class="sales-boxes">
-        <div class="recent-sales box">
-            <div class="title">Proveedores</div>
-            <br>
-            <div class="example-container mat-elevation-z8">
-                <div class="example-table-container">
-                <table mat-table [dataSource]="dataSource" class="example-table" matSort>
-                    
-                    <!-- ID Column -->
-                    <ng-container matColumnDef="id">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
-                      <td mat-cell *matCellDef="let item">{{item.id}}</td>
-                    </ng-container>
-            
-                    <!-- Foto Column -->
-                    
-            
-                    <!-- Nombre Column -->
-                    <ng-container matColumnDef="nombre">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
-                      <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
-                    </ng-container>
-            
-                    <!-- Categoría Column -->
-                    <ng-container matColumnDef="categoria">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
-                      <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
-                    </ng-container>
-            
-                    <!-- Estado Column -->
-                    <ng-container matColumnDef="estado">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
-                      <td mat-cell *matCellDef="let item">{{item.estado}}</td>
-                    </ng-container>
-            
-                    <!-- Unidades Column -->
-                    <ng-container matColumnDef="unidad">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
-                      <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
-                    </ng-container>
-            
-                    <!-- Precio Compra Column -->
-                    <ng-container matColumnDef="compra">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
-                      <td mat-cell *matCellDef="let item">{{item.compra}}</td>
-                    </ng-container>
-            
-                    <!-- Proveedor Column -->
-                    <ng-container matColumnDef="proveedor">
-                      <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
-                      <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
-                    </ng-container>
-            
-                    <!-- Table Headers and Rows -->
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                </div>
-                <div class="button">
-                    <a href="#">Ver Mas</a>
-                </div>
-            </div>
-            
-            
-            <!-- <div>
-                <h1>PROVEEDORES</h1>
-                <app-proveedore></app-proveedore> 
-            </div> -->
+      <div class="recent-sales box">
+        <div class="title">Proveedores</div>
+        <br>
+        <div class="example-container mat-elevation-z8">
+          <div class="example-table-container">
+            <table mat-table [dataSource]="dataSource" class="example-table" matSort>
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let item">{{item.id}}</td>
+              </ng-container>
+
+              <!-- Foto Column -->
+
+
+              <!-- Nombre Column -->
+              <ng-container matColumnDef="nombre">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
+              </ng-container>
+
+              <!-- Categoría Column -->
+              <ng-container matColumnDef="categoria">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Categoria</th>
+                <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
+              </ng-container>
+
+              <!-- Estado Column -->
+              <ng-container matColumnDef="estado">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item">{{item.estado}}</td>
+              </ng-container>
+
+              <!-- Unidades Column -->
+              <ng-container matColumnDef="unidad">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Unidades</th>
+                <td mat-cell *matCellDef="let item">{{item.unidad}}</td>
+              </ng-container>
+
+              <!-- Precio Compra Column -->
+              <ng-container matColumnDef="compra">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio Compra</th>
+                <td mat-cell *matCellDef="let item">{{item.compra}}</td>
+              </ng-container>
+
+              <!-- Proveedor Column -->
+              <ng-container matColumnDef="proveedor">
+                <th class="itemHeader" mat-header-cell *matHeaderCellDef>Proveedor</th>
+                <td mat-cell *matCellDef="let item">{{item.proveedor}}</td>
+              </ng-container>
+
+              <!-- Table Headers and Rows -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div class="button">
+            <a href="#">Ver Mas</a>
+          </div>
         </div>
-        
-    
-        <!---------------------------------------------------------------------------------------------------------------->
-        
-        <!--============================================================================================================-->
-        <!-- <div class="top-sales box">
+
+
+        <!-- <div>
+                <h1>PROVEEDORES</h1>
+                <app-proveedore></app-proveedore>
+            </div> -->
+      </div>
+
+
+      <!---------------------------------------------------------------------------------------------------------------->
+
+      <!--============================================================================================================-->
+      <!-- <div class="top-sales box">
             <div class="title">Stock</div>
             <ul class="top-sales-details">
             <li>
@@ -319,5 +320,5 @@
             </li>
             </ul>
         </div> -->
-        </div>
-</div>
+    </div>
+  </div>

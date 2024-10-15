@@ -42,8 +42,10 @@ export class ProveedoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.sTitle.setTitle("proveedores")
-    this.getAllProveedores()
+    this.getAllProveedores();
   }
+
+
   closeSidenav() {
     this.sidenav.close();
   }
