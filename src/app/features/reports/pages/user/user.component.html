@@ -3,6 +3,23 @@
 </div>
 
 <div id="reportContent">
+  <div class="head">
+    <img [src]="logocondor" alt="Logo">
+    <p><strong>{{ nombreempresa }}</strong></p>
+    <h1>REPORTE DE USUARIOS</h1>
+  </div>
+  <div class="header">
+    <div>
+      <p><strong>Telefono:</strong> {{ numeroempresa }}</p>
+      <p><strong>E-mail:</strong> {{ correoempresa }}</p>
+      <p><strong>Direccion:</strong> {{ direccionempresa }}</p>
+    </div>
+    <div>
+      <p><strong>Mes:</strong><span id="reportMonth"></span></p>
+      <p><strong>Fecha y hora de emisión:</strong><span id="reportDate"></span></p>
+      <p><strong>Elaborado por:</strong><span id="reportUser"></span></p>
+    </div>
+  </div>
   <div class="table-container">
     <div class="example-container mat-elevation-z8">
       <div class="example-table-container">

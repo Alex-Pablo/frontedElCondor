@@ -33,7 +33,7 @@ export class CategoriaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'description', 'acciones'];
   sTitle = inject(TitleService)
   _matDialog = inject(MatDialog)
-  searchMessage = "Buscar proveedor"
+  searchMessage = "Buscar categoría"
   dataSource: any;
   selectedId: any;
   @ViewChild('sidenav') sidenav!: MatSidenav
