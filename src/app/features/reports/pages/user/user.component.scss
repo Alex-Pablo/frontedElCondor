@@ -6,10 +6,49 @@
 
   button {
     background-color: var(--contrast-blue-color);
-    color: white;
+    color: var(--bg-color);
     padding: 5px 10px;
 
   }
+}
+
+.head {
+  font-family: 'PoppinsBold';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color); 
+  padding-left: 15vh;
+  padding-right: 75vh;
+  padding-top: 15px;
+}
+
+.head p {
+  color: var(--contrast-blue-color);
+  margin: 0;
+  display: flex;
+  text-align: center;
+}
+
+.head h1 {
+  font-family: 'poppinsextrabold';
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 40px;
+  color: var(--primary-color);
+}
+
+div#reportContent div.header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: var(--bg-color); 
+  padding: 10px 40px;
+}
+
+img {
+  height: 50px;
 }
 
 .example-container {
