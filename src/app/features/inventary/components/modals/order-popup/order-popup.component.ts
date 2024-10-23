@@ -105,11 +105,12 @@ export class OrderPopupComponent implements OnInit {
       this._sBaseApi.addItem('order', order).subscribe({
         next: async (data: IResult<any>) => {
           this._sSweetalert.closeLoading();
-
           if (data.isSuccess) {
             const isPDFSend = await this._sSweetalert.showConfirmationPDF(`Enviar pdf al proveedor : ${this.getSupplier()}`);
             if (isPDFSend) {
-              console.log('pdf enviando')
+
+              console.log('id', data.value)
+
             }
             this._MatDialgoRef.close(true);
           } else {
