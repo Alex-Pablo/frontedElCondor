@@ -1,0 +1,92 @@
+<div class="list-inputs">
+  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+  <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
+</div>
+<div class="example-container mat-elevation-z8">
+  <div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let item">{{item.id}}</td>
+      </ng-container>
+
+      <!-- Foto Column -->
+      <ng-container matColumnDef="img">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Imagen</th>
+        <td mat-cell *matCellDef="let item"><img class="imgFoto" [src]="item.img" alt=""></td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="name">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+      </ng-container>
+
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="code">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Codigo</th>
+        <td mat-cell *matCellDef="let item">{{item.code}}</td>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="key">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Clave</th>
+        <td mat-cell *matCellDef="let item">{{item.key}}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let item">
+          @if(item.status == 'S'){
+          Disponible
+          }@else if(item.status =='E'){
+          En proceso
+          }@else if(item.status == 'F'){
+          Proximos
+          }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="purchasePrice">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio de aquision</th>
+        <td mat-cell *matCellDef="let item">{{item.purchasePrice}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="salePrice">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio de venta</th>
+        <td mat-cell *matCellDef="let item">{{item.salePrice}}</td>
+      </ng-container>
+
+      <!-- Last Login Column -->
+      <ng-container matColumnDef="acciones">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let item" class="actions-cell">
+          <div class="actions-container">
+            <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEditar" (click)="onEdit(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEliminar" (click)="onDelete(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+    <!-- Paginador -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+  <app-producto-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-producto-detail-popup>
+</mat-sidenav>

@@ -1,0 +1,86 @@
+<h2 class="" mat-dialog-title>{{isEditMode ? 'Editar producto': 'Crear un nuevo producto'}}</h2>
+<mat-dialog-content class="mat-typography w-full">
+  <form [formGroup]="loginForm">
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Nombre del producto:*" type="text" placeholder="Ingrese el nonbre del producto"
+          [control]="getFormControl('name')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Codigo:" type="text" placeholder="Codigo de producto"
+          [control]="getFormControl('code')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Clave:" type="text" placeholder="Clave del producto"
+          [control]="getFormControl('key')"></app-input-field>
+      </div>
+    </div>
+
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Marca del producto:" type="text" placeholder="Ingrese la marca del producto"
+          [control]="getFormControl('brand')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Precio de aquisicion:" type="text" placeholder="Ingrese el precio de aquisicion"
+          [control]="getFormControl('purchasePrice')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Precio de venta:" type="text" placeholder="Ingrese el precio de venta"
+          [control]="getFormControl('salePrice')"></app-input-field>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full  px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-text-area [control]="getFormControl('description')" label="Descripcion del prodcuto"
+          placeholder="Descripcion"></app-input-text-area>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Categoria" placeholder="Seleccion una categoria" [options]="aCategories"
+          [control]="getFormControl('idCategory')"></app-input-select>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Proveedor" placeholder="Selecione un proveedor" [options]="aSuppliers"
+          [control]="getFormControl('idSupplier')"></app-input-select>
+      </div>
+    </div>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Unidad" placeholder="Seleccion una unidad del producto" [options]="aUnits"
+          [control]="getFormControl('idUnit')"></app-input-select>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-select label="Estado" placeholder="Selecione un estado" [options]="aStatus"
+          [control]="getFormControl('status')"></app-input-select>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap md:mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="En stock:" type="text" placeholder="Cantidad en stock"
+          [control]="getFormControl('stock')"></app-input-field>
+      </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+        <app-input-field label="Stock minimo:" type="text" placeholder="Cantidad minimo de stock"
+          [control]="getFormControl('stockMin')"></app-input-field>
+      </div>
+    </div>
+    <div class="flex flex-wrap md:mb-6">
+      <div class="flex flex-wrap md:mb-6">
+        <app-image-uploader [control]="getFormControl('profileImg')" [imageUrl]="imgUrl"
+          label="Agregar imagen del producto"></app-image-uploader>
+      </div>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-btn-close (click)="onCloseModal()"></app-btn-close>
+  <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+</mat-dialog-actions>

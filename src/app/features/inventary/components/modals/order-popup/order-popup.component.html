@@ -1,0 +1,107 @@
+<h3 class="text-bol" mat-dialog-title>Nuevo pedido</h3>
+<mat-dialog-content class="mat-typography w-full">
+  <mat-divider></mat-divider>
+  <form [formGroup]="fOrder" class="mt-4">
+    @if(fOrder.get('idSupplier').value == null){
+    <ng-container>
+      <p>Selecione un proveedor</p>
+      <div class="w-full flex flex-row gap-4 flex-wrap">
+        @for(item of aSuppliers; track item.id){
+        <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-500/10" (click)="addSupplier(item.id)">
+          <h5 class="text-sm font-medium text-gray-900">{{item.name}}</h5>
+          <p class="text-sm text-gray-500">{{item.nameContact}}</p>
+          <p class="text-sm text-gray-500">{{item.phoneNumber}}</p>
+        </div>
+        }
+      </div>
+    </ng-container>
+    }@else{
+    <div class="w-full flex flex-row align-baseline gap-20 ">
+      <p>Proveedor selecionado: <span class="text-blue-950 font-bold">{{getSupplier()}}</span> </p>
+      <button
+        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        type="button" (click)="resetSupplier()">Cambiar proveedor</button>
+    </div>
+    <div class="mt-4">
+      <div class="flex flex-wrap md:mb-6">
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
+          <app-input-select label="Productos" placeholder="" [options]="aProducts"
+            [control]="getFormControl('selectedProductId')"></app-input-select>
+        </div>
+        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+          <app-input-field label="Precio de compra" type="text" placeholder="Ingrese el precio de compra"
+            [control]="getFormControl('price')"></app-input-field>
+        </div>
+        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
+          <app-input-field label="Cantidad" type="number" placeholder="Cantidad del pedido"
+            [control]="getFormControl('quantity')"></app-input-field>
+        </div>
+
+        <button type="button" (click)="addProductToOrder()"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">Agregar producto</button>
+      </div>
+
+      <div>
+        <p class="font-bold">Lista de productos</p>
+
+
+        <div class="table-container">
+          <div class="example-container mat-elevation-z8">
+            <div class="example-table-container">
+
+              <table mat-table [dataSource]="fOrder.get('products').value" class="example-table" matSort
+                matSortActive="created" matSortDisableClear matSortDirection="desc">
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="name">
+                  <th class="itemHeader" mat-header-cell *matHeaderCellDef>Nombre</th>
+                  <td mat-cell *matCellDef="let user">{{user.name}}</td>
+                </ng-container>
+                <!-- Email Column -->
+                <ng-container matColumnDef="price">
+                  <th class="itemHeader" mat-header-cell *matHeaderCellDef>Precio de compra</th>
+                  <td mat-cell *matCellDef="let user">{{user.price}}</td>
+                </ng-container>
+
+
+                <!-- First Name Column -->
+                <ng-container matColumnDef="quantity">
+                  <th class="itemHeader" mat-header-cell *matHeaderCellDef>Cantidad</th>
+                  <td mat-cell *matCellDef="let user">{{user.quantity}}</td>
+                </ng-container>
+
+                <!-- Last Login Column -->
+                <ng-container matColumnDef="acciones">
+                  <th class="itemHeader" mat-header-cell *matHeaderCellDef>Acciones</th>
+                  <td mat-cell *matCellDef="let user; let i = index" class="actions-cell">
+                    <div class="actions-container">
+                      <button mat-icon-button class="btnEliminar" (click)="removeProduct(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button class="btnEditar" (click)="editProduct(i)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- Table Headers and Rows -->
+                <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColumns;">
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    }
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-btn-close (click)="_MatDialgoRef.close(false)"></app-btn-close>
+  <app-btn-accept (click)="onSubmit()"></app-btn-accept>
+</mat-dialog-actions>

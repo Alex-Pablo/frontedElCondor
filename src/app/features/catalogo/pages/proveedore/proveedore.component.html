@@ -1,0 +1,71 @@
+<div class="flex flex-wrap justify-end gap-2 mb-4">
+  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+  <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
+</div>
+<div class="example-container mat-elevation-z8">
+  <div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc">
+
+      <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let item">{{item.id}}</td>
+      </ng-container>
+
+
+      <!-- Nombre de proveedor Column -->
+      <ng-container matColumnDef="name">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre de la empresa </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- NIT Column -->
+      <ng-container matColumnDef="nameContact">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre persona de contacto </th>
+        <td mat-cell *matCellDef="let element"> {{element.nameContact}} </td>
+      </ng-container>
+
+
+      <!-- Teléfono Column -->
+      <ng-container matColumnDef="phoneNumber">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Numero de telefono de contacto </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="status">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+
+
+      <!-- Last Login Column -->
+      <ng-container matColumnDef="acciones">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>acciones</th>
+        <td mat-cell *matCellDef="let item" class="actions-cell">
+          <div class="actions-container">
+            <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEditar" (click)="onEdit(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEliminar" (click)="onDelete(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+    <!-- Paginador -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+  <app-proveedor-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-proveedor-detail-popup>
+</mat-sidenav>

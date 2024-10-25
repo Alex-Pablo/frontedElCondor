@@ -1,0 +1,57 @@
+<div class="flex flex-wrap justify-end gap-2 mb-4">
+  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+  <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
+</div>
+<div class="example-container mat-elevation-z8">
+  <div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc">
+
+      <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.id }} </td>
+      </ng-container>
+
+      <!-- Descripción -->
+      <ng-container matColumnDef="name">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre de categoria </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.name }} </td>
+      </ng-container>
+
+      <!-- Estado -->
+      <ng-container matColumnDef="description">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Desripcion de la categoria </th>
+        <td mat-cell *matCellDef="let categoria"> {{ categoria.description}} </td>
+      </ng-container>
+
+
+      <!-- Last Login Column -->
+      <ng-container matColumnDef="acciones">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>acciones</th>
+        <td mat-cell *matCellDef="let item" class="actions-cell">
+          <div class="actions-container">
+            <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEditar" (click)="onEdit(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="btnEliminar" (click)="onDelete(item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+     <!-- Paginador -->
+     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+<app-categoria-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-categoria-detail-popup> 
+</mat-sidenav>

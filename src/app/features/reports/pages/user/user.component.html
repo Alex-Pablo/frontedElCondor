@@ -1,0 +1,97 @@
+<div class="container-btn">
+  <button (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
+<div id="reportContent">
+  <div class="head">
+    <img [src]="logocondor" alt="Logo">
+    <p><strong>{{ nombreempresa }}</strong></p>
+    <h1>REPORTE DE USUARIOS</h1>
+  </div>
+  <div class="header">
+    <div>
+      <p><strong>Telefono:</strong> {{ numeroempresa }}</p>
+      <p><strong>E-mail:</strong> {{ correoempresa }}</p>
+      <p><strong>Direccion:</strong> {{ direccionempresa }}</p>
+    </div>
+    <div>
+      <p><strong>Mes:</strong><span id="reportMonth"></span></p>
+      <p><strong>Fecha y hora de emisión:</strong><span id="reportDate"></span></p>
+      <p><strong>Elaborado por:</strong><span id="reportUser"></span></p>
+    </div>
+  </div>
+  <div class="table-container">
+    <div class="example-container mat-elevation-z8">
+      <div class="example-table-container">
+
+        <table mat-table [dataSource]="reportUsers" class="example-table" matSort matSortActive="created"
+          matSortDisableClear matSortDirection="desc">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let user">{{user.id}}</td>
+          </ng-container>
+
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let user">{{user.email}}</td>
+          </ng-container>
+
+
+          <!-- First Name Column -->
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let user">{{user.firstname}}</td>
+          </ng-container>
+
+          <!-- Last Name Column -->
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef>Apellido</th>
+            <td mat-cell *matCellDef="let user">{{user.lastname}}</td>
+          </ng-container>
+
+          <!-- Role Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <td mat-cell *matCellDef="let user">{{user.role}}</td>
+          </ng-container>
+
+
+          <!-- Last Login Column -->
+          <ng-container matColumnDef="last_login_at">
+            <th mat-header-cell *matHeaderCellDef>Inicio sesion</th>
+            <td mat-cell *matCellDef="let user">{{user.last_login_at | date: 'short'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="last_logout_at">
+            <th mat-header-cell *matHeaderCellDef>Cierre de sesion</th>
+            <td mat-cell *matCellDef="let user">{{user.last_logout_at| date: 'short'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="updated_at">
+            <th mat-header-cell *matHeaderCellDef>Ultima actualizacion</th>
+            <td mat-cell *matCellDef="let user">{{user.updated_at | date: 'short'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef>Fecha de creacion</th>
+            <td mat-cell *matCellDef="let user">{{user.created_at | date: 'short'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="stateUser">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let user">{{user.stateUser}}</td>
+          </ng-container>
+          <!-- Last Login Column -->
+
+          <!-- Table Headers and Rows -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (mouseover)="hoveredRow = row"
+            (mouseleave)="hoveredRow = null">
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

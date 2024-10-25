@@ -1,0 +1,48 @@
+<div>
+  <div class="container-principal">
+    <div class="container-info">
+      <h1>{{ NombreEmpresa }}</h1>
+      <p class="DescripcionP">
+        Todo lo que necesitas para construir tus sueños, con herramientas de
+        confianza de la mas alta calidad.
+      </p>
+      <button>Ver productos</button>
+    </div>
+
+    <div class="container-imgPrincipal">
+      <img src="img/image.png" alt="" />
+    </div>
+  </div>
+
+  <section class="Lista_de_productos">
+    <h2 class="SubtituloL">Lista de productos</h2>
+    <br />
+    <div class="wrapperProducto">
+      <div class="Categorias">
+        <h3>Categorias</h3>
+        <button>Todas</button>
+        @for (categoria of categorias; track categoria.id) {
+          <button type="button" (click)="getProducts(categoria.id)">
+            {{ categoria.name }}
+          </button>
+        }
+      </div>
+
+      <div class="product-container">
+        <div class="product-card">
+          <div class="wrapperImg">
+            <img
+              class="imagenProducto"
+              src="img/Cuchara.jpg"
+              alt="Herramienta"
+            />
+          </div>
+          <h2 class="Titulo">Cuchara para albañil.</h2>
+          <p class="Precio">Q23</p>
+          <p class="Disponible">Disponible: <span>34</span></p>
+          <p class="Codigo">Código: <span>#323435</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

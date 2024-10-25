@@ -1,0 +1,59 @@
+<div class="flex flex-wrap justify-end gap-2 mb-4">
+    <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+    <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
+</div>
+<div class="example-container mat-elevation-z8">
+<div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+
+    <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let unit"> {{ unit.id }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre de la Unidad </th>
+        <td mat-cell *matCellDef="let unit"> {{ unit.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="abbreviation">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Abreviación </th>
+        <td mat-cell *matCellDef="let unit"> {{ unit.abbreviation }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let unit"> {{ unit.description }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="products">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Productos </th>
+        <td mat-cell *matCellDef="let unit"> {{ unit.products }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let unit" class="actions-cell">
+        <div class="actions-container">
+            <!-- <button mat-icon-button class="btnVer" (click)="onViewDetails(unit)">
+            <mat-icon>visibility</mat-icon>
+            </button> -->
+            <!-- <button mat-icon-button class="btnEditar" (click)="onEdit(unit)">
+            <mat-icon>edit</mat-icon>
+            </button> -->
+            <button mat-icon-button class="btnEliminar" (click)="onDelete(unit)">
+            <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+</div>
+<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
+<!-- <app-unitofmeasurements-detail [unit]="selectedUnitOfMeasure" (closeSidenav)="closeSidenav()"></app-unitofmeasurements-detail> -->
+</mat-sidenav>

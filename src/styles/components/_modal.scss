@@ -1,0 +1,66 @@
+.modal {
+  background-color: #FAF8F4;
+
+  .modal-title {
+    font-family: 'PoppinsBold' !important;
+    color: #33322E !important;
+    font-size: 1.2rem !important;
+    margin: 0px;
+    padding: 0px 0px 10px 20px;
+  }
+
+  .mat-typography {
+    overflow: auto;
+    height: 100%;
+  }
+
+  .wrapperForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .wrapperRowForm {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+
+      .wrapperInput {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        input,
+        select {
+          width: 100%;
+          border: solid #ACC2D3 1px;
+          padding: 5px 10px;
+        }
+
+        .wrapperImg {
+          width: 130px;
+        }
+      }
+    }
+
+    label {
+      font-family: 'PoppinsMedium';
+    }
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    padding: 0px 20px;
+
+    .btnCancel {
+      background-color: var(--bg-red-color);
+      color: white !important;
+      border-radius: 5px !important;
+    }
+
+    .btnAccept {
+      background-color: #3A4DB1;
+      color: white;
+      border-radius: 5px;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.login-container {
+  font-family: 'PoppinsExtraBold';
+  color: var(--contrast-blue-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.login-form {
+  width: 60%;
+  flex: 1;
+
+  h2 {
+    color: var(--contrast-blue-color);
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    margin-left: 10%;
+
+    label {
+      color: var(--fourth-txt-color);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  }
+
+  .btn-enter {
+    background-color: var(--txt-blue-color);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    width: 30%;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.general-error-message {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 100vh;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}

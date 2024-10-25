@@ -1,0 +1,69 @@
+<mat-toolbar class="nav">
+  <div class="nav-logo">
+    <button mat-icon-button aria-label="Menu icon" (click)="collapsed.set(!collapsed())">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img [src]="logocondor" class="logo" alt="Logo" />
+  </div>
+  <div class="wrapper-profile">
+    <mat-icon>sms</mat-icon>
+    <div>
+      <img class="userprofile" [src]="userInfor?.profile" alt="">
+    </div>
+    <div class="wrapper-names">
+      <span class="user-name">{{userInfor?.firstname}}</span>
+      <span class="user-role">{{userInfor?.role}}</span>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container autosize="true">
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+    <mat-nav-list>
+      @for(item of menuItems(); track item.label){
+
+      @if(item.subItems){
+
+      <button type="button" class="item" mat-list-item (click)="toggleNested(item)">
+        <mat-icon matListItemIcon class="item-icon">{{item.icon}}</mat-icon>
+        <span matListItemTitle class="item-title flex justify-start">{{item.label}}</span>
+        <span matListItemMeta>
+          <mat-icon class="item-icon">{{item.isExpanded ? 'expand_less': 'expand_more'}}
+          </mat-icon>
+        </span>
+      </button>
+
+      @if(item.isExpanded){
+      <div>
+        @for(subItem of item.subItems; track subItem.label){
+        <a class="subItem" mat-list-item [routerLink]="[item.route, subItem.route]" routerLinkActive="activeSubItem"
+          #rla2="routerLinkActive" [activated]="rla2.isActive">
+          <mat-icon matListItemIcon class="icon-subItem"
+            [class.activeSubItemIcon]="rla2.isActive">{{subItem.icon}}</mat-icon>
+          <span class="title-SubItem" matListItemTitle
+            [class.activeSubItemTitle]="rla2.isActive">{{subItem.label}}</span>
+        </a>
+        }
+      </div>
+      }
+
+      }@else{
+
+      <a class="item" mat-list-item [routerLink]="item.route" routerLinkActive="active-link" #rla="routerLinkActive"
+        [activated]="rla.isActive">
+        <mat-icon matListItemIcon class="item-icon" [class.activeIcon]="rla.isActive">{{item.icon}}</mat-icon>
+        <span matListItemTitle class="item-title" [class.activeTitle]="rla.isActive">{{item.label}}</span>
+      </a>
+
+      }
+
+      }
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p class="titlePage">{{titlePage()}}</p>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

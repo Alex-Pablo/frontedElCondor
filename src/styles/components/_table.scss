@@ -1,0 +1,73 @@
+.example-container {
+  position: relative;
+  padding: 0px 0px 10px 0px;
+
+  .example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 500px;
+    overflow: auto;
+
+    table {
+      width: 100%;
+
+
+      .itemHeader {
+        background-color: #EFEFF1;
+        color: #223BBD;
+        font-family: 'PoppinsBold';
+        font-size: 0.85rem;
+
+
+      }
+
+      td {
+        .imgFoto {
+          width: 71px;
+        }
+
+        .actions-container {
+          display: flex;
+          gap: 8px;
+          justify-content: flex-start;
+          align-items: center;
+
+          .mat-icon {
+            cursor: pointer;
+            font-size: 20px;
+          }
+
+          .btnVer {
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            color: orange !important;
+          }
+
+          .btnEditar {
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            color: blue;
+          }
+
+          .btnEliminar {
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}

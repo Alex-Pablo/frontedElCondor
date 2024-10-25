@@ -1,0 +1,20 @@
+@import './typography';
+@import './variables';
+@import './layout';
+@import './components/table';
+@import './components/modal';
+@import './components/_matdialog.scss';
+
+// botones globales
+.btn-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  background-color: #33322E;
+  color: white;
+  font-family: 'PoppinsBlack';
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
