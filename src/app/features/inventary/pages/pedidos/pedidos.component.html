@@ -54,6 +54,8 @@
           Pendiente
           }@else if(pedido.status == 'E'){
           En Proceso
+          }@else if(pedido.status == 'C'){
+          Completado
           }
         </td>
       </ng-container>
@@ -70,8 +72,14 @@
             </button>
 
             @if(item.status == 'P'){
-            <button mat-icon-button class="btnEditar">
+            <button mat-icon-button class="btnEditar" (click)="modifyOrder(item.id)">
               <mat-icon>edit</mat-icon>
+            </button>
+            }
+            @if(item.status == 'E'){
+            <button mat-icon-button class="text-green-600 font-bold" (click)="reciveOrder(item.id)">
+              <!-- <mat-icon>edit</mat-icon> -->
+              Recibir
             </button>
             }
           </div>

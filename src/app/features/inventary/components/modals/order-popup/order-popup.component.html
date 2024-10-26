@@ -1,8 +1,8 @@
-<h3 class="text-bol" mat-dialog-title>Nuevo pedido</h3>
+<h3 class="text-bol" mat-dialog-title>{{isEditMode ? 'Editar pedido' : 'Nuevo pedido'}}</h3>
 <mat-dialog-content class="mat-typography w-full">
   <mat-divider></mat-divider>
   <form [formGroup]="fOrder" class="mt-4">
-    @if(fOrder.get('idSupplier').value == null){
+    @if(fOrder.get('idSupplier')?.value == null){
     <ng-container>
       <p>Selecione un proveedor</p>
       <div class="w-full flex flex-row gap-4 flex-wrap">
@@ -18,9 +18,11 @@
     }@else{
     <div class="w-full flex flex-row align-baseline gap-20 ">
       <p>Proveedor selecionado: <span class="text-blue-950 font-bold">{{getSupplier()}}</span> </p>
+      @if(isEditMode == false){
       <button
         class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         type="button" (click)="resetSupplier()">Cambiar proveedor</button>
+      }
     </div>
     <div class="mt-4">
       <div class="flex flex-wrap md:mb-6">
@@ -29,7 +31,7 @@
             [control]="getFormControl('selectedProductId')"></app-input-select>
         </div>
         <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
-          <app-input-field label="Precio de compra" type="text" placeholder="Ingrese el precio de compra"
+          <app-input-field label="Precio de compra" type="number" placeholder="Ingrese el precio de compra"
             [control]="getFormControl('price')"></app-input-field>
         </div>
         <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
@@ -42,6 +44,7 @@
       </div>
 
       <div>
+
         <p class="font-bold">Lista de productos</p>
 
 
@@ -49,7 +52,7 @@
           <div class="example-container mat-elevation-z8">
             <div class="example-table-container">
 
-              <table mat-table [dataSource]="fOrder.get('products').value" class="example-table" matSort
+              <table mat-table [dataSource]="fOrder.get('products')?.value" class="example-table" matSort
                 matSortActive="created" matSortDisableClear matSortDirection="desc">
 
                 <!-- Email Column -->
@@ -93,9 +96,13 @@
             </div>
           </div>
         </div>
-
-
       </div>
+      @if(isEditMode){
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full mt-6">
+        <app-input-select label="Estado" placeholder="Selecione un estado" [options]="aStatus"
+          [control]="getFormControl('status')"></app-input-select>
+      </div>
+      }
     </div>
     }
 

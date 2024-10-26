@@ -56,15 +56,15 @@ export class ProductoPopupComponent {
       code: [data.payload?.code || ''],
       key: [data.payload?.key || ''],
       description: [data.payload?.description || ''],
-      purchasePrice: [data.payload?.purchasePrice || ''],
-      salePrice: [data.payload?.salePrice || ''],
+      purchasePrice: [data.payload?.purchasePrice || '0'],
+      salePrice: [data.payload?.salePrice || '0'],
       brand: [data.payload?.brand || ''],
       idCategory: [data.payload?.id_category || '', [Validators.required]],
       idSupplier: [data.payload?.id_suplier || '', [Validators.required]],
       idUnit: [data.payload?.id_unit || '', [Validators.required]],
-      stock: [data.payload?.stock || ''],
-      stockMin: [data.payload?.stockMin || ''],
-      status: [data.payload?.status, [Validators.required]],
+      stock: [data.payload?.stock || '0'],
+      stockMin: [data.payload?.stockMin || '0'],
+      status: [data.payload?.status || 'F', [Validators.required]],
     });
     this.imgUrl = data.payload?.img
 
@@ -76,6 +76,8 @@ export class ProductoPopupComponent {
     this.getSuppliers();
     this.getunits();
     this.getStatus();
+
+
   }
 
   onSubmit() {
@@ -153,15 +155,15 @@ export class ProductoPopupComponent {
     this.aStatus = [
       {
         id: 'S',
-        name: 'Disponible'
+        name: 'Disponible (En inventario y listo para la venta)'
       },
       {
         id: 'E',
-        name: 'En proceso'
+        name: 'En proceso (Pedido realizado, en camino)'
       },
       {
         id: 'F',
-        name: 'Futuro'
+        name: 'Proximo (Registrado, sin stock ni pedido)'
       }
     ]
   }
