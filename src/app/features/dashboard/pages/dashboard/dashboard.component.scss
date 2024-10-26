@@ -90,8 +90,10 @@
 }
 
 .home-content .sales-boxes{
+    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     /* padding: 0 20px; */
 }
 
@@ -110,6 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    
 }
 
 .sales-boxes .box .title{
@@ -125,6 +128,7 @@
 .sales-boxes .sales-details li{
     list-style: none;
     margin: 8px 0;
+    
 }
 
 .sales-boxes .sales-details li a{
