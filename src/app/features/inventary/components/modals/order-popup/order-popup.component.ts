@@ -94,39 +94,6 @@ export class OrderPopupComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
-      this._sSweetalert.showLoading();
-      const order = {
-        supplierId: this.fOrder.get('idSupplier')?.value,
-        products: this.fOrder.get('products')?.value,
-        status: this.fOrder.get('status')?.value
-      };
-      this._sBaseApi.addItem('order', order).subscribe({
-        next: async (data: IResult<any>) => {
-          this._sSweetalert.closeLoading();
-          if (data.isSuccess) {
-            const isPDFSend = await this._sSweetalert.showConfirmationPDF(`Enviar pdf al proveedor : ${this.getSupplier()}`);
-            if (isPDFSend) {
-
-              console.log('id', data.value)
-
-            }
-            this._MatDialgoRef.close(true);
-          } else {
-            this._sSweetalert.showError("Error al crear el pedido");
-          }
-        },
-        error: (error) => {
-          this._sSweetalert.closeLoading();
-          this._sSweetalert.showError("Ocurrió un error inesperado al crear el pedido");
-          console.error('Error al crear pedido:', error);
-        }
-      });
-    } else {
-      this._sSweetalert.showError("Formulario inválido o sin productos");
-    }
-  }
 
   addSupplier(id: number) {
     this.fOrder.patchValue({
