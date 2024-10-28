@@ -59,6 +59,16 @@ export class MainLayoutComponent {
       route: '/dashboard'
     },
     {
+      icon: 'home', // Icono para 'Inicio'
+      label: 'Cierre',
+      route: '/cierre'
+    },
+    {
+      icon: 'home', // Icono para 'Inicio'
+      label: 'venta',
+      route: '/venta'
+    },
+    {
       icon: 'inventory_2', // Icono más específico para 'Inventario'
       label: 'Inventario',
       route: '/inventario',

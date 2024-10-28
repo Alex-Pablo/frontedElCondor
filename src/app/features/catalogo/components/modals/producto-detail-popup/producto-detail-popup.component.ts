@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, inject, Input, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { BaseApiService } from '../../../../../core/services/base-api.service';
+import { IResult } from '../../../../../shared/models/IResult';
 
 
 @Component({
@@ -13,14 +17,21 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   styleUrl: './producto-detail-popup.component.scss'
 })
 export class ProductoDetailPopupComponent {
-  @Input() id!: any;
-  @Output() closeSidenav: EventEmitter<void> = new EventEmitter<void>();
+  _MatDialgoRef = inject(MatDialogRef<ProductoDetailPopupComponent>)
+  ProductDetail: any;
+  sBaseApi = inject(BaseApiService)
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
- 
+  ngOnInit(): void {
+    this.loadProductDetails(this.data.id)
+  }
 
-  public close() {
-    console.log('sii');
-    this.closeSidenav.emit();
+  loadProductDetails(id: any): void {
+    this.sBaseApi.getDetail('product',id).subscribe((data: IResult<any>) => {
+      this.ProductDetail = data.value;
+      console.log(this.ProductDetail);
+    });
   }
 }
 

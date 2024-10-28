@@ -55,7 +55,7 @@ export class ProductoPopupComponent {
       name: [data.payload?.name || '', [Validators.required]],
       code: [data.payload?.code || ''],
       key: [data.payload?.key || ''],
-      description: [data.payload?.description || ''],
+      description: [data.payload?.description || '', [Validators.required]],
       purchasePrice: [data.payload?.purchasePrice || ''],
       salePrice: [data.payload?.salePrice || ''],
       brand: [data.payload?.brand || ''],
