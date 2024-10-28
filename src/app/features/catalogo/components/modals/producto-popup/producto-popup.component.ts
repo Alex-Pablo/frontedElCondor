@@ -158,12 +158,8 @@ export class ProductoPopupComponent {
         name: 'Disponible (En inventario y listo para la venta)'
       },
       {
-        id: 'E',
-        name: 'En proceso (Pedido realizado, en camino)'
-      },
-      {
-        id: 'F',
-        name: 'Proximo (Registrado, sin stock ni pedido)'
+        id: 'P',
+        name: 'Registrado (sin stock ni pedido)'
       }
     ]
   }
