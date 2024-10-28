@@ -5,12 +5,8 @@ import { HistorialVentasComponent } from "./pages/historial-ventas/historial-ven
 
 
 export const VENTA_ROUTES: Routes = [
-  { path: 'Venta', component: VentasComponent },
+  { path: 'venta', component: VentasComponent },
   {
-    path: 'Historial', component: HistorialVentasComponent
-  },
-
-  {
-    path: '', redirectTo: 'ventas', pathMatch: 'full'
+    path: 'historial', component: HistorialVentasComponent
   }
 ]
