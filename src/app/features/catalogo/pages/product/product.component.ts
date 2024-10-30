@@ -61,16 +61,6 @@ export class ProductComponent implements OnInit {
 
 
   onDelete(id: any) {
-    this.sSweetalert.showConfirmation(`Quieres eliminar el producto: ${id}`, () => {
-      this.sBaseApi.removeItem('Product', id).subscribe((data: IResult<any>) => {
-        if (data.isSuccess) {
-          this.sSweetalert.showSuccess('Producto eliminado');
-          this.getProducts();
-        } else {
-          this.sSweetalert.showError(data.error || 'No se pudo eliminar el producto')
-        }
-      })
-    });
   }
 
 
