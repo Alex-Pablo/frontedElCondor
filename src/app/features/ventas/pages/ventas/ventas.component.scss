@@ -1,0 +1,98 @@
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px 2px;
+    justify-content: flex-start;
+}
+
+.product-card {
+    flex: 0 0 calc(25% - 20px);
+    background-color: var(--white-color);
+    border: 1px solid var(--white-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.wrapperImg {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.imagenProducto {
+    width: 60%;
+    height: auto;
+}
+
+.Titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Precio, .Disponible, .Codigo {
+    width: 100%;
+    text-align: left;
+    color: #196890;
+    margin: 1px 0;
+}
+
+.Precio {
+    font-size: 1.2rem;
+}
+
+.agregar-producto {
+    margin-top: auto;
+    padding: 10px 15px;
+    background-color: #196890;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.agregar-producto:hover {
+    background-color: #18a9e3; 
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    margin-bottom: 20px; /* Space below the filter section */
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Space below the search input */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.filter-buttons button {
+    padding: 10px 15px;
+    background-color: #196890;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+    background-color: #18a9e3; 
+}
