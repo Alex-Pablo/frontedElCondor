@@ -1,0 +1,100 @@
+.container {
+    display: flex;
+    width: 100%;
+    font-family: 'PoppinsSemiBold';
+  }
+  
+  
+  .main-content {
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  
+  .controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .controls .search-button,
+  .controls .add-user-button {
+    padding: 8px 12px;
+    border: none;
+    color: var(--bg-color);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  
+
+  .controls .search-button:hover,
+  .controls .add-user-button:hover {
+    background-color: var(--sky-color);
+  }
+
+.controls .date-input {
+    border: 1px solid orange; /* Borde anaranjado */
+    border-radius: 5px;
+    outline: none;
+    padding: 8px;
+}
+
+  .controls .state-select,
+  .controls .role-select,
+  .controls .search-input {
+    padding: 8px;
+    border: 1px solid var(--bg-color);
+    border-radius: 4px;
+  }
+  
+  .controls .add-user-button {
+    background-color: var(--txt-orange-color);
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+  
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-rate-limit-reached {
+    max-width: 360px;
+    text-align: center;
+  }
+  
+  /* Column Widths */
+  .mat-column-number,
+  .mat-column-state {
+    width: 64px;
+  }
+  
+  .mat-column-created {
+    width: 124px;
+  }
+
+  .list-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 0px 0px 20px 0px;
+    gap: 10px;
+  }
+  
+  
+  .custom-dialog-container {
+    background-color: red !important;
+    padding: 30px;
+    width: 30px !important;
+  }
