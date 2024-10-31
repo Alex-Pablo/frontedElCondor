@@ -24,50 +24,50 @@
           [control]="getFormControl('brand')"></app-input-field>
       </div>
       <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-field label="Precio de aquisicion:" type="text" placeholder="Ingrese el precio de aquisicion"
+        <app-input-field label="Precio de aquisicion:" type="number" placeholder="Ingrese el precio de aquisicion"
           [control]="getFormControl('purchasePrice')"></app-input-field>
       </div>
       <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-field label="Precio de venta:" type="text" placeholder="Ingrese el precio de venta"
+        <app-input-field label="Precio de venta:" type="number" placeholder="Ingrese el precio de venta"
           [control]="getFormControl('salePrice')"></app-input-field>
       </div>
     </div>
 
     <div class="flex flex-wrap md:mb-6">
       <div class="w-full  px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-text-area [control]="getFormControl('description')" label="Descripcion del prodcuto"
+        <app-input-text-area [control]="getFormControl('description')" label="Descripcion del prodcuto:*"
           placeholder="Descripcion"></app-input-text-area>
       </div>
     </div>
 
     <div class="flex flex-wrap md:mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-select label="Categoria" placeholder="Seleccion una categoria" [options]="aCategories"
+        <app-input-select label="Categoria:*" placeholder="Seleccion una categoria" [options]="aCategories"
           [control]="getFormControl('idCategory')"></app-input-select>
       </div>
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-select label="Proveedor" placeholder="Selecione un proveedor" [options]="aSuppliers"
+        <app-input-select label="Proveedor:*" placeholder="Selecione un proveedor" [options]="aSuppliers"
           [control]="getFormControl('idSupplier')"></app-input-select>
       </div>
     </div>
     <div class="flex flex-wrap md:mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-select label="Unidad" placeholder="Seleccion una unidad del producto" [options]="aUnits"
+        <app-input-select label="Unidad de medida:*" placeholder="Seleccion una unidad del producto" [options]="aUnits"
           [control]="getFormControl('idUnit')"></app-input-select>
       </div>
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-select label="Estado" placeholder="Selecione un estado" [options]="aStatus"
+        <app-input-select label="Estado:*" placeholder="Selecione un estado" [options]="aStatus"
           [control]="getFormControl('status')"></app-input-select>
       </div>
     </div>
 
     <div class="flex flex-wrap md:mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-field label="En stock:" type="text" placeholder="Cantidad en stock"
+        <app-input-field label="En stock:" type="number" placeholder="Cantidad en stock"
           [control]="getFormControl('stock')"></app-input-field>
       </div>
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:w-full">
-        <app-input-field label="Stock minimo:" type="text" placeholder="Cantidad minimo de stock"
+        <app-input-field label="Stock minimo:" type="number" placeholder="Cantidad minimo de stock"
           [control]="getFormControl('stockMin')"></app-input-field>
       </div>
     </div>

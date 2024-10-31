@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IResult } from '../../shared/models/IResult';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { NumberInput } from '@angular/cdk/coercion';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,47 @@ export class BaseApiService {
     return this.http.get<IResult<any>>(`${environment.baseUrlApi}/${service}/detail/${id}`)
   }
 
+
+  getItemsPagination(service: string, pageIndex: number, pageSize: number) {
+    let params = new HttpParams()
+      .set('pageIndex', pageIndex.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<any>(`${environment.baseUrlApi}/${service}`, { params, observe: 'response' })
+      .pipe(
+        map(response => {
+          console.log('HTTP Status Code:', response.status);  // Esto mostrará el código de estado
+          console.log(response);
+
+          const paginationHeader = response.headers.get('X-Pagination') || response.headers.get('x-pagination');
+          if (!paginationHeader) {
+            console.warn('X-Pagination header not found');
+          }
+
+          const pagination = paginationHeader ? JSON.parse(paginationHeader) : null;
+          return {
+            items: response.body || [],
+            pagination
+          };
+        })
+      );
+  }
+
+
+  filter(service: string, numberDTE?: string | null, startDate?: Date | null, endDate?: Date | null) {
+    let params = new HttpParams();
+
+    if (numberDTE) {
+      params = params.append('numberDTE', numberDTE);
+    }
+    if (startDate) {
+      params = params.append('startDate', startDate.toISOString());
+    }
+    if (endDate) {
+      params = params.append('endDate', endDate.toISOString());
+    }
+
+    console.log(params)
+    return this.http.get<any>(`${this.baseApi}/${service}/filter`, { params });
+  }
 }

@@ -1,5 +1,5 @@
 export interface IResult<T> {
   isSuccess: boolean;
-  value?: T
+  value?: T;
   error?: string
 }

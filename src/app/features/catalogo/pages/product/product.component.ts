@@ -46,8 +46,6 @@ export class ProductComponent implements OnInit {
     console.log(this.dataSource);
   }
 
-
-
   onOpenModal() {
     this._matDialog.open(ProductoPopupComponent, {
       width: '60vw',
@@ -63,16 +61,6 @@ export class ProductComponent implements OnInit {
 
 
   onDelete(id: any) {
-    this.sSweetalert.showConfirmation(`Quieres eliminar el producto: ${id}`, () => {
-      this.sBaseApi.removeItem('Product', id).subscribe((data: IResult<any>) => {
-        if (data.isSuccess) {
-          this.sSweetalert.showSuccess('Producto eliminado');
-          this.getProducts();
-        } else {
-          this.sSweetalert.showError(data.error || 'No se pudo eliminar el producto')
-        }
-      })
-    });
   }
 
 
@@ -94,14 +82,19 @@ export class ProductComponent implements OnInit {
 
   }
 
-  onViewDetails(id: Productos) {
-    this.selectedId = id;
-    if (this.sidenav) {
-      this.sidenav.open();
-    } else {
-      console.error('El sidenav no está definido.');
-    }
+
+  onViewDetails(selectedId: string) {
+    console.log('id', selectedId)
+    this._matDialog.open(ProductoDetailPopupComponent, {
+      data: { id: selectedId },
+      width: '350px',
+      height: '100vh',
+      maxHeight: '100vh',
+      position: { right: '0' },
+      panelClass: 'dialog-detail'
+    });
   }
+
 
   closeSidenav() {
     this.sidenav.close();

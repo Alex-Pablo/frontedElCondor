@@ -1,108 +1,89 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { TitleService } from '../../../../core/services/title.service';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 import { MatIcon } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { BaseApiService } from '../../../../core/services/base-api.service';
+import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
+import { IResult } from '../../../../shared/models/IResult';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, MatTableModule],
+  imports: [InputSearchComponent,
+    MatIcon,
+    MatTableModule,
+    MatPaginatorModule,
+    DateStartEndComponent
+  ],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.scss'
 })
 export class InventoryComponent implements OnInit {
   sTitle = inject(TitleService)
+  searchInput: string | null = null;
+  selectedStartDate: any;
+  selectedEndDate: any;
   searchMessage = "Buscar producto"
-  dataSource: any
+  sItemToSearch: any;
+  dItemDateStart: any;
+  dItemDateEnd: any;
+  dataSource = new MatTableDataSource<any>();
+  _BaseApi = inject(BaseApiService)
+  totalItems = 0;
+  private paginatorSubscription: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.sTitle.setTitle('Inventario')
-    this.getAllInventory();
   }
 
-  getAllInventory() {
-    this.dataSource = [
-      {
-        code: 'HERR001',
-        key: 'CLV01',
-        name: 'Martillo',
-        category: 'Herramientas',
-        quantity: 50,
-        minStock: 10,
-        maxStock: 100,
-        unitCost: 5.99,
-        sellingPrice: 9.99,
-        supplier: 'Herramientas S.A.',
-        status: 'En stock',
-        expirationDate: '',
-        lastRestocked: '2024-09-01'
-      },
-      {
-        code: 'HERR002',
-        key: 'CLV02',
-        name: 'Juego de destornilladores',
-        category: 'Herramientas',
-        quantity: 120,
-        minStock: 20,
-        maxStock: 200,
-        unitCost: 12.50,
-        sellingPrice: 19.99,
-        supplier: 'FixIt Proveedores',
-        status: 'En stock',
-        expirationDate: '',
-        lastRestocked: '2024-09-10'
-      },
-      {
-        code: 'HERR003',
-        key: 'CLV03',
-        name: 'Clavos 100 unidades',
-        category: 'Ferretería',
-        quantity: 300,
-        minStock: 50,
-        maxStock: 500,
-        unitCost: 0.99,
-        sellingPrice: 2.50,
-        supplier: 'Metales S.A.',
-        status: 'En stock',
-        expirationDate: '',
-        lastRestocked: '2024-08-25'
-      },
-      {
-        code: 'HERR004',
-        key: 'CLV04',
-        name: 'Taladro',
-        category: 'Herramientas eléctricas',
-        quantity: 30,
-        minStock: 5,
-        maxStock: 50,
-        unitCost: 45.00,
-        sellingPrice: 79.99,
-        supplier: 'PowerTools Co.',
-        status: 'En stock',
-        expirationDate: '',
-        lastRestocked: '2024-09-05'
-      },
-      {
-        code: 'HERR005',
-        key: 'CLV05',
-        name: 'Cinta métrica 5m',
-        category: 'Medición',
-        quantity: 80,
-        minStock: 15,
-        maxStock: 150,
-        unitCost: 3.50,
-        sellingPrice: 5.99,
-        supplier: 'Mediciones S.A.',
-        status: 'En stock',
-        expirationDate: '',
-        lastRestocked: '2024-09-12'
-      }
-    ];
+  ngAfterViewInit() {
+    this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
+    this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
   }
 
-  onSearch(id: any) {
+  filterItems() {
+    console.log(this.searchInput)
+    this._BaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
+      this.dataSource.data = data.value;
+    })
+  }
 
+  clearFilters() {
+    this.searchInput = null;
+    this.selectedEndDate = null;
+    this.selectedStartDate = null;
+    this.paginator.pageIndex = 0;
+    this.loadItems();
+
+  }
+
+  handleDateRangeChange(dateRange: { startDate: string, endDate: string }): void {
+    this.dItemDateEnd = dateRange.endDate;
+    this.dItemDateStart = dateRange.startDate;
+  }
+
+  loadItems() {
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+
+    this._BaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize).subscribe((data: any) => {
+      console.log(data.items)
+      this.dataSource.data = data.items;
+      console.log(this.dataSource)
+      this.totalItems = data.pagination.TotalItemCount;
+      this.paginator.pageIndex = data.pagination.CurrentPage - 1;
+      this.paginator.length = this.totalItems;
+    });
+  }
+
+  onSearch(value: string) {
+    this.sItemToSearch = value;
   }
 
   onOpenModal() {
@@ -116,18 +97,13 @@ export class InventoryComponent implements OnInit {
 
   }
   displayedColumns: string[] = [
-    'code',
-    'key',
-    'name',
-    'category',
-    'quantity',
-    'minStock',
-    'unitCost',
-    'sellingPrice',
-    'supplier',
+    'id',
+    'productName',
+    'supplierName',
+    'quantityInStock',
+    'stockMin',
     'status',
-    'expirationDate',
-    'lastRestocked',
+    'updated_at',
     'acciones'
   ];
 }

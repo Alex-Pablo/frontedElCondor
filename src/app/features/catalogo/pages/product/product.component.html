@@ -45,8 +45,8 @@
           Disponible
           }@else if(item.status =='E'){
           En proceso
-          }@else if(item.status == 'F'){
-          Proximos
+          }@else if(item.status == 'P'){
+          Registrado
           }
         </td>
       </ng-container>
@@ -84,7 +84,3 @@
     </table>
   </div>
 </div>
-
-<mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
-  <app-producto-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-producto-detail-popup>
-</mat-sidenav>

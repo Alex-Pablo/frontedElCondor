@@ -59,6 +59,22 @@ export class SweealertService {
     });
   }
 
+  showConfirmation2(message: string, cancelar: string = 'cancelar', ok: string = "Okay", confirmCallback: () => void) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: message,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: cancelar,
+      confirmButtonText: ok,
+      confirmButtonColor: 'red',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        confirmCallback();
+      }
+    });
+  }
+
   showConfirmationPDF(message: string, cancelarBtn: string = 'No', okBtn: string = 'Si'): Promise<boolean> {
     return Swal.fire({
       title: '¿Enviar PDF?',
@@ -68,6 +84,19 @@ export class SweealertService {
       cancelButtonText: cancelarBtn,
       confirmButtonText: okBtn,
       confirmButtonColor: 'red',
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+  }
+
+
+  showNotification(message: string, okBtn: string = 'OK'): Promise<boolean> {
+    return Swal.fire({
+      title: 'Importante',
+      text: message,
+      icon: 'info',
+      confirmButtonText: okBtn,
+      confirmButtonColor: 'blue',
     }).then((result) => {
       return result.isConfirmed;
     });
