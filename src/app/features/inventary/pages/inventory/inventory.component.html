@@ -1,6 +1,21 @@
-<div class="flex flex-wrap justify-end gap-4 mb-4">
-  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
-  <!-- <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button> -->
+<div class="flex flex-wrap flex-col">
+  <div class="flex flex-wrap justify-end items-end gap-4 mb-4">
+
+    <app-date-start-end [(startDate)]="selectedStartDate" [(endDate)]="selectedEndDate"></app-date-start-end>
+    <app-input-search [searchMessage]="searchMessage" [(searchInput)]="searchInput"></app-input-search>
+  </div>
+  <div class="flex  flex-wrap justify-end items-end gap-4 mb-4">
+    <button type="button" (click)="filterItems()"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+      Buscar
+    </button>
+
+    <button type="button" (click)="clearFilters()"
+      class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 ml-2">
+      Limpiar
+    </button>
+
+  </div>
 </div>
 <div class="example-container mat-elevation-z8">
   <div class="example-table-container">
@@ -9,76 +24,54 @@
       matSortDirection="desc">
 
       <!-- Code Column -->
-      <ng-container matColumnDef="code">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Codigo </th>
-        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+      <ng-container matColumnDef="id">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
 
       <!-- Key Column -->
-      <ng-container matColumnDef="key">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Clave </th>
-        <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+      <ng-container matColumnDef="productName">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre producto </th>
+        <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <ng-container matColumnDef="supplierName">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Proveedor</th>
+        <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
       </ng-container>
 
       <!-- Category Column -->
-      <ng-container matColumnDef="category">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Categoria </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      <ng-container matColumnDef="quantityInStock">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Cantidad en inventario </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantityInStock}} </td>
       </ng-container>
 
       <!-- Quantity Column -->
-      <ng-container matColumnDef="quantity">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Cantidad </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      <ng-container matColumnDef="stockMin">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Cantidad minima </th>
+        <td mat-cell *matCellDef="let element"> {{element.stockMin}} </td>
       </ng-container>
 
       <!-- Min Stock Column -->
-      <ng-container matColumnDef="minStock">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Stock minimo </th>
-        <td mat-cell *matCellDef="let element"> {{element.minStock}} </td>
+      <ng-container matColumnDef="status">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Estado </th>
+
+        <td mat-cell *matCellDef="let item">
+          @if(item.status == 'S'){
+          Disponible
+          }@else if(item.status =='E'){
+          En proceso
+          }@else if(item.status == 'P'){
+          Registrado
+          }
       </ng-container>
 
 
       <!-- Unit Cost Column -->
-      <ng-container matColumnDef="unitCost">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Costo de compra </th>
-        <td mat-cell *matCellDef="let element"> {{element.unitCost}} </td>
-      </ng-container>
-
-      <!-- Selling Price Column -->
-      <ng-container matColumnDef="sellingPrice">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Costo de venta </th>
-        <td mat-cell *matCellDef="let element"> {{element.sellingPrice}} </td>
-      </ng-container>
-
-      <!-- Supplier Column -->
-      <ng-container matColumnDef="supplier">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Proveedor </th>
-        <td mat-cell *matCellDef="let element"> {{element.supplier}} </td>
-      </ng-container>
-
-      <!-- Status Column -->
-      <ng-container matColumnDef="status">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-      </ng-container>
-
-      <!-- Expiration Date Column -->
-      <ng-container matColumnDef="expirationDate">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Fecha de expiracion </th>
-        <td mat-cell *matCellDef="let element"> {{element.expirationDate}} </td>
-      </ng-container>
-
-      <!-- Last Restocked Column -->
-      <ng-container matColumnDef="lastRestocked">
-        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Ultima reposicion</th>
-        <td mat-cell *matCellDef="let element"> {{element.lastRestocked}} </td>
+      <ng-container matColumnDef="updated_at">
+        <th class="itemHeader" mat-header-cell *matHeaderCellDef> Ultima Actualizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
       </ng-container>
 
       <!-- Last Login Column -->
@@ -100,6 +93,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </table>
+    <mat-paginator [length]="totalItems" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 
 </div>

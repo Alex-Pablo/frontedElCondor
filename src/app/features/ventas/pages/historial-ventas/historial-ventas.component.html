@@ -1,14 +1,22 @@
-
-
 <div class="container">
   <main class="main-content">
-    <div class="controls">
-      <input type="text" placeholder="Buscar por fecha" class="date-input" />
-      <div>
-        <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
-      </div>
-    </div>
+    <div class="flex flex-wrap justify-end items-end gap-4 mb-4">
 
+      <app-date-start-end [(startDate)]="selectedStartDate" [(endDate)]="selectedEndDate"></app-date-start-end>
+      <app-input-search [searchMessage]="searchMessage" [(searchInput)]="searchInput"></app-input-search>
+    </div>
+    <div class="flex  flex-wrap justify-end items-end gap-4 mb-4">
+      <button type="button" (click)="filterItems()"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Buscar
+      </button>
+  
+      <button type="button" (click)="clearFilters()"
+        class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 ml-2">
+        Limpiar
+      </button>
+  
+    </div>
     <div class="example-container mat-elevation-z8">
       <div class="example-table-container">
         <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
@@ -23,8 +31,9 @@
           <!-- Columna Fecha de venta -->
           <ng-container matColumnDef="date">
             <th class="itemHeader" mat-header-cell *matHeaderCellDef>Fecha de venta</th>
-            <td mat-cell *matCellDef="let fecha"> {{ fecha.date }} </td> <!-- Cambiado a categoria.date -->
+            <td mat-cell *matCellDef="let fecha"> {{ fecha.date }} </td>
           </ng-container>
+          
 
           <!-- Columna Usuario -->
           <ng-container matColumnDef="user">

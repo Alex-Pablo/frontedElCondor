@@ -1,26 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-input-search',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './input-search.component.html',
   styleUrl: './input-search.component.scss'
 })
 export class InputSearchComponent {
   @Input() searchMessage: string = '';
-  @Output() searchChange = new EventEmitter<string>();
-  private searchSubject = new Subject<string>();
+  @Input() searchInput: string | null = null;
+  @Output() searchInputChange = new EventEmitter<string>();
 
-  ngOnInit(): void {
-    this.searchSubject.pipe(debounceTime(1500)).subscribe((value) => {
-      this.searchChange.emit(value);
-    });
-  }
-
-  onSearch(event: Event) {
-    const inputValue = (event.target as HTMLInputElement).value;
-    this.searchSubject.next(inputValue);
+  onSearchChange(value: string) {
+    this.searchInputChange.emit(value);
   }
 }

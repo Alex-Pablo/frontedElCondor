@@ -90,15 +90,17 @@ export class ProveedoreComponent implements OnInit {
     })
   }
 
-  onViewDetails(id: Proveedor) {
-    this.selectedId = id;
-    if (this.sidenav) {
-      this.sidenav.open();
-    } else {
-      console.error('El sidenav no está definido.');
-    }
+  onViewDetails(selectedId: string) {
+    console.log('id', selectedId)
+    this._matDialog.open(ProveedorDetailPopupComponent, {
+      data: { id: selectedId },
+      width: '350px',
+      height: '100vh',
+      maxHeight: '100vh',
+      position: { right: '0' },
+      panelClass: 'dialog-detail'
+    });
   }
-
 
   getAllProveedores() {
     this.sBaseApi.getItems('supplier').subscribe((data: IResult<any>) => {

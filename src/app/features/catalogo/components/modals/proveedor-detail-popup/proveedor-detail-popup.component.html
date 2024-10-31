@@ -1,10 +1,63 @@
 <div class="p-4">
     <div class="w-full flex flex-row justify-between items-center">
       <span class="text-15">Detalle del proveedor</span>
-      <button (click)="close()">
+      <button (click)="_MatDialgoRef.close()">
         <mat-icon class="text-blue-500 hover:text-blue-300">close</mat-icon>
       </button>
     </div>
-  
+    <div class="flex flex-col">
+      <span class="title">Proveedor</span>
+      <p class="text-content">{{proveedordetail?.username}}</p>
+      <span class="status">{{proveedordetail?.status == 'A' ? 'Activo' : 'Inactivo'}}</span>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Nombre de la empresa</span>
+      <p class="text-content">{{proveedordetail?.name}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Correo electronico</span>
+      <p class="text-content">{{proveedordetail?.email}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Nombre de la cuenta</span>
+      <p class="text-content">{{proveedordetail?.nameAccount}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Nombre del banco</span>
+      <p class="text-content">{{proveedordetail?.nameBanck}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Numero del proveedor de contacto</span>
+      <p class="text-content">{{proveedordetail?.phoneNumber}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Pagina Web</span>
+      <p class="text-content">{{proveedordetail?.website}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Direccion de la empresa</span>
+      <p class="text-content">{{proveedordetail?.address}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Numero de la empresa</span>
+      <p class="text-content">{{proveedordetail?.phoneNumberSupplier}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Cuenta bancaria</span>
+      <p class="text-content">{{proveedordetail?.numberAccount}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Comentario</span>
+      <p class="text-content">{{proveedordetail?.description}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Proveedor creado en</span>
+      <p class="text-content">{{proveedordetail?.created_at | date: 'short'}}</p>
+    </div>
+    <div class="w-full flex flex-col">
+      <span class="title">Proveedor creado por</span>
+      <p class="text-content">{{proveedordetail?.created_by | date: 'short'}}</p>
+    </div>
+   
   </div>
   
