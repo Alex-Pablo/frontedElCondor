@@ -10,11 +10,19 @@ import { OrderPopupComponent } from '../../components/modals/order-popup/order-p
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { SweealertService } from '../../../../core/services/sweealert.service';
+import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, MatTableModule, DatePipe, NgIf, OrderPopupComponent, DatePipe],
+  imports: [InputSearchComponent,
+    MatIcon, MatTableModule,
+    DatePipe,
+    NgIf,
+    OrderPopupComponent,
+    DatePipe,
+    DateStartEndComponent
+  ],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
