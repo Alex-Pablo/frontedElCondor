@@ -1,0 +1,72 @@
+.product-table-container {
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+}
+
+.product-table {
+  width: 95%;
+  border-collapse: collapse;
+}
+
+.table-header, .table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-header {
+  background-color: #cceeff; 
+  font-weight: bold;
+}
+
+.table-row {
+  background-color: #f9f9f9; 
+}
+
+.table-row:nth-child(even) {
+  background-color: #f1f1f1; 
+}
+
+.table-header span, .table-row span {
+  flex: 1;
+  text-align: center;
+}
+
+.totals {
+  text-align: center; 
+  margin-top: 10px; 
+}
+
+
+.totals strong {
+  color: black; 
+}
+
+.totals div:last-child strong {
+  color: red; 
+}
+.button-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+  
+}
+
+.custom-button {
+  background-color: rgb(0, 0, 136) ;
+  color: white !important;
+  border-radius: 5px; 
+  padding: 5px;
+}
+
+h4 {
+  text-align: center; 
+  font-size: 20px;
+}
+
+p {
+  margin-left: 5%; /* Agrega un espacio del 5% al inicio de los párrafos */
+}
+
