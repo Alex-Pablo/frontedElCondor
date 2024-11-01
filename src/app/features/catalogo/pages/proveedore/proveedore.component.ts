@@ -12,6 +12,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ProveedorDetailPopupComponent } from '../../components/modals/proveedor-detail-popup/proveedor-detail-popup.component';
 import { IResult } from '../../../../shared/models/IResult';
 
+
 export interface Proveedor {
   nombre: string;
   nit: string;
@@ -23,7 +24,7 @@ export interface Proveedor {
 @Component({
   selector: 'app-proveedore',
   standalone: true,
-  imports: [InputSearchComponent, MatIconModule, MatIcon, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule],
+  imports: [InputSearchComponent, MatIconModule, MatIcon, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule,],
   templateUrl: './proveedore.component.html',
   styleUrl: './proveedore.component.scss'
 })
@@ -36,6 +37,7 @@ export class ProveedoreComponent implements OnInit {
   sSweetalert = inject(SweealertService);
   sBaseApi = inject(BaseApiService);
   selectedId: any;
+  
   @ViewChild('sidenav') sidenav!: MatSidenav
   onSearch(event: any) {
   }

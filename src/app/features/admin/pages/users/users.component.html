@@ -109,6 +109,7 @@
               (mouseleave)="hoveredRow = null">
 
           </table>
+          <mat-paginator [length]="totalItems" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
 
       </div>
