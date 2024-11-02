@@ -1,1 +1,76 @@
-<p>historial-ventas works!</p>
+<div class="container">
+  <main class="main-content">
+    <div class="flex flex-wrap justify-end items-end gap-4 mb-4">
+
+      <app-date-start-end [(startDate)]="selectedStartDate" [(endDate)]="selectedEndDate"></app-date-start-end>
+      <app-input-search [searchMessage]="searchMessage" [(searchInput)]="searchInput"></app-input-search>
+    </div>
+    <div class="flex  flex-wrap justify-end items-end gap-4 mb-4">
+      <button type="button" (click)="filterItems()"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Buscar
+      </button>
+  
+      <button type="button" (click)="clearFilters()"
+        class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 ml-2">
+        Limpiar
+      </button>
+  
+    </div>
+    <div class="example-container mat-elevation-z8">
+      <div class="example-table-container">
+        <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear
+          matSortDirection="desc">
+
+          <!-- Columna ID -->
+          <ng-container matColumnDef="id">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let codigo"> {{ codigo.id }} </td>
+          </ng-container>
+
+          <!-- Columna Fecha de venta -->
+          <ng-container matColumnDef="date">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Fecha de venta</th>
+            <td mat-cell *matCellDef="let fecha"> {{ fecha.date }} </td>
+          </ng-container>
+          
+
+          <!-- Columna Usuario -->
+          <ng-container matColumnDef="user">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Usuario</th>
+            <td mat-cell *matCellDef="let usuario"> {{ usuario.user }} </td> <!-- Cambiado a categoria.user -->
+          </ng-container>
+          
+          <!-- Columna Total de ventas -->
+          <ng-container matColumnDef="totalventa">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Total de ventas</th>
+            <td mat-cell *matCellDef="let total"> {{ total.totalventa }} </td> <!-- Cambiado a categoria.totalventa -->
+          </ng-container>
+
+          <!-- Columna Cantidad de producto -->
+          <ng-container matColumnDef="cantprod">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Cantidad de producto</th>
+            <td mat-cell *matCellDef="let cantidad"> {{ cantidad.cantprod }} </td> <!-- Cambiado a categoria.cantprod -->
+          </ng-container>
+
+          <!-- Columna Acciones -->
+          <ng-container matColumnDef="acciones">
+            <th class="itemHeader" mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item" class="actions-cell">
+              <div class="actions-container">
+                <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Encabezados y Filas de la Tabla -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+

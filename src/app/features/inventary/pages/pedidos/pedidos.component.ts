@@ -11,6 +11,7 @@ import { BaseApiService } from '../../../../core/services/base-api.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { SweealertService } from '../../../../core/services/sweealert.service';
 import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pedidos',
@@ -21,7 +22,9 @@ import { DateStartEndComponent } from '../../../../shared/components/date-start-
     NgIf,
     OrderPopupComponent,
     DatePipe,
-    DateStartEndComponent
+    DateStartEndComponent,
+    MatPaginator,
+    MatPaginatorModule,
   ],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
@@ -29,7 +32,13 @@ import { DateStartEndComponent } from '../../../../shared/components/date-start-
 export class PedidosComponent implements OnInit {
   sTitle = inject(TitleService);
   _sBaseApi = inject(BaseApiService);
+  totalItems = 0;
   _sSweetalert = inject(SweealertService)
+  sItemToSearch: any;
+  dItemDateStart: any;
+  dItemDateEnd: any;
+  selectedStartDate: any;
+  selectedEndDate: any;
   constructor(private _matDialog: MatDialog,) {
   }
   searchMessage = "Buscar pedido"

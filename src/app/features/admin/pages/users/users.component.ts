@@ -15,6 +15,8 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { UserDetailPopupComponent } from '../../components/modals/user-detail-popup/user-detail-popup.component';
 import { JwtTokenService } from '../../../../core/services/jwt-token.service';
 import { retry } from 'rxjs';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -27,7 +29,9 @@ import { retry } from 'rxjs';
     MatProgressSpinner,
     MatIcon,
     MatSidenavModule,
-    UserDetailPopupComponent
+    UserDetailPopupComponent,
+    MatPaginator,
+    MatPaginatorModule
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
@@ -40,6 +44,7 @@ export class UsersComponent implements OnInit {
   isLoadingResults = true; isRateLimitReached = false;
   @ViewChild('sidenav') sidenav!: MatSidenav
   resultsLength = 0;
+  totalItems = 0;
   hoveredRow: IUser | null = null
 
   selectedId: any;

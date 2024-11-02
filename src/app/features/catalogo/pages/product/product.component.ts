@@ -11,6 +11,7 @@ import { MatIcon } from '@angular/material/icon'
 import { SweealertService } from '../../../../core/services/sweealert.service';
 import { ProductoDetailPopupComponent } from '../../components/modals/producto-detail-popup/producto-detail-popup.component';
 import { IResult } from '../../../../shared/models/IResult';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 export interface Productos {
   nombre: string;
@@ -22,7 +23,7 @@ export interface Productos {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent],
+  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent,MatPaginator,MatPaginatorModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -37,6 +38,7 @@ export class ProductComponent implements OnInit {
   searchMessage = "Buscar producto"
   sSweetalert = inject(SweealertService);
   aProducts: any;
+  totalItems = 0;
   constructor() {
     this.sTitle.setTitle("Catalogo - Productos")
   }

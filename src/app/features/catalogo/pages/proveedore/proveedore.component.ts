@@ -12,6 +12,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ProveedorDetailPopupComponent } from '../../components/modals/proveedor-detail-popup/proveedor-detail-popup.component';
 import { IResult } from '../../../../shared/models/IResult';
 
+
 export interface Proveedor {
   nombre: string;
   nit: string;
@@ -23,7 +24,7 @@ export interface Proveedor {
 @Component({
   selector: 'app-proveedore',
   standalone: true,
-  imports: [InputSearchComponent, MatIconModule, MatIcon, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule],
+  imports: [InputSearchComponent, MatIconModule, MatIcon, MatSidenavModule, ProveedorDetailPopupComponent, MatTableModule,],
   templateUrl: './proveedore.component.html',
   styleUrl: './proveedore.component.scss'
 })
@@ -36,6 +37,7 @@ export class ProveedoreComponent implements OnInit {
   sSweetalert = inject(SweealertService);
   sBaseApi = inject(BaseApiService);
   selectedId: any;
+  
   @ViewChild('sidenav') sidenav!: MatSidenav
   onSearch(event: any) {
   }
@@ -90,15 +92,17 @@ export class ProveedoreComponent implements OnInit {
     })
   }
 
-  onViewDetails(id: Proveedor) {
-    this.selectedId = id;
-    if (this.sidenav) {
-      this.sidenav.open();
-    } else {
-      console.error('El sidenav no está definido.');
-    }
+  onViewDetails(selectedId: string) {
+    console.log('id', selectedId)
+    this._matDialog.open(ProveedorDetailPopupComponent, {
+      data: { id: selectedId },
+      width: '350px',
+      height: '100vh',
+      maxHeight: '100vh',
+      position: { right: '0' },
+      panelClass: 'dialog-detail'
+    });
   }
-
 
   getAllProveedores() {
     this.sBaseApi.getItems('supplier').subscribe((data: IResult<any>) => {
