@@ -11,7 +11,7 @@ interface Producto {
   precio: number;
   codigo: string;
   disponible: number;
-  imagen: string; 
+  imagen: string;
 }
 
 
@@ -33,43 +33,43 @@ export class VentasComponent {
       precio: 23,
       codigo: '#323435',
       disponible: 34,
-      imagen: 'img/Cuchara.jpg' 
+      imagen: 'img/Cuchara.jpg'
     },
-   
+
     {
       nombre: 'Cerrucho',
       precio: 45,
       codigo: '#323436',
       disponible: 12,
-      imagen: 'img/cerrucho.jfif' 
+      imagen: 'img/cerrucho.jfif'
     },
     {
       nombre: 'Cuchara',
       precio: 45,
       codigo: '#323436',
       disponible: 12,
-      imagen: 'img/Cuchara.jpg' 
+      imagen: 'img/Cuchara.jpg'
     },
     {
       nombre: 'Cuter',
       precio: 45,
       codigo: '#323436',
       disponible: 12,
-      imagen: 'img/cuter.jfif' 
+      imagen: 'img/cuter.jfif'
     },
     {
       nombre: 'Desarmador',
       precio: 45,
       codigo: '#323436',
       disponible: 12,
-      imagen: 'img/desarmador.jfif' 
+      imagen: 'img/desarmador.jfif'
     },
     {
       nombre: 'Pala',
       precio: 45,
       codigo: '#323436',
       disponible: 12,
-      imagen: 'img/pala.jfif' 
+      imagen: 'img/pala.jfif'
     },
   ];
 
@@ -84,5 +84,5 @@ export class VentasComponent {
     });
   }
 
-  
+
 }
