@@ -46,6 +46,7 @@ export class ProveedoreComponent implements OnInit {
     this.sTitle.setTitle("proveedores")
     this.getAllProveedores();
   }
+  
 
 
   closeSidenav() {

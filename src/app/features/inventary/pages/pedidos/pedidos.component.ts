@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -39,6 +39,9 @@ export class PedidosComponent implements OnInit {
   dItemDateEnd: any;
   selectedStartDate: any;
   selectedEndDate: any;
+  searchInput: string | null = null;
+  private paginatorSubscription: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private _matDialog: MatDialog,) {
   }
   searchMessage = "Buscar pedido"
@@ -49,6 +52,43 @@ export class PedidosComponent implements OnInit {
     this.sTitle.setTitle("Lista de pedidos");
     this.getOrders();
   }
+  ngAfterViewInit() {
+    this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
+    this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
+  }
+
+  filterItems() {
+    console.log(this.searchInput)
+    this._sBaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
+      this.dataSource.data = data.value;
+    })
+  }
+
+  clearFilters() {
+    this.searchInput = null;
+    this.selectedEndDate = null;
+    this.selectedStartDate = null;
+    this.paginator.pageIndex = 0;
+    this.loadItems();
+
+  }
+
+  loadItems() {
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+
+    this._sBaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize).subscribe((data: any) => {
+      console.log(data.items)
+      this.dataSource.data = data.items;
+      console.log(this.dataSource)
+      this.totalItems = data.pagination.TotalItemCount;
+      this.paginator.pageIndex = data.pagination.CurrentPage - 1;
+      this.paginator.length = this.totalItems;
+    });
+  }
+
   onSearch(id: any) {
   }
 
