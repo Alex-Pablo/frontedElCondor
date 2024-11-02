@@ -1,14 +1,71 @@
-<div class="split-screen">
-    <div class="product-container">
-        <div *ngFor="let producto of productos" class="product-card">
-            <div class="wrapperImg">
-                <img class="imagenProducto" [src]="producto.imagen" alt="{{ producto.nombre }}" /> 
+<div class="parent-container"> <!-- Contenedor padre -->
+    <div class="category-container">
+        <button class="category-button active">Todos <span>45333</span></button>
+        <button class="category-button">Carpintería <span>345</span></button>
+        <button class="category-button">Albañilería <span>3234</span></button>
+        <button class="category-button">Herramientas locales <span>234</span></button>
+
+        <app-input-search [searchMessage]="searchMessage" [(searchInput)]="searchInput" (ngModelChange)="filtrarProductos()"></app-input-search>
+    </div>
+    <div class="split-screen" [ngClass]="{'modal-open': isModalVisible}">
+        <div class="product-container">
+            <div *ngFor="let producto of productos" class="product-card">
+                <div class="wrapperImg">
+                    <img class="imagenProducto" [src]="producto.imagen" alt="{{ producto.nombre }}" /> 
+                </div>
+                <h2 class="Titulo">{{ producto.nombre }}</h2>
+                <p class="Disponible">Disponible: <span>{{ producto.disponible }}</span></p>
+                <p class="Codigo">Código: <span>{{ producto.codigo }}</span></p>
+                <p class="Precio">Q{{ producto.precio }}</p>
+                <button class="agregar-producto" (click)="mostrarModal(producto)">Agregar Producto</button>
             </div>
-            <h2 class="Titulo">{{ producto.nombre }}</h2>
-            <p class="Disponible">Disponible: <span>{{ producto.disponible }}</span></p>
-            <p class="Codigo">Código: <span>{{ producto.codigo }}</span></p>
-            <p class="Precio">Q{{ producto.precio }}</p>
-            <button class="agregar-producto" (click)="agregarProducto(producto)">Agregar Producto</button>
+        </div>
+    
+        <!-- Modal de lista de productos -->
+        <div class="product-list-detail-modal" *ngIf="isModalVisible">
+            <div class="modal-content">
+                <h2>Lista de productos</h2>
+                <div class="product-table">
+                    <div class="table-header">
+                        <span>Producto</span>
+                        <span>Cantidad</span>
+                        <span>Desc</span>
+                        <span>SubTotal</span>
+                        <span>Total</span>
+                    </div>
+    
+                    <div *ngFor="let producto of productos" class="table-row">
+                        <span>{{ producto.nombre }} <br> Q{{ producto.precio }}</span>
+    
+                        <div class="quantity-controls">
+                            <button (click)="decreaseQuantity(producto)">-</button>
+                            <span>{{ producto.cantidad }}</span>
+                            <button (click)="increaseQuantity(producto)">+</button>
+                        </div>
+    
+                        <input type="number" min="0" max="{{ producto.disponible }}" [(ngModel)]="producto.descuento" class="desc-input" />
+    
+                        <span>Q{{ producto.precio * producto.cantidad }}</span>
+                        <span>Q{{ (producto.precio * producto.cantidad) - producto.descuento }}</span>
+                    </div>
+                </div>
+    
+                <div class="totals">
+                    <div>
+                        <span>SubTotal</span>
+                        <span>Q{{ calcularSubTotal() }}</span>
+                    </div>
+                    <div>
+                        <span>Total</span>
+                        <span>Q{{ calcularTotal() }}</span>
+                    </div>
+                </div>
+    
+                <div class="action-buttons">
+                    <button class="cancel-btn" (click)="close()">Cancelar Venta</button>
+                    <button class="confirm-btn" (click)="confirmarVenta()">Confirmar venta</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    
