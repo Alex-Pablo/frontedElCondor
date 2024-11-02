@@ -60,7 +60,6 @@ export class InventoryComponent implements OnInit {
     this.selectedStartDate = null;
     this.paginator.pageIndex = 0;
     this.loadItems();
-
   }
 
   handleDateRangeChange(dateRange: { startDate: string, endDate: string }): void {
