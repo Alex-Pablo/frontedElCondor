@@ -52,7 +52,8 @@ export class VentasComponent implements OnInit {
   productos: Producto[] = []
   selectedProducts: SaleDetail[] = []
   _sSweetAlet = inject(SweealertService)
-
+  
+  isModalSinStockVisible: boolean = false;
   isProductListModalVisible: boolean = false; // Controla la visibilidad del modal de productos
   isPaymentModalVisible: boolean = false; // Controla la visibilidad del modal de pago
 
@@ -61,6 +62,9 @@ export class VentasComponent implements OnInit {
   
   montoRecibido: number = 0;
   cambio: number = 0;
+  total = 0;
+  productName: string = ''; 
+
 
   
 
@@ -71,12 +75,9 @@ export class VentasComponent implements OnInit {
 
   }
   calcularCambio() {
-    this.cambio = this.montoRecibido - this.calcularTotal();
+    this.cambio = this.montoRecibido - this.calcularT();
   }
 
-  confirmarPago() {
-    this.isPaymentModalVisible = false;
-  }
 
   
   ngOnInit(): void {
@@ -104,6 +105,15 @@ export class VentasComponent implements OnInit {
 
 
   mostrarModal(producto: Producto) {
+    // Verificar si el producto tiene existencias
+    if (producto.quantityInStock <= 0) {
+        // Mostrar el modal de advertencia de "Sin Stock"
+        this.productName = producto.productName; // Agregar esta línea para capturar el nombre
+
+        this.isModalSinStockVisible = true;
+        return; // Salir de la función para evitar añadir el producto
+    }
+
     const saleDetail: SaleDetail = {
         iD_product: producto.productId,
         unit_price: producto.salePrice || 0,
@@ -113,14 +123,20 @@ export class VentasComponent implements OnInit {
         name: this.obtenerNombreProducto(producto.id)
     };
 
+    // Agregar el producto a la lista de productos seleccionados
     this.selectedProducts.push(saleDetail);
     console.log(this.selectedProducts);
 
     // Mostrar solo el modal de lista de productos
-    this.isModalVisible = true
+    this.isModalVisible = true;
 }
 
-  
+mostrarModalSinStock() {
+  this.isModalSinStockVisible = true;
+}
+cerrarModalSinStock() {
+  this.isModalSinStockVisible = false;
+}
   obtenerNombreProducto(productId: number): string {
     const producto = this.productos.find(p => p.id === productId);
     return producto ? producto.productName : 'Producto no encontrado';
@@ -131,10 +147,24 @@ export class VentasComponent implements OnInit {
   }
 
   calcularTotal(): number {
-      // Retorna directamente el total almacenado
-      return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
-    }  
+    // Verifica que la lista de productos seleccionados exista y esté llena
+    if (this.selectedProducts && this.selectedProducts.length > 0) {
+      // Calcula el total sumando los subtotales y restando descuentos
+      this.total = this.selectedProducts.reduce((acc, product) => {
+        const subtotalProducto = product.unit_price * product.quantity;
+        const descuentoProducto = product.discount || 0;
+        return acc + (subtotalProducto - descuentoProducto);
+      }, 0);
+    } else {
+      this.total = 0; // Establece a 0 si no hay productos seleccionados
+    }
+  
+    return this.total;
+  } 
 
+  calcularT(){
+    return this.transactionTotal ?? 0; // Si transactionTotal es null o undefined, retorna 0
+  }
 
   close() {
     this.isModalVisible = false;

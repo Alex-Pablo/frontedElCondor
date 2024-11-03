@@ -20,7 +20,7 @@
           <img class="imagenProducto" [src]="producto.img" alt="{{ producto.productName }}" />
         </div>
         <h2 class="Titulo">{{ producto.productName }}</h2>
-        <p class="Disponible">Disponible: <span>{{ producto.quantityInStock }}</span></p>
+        <p class="Disponible">Disponible: <span>{{ producto.quantityInStock < 0 ? 0 : producto.quantityInStock }}</span></p>
         <p class="Codigo">Código: <span>{{ producto.code }}</span></p>
         <p class="Codigo">Clave: <span>{{ producto.key }}</span></p>
         <p class="Precio">Q{{ producto.salePrice }}</p>
@@ -28,6 +28,15 @@
       </div>
     </div>
 
+
+   <!-- Modal de alerta de "Sin Stock" -->
+   <div *ngIf="isModalSinStockVisible" class="sin-stock-modal">
+    <div class="sin-stock-content">
+      <h2>Producto sin stock</h2>
+      <p>El producto {{ productName  }} no está disponible actualmente.</p>
+      <button class="close-btn" (click)="cerrarModalSinStock()">Cerrar</button>
+    </div>
+  </div>
 
 
     <!-- Modal de lista de productos -->
@@ -99,7 +108,6 @@
     <div class="transaction-info">
       <p><strong>ID de Transacción:</strong> {{ transactionId }}</p>
       <p><strong>Total de la Venta:</strong> Q{{ transactionTotal }}</p>
-      <button (click)="confirmarPago()">Aceptar</button>
     </div>
 
     <!-- Resto del contenido del modal -->
@@ -110,7 +118,7 @@
       </div>
       <div class="total-row">
         <span>Total</span>
-        <span>Q{{ calcularTotal() }}</span>
+        <span>Q{{ calcularT() }}</span>
       </div>
     </div>
 
