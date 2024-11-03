@@ -1,55 +1,49 @@
 <div class="sale-info">
-<h4>Información de ventas</h4>
-<p><strong>Código venta:</strong> {{ data.id }}</p>
-<p><strong>Empleado:</strong> {{ data.user }}</p>
-<p><strong>Fecha de venta:</strong> {{ data.date }}</p>
+  <h4>Información de ventas</h4>
+  <!-- <p><strong>Código venta:</strong> {{ data.id }}</p> -->
+  <p><strong>Empleado:</strong> {{ getNameUser(aSaleDetail.iD_User)}}</p>
+  <p><strong>Fecha de venta:</strong> {{ aSaleDetail.saleDate | date: 'short'}}</p>
 
+  <div class="product-table-container">
+    <div class="product-table">
+      <!-- Cabecera de la tabla -->
+      <div class="table-header">
+        <span>Producto</span>
+        <span>Cantidad</span>
+        <span>Descuento</span>
+        <span>SubTotal</span>
+        <span>Total</span>
+      </div>
 
-    <div class="product-table-container">
-        <div class="product-table">
-          <!-- Cabecera de la tabla -->
-          <div class="table-header">
-            <span>Producto</span>
-            <span>Cantidad</span>
-            <span>Descuento</span>
-            <span>SubTotal</span>
-            <span>Total</span>
-          </div>
-        
-          <!-- Primera fila de información estática -->
-          <div class="table-row">
-            <span>Pintura rojo</span>
-            <span>1</span>
-            <span>Q. 5</span>
-            <span>Q30</span>
-            <span>Q25</span>
-          </div>
-        
-          <!-- Segunda fila de información estática -->
-          <div class="table-row">
-            <span>Martillo</span>
-            <span>1</span>
-            <span>Q. 4</span>
-            <span>Q20</span>
-            <span>Q20</span>
-          </div>
-        </div>
+      <!-- Primera fila de información estática -->
+      <div class="table-row">
+        <span>Pintura rojo</span>
+        <span>1</span>
+        <span>Q. 5</span>
+        <span>Q30</span>
+        <span>Q25</span>
       </div>
-      <br>
-      
-  
-      <div class="totals">
-        <div><strong>SubTotal--------------</strong> Q{{ data.subTotal }}</div><br>
-        <div><strong>Total-----------------</strong> Q{{ data.totalventa }}</div>
+
+      <!-- Segunda fila de información estática -->
+      <div class="table-row">
+        <span>Martillo</span>
+        <span>1</span>
+        <span>Q. 4</span>
+        <span>Q20</span>
+        <span>Q20</span>
       </div>
-      
-      <div class="button-container">
-        <button mat-raised-button class="custom-button">Imprimir recibo</button>
-      </div>
-      
+    </div>
   </div>
-  
-    
+  <br>
 
-  
 
+  <div class="totals">
+    <div><strong>SubTotal--------------</strong> Q{{ data.subTotal }}</div><br>
+    <div><strong>Total-----------------</strong> Q{{ data.totalventa }}</div>
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button class="custom-button">Imprimir recibo</button>
+  </div>
+
+</div>

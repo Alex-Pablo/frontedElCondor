@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
   private paginatorSubscription: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  
+
   constructor() {
     this.sTitle.setTitle("Catalogo - Productos")
   }
