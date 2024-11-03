@@ -39,6 +39,10 @@ export class BaseApiService {
     return this.http.get<IResult<any>>(`${environment.baseUrlApi}/${service}/detail/${id}`)
   }
 
+  getItemsById(service: string, id: number) {
+    return this.http.get<any>(`${environment.baseUrlApi}/${service}/${id}`)
+  }
+
 
   getItemsPagination(service: string, pageIndex: number, pageSize: number) {
     let params = new HttpParams()
