@@ -58,11 +58,11 @@ export class VentasComponent implements OnInit {
 
   transactionId: string | null = null; // Almacena el ID de la transacción
   transactionTotal: number | null = null; // Almacena el total de la venta
-  
+
   montoRecibido: number = 0;
   cambio: number = 0;
 
-  
+
 
   mostrarModalConIdYTotal(id: string, total: number) {
     this.transactionId = id;
@@ -78,7 +78,7 @@ export class VentasComponent implements OnInit {
     this.isPaymentModalVisible = false;
   }
 
-  
+
   ngOnInit(): void {
     this._BaseApi.getItems('category').subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
@@ -105,12 +105,12 @@ export class VentasComponent implements OnInit {
 
   mostrarModal(producto: Producto) {
     const saleDetail: SaleDetail = {
-        iD_product: producto.productId,
-        unit_price: producto.salePrice || 0,
-        discount: 0,
-        quantity: 1,
-        total_item: producto.salePrice || 0,
-        name: this.obtenerNombreProducto(producto.id)
+      iD_product: producto.productId,
+      unit_price: producto.salePrice || 0,
+      discount: 0,
+      quantity: 1,
+      total_item: producto.salePrice || 0,
+      name: this.obtenerNombreProducto(producto.id)
     };
 
     this.selectedProducts.push(saleDetail);
@@ -118,9 +118,9 @@ export class VentasComponent implements OnInit {
 
     // Mostrar solo el modal de lista de productos
     this.isModalVisible = true
-}
+  }
 
-  
+
   obtenerNombreProducto(productId: number): string {
     const producto = this.productos.find(p => p.id === productId);
     return producto ? producto.productName : 'Producto no encontrado';
@@ -131,53 +131,53 @@ export class VentasComponent implements OnInit {
   }
 
   calcularTotal(): number {
-      // Retorna directamente el total almacenado
-      return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
-    }  
+    // Retorna directamente el total almacenado
+    return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
+  }
 
 
   close() {
     this.isModalVisible = false;
-        this.selectedProducts = [];
+    this.selectedProducts = [];
   }
 
-  
+
 
   confirmarVenta() {
     this._sSweetAlet.showLoading();
     this._BaseApi.addItem('sale', this.selectedProducts).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this._sSweetAlet.closeLoading();
-        console.log(data.value); 
-        this.transactionId = data.value.id; 
-        this.transactionTotal = data.value.total; 
+        console.log(data.value);
+        this.transactionId = data.value.id;
+        this.transactionTotal = data.value.total;
         this.close();
-        this.isPaymentModalVisible = true; 
+        this.isPaymentModalVisible = true;
       } else {
         this._sSweetAlet.showError("error al registrar la venta");
       }
     });
-}
-
-
-
-
-confirmar() {
-   // Verificar que se tiene un total y que se ha recibido una cantidad pagada
-   if (this.transactionTotal !== null && this.montoRecibido > 0) {
-    // Calcular el cambio
-    this.cambio = this.montoRecibido - this.transactionTotal;
-
-    // Imprimir en consola el ID, el total y el cambio
-    console.log(`ID de Transacción: ${this.transactionId}`);
-    console.log(`Total de la Venta: Q${this.transactionTotal}`);
-    console.log(`Monto recibido: Q${this.montoRecibido}`)
-    console.log(`Cambio: Q${this.cambio}`);
-  } else {
-    console.error("Error: El total de la venta o la cantidad recibida no son válidos.");
   }
+
+
+
+
+  confirmar() {
+    // Verificar que se tiene un total y que se ha recibido una cantidad pagada
+    if (this.transactionTotal !== null && this.montoRecibido > 0) {
+      // Calcular el cambio
+      this.cambio = this.montoRecibido - this.transactionTotal;
+
+      // Imprimir en consola el ID, el total y el cambio
+      console.log(`ID de Transacción: ${this.transactionId}`);
+      console.log(`Total de la Venta: Q${this.transactionTotal}`);
+      console.log(`Monto recibido: Q${this.montoRecibido}`)
+      console.log(`Cambio: Q${this.cambio}`);
+    } else {
+      console.error("Error: El total de la venta o la cantidad recibida no son válidos.");
+    }
     this.isPaymentModalVisible = false;
-}
+  }
 
 
   increaseQuantity(product: SaleDetail) {
