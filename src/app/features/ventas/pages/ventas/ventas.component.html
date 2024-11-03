@@ -90,3 +90,41 @@
         </div>
       </div>
     </div>
+<!-- Modal de Pago -->
+<div class="payment-modal" *ngIf="isPaymentModalVisible">
+  <div class="payment-modal-content">
+    <h2>Detalles de la Venta</h2>
+
+    <!-- Mostrar el ID y el Total -->
+    <div class="transaction-info">
+      <p><strong>ID de Transacción:</strong> {{ transactionId }}</p>
+      <p><strong>Total de la Venta:</strong> Q{{ transactionTotal }}</p>
+      <button (click)="confirmarPago()">Aceptar</button>
+    </div>
+
+    <!-- Resto del contenido del modal -->
+    <div class="payment-details">
+      <div class="subtotal-row">
+        <span>SubTotal</span>
+        <span>Q{{ calcularSubTotal() }}</span>
+      </div>
+      <div class="total-row">
+        <span>Total</span>
+        <span>Q{{ calcularTotal() }}</span>
+      </div>
+    </div>
+
+    <div class="payment-inputs">
+      <div class="input-row">
+        <label for="montoRecibido">Monto recibido </label>
+        <input type="number" id="montoRecibido" class="input-monto" [(ngModel)]="montoRecibido" (ngModelChange)="calcularCambio()" min="0" />
+      </div>
+      <div class="change-row">
+        <label>Cambio </label>
+        <span>Q{{ cambio }}</span>
+      </div>
+    </div>
+
+    <button class="confirm-btn" (click)="confirmar()">Confirmar</button>
+  </div>
+</div>
