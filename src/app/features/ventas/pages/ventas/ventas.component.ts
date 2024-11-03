@@ -46,24 +46,29 @@ export interface SaleDetail {
 export class VentasComponent implements OnInit {
   searchMessage = "Buscar Producto";
   searchInput: string | null = null;
-  isModalVisible = false;
+  isModalVisible: boolean = false; // Controla la visibilidad del modal de pago
   _BaseApi = inject(BaseApiService);
   aItemsCategory: any;
   productos: Producto[] = []
   selectedProducts: SaleDetail[] = []
   _sSweetAlet = inject(SweealertService)
 
-  isPaymentModalVisible = false;
+  isProductListModalVisible: boolean = false; // Controla la visibilidad del modal de productos
+  isPaymentModalVisible: boolean = false; // Controla la visibilidad del modal de pago
+
+  transactionId: string | null = null; // Almacena el ID de la transacción
+  transactionTotal: number | null = null; // Almacena el total de la venta
+  
   montoRecibido: number = 0;
   cambio: number = 0;
 
-  transactionId: string = ''; // Nuevo: Variable para almacenar el ID de la transacción
-  transactionTotal: number = 0; 
+  
 
   mostrarModalConIdYTotal(id: string, total: number) {
     this.transactionId = id;
     this.transactionTotal = total;
     this.isModalVisible = true;
+
   }
   calcularCambio() {
     this.cambio = this.montoRecibido - this.calcularTotal();
@@ -112,8 +117,7 @@ export class VentasComponent implements OnInit {
     console.log(this.selectedProducts);
 
     // Mostrar solo el modal de lista de productos
-    this.isModalVisible = true;
-    this.isPaymentModalVisible = false; // Asegúrate de que el modal de pago esté cerrado
+    this.isModalVisible = true
 }
 
   
@@ -127,27 +131,53 @@ export class VentasComponent implements OnInit {
   }
 
   calcularTotal(): number {
-    return this.selectedProducts.reduce((sum, product) => sum + (product.unit_price * product.quantity - product.discount), 0);
-  }
+      // Retorna directamente el total almacenado
+      return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
+    }  
 
 
   close() {
     this.isModalVisible = false;
-    this.selectedProducts = [];
+        this.selectedProducts = [];
   }
+
+  
 
   confirmarVenta() {
     this._sSweetAlet.showLoading();
     this._BaseApi.addItem('sale', this.selectedProducts).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this._sSweetAlet.closeLoading();
-        console.log(data.value)
+        console.log(data.value); 
+        this.transactionId = data.value.id; 
+        this.transactionTotal = data.value.total; 
         this.close();
+        this.isPaymentModalVisible = true; 
       } else {
-        this._sSweetAlet.showError("error al registar la venta")
+        this._sSweetAlet.showError("error al registrar la venta");
       }
-    })
+    });
+}
+
+
+
+
+confirmar() {
+   // Verificar que se tiene un total y que se ha recibido una cantidad pagada
+   if (this.transactionTotal !== null && this.montoRecibido > 0) {
+    // Calcular el cambio
+    this.cambio = this.montoRecibido - this.transactionTotal;
+
+    // Imprimir en consola el ID, el total y el cambio
+    console.log(`ID de Transacción: ${this.transactionId}`);
+    console.log(`Total de la Venta: Q${this.transactionTotal}`);
+    console.log(`Monto recibido: Q${this.montoRecibido}`)
+    console.log(`Cambio: Q${this.cambio}`);
+  } else {
+    console.error("Error: El total de la venta o la cantidad recibida no son válidos.");
   }
+    this.isPaymentModalVisible = false;
+}
 
 
   increaseQuantity(product: SaleDetail) {
