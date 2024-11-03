@@ -47,7 +47,7 @@
             <span>{{ product.name }}</span>
             <div class="quantity-controls">
               <button (click)="decreaseQuantity(product)">-</button>
-              <span>{{ product.quantity }}</span>
+              <input type="number" min="0" [(ngModel)]="product.quantity" class="quantity-input" />
               <button (click)="increaseQuantity(product)">+</button>
             </div>
             <input type="number" min="0" [(ngModel)]="product.discount" class="desc-input" />
