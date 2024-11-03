@@ -35,7 +35,7 @@ export class BaseApiService {
     return this.http.delete<any>(`${environment.baseUrlApi}/${service}/delete/${id}`)
   }
 
-  getDetail(service: string, id: number): Observable<IResult<any>> {
+  getDetail(service: string, id: any): Observable<IResult<any>> {
     return this.http.get<IResult<any>>(`${environment.baseUrlApi}/${service}/detail/${id}`)
   }
 
