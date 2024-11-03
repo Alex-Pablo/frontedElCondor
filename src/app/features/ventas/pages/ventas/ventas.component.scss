@@ -380,4 +380,40 @@ span,
 
 
 
+//sin stok
+.sin-stock-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.sin-stock-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #42a5f5, #1e88e5); /* Degradado azul */
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 15px;
+}
+
+.close-btn:hover {
+  background: linear-gradient(45deg, #1e88e5, #1565c0); /* Efecto degradado más oscuro */
+  transform: scale(1.05); /* Efecto de ampliación */
+}
