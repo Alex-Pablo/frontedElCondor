@@ -53,6 +53,27 @@ export class VentasComponent implements OnInit {
   selectedProducts: SaleDetail[] = []
   _sSweetAlet = inject(SweealertService)
 
+  isPaymentModalVisible = false;
+  montoRecibido: number = 0;
+  cambio: number = 0;
+
+  transactionId: string = ''; // Nuevo: Variable para almacenar el ID de la transacción
+  transactionTotal: number = 0; 
+
+  mostrarModalConIdYTotal(id: string, total: number) {
+    this.transactionId = id;
+    this.transactionTotal = total;
+    this.isModalVisible = true;
+  }
+  calcularCambio() {
+    this.cambio = this.montoRecibido - this.calcularTotal();
+  }
+
+  confirmarPago() {
+    this.isPaymentModalVisible = false;
+  }
+
+  
   ngOnInit(): void {
     this._BaseApi.getItems('category').subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
@@ -77,21 +98,25 @@ export class VentasComponent implements OnInit {
   }
 
 
-
   mostrarModal(producto: Producto) {
     const saleDetail: SaleDetail = {
-      iD_product: producto.productId,
-      unit_price: producto.salePrice || 0,
-      discount: 0,
-      quantity: 1,
-      total_item: producto.salePrice || 0,
-      name: this.obtenerNombreProducto(producto.id)
+        iD_product: producto.productId,
+        unit_price: producto.salePrice || 0,
+        discount: 0,
+        quantity: 1,
+        total_item: producto.salePrice || 0,
+        name: this.obtenerNombreProducto(producto.id)
     };
-    this.selectedProducts.push(saleDetail);
-    console.log(this.selectedProducts)
-    this.isModalVisible = true;
-  }
 
+    this.selectedProducts.push(saleDetail);
+    console.log(this.selectedProducts);
+
+    // Mostrar solo el modal de lista de productos
+    this.isModalVisible = true;
+    this.isPaymentModalVisible = false; // Asegúrate de que el modal de pago esté cerrado
+}
+
+  
   obtenerNombreProducto(productId: number): string {
     const producto = this.productos.find(p => p.id === productId);
     return producto ? producto.productName : 'Producto no encontrado';
