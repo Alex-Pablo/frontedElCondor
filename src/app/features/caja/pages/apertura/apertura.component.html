@@ -1,0 +1,10 @@
+<div class="apertura-caja">
+  <h2>Apertura de Caja</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="saldoInicial">Saldo Inicial:</label>
+      <input type="number" id="saldoInicial" name="saldoInicial" [(ngModel)]="saldoInicial">
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Registrar Apertura</button>
+  </form>
+</div>

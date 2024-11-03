@@ -59,9 +59,22 @@ export class MainLayoutComponent {
       route: '/dashboard'
     },
     {
-      icon: 'home', // Icono para 'Inicio'
-      label: 'Cierre',
-      route: '/cierre'
+      icon: 'attach_money', // Icono para 'Caja'
+      label: 'Caja',
+      route: '/caja',
+      subItems: [
+        {
+          icon: 'login', // Icono para 'Apertura de Caja'
+          label: 'Apertura de Caja',
+          route: 'apertura'
+        },
+        {
+          icon: 'logout', // Icono para 'Cierre de Caja'
+          label: 'Cierre de Caja',
+          route: 'cierre'
+        }
+      ],
+      isExpanded: false
     },
     {
       icon: 'home', // Icono para 'Inicio'

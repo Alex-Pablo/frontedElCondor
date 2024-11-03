@@ -1,0 +1,88 @@
+<div class="report-container" id="reportContent">
+  <header>
+    <h1>Cierre de Caja</h1>
+    <div class="header-info">
+      <div>
+        <label>Nombre del Usuario/Cajero:</label>
+        <span>{{ userInfor?.firstname }} {{ userInfor?.lastname }}</span>
+      </div>
+      <div>
+        <label>Caja:</label>
+        <span>001</span>
+      </div>
+      <div>
+        <label>Fecha de Apertura:</label>
+        <span>02/11/2024</span>
+      </div>
+      <div>
+        <label>Fecha de Cierre:</label>
+        <span>{{ currentDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+      <div>
+        <label>Base en caja:</label>
+        <span>Q 45,000</span>
+      </div>
+    </div>
+  </header>
+  <div class="main-content">
+    <section class="denominations">
+      <h2>Denominaciones</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Denominación</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let denomination of denominations">
+              <td>{{ denomination.label }}</td>
+              <td>
+                <input type="number" [value]="denomination.quantity" min="0"
+                  (input)="updateSubtotal(denomination, $event)">
+              </td>
+              <td>{{ denomination.subtotal | currency:'GTQ':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <p class="total">Total Efectivo: {{ total | currency:'GTQ':'symbol':'1.2-2' }}</p>
+    </section>
+
+
+    <section class="importes">
+      <h2>Importes de Caja</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Saldo Anterior</th>
+            <th>Entradas/Cobros</th>
+            <th>Salida/Pagos</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let importe of importes">
+            <td>{{ importe.descripcion }}</td>
+            <td>{{ importe.saldoAnterior | currency:'GTQ':'symbol':'1.2-2' }}</td>
+            <td>{{ importe.entradas | currency:'GTQ':'symbol':'1.2-2' }}</td>
+            <td>{{ importe.salidas | currency:'GTQ':'symbol':'1.2-2' }}</td>
+            <td>{{ importe.total | currency:'GTQ':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+
+
+  </div>
+
+  <div class="action-buttons">
+    <button (click)="exportToPDF()">Exportar a PDF</button>
+
+  </div>
+</div>
