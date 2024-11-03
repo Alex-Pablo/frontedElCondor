@@ -1,5 +1,5 @@
 <div class="flex flex-wrap justify-end gap-2 mb-4">
-  <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search>
+  <!-- <app-input-search [searchMessage]="searchMessage" (searchChange)="onSearch($event)"></app-input-search> -->
   <button type="button" class="btn-add" (click)="onOpenModal()"><mat-icon>add</mat-icon></button>
 </div>
 <div class="example-container mat-elevation-z8">
@@ -51,5 +51,5 @@
   </div>
 </div>
 <mat-sidenav #sidenav mode="over" position="end" [opened]="false" class="custom-sidenav">
-<app-categoria-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-categoria-detail-popup> 
+  <app-categoria-detail-popup [id]="selectedId" (closeSidenav)="closeSidenav()"></app-categoria-detail-popup>
 </mat-sidenav>
