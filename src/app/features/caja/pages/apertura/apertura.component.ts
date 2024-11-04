@@ -38,10 +38,11 @@ export class AperturaComponent {
       openingAmount: 40
     }
     this._BaseApi.addItem("cashSession", oApertua).subscribe((data: IResult<any>) => {
-      console.log("resultyado de apertura", data)
+      console.log("resultado de apertura", data)
       if (data.isSuccess) {
-
+        this._SweetAlert.showSuccess("Apertura Correcta")
       } else {
+        this._SweetAlert.showError(data.error||"Error al registrar la apertura.");
       }
     })
   }
