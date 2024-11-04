@@ -26,6 +26,10 @@ export class BaseApiService {
     return this.http.post<any>(`${environment.baseUrlApi}/${service}/register`, data);
   }
 
+  closeCashSession(data: any) {
+    console.log(data)
+    return this.http.post<any>(`${environment.baseUrlApi}/cashSession/close`, data);
+  }
 
   updateItem(service: any, data: any, id: number) {
     return this.http.put<any>(`${environment.baseUrlApi}/${service}/modify/${id}`, data)

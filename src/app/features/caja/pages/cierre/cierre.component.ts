@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { IUser } from '../../../../shared/models/IUser';
 import { AuthService } from '../../../../core/services/auth.service';
+import { BaseApiService } from '../../../../core/services/base-api.service';
+import { IResult } from '../../../../shared/models/IResult';
 
 
 interface Denomination {
@@ -25,6 +27,8 @@ export class CierreComponent {
   logocondor: string = '/img/logo.png';
   userInfor: IUser | undefined;
   currentDate: Date = new Date();
+  totalAmount: number = 0;
+  _BaseApi = inject(BaseApiService)
   private intervalId: any;
 
   denominations: Denomination[] = [
@@ -58,12 +62,23 @@ export class CierreComponent {
     }, 1000);
   }
 
+  onCloseCashSession() {
+    console.log("totall", this.totalAmount)
+    const closeCashSession = {
+      reportedClosingAmount: this.totalAmount
+    }
+    this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
+      console.log(data)
+    })
+  }
+
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
   }
 
   get total(): number {
-    return this.denominations.reduce((sum, denomination) => sum + denomination.subtotal, 0);
+    this.totalAmount = this.denominations.reduce((sum, denomination) => sum + denomination.subtotal, 0);
+    return this.totalAmount
   }
 
   updateSubtotal(denomination: Denomination, quantityEvent: Event): void {
