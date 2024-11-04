@@ -10,9 +10,11 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HistorialDetailPopupComponent } from '../../components/historial-detail-popup/historial-detail-popup.component';
 import { DateStartEndComponent } from "../../../../shared/components/date-start-end/date-start-end.component";
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { IResult } from '../../../../shared/models/IResult';
-import { Component, inject, ViewChild, OnInit } from '@angular/core';
+import { Component, inject, ViewChild, OnInit, ɵɵpureFunction0 } from '@angular/core';
+import { IUser } from '../../../../shared/models/IUser';
+import { DatePipe } from '@angular/common';
 
 interface Ventas {
   id: string;
@@ -25,7 +27,16 @@ interface Ventas {
 @Component({
   selector: 'app-historial-ventas',
   standalone: true,
-  imports: [InputSearchComponent, MatIcon, MatTableModule, MatSidenavModule, DateStartEndComponent],
+  imports: [
+    InputSearchComponent,
+    MatIcon,
+    MatTableModule,
+    MatSidenavModule,
+    DateStartEndComponent,
+    MatPaginator,
+    MatPaginatorModule,
+    DatePipe,
+  ],
   templateUrl: './historial-ventas.component.html',
   styleUrls: ['./historial-ventas.component.scss']
 })
@@ -36,29 +47,14 @@ export class HistorialVentasComponent implements OnInit {
   selectedStartDate: any;
   selectedEndDate: any;
   _BaseApi = inject(BaseApiService);
-  
+  _AuthS = inject(AuthService)
+  _SweetAlerts = inject(SweealertService)
+  totalItems = 0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Ventas>();
-
-  ventas: Ventas[] = [
-    {
-      id: '001',
-      date: '12/08/2024',
-      user: 'Alex Pablo',
-      totalventa: 23,
-      cantprod: 1
-    },
-    {
-      id: '002',
-      date: '12/08/2025',
-      user: 'Royer Alexander',
-      totalventa: 45,
-      cantprod: 1
-    },
-  ];
-
-  displayedColumns: string[] = ['id', 'date', 'user', 'totalventa', 'cantprod', 'acciones'];
-
+  private paginatorSubscription: any;
+  displayedColumns: string[] = ['total', 'iD_User', 'saleDate', 'productsTotal', 'acciones'];
+  aItemsUser: IUser[] = []
   constructor(
     private _matDialog: MatDialog,
     private authService: AuthService,
@@ -68,8 +64,19 @@ export class HistorialVentasComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Asigna el arreglo ventas al dataSource
-    this.dataSource.data = this.ventas;
+    this._SweetAlerts.showLoading();
+    this._AuthS.getUsers().subscribe((data: IResult<IUser[]>) => {
+      this.aItemsUser = data.value ?? []
+      this._SweetAlerts.closeLoading();
+    })
+  }
+
+
+  ngAfterViewInit() {
+    this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
+    this.paginator.page.subscribe(() => this.loadItems());
+    this.loadItems();
   }
 
   onSearch(value: string) {
@@ -77,28 +84,31 @@ export class HistorialVentasComponent implements OnInit {
   }
 
   onViewDetails(selectedId: string) {
-    const selectedData = this.dataSource.data.find(item => item.id === selectedId);
-    
-    if (selectedData) {
-      this._matDialog.open(HistorialDetailPopupComponent, {
-        data: selectedData,
-        width: '450px',
-        height: '100vh',
-        maxHeight: '100vh',
-        position: { right: '0' },
-        panelClass: 'dialog-detail'
-      });
-    }
+    this._SweetAlerts.showLoading();
+    this._BaseApi.getDetail("sale", selectedId).subscribe((date: IResult<any>) => {
+      if (date.isSuccess) {
+        this._SweetAlerts.closeLoading();
+        this._matDialog.open(HistorialDetailPopupComponent, {
+          width: '450px',
+          height: '100vh',
+          maxHeight: '100vh',
+          position: { right: '0' },
+          panelClass: 'dialog-detail',
+          data: { payload: date.value }
+        });
+      }
+    })
+
   }
-  
+
   filterItems() {
     console.log(this.searchInput);
-    this._BaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate)
+    this._BaseApi.filter('sale', this.searchInput, this.selectedStartDate, this.selectedEndDate)
       .subscribe((data: IResult<any>) => {
         this.dataSource.data = data.value;
       });
   }
-  
+
   clearFilters() {
     this.searchInput = null;
     this.selectedEndDate = null;
@@ -108,15 +118,27 @@ export class HistorialVentasComponent implements OnInit {
   }
 
   loadItems() {
+    this._SweetAlerts.showLoading();
     const pageIndex = this.paginator.pageIndex;
     const pageSize = this.paginator.pageSize;
-  
-    this._BaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize)
+    this._BaseApi.getItemsPagination('sale', pageIndex + 1, pageSize)
       .subscribe((data: any) => {
-        console.log(data.items);
+        this._SweetAlerts.closeLoading()
         this.dataSource.data = data.items;
-        console.log(this.dataSource);
+        this.totalItems = data.pagination.TotalItemCount;
         this.paginator.pageIndex = data.pagination.CurrentPage - 1;
+        this.paginator.length = this.totalItems
       });
+  }
+
+
+  getNameById(Id: number): any {
+    if (this.aItemsUser.length > 0) {
+      const producto = this.aItemsUser.find((p: IUser) => p.id == Id);
+      return producto ? producto.username : Id;
+    }
+    else {
+      return Id
+    }
   }
 }

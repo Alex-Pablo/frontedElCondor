@@ -8,6 +8,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
 import { IResult } from '../../../../shared/models/IResult';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-inventory',
@@ -16,7 +17,8 @@ import { IResult } from '../../../../shared/models/IResult';
     MatIcon,
     MatTableModule,
     MatPaginatorModule,
-    DateStartEndComponent
+    DateStartEndComponent,
+    DatePipe,
   ],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.scss'
@@ -60,7 +62,6 @@ export class InventoryComponent implements OnInit {
     this.selectedStartDate = null;
     this.paginator.pageIndex = 0;
     this.loadItems();
-
   }
 
   handleDateRangeChange(dateRange: { startDate: string, endDate: string }): void {

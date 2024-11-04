@@ -13,6 +13,8 @@ import { SweealertService } from '../../../../core/services/sweealert.service';
 import { ProductoDetailPopupComponent } from '../../components/modals/producto-detail-popup/producto-detail-popup.component';
 import { IResult } from '../../../../shared/models/IResult';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
+import { MatStartDate } from '@angular/material/datepicker';
 
 export interface Productos {
   nombre: string;
@@ -24,7 +26,7 @@ export interface Productos {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent,MatPaginator,MatPaginatorModule],
+  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent, MatPaginator, MatPaginatorModule, DateStartEndComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -47,13 +49,13 @@ export class ProductComponent implements OnInit {
   private paginatorSubscription: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  
+
   constructor() {
     this.sTitle.setTitle("Catalogo - Productos")
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
     this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
     this.loadItems();
     this.paginator.page.subscribe(() => this.loadItems());
@@ -81,7 +83,7 @@ export class ProductComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._BaseApi.getItemsPagination('product', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log(data.items)
+      console.log("datos que se mostrrta en ", data.items)
       this.dataSource.data = data.items;
       console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
@@ -98,7 +100,7 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getProducts();
+    // this.getProducts();
     console.log(this.dataSource);
   }
 
@@ -110,7 +112,7 @@ export class ProductComponent implements OnInit {
       data: {}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.getProducts();
+        // this.getProducts();
       }
     });
   }
@@ -129,7 +131,7 @@ export class ProductComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        this.getProducts();
+        // this.getProducts();
       }
     })
   }

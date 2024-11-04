@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InputSearchComponent } from '../../../../shared/components/input-search/input-search.component';
 import { MatIcon } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DatePipe, NgIf } from '@angular/common';
 import { TitleService } from '../../../../core/services/title.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -45,8 +45,8 @@ export class PedidosComponent implements OnInit {
   constructor(private _matDialog: MatDialog,) {
   }
   searchMessage = "Buscar pedido"
-  dataSource: any;
 
+  dataSource = new MatTableDataSource<any>();
 
   ngOnInit(): void {
     this.sTitle.setTitle("Lista de pedidos");

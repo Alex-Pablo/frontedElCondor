@@ -26,6 +26,10 @@ export class BaseApiService {
     return this.http.post<any>(`${environment.baseUrlApi}/${service}/register`, data);
   }
 
+  closeCashSession(data: any) {
+    console.log(data)
+    return this.http.post<any>(`${environment.baseUrlApi}/cashSession/close`, data);
+  }
 
   updateItem(service: any, data: any, id: number) {
     return this.http.put<any>(`${environment.baseUrlApi}/${service}/modify/${id}`, data)
@@ -35,8 +39,12 @@ export class BaseApiService {
     return this.http.delete<any>(`${environment.baseUrlApi}/${service}/delete/${id}`)
   }
 
-  getDetail(service: string, id: number): Observable<IResult<any>> {
+  getDetail(service: string, id: any): Observable<IResult<any>> {
     return this.http.get<IResult<any>>(`${environment.baseUrlApi}/${service}/detail/${id}`)
+  }
+
+  getItemsById(service: string, id: number) {
+    return this.http.get<any>(`${environment.baseUrlApi}/${service}/${id}`)
   }
 
 

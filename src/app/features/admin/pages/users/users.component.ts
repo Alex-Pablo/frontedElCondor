@@ -17,6 +17,7 @@ import { JwtTokenService } from '../../../../core/services/jwt-token.service';
 import { retry } from 'rxjs';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { BaseApiService } from '../../../../core/services/base-api.service';
+import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
 
 @Component({
   selector: 'app-users',
@@ -32,7 +33,8 @@ import { BaseApiService } from '../../../../core/services/base-api.service';
     MatSidenavModule,
     UserDetailPopupComponent,
     MatPaginator,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DateStartEndComponent
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']

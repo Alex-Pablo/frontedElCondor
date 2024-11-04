@@ -1,33 +1,32 @@
 .split-screen {
-  display: flex; /* Usar flexbox para alinear los hijos */
-  justify-content: space-between; /* Espaciado entre los elementos */
+  display: flex;
+  justify-content: space-between
 }
+
 .product-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas por defecto */
-  gap: 20px;
-  padding: 10px;
-  transition: all 0.3s ease; /* Suaviza la transición de columnas */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 50px; /* Añadir un margen superior para bajarlo */
+  transition: all 0.3s ease
 }
 
 .split-screen.modal-open .product-container {
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas cuando el modal está abierto */
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columnas cuando el modal está abierto */
 }
 
-/* Estilo normal para cada tarjeta en una cuadrícula de 4 columnas */
+//
 .product-card {
-  flex: 0 0 calc(25% - 20px); /* 4 tarjetas por fila (ajustando el espacio entre ellas) */
+  flex: 0 0 calc(25% - 20px);
   background-color: var(--white-color);
   border: 1px solid var(--white-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
+  padding: 20px;
 }
-
-
-
 
 .wrapperImg {
   display: flex;
@@ -36,14 +35,13 @@
 }
 
 .imagenProducto {
-  width: 60%;
-  height: auto;
+  width: 240px; /* Ajusta el ancho según tus necesidades */
+  height: 150px; /* Ajusta la altura según tus necesidades */
+  object-fit: cover; /* Asegura que la imagen se recorte para llenar el espacio sin distorsionarse */
 }
 
 .Titulo {
   font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
 }
 
 .Precio,
@@ -52,16 +50,14 @@
   width: 100%;
   text-align: left;
   color: #196890;
-  margin: 1px 0;
+  margin: -6px 0 0 0;
 }
 
-.Precio {
-  font-size: 1.2rem;
-}
+
 
 .agregar-producto {
-  margin-top: auto;
-  padding: 10px 15px;
+  margin-top: 10%;
+  padding: 15px 15px;
   background-color: #196890;
   color: white;
   border: none;
@@ -72,91 +68,110 @@
 }
 
 .agregar-producto:hover {
-  background-color: #18a9e3; 
+  background-color: #18a9e3;
 }
 
 /*modL*/
 
 .product-list-detail-modal {
-  
-    right: 0; 
-    top: 0;
-    height: auto;
-    width: 45%; 
-    padding: 20px;
-    box-shadow: -4px 0 8px rgba(18, 6, 6, 0.199);
-    display: flex;
-    flex-direction: column;
+
+  right: 0;
+  top: 0;
+  height: auto;
+  width: 45%;
+  padding: 20px;
+  box-shadow: -4px 0 8px rgba(18, 6, 6, 0.199);
+  display: flex;
+  flex-direction: column;
 
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-  z-index: 999; /* Detrás del modal */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo oscuro semi-transparente */
+  z-index: 999;
+  /* Detrás del modal */
 }
 
 .product-table {
   background-color: #f3f4f6;
-        padding: 10px;
-        border-radius: 10px;
-        flex-grow: 1;
-        overflow-y: auto;
-        height: auto;
-        
+  padding: 10px;
+  border-radius: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: auto;
+
 }
 
-.table-header, .table-row {
+.table-header,
+.table-row {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px 0;
   font-weight: bold;
 }
-span, .quantity-controls, .desc-input {
+
+span,
+.quantity-controls,
+.desc-input {
   text-align: center;
 }
 
 .quantity-controls {
+  
   display: flex;
   align-items: center;
   justify-content: center;
 
 
-button {
-  width: 25px;
-  height: 25px;
-  font-size: 1em;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin: 0 5px;
-  cursor: pointer;
+  button {
+    width: 35px;
+    height: 35px;
+    font-size: 1em;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    cursor: pointer;
 
-  &:hover {
+    &:hover {
       background-color: #2563eb;
+    }
   }
-}
 }
 
 .desc-input {
-  width: 50px;
+  width: 65px;
+  height: 35px;
   text-align: center;
 }
 
+.quantity-controls input[type="number"] {
+  width: 350%; 
+  padding: 5px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+}
+
+
 .action-buttons {
-   display: flex;
-        justify-content: space-between;
-        margin-top: auto;
-        padding-top: 20px;
+  
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 20px;
 
 }
 
-.cancel-btn{
+.cancel-btn {
   background-color: #ef4444;
   color: white;
   padding: 10px 20px;
@@ -164,38 +179,39 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .confirm-btn {
   background-color: #3b82f6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;}
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .cancel-btn {
-  background-color: #ef4444; /* Color del botón de cancelar */
+  background-color: #ef4444;
+  /* Color del botón de cancelar */
   color: white;
 }
 
 .confirm-btn {
-  background-color: #3b82f6; /* Color del botón de confirmar */
+  background-color: #3b82f6;
+  /* Color del botón de confirmar */
   color: white;
 }
-
-
-
-
-
-
 /* Transición del producto cuando se abre el modal */
 .split-screen.modal-open .product-container {
-  flex: 40%; /* Reduce la anchura al abrir el modal */
+  flex: 40%;
+  /* Reduce la anchura al abrir el modal */
 }
 
+
 .parent-container {
-  margin: -10; /* Elimina cualquier margen por defecto */
-  width: 100%;/* Asegura que el contenedor ocupe todo el ancho disponible */
-  z-index: 1; /* Asegura que el contenedor esté por encima de otros elementos si es necesario */
+  margin: 0;
+  /* Elimina cualquier margen por defecto */
+  width: 100%;
+  /* Asegura que el contenedor ocupe todo el ancho disponible */ 
 }
 
 .category-container {
@@ -204,11 +220,10 @@ button {
   padding: 1rem;
   background-color: #fffffffe;
   position: sticky;
-  top: 0;
+  top: 10;
   width: 100%;
-  z-index: 1000;
-  margin-top: -20px; /* Utiliza un margin-top negativo si es necesario */
-}
+  margin-top: -30px;
+}  
 
 .category-button {
   background-color: #e6e6e6;
@@ -262,4 +277,143 @@ button {
   padding: 0.5rem;
 }
 
+//modal de pago/
 
+/* Superposición del modal */
+.payment-modal {
+  position: fixed; /* Mantiene el modal fijo en la pantalla */
+  top: 0px; /* Alinea el modal en la parte superior */
+  left: 0; /* Alinea el modal desde el lado izquierdo */
+  right: 0; /* Alinea el modal desde el lado derecho */
+  bottom: 0; /* Alinea el modal desde el fondo */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  display: flex;
+  justify-content: flex-end; /* Alinea el contenido hacia el extremo derecho */
+  align-items: center; /* Alinea verticalmente el contenido */
+  z-index: 999; /* Asegura que esté encima de otros elementos */
+}
+
+/* Contenido del modal */
+.payment-modal-content {
+  background-color: white; /* Fondo blanco para el modal */
+  padding: 68px; /* Ajusta el espaciado interno a un valor positivo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para el efecto de elevación */
+  width: 600px; /* Ancho del modal (ajusta este valor para hacer el modal más ancho) */
+  height: 100%; /* Altura automática según el contenido */
+  max-width: 90%; /* Para que sea responsivo */
+  margin-right: 0; /* Sin margen a la derecha para estar pegado al borde */
+}
+
+
+/* Estilos para la información de la transacción */
+.transaction-info {
+  
+  margin-bottom: 20px; /* Espaciado entre la información de la transacción y el resto del contenido */
+}
+
+/* Detalles de pago */
+.payment-details {
+  margin-bottom: 20px; /* Espaciado entre los detalles de pago y los inputs */
+}
+
+/* Estilos para las filas de subtotal y total */
+.subtotal-row, .total-row {
+  display: flex; /* Usa flexbox para la alineación */
+  justify-content: space-between; /* Espacio entre los elementos */
+  padding: 5px 0; /* Espaciado vertical */
+}
+
+/* Estilos para los inputs de pago */
+.payment-inputs {
+  margin-bottom: 20px; /* Espaciado entre los inputs de pago y los botones */
+}
+
+/* Estilo para los botones */
+.confirm-btn, .close-btn {
+  background-color: #3b82f6; /* Color del botón de confirmar */
+  color: white; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor pointer al pasar sobre el botón */
+  margin-right: 10px; /* Espacio entre los botones */
+}
+
+.close-btn {
+  background-color: #ef4444; /* Color del botón de cerrar */
+}
+
+/* Estilo del botón al pasar el cursor */
+.confirm-btn:hover, .close-btn:hover {
+  opacity: 0.8; /* Efecto de opacidad al pasar el mouse */
+}
+
+/* Estilo del campo de entrada con la clase específica */
+.input-monto {
+  padding: 10px; /* Espaciado interno para mayor comodidad */
+  border: 2px solid #e68925; /* Borde de color azul */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto de elevación */
+  font-size: 16px; /* Tamaño de fuente para mejorar la legibilidad */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para efectos de enfoque */
+}
+
+/* Efecto al enfocar el input */
+.input-monto:focus {
+  border-color: #2563eb; /* Cambio de color del borde al enfocar */
+  box-shadow: 0 0 5px rgba(38, 99, 235, 0.5); /* Sombra más intensa al enfocar */
+  outline: none; /* Quitar el contorno predeterminado del navegador */
+}
+
+/* Estilo para cuando el input está vacío */
+.input-monto::placeholder {
+  color: #aaa; /* Color del texto del placeholder */
+}
+
+/* Estilo opcional para mejorar la apariencia general */
+.input-monto::-webkit-inner-spin-button,
+.input-monto::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Quitar los botones de incremento y decremento en Chrome */
+  margin: 0; /* Eliminar márgenes */
+}
+
+
+
+//sin stok
+.sin-stock-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sin-stock-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #42a5f5, #1e88e5); /* Degradado azul */
+  color: white;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 15px;
+}
+
+.close-btn:hover {
+  background: linear-gradient(45deg, #1e88e5, #1565c0); /* Efecto degradado más oscuro */
+  transform: scale(1.05); /* Efecto de ampliación */
+}
