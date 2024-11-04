@@ -11,6 +11,7 @@ import { InputSelectComponent } from '../../../../../shared/components/input-sel
 import { InputFieldComponent } from '../../../../../shared/components/input-field/input-field.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { DocumentService } from '../../../../../core/services/generate-order.service';
 
 @Component({
   selector: 'app-order-popup',
@@ -33,6 +34,7 @@ export class OrderPopupComponent implements OnInit {
   _MatDialgoRef = inject(MatDialogRef<OrderPopupComponent>)
   _sBaseApi = inject(BaseApiService);
   _sSweetalert = inject(SweealertService);
+  _documentService = inject(DocumentService);
   _fb = inject(FormBuilder)
   aSuppliers: any;
   aProducts: any
@@ -105,6 +107,51 @@ export class OrderPopupComponent implements OnInit {
     }
   }
   onSubmit() {
+  //   if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
+  //     this._sSweetalert.showLoading();
+  //     const order = {
+  //       supplierId: this.fOrder.get('idSupplier')?.value,
+  //       products: this.fOrder.get('products')?.value.map((product: any) => ({
+  //         name: product.name,
+  //         quantity: product.quantity,
+  //         price: product.price
+  //       })),
+  //       status: this.fOrder.get('status')?.value
+  //     };
+  //     console.log('antes de enviar', order);
+  //     if (!this.isEditMode) {
+  //       this._sBaseApi.addItem('order', order).subscribe({
+  //         next: async (data: IResult<any>) => {
+  //           this._sSweetalert.closeLoading();
+  //           if (data.isSuccess) {
+  //             // Generar el PDF después de crear el pedido
+  //             this._documentService.generateOrderDocument(order);
+  //             const ok = await this._sSweetalert.showNotification("El PDF se ha descargado. Envíalo al proveedor y cambia el estado a 'En proceso'.");
+  //             this._MatDialgoRef.close(true);
+  //           } else {
+  //             this._sSweetalert.showError("Error al crear el pedido");
+  //             console.error('Error del servidor:', data); // Log adicional
+  //           }
+  //         },
+  //         error: (err) => {
+  //           this._sSweetalert.closeLoading();
+  //           this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
+  //           console.error('Error de comunicación:', err); // Log adicional
+  //         }
+  //       });
+  //     } else {
+  //       this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
+  //         if (data.isSuccess) {
+  //           this._MatDialgoRef.close(true);
+  //         } else {
+  //           console.log(data);
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     this._sSweetalert.showError("Formulario inválido o sin productos");
+  //   }
+  // }
     if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
       this._sSweetalert.showLoading();
       const order = {

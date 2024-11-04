@@ -1,0 +1,101 @@
+.container-btn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  
+    button {
+      background-color: var(--contrast-blue-color);
+      color: var(--bg-color);
+      padding: 5px 10px;
+  
+    }
+  }
+  
+  .head {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--bg-color); 
+    padding-left: 50px;
+    padding-right: 50vh;
+    padding-top: 15px;
+  }
+  
+  .head .info-report {
+    font-family: 'PoppinsBold';
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .head p {
+    color: var(--contrast-blue-color);
+    margin: 0;
+    display: flex;
+    text-align: center;
+  }
+  
+  .head h1 {
+    font-family: 'poppinsextrabold';
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 40px;
+    color: var(--primary-color);
+  }
+  
+  div#reportContent div.header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: var(--bg-color); 
+    padding: 10px 40px;
+  }
+  
+  img {
+    height: 50px;
+  }
+  
+  .example-container {
+    position: relative;
+  }
+  
+  .example-table-container {
+    position: relative;
+    overflow: auto;
+    min-width: 700px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-rate-limit-reached {
+    max-width: 360px;
+    text-align: center;
+    background: red;
+  }
+  
+  /* Column Widths */
+  .mat-column-number,
+  .mat-column-state {
+    width: 64px;
+  }
+  
+  .mat-column-created {
+    width: 124px;
+  }
+  
