@@ -199,30 +199,27 @@ export class VentasComponent implements OnInit {
 
 
   confirmar() {
-    // Verificar que se tiene un total y que se ha recibido una cantidad pagada
+    this._sSweetAlet.showLoading();
     if (this.transactionTotal !== null && this.montoRecibido > 0) {
-      // Calcular el cambio
       this.cambio = this.montoRecibido - this.transactionTotal;
-
-      // Imprimir en consola el ID, el total y el cambio
-      console.log(`ID de Transacción: ${this.transactionId}`);
-      console.log(`Total de la Venta: Q${this.transactionTotal}`);
-      console.log(`Monto recibido: Q${this.montoRecibido}`)
-      console.log(`Cambio: Q${this.cambio}`);
-
       const saleTransacction = {
         amount: this.transactionTotal,
         saleId: this.transactionId,
         receiveAmount: this.montoRecibido,
         returnedAmount: this.cambio
       }
-
       this._BaseApi.addItem('cashFlow', saleTransacction).subscribe((data: IResult<any>) => {
-        console.log(data)
+        if (data.isSuccess) {
+          //aqui gneera un recivbo
+          //los datos que se uysar para el recibo estya en data.value
+          this._sSweetAlet.showSuccess("venta realizado con exito")
+        } else {
+          this._sSweetAlet.showError(data.error || "Error al registrar la venta");
+        }
       })
 
     } else {
-      console.error("Error: El total de la venta o la cantidad recibida no son válidos.");
+      this._sSweetAlet.showError("Error, el total o la cantidad no son validos")
     }
     this.isPaymentModalVisible = false;
   }
