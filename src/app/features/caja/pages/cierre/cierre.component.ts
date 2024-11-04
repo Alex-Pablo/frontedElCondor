@@ -64,22 +64,22 @@ export class CierreComponent {
     }, 1000);
   }
 
-onCloseCashSession() {
-  console.log("totall", this.totalAmount);
-  const closeCashSession = {
-    reportedClosingAmount: this.totalAmount
-  };
+  onCloseCashSession() {
+    console.log("totall", this.totalAmount);
+    const closeCashSession = {
+      reportedClosingAmount: this.totalAmount
+    };
 
-  this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
-    console.log(data);
+    this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
+      console.log(data);
 
-    if (data.isSuccess) {
-      this._SweetAlert.showSuccess("La sesión de caja se cerró con éxito");
-    } else {
-      this._SweetAlert.showError(data.error || "No hay una sesión de caja iniciada");
-    }
-  });
-}
+      if (data.isSuccess) {
+        this._SweetAlert.showSuccess("La sesión de caja se cerró con éxito");
+      } else {
+        this._SweetAlert.showError(data.error || "No hay una sesión de caja iniciada");
+      }
+    });
+  }
 
 
   ngOnDestroy(): void {

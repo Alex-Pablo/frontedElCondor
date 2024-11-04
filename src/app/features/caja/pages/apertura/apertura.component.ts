@@ -28,21 +28,15 @@ export class AperturaComponent {
 
   onSubmit() {
     this._SweetAlert.showLoading();
-    const aperturaData = {
-      saldoInicial: this.saldoInicial
-    };
-
-    console.log('Datos de Apertura:', aperturaData);
-
     const oApertua = {
-      openingAmount: 40
+      openingAmount: this.saldoInicial
     }
     this._BaseApi.addItem("cashSession", oApertua).subscribe((data: IResult<any>) => {
       console.log("resultado de apertura", data)
       if (data.isSuccess) {
         this._SweetAlert.showSuccess("Apertura Correcta")
       } else {
-        this._SweetAlert.showError(data.error||"Error al registrar la apertura.");
+        this._SweetAlert.showError(data.error || "Error al registrar la apertura.");
       }
     })
   }
