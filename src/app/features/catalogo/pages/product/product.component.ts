@@ -26,7 +26,7 @@ export interface Productos {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent, MatPaginator, MatPaginatorModule,DateStartEndComponent],
+  imports: [MatTableModule, MatIcon, MatIconModule, InputSearchComponent, MatDialogModule, MatSidenavModule, ProductoDetailPopupComponent, MatPaginator, MatPaginatorModule, DateStartEndComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
     this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
     this.loadItems();
     this.paginator.page.subscribe(() => this.loadItems());
@@ -83,7 +83,7 @@ export class ProductComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._BaseApi.getItemsPagination('product', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log(data.items)
+      console.log("datos que se mostrrta en ", data.items)
       this.dataSource.data = data.items;
       console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
@@ -100,7 +100,7 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getProducts();
+    // this.getProducts();
     console.log(this.dataSource);
   }
 
@@ -112,7 +112,7 @@ export class ProductComponent implements OnInit {
       data: {}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.getProducts();
+        // this.getProducts();
       }
     });
   }
@@ -131,7 +131,7 @@ export class ProductComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        this.getProducts();
+        // this.getProducts();
       }
     })
   }
