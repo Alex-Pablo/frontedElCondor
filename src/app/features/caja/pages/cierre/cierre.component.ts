@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { IUser } from '../../../../shared/models/IUser';
 import { AuthService } from '../../../../core/services/auth.service';
+import { BaseApiService } from '../../../../core/services/base-api.service';
+import { IResult } from '../../../../shared/models/IResult';
+import { SweealertService } from '../../../../core/services/sweealert.service';
 
 
 interface Denomination {
@@ -25,6 +28,9 @@ export class CierreComponent {
   logocondor: string = '/img/logo.png';
   userInfor: IUser | undefined;
   currentDate: Date = new Date();
+  totalAmount: number = 0;
+  _BaseApi = inject(BaseApiService)
+  _SweetAlert = inject(SweealertService)
   private intervalId: any;
 
   denominations: Denomination[] = [
@@ -58,12 +64,31 @@ export class CierreComponent {
     }, 1000);
   }
 
+onCloseCashSession() {
+  console.log("totall", this.totalAmount);
+  const closeCashSession = {
+    reportedClosingAmount: this.totalAmount
+  };
+
+  this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
+    console.log(data);
+
+    if (data.isSuccess) {
+      this._SweetAlert.showSuccess("La sesión de caja se cerró con éxito");
+    } else {
+      this._SweetAlert.showError(data.error || "No hay una sesión de caja iniciada");
+    }
+  });
+}
+
+
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
   }
 
   get total(): number {
-    return this.denominations.reduce((sum, denomination) => sum + denomination.subtotal, 0);
+    this.totalAmount = this.denominations.reduce((sum, denomination) => sum + denomination.subtotal, 0);
+    return this.totalAmount
   }
 
   updateSubtotal(denomination: Denomination, quantityEvent: Event): void {
@@ -87,9 +112,8 @@ export class CierreComponent {
       PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
       const currentDateFormatted = this.currentDate.toLocaleString('es-GT', { dateStyle: 'short', timeStyle: 'short' });
 
-      // Cambiar las comillas para interpolación de variables en el nombre del archivo
+
       PDF.save(`cierre-caja-${currentDateFormatted}.pdf`);
     });
   }
-
 }
