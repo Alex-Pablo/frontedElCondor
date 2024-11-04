@@ -52,21 +52,21 @@ export class VentasComponent implements OnInit {
   productos: Producto[] = []
   selectedProducts: SaleDetail[] = []
   _sSweetAlet = inject(SweealertService)
-  
+
   isModalSinStockVisible: boolean = false;
   isProductListModalVisible: boolean = false; // Controla la visibilidad del modal de productos
   isPaymentModalVisible: boolean = false; // Controla la visibilidad del modal de pago
 
   transactionId: string | null = null; // Almacena el ID de la transacción
   transactionTotal: number | null = null; // Almacena el total de la venta
-  
+
   montoRecibido: number = 0;
   cambio: number = 0;
   total = 0;
-  productName: string = ''; 
+  productName: string = '';
 
 
-  
+
 
   mostrarModalConIdYTotal(id: string, total: number) {
     this.transactionId = id;
@@ -79,7 +79,7 @@ export class VentasComponent implements OnInit {
   }
 
 
-  
+
   ngOnInit(): void {
     this._BaseApi.getItems('category').subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
@@ -108,18 +108,19 @@ export class VentasComponent implements OnInit {
     // Verificar si el producto tiene existencias
     if (producto.quantityInStock <= 0) {
         // Mostrar el modal de advertencia de "Sin Stock"
-        this.productName = producto.productName;
+        this.productName = producto.productName; // Agregar esta línea para capturar el nombre
+
         this.isModalSinStockVisible = true;
         return; // Salir de la función para evitar añadir el producto
     }
 
     const saleDetail: SaleDetail = {
-        iD_product: producto.productId,
-        unit_price: producto.salePrice || 0,
-        discount: 0,
-        quantity: 1,
-        total_item: producto.salePrice || 0,
-        name: this.obtenerNombreProducto(producto.id)
+      iD_product: producto.productId,
+      unit_price: producto.salePrice || 0,
+      discount: 0,
+      quantity: 1,
+      total_item: producto.salePrice || 0,
+      name: this.obtenerNombreProducto(producto.id)
     };
 
     // Agregar el producto a la lista de productos seleccionados
@@ -127,15 +128,19 @@ export class VentasComponent implements OnInit {
     console.log(this.selectedProducts);
 
     // Mostrar solo el modal de lista de productos
-    this.isModalVisible = true;
-}
+    // <<<<<<< HEAD
+    //     this.isModalVisible = true
+    //   }
 
-mostrarModalSinStock() {
-  this.isModalSinStockVisible = true;
-}
-cerrarModalSinStock() {
-  this.isModalSinStockVisible = false;
-}
+    this.isModalVisible = true;
+  }
+
+  mostrarModalSinStock() {
+    this.isModalSinStockVisible = true;
+  }
+  cerrarModalSinStock() {
+    this.isModalSinStockVisible = false;
+  }
   obtenerNombreProducto(productId: number): string {
     const producto = this.productos.find(p => p.id === productId);
     return producto ? producto.productName : 'Producto no encontrado';
@@ -146,6 +151,8 @@ cerrarModalSinStock() {
   }
 
   calcularTotal(): number {
+    // Retorna directamente el total almacenado
+    return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
     // Verifica que la lista de productos seleccionados exista y esté llena
     if (this.selectedProducts && this.selectedProducts.length > 0) {
       // Calcula el total sumando los subtotales y restando descuentos
@@ -157,56 +164,65 @@ cerrarModalSinStock() {
     } else {
       this.total = 0; // Establece a 0 si no hay productos seleccionados
     }
-  
-    return this.total;
-  } 
 
-  calcularT(){
+    return this.total;
+  }
+
+  calcularT() {
     return this.transactionTotal ?? 0; // Si transactionTotal es null o undefined, retorna 0
   }
 
   close() {
     this.isModalVisible = false;
-        this.selectedProducts = [];
+    this.selectedProducts = [];
   }
 
-  
+
 
   confirmarVenta() {
     this._sSweetAlet.showLoading();
     this._BaseApi.addItem('sale', this.selectedProducts).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this._sSweetAlet.closeLoading();
-        console.log(data.value); 
-        this.transactionId = data.value.id; 
-        this.transactionTotal = data.value.total; 
+        console.log(data.value);
+        this.transactionId = data.value.id;
+        this.transactionTotal = data.value.total;
         this.close();
-        this.isPaymentModalVisible = true; 
+        this.isPaymentModalVisible = true;
       } else {
         this._sSweetAlet.showError("error al registrar la venta");
       }
     });
-}
-
-
-
-
-confirmar() {
-   // Verificar que se tiene un total y que se ha recibido una cantidad pagada
-   if (this.transactionTotal !== null && this.montoRecibido > 0) {
-    // Calcular el cambio
-    this.cambio = this.montoRecibido - this.transactionTotal;
-
-    // Imprimir en consola el ID, el total y el cambio
-    console.log(`ID de Transacción: ${this.transactionId}`);
-    console.log(`Total de la Venta: Q${this.transactionTotal}`);
-    console.log(`Monto recibido: Q${this.montoRecibido}`)
-    console.log(`Cambio: Q${this.cambio}`);
-  } else {
-    console.error("Error: El total de la venta o la cantidad recibida no son válidos.");
   }
+
+
+
+
+  confirmar() {
+    this._sSweetAlet.showLoading();
+    if (this.transactionTotal !== null && this.montoRecibido > 0) {
+      this.cambio = this.montoRecibido - this.transactionTotal;
+      const saleTransacction = {
+        amount: this.transactionTotal,
+        saleId: this.transactionId,
+        receiveAmount: this.montoRecibido,
+        returnedAmount: this.cambio
+      }
+      this._BaseApi.addItem('cashFlow', saleTransacction).subscribe((data: IResult<any>) => {
+        if (data.isSuccess) {
+          //aqui gneera un recivbo
+          //los datos que se uysar para el recibo estya en data.value
+          this._sSweetAlet.showSuccess("venta realizado con exito")
+        } else {
+          this._sSweetAlet.showError(data.error || "Error al registrar la venta");
+        }
+      })
+
+    } else {
+      this._sSweetAlet.showError("Error, el total o la cantidad no son validos")
+    }
     this.isPaymentModalVisible = false;
-}
+  }
 
 
   increaseQuantity(product: SaleDetail) {

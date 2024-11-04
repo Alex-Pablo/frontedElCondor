@@ -125,7 +125,9 @@ export class HistorialVentasComponent implements OnInit {
       .subscribe((data: any) => {
         this._SweetAlerts.closeLoading()
         this.dataSource.data = data.items;
+        this.totalItems = data.pagination.TotalItemCount;
         this.paginator.pageIndex = data.pagination.CurrentPage - 1;
+        this.paginator.length = this.totalItems
       });
   }
 
