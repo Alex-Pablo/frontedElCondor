@@ -8,21 +8,20 @@
     background-color: var(--contrast-blue-color);
     color: var(--bg-color);
     padding: 5px 10px;
-
   }
 }
 
 .head {
   display: flex;
   justify-content: space-between;
-  background-color: var(--bg-color); 
+  background-color: var(--bg-color);
   padding-left: 50px;
   padding-right: 50vh;
   padding-top: 15px;
 }
 
 .head .info-report {
-  font-family: 'PoppinsBold';
+  font-family: "PoppinsBold";
   display: flex;
   text-align: center;
   align-items: center;
@@ -36,7 +35,7 @@
 }
 
 .head h1 {
-  font-family: 'poppinsextrabold';
+  font-family: "poppinsextrabold";
   flex-grow: 1;
   text-align: center;
   margin: 0;
@@ -45,10 +44,10 @@
 }
 
 div#reportContent div.header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  background-color: var(--bg-color); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
   padding: 10px 40px;
 }
 

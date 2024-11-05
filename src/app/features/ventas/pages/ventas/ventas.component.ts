@@ -150,23 +150,22 @@ export class VentasComponent implements OnInit {
     return this.selectedProducts.reduce((sum, product) => sum + (product.unit_price * product.quantity), 0);
   }
 
+ 
+
   calcularTotal(): number {
-    // Retorna directamente el total almacenado
-    return this.transactionTotal || 0; // Devuelve 0 si transactionTotal es null
-    // Verifica que la lista de productos seleccionados exista y esté llena
     if (this.selectedProducts && this.selectedProducts.length > 0) {
-      // Calcula el total sumando los subtotales y restando descuentos
-      this.total = this.selectedProducts.reduce((acc, product) => {
-        const subtotalProducto = product.unit_price * product.quantity;
-        const descuentoProducto = product.discount || 0;
-        return acc + (subtotalProducto - descuentoProducto);
-      }, 0);
+        this.total = this.selectedProducts.reduce((acc, product) => {
+            const subtotalProducto = product.unit_price * product.quantity;
+            const descuentoProducto = product.discount || 0;
+            return acc + (subtotalProducto - descuentoProducto);
+        }, 0);
     } else {
-      this.total = 0; // Establece a 0 si no hay productos seleccionados
+        this.total = 0; 
     }
 
     return this.total;
-  }
+}
+
 
   calcularT() {
     return this.transactionTotal ?? 0; // Si transactionTotal es null o undefined, retorna 0

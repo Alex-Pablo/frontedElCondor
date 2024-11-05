@@ -5,10 +5,14 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { IUser } from '../../../../shared/models/IUser';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
+import { Observable } from 'rxjs';
 import { TitleService } from '../../../../core/services/title.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { IEnterprise, ApiResponse } from '../../../../shared/models/IEnterprise';
+import { EnterpriseService } from '../../../../core/services/enterprise.service';
 
 @Component({
   selector: 'app-user',
@@ -21,17 +25,19 @@ export class UserComponent implements OnInit {
   displayedColumns: string[] = ['id', 'email', 'firstname', 'lastname', 'stateUser', 'last_login_at', 'created_at', 'last_logout_at', 'updated_at', 'role'];
   reportUsers: IUserReportsDto[] = [];
   userInfor: IUser | undefined;
+  enterpriseInfor: IEnterprise | undefined;
 
   logocondor: string = '/img/logo.png';
-  nombreempresa: string = 'Ferreteria El Condor';
-  numeroempresa: string = '+502 31588772';
-  correoempresa: string = 'elcondor2114@gmail.com';
-  direccionempresa: string = 'Sololá. 6ta ave 4-55 zona 2 Barrio El Calvario';
-  
-  constructor(private reportsService: ReportsService, private sTitle: TitleService, private authService: AuthService) {
+
+  private apiUrl = 'https://localhost:7059/api/Enterprise/detail/';
+
+  constructor(private reportsService: ReportsService, private sTitle: TitleService, private authService: AuthService, private http: HttpClient, private enterpriseService: EnterpriseService) {
     this.sTitle.setTitle("Reportes-Usuarios")
   }
 
+  getEnterpriseById(id: number): Observable<ApiResponse<IEnterprise>> {
+    return this.http.get<ApiResponse<IEnterprise>>(`${this.apiUrl}${id}`);
+  }
 
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -51,7 +57,29 @@ export class UserComponent implements OnInit {
         console.log(this.reportUsers);
       }
     });
+
+  // Obtener información de la empresa con ID 1
+  this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
+    if (data.isSuccess) {
+      this.enterpriseInfor = data.value; // Accede a data.value
+      console.log('Datos de la empresa:', this.enterpriseInfor);
+    } else {
+      console.error('Error al obtener datos de la empresa:', data.error);
+    }
+  });
   }
+
+      // Método para traducir el estado
+      getStatusDescription(stateUser: string): string {
+        switch (stateUser) {
+          case 'A':
+            return 'Activo';
+          case 'I':
+            return 'Inactivo';
+          default:
+            return 'Desconocido'; // Valor por defecto si no coincide
+        }
+      }
 
   // Función para exportar la tabla junto con el título a PDF
   exportToPDF() {
@@ -62,6 +90,8 @@ export class UserComponent implements OnInit {
     const now = new Date();
     const date = now.toLocaleDateString();
     const time = now.toLocaleTimeString();
+      // Obtener la URL del logo
+  const logoUrl = this.enterpriseInfor?.logo;
   
     // Actualizar contenido dinámico
     // Actualizar contenido dinámico
@@ -80,15 +110,37 @@ export class UserComponent implements OnInit {
     if (reportUser) {
       reportUser.textContent = ` ${this.userInfor?.firstname} ${this.userInfor?.lastname}`
     }
+        html2canvas(DATA).then((canvas) => {
+          const fileWidth = 208;
+          const fileHeight = (canvas.height * fileWidth) / canvas.width;
+          const FILEURI = canvas.toDataURL('image/png');
+          
+          PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
+          PDF.save(`reporte-usuarios-${date}-${time}.pdf`);
+        });
+      }
+    }
 
-    html2canvas(DATA).then((canvas) => {
-      const fileWidth = 208;
-      const fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
+//     // Crear una nueva imagen y cargar el logo
+//   const logoImage = new Image();
+//   logoImage.src = logoUrl || '';
+//   logoImage.onload = () => {
+//     // Cuando la imagen se haya cargado, genera el PDF
+//     html2canvas(DATA).then((canvas) => {
+//       const fileWidth = 208;
+//       const fileHeight = (canvas.height * fileWidth) / canvas.width;
+//       const FILEURI = canvas.toDataURL('image/png');
       
-      PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
-      PDF.save(`reporte-usuarios-${date}-${time}.pdf`);
-    });
-  }
-}
+//       // Añadir la imagen del logo al PDF
+//       PDF.addImage(logoImage, 'PNG', 10, 10, 30, 30); // Ajusta la posición y tamaño según sea necesario
+//       PDF.addImage(FILEURI, 'PNG', 0, 40, fileWidth, fileHeight); // Ajusta para no sobrescribir el logo
+//       PDF.save(`reporte-usuarios-${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}.pdf`);
+//     });
+//   };
+
+//   logoImage.onerror = () => {
+//     console.error('Error al cargar el logo de la empresa.');
+//   };
+// }
+// }
 
