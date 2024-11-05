@@ -64,7 +64,7 @@ export class ProductoPopupComponent {
       idUnit: [data.payload?.id_unit || '', [Validators.required]],
       stock: [data.payload?.stock || '0'],
       stockMin: [data.payload?.stockMin || '0'],
-      status: [data.payload?.status || 'F', [Validators.required]],
+      status: [data.payload?.status || 'P', [Validators.required]],
     });
     this.imgUrl = data.payload?.img
 
