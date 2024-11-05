@@ -1,0 +1,79 @@
+<div class="container-btn">
+    <button (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
+<div class="search-form">
+    <label for="numberDTE">Número DTE:</label>
+    <input id="numberDTE" [(ngModel)]="numberDTE" type="text" />
+    <label for="startDate">Fecha de Inicio:</label>
+    <input id="startDate" [(ngModel)]="startDate" type="date" />
+    <label for="endDate">Fecha de Fin:</label>
+    <input id="endDate" [(ngModel)]="endDate" type="date" />
+    <button (click)="fetchSalesReport()">Buscar Reporte</button>
+</div>
+
+<div id="reportContent">
+    <div class="head">
+        <section class="info-report">
+            <img [src]="logocondor" alt="Logo">
+            <p><strong>{{ enterpriseInfor?.name }}</strong></p>
+        </section>
+        <section class="info-report">
+            <h1>REPORTE DE VENTAS</h1>
+        </section>
+    </div>
+    <div class="header">
+        <div>
+            <p><strong>Teléfono:</strong> {{ enterpriseInfor?.phoneNumber }}</p>
+            <p><strong>E-mail:</strong> {{ enterpriseInfor?.email }}</p>
+            <p><strong>Dirección:</strong> {{ enterpriseInfor?.address }}</p>
+        </div>
+        <div>
+            <p><strong>Mes:</strong><span id="reportMonth"></span></p>
+            <p><strong>Fecha y hora de emisión:</strong><span id="reportDate"></span></p>
+            <p><strong>Elaborado por:</strong><span id="reportUser"></span></p>
+        </div>
+    </div>
+    <div class="table-container">
+        <div class="example-container">
+            <div class="example-table-container">
+                <table mat-table [dataSource]="salesReport" class="example-table" matSort matSortActive="saleDate" matSortDisableClear matSortDirection="desc">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>ID</th>
+                        <td mat-cell *matCellDef="let sale">{{ sale.id }}</td>
+                    </ng-container>
+
+                    <!-- Total Column -->
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef>Total</th>
+                        <td mat-cell *matCellDef="let sale">{{ sale.total | currency }}</td>
+                    </ng-container>
+
+                    <!-- User ID Column -->
+                    <ng-container matColumnDef="iD_User">
+                        <th mat-header-cell *matHeaderCellDef>ID Usuario</th>
+                        <td mat-cell *matCellDef="let sale">{{ sale.iD_User }}</td>
+                    </ng-container>
+
+                    <!-- Sale Date Column -->
+                    <ng-container matColumnDef="saleDate">
+                        <th mat-header-cell *matHeaderCellDef>Fecha de Venta</th>
+                        <td mat-cell *matCellDef="let sale">{{ sale.saleDate | date: 'short' }}</td>
+                    </ng-container>
+
+                    <!-- Products Total Column -->
+                    <ng-container matColumnDef="productsTotal">
+                        <th mat-header-cell *matHeaderCellDef>Total Productos</th>
+                        <td mat-cell *matCellDef="let sale">{{ sale.productsTotal }}</td>
+                    </ng-container>
+
+                    <!-- Table Headers and Rows -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

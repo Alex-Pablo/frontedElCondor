@@ -28,6 +28,8 @@ export class OrderReportComponent implements OnInit {
   userInfo: IUser | undefined; // Información del usuario autenticado
   enterpriseInfo: IEnterprise | undefined; // Información de la empresa
 
+  logocondor: string = '/img/logo.png';
+
   private apiUrl = 'https://localhost:7059/api/Enterprise/detail/';
 
   constructor(

@@ -29,6 +29,8 @@ export class InventoryReportComponent implements OnInit {
   enterpriseInfo: IEnterprise | undefined; // Información de la empresa
   hoveredRow: IInventoryReportDto | null = null;
 
+  logocondor: string = '/img/logo.png';
+
   private apiUrl = 'https://localhost:7059/api/Enterprise/detail/';
 
   constructor(

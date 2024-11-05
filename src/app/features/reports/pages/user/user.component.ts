@@ -27,6 +27,8 @@ export class UserComponent implements OnInit {
   userInfor: IUser | undefined;
   enterpriseInfor: IEnterprise | undefined;
 
+  logocondor: string = '/img/logo.png';
+
   private apiUrl = 'https://localhost:7059/api/Enterprise/detail/';
 
   constructor(private reportsService: ReportsService, private sTitle: TitleService, private authService: AuthService, private http: HttpClient, private enterpriseService: EnterpriseService) {
