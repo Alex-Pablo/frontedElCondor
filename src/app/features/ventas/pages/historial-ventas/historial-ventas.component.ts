@@ -89,7 +89,7 @@ export class HistorialVentasComponent implements OnInit {
       if (date.isSuccess) {
         this._SweetAlerts.closeLoading();
         this._matDialog.open(HistorialDetailPopupComponent, {
-          width: '450px',
+          width: '550px',
           height: '100vh',
           maxHeight: '100vh',
           position: { right: '0' },
@@ -102,7 +102,7 @@ export class HistorialVentasComponent implements OnInit {
   }
 
   filterItems() {
-    console.log(this.searchInput);
+    console.log("SearchInput: ", this.searchInput);
     this._BaseApi.filter('sale', this.searchInput, this.selectedStartDate, this.selectedEndDate)
       .subscribe((data: IResult<any>) => {
         this.dataSource.data = data.value;
