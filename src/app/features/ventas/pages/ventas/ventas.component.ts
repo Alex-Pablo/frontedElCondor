@@ -189,7 +189,7 @@ export class VentasComponent implements OnInit {
         this.close();
         this.isPaymentModalVisible = true;
       } else {
-        this._sSweetAlet.showError("error al registrar la venta");
+        this._sSweetAlet.showError(data.error || "Error al registrar la venta");
       }
     });
   }
