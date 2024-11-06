@@ -1,8 +1,20 @@
-<div class="sale-info">
-  <h4>Información de ventas</h4>
-  <!-- <p><strong>Código venta:</strong> {{ data.id }}</p> -->
-  <p><strong>Empleado:</strong> {{ getNameUser(aSaleDetail.iD_User)}}</p>
-  <p><strong>Fecha de venta:</strong> {{ aSaleDetail.saleDate | date: 'short'}}</p>
+<div class="sale-info" id="receiptContent">
+
+  <div class="head">
+    <section class="info-enterprise">
+      <img [src]="logocondor" alt="Logo" class="logo">
+      <p><strong>{{ enterpriseInfor?.name }}</strong></p>
+    </section>
+    <h4 class="receipt-title">Recibo de Venta</h4>
+  </div>
+  <div class="header">
+      <p><strong>Teléfono:</strong> {{ enterpriseInfor?.phoneNumber }}</p>
+      <p><strong>E-mail:</strong> {{ enterpriseInfor?.email }}</p>
+      <p><strong>Dirección:</strong> {{ enterpriseInfor?.address }}</p>
+  </div><hr>
+
+  <p><strong>Vendedor:</strong> {{ getNameUser(aSaleDetail.iD_User) }}</p>
+  <p><strong>Fecha de venta:</strong> {{ aSaleDetail.saleDate | date: 'short' }}</p>
 
   <div class="product-table-container">
     <div class="product-table">
@@ -10,40 +22,31 @@
       <div class="table-header">
         <span>Producto</span>
         <span>Cantidad</span>
+        <span>Precio Unitario</span>
         <span>Descuento</span>
-        <span>SubTotal</span>
         <span>Total</span>
       </div>
 
-      <!-- Primera fila de información estática -->
-      <div class="table-row">
-        <span>Pintura rojo</span>
-        <span>1</span>
-        <span>Q. 5</span>
-        <span>Q30</span>
-        <span>Q25</span>
-      </div>
-
-      <!-- Segunda fila de información estática -->
-      <div class="table-row">
-        <span>Martillo</span>
-        <span>1</span>
-        <span>Q. 4</span>
-        <span>Q20</span>
-        <span>Q20</span>
+      <!-- Usar *ngFor para iterar sobre productos -->
+      <div class="table-row" *ngFor="let product of aSaleDetail.products">
+        <span>{{ product.nameProduct }}</span>
+        <span>{{ product.quantity }}</span>
+        <span>Q. {{ product.unit_price | number:'1.2-2' }}</span>
+        <span>Q. {{ product.discount | number:'1.2-2' }}</span>
+        <span>Q. {{ (product.unit_price * product.quantity - product.discount * product.quantity) | number:'1.2-2' }}</span>
       </div>
     </div>
   </div>
-  <br>
-
-
+  
   <div class="totals">
-    <div><strong>SubTotal--------------</strong> Q{{ data.subTotal }}</div><br>
-    <div><strong>Total-----------------</strong> Q{{ data.totalventa }}</div>
+    <div><strong>SubTotal:</strong> Q{{ getSubtotal() | number:'1.2-2' }}</div>
+    <div><strong>Descuento:</strong> Q{{ getDescuento() | number:'1.2-2' }}</div>
+    <hr>
+    <div><strong>TOTAL:</strong> Q{{ aSaleDetail.total | number:'1.2-2' }}</div>
   </div>
 
-  <div class="button-container">
-    <button mat-raised-button class="custom-button">Imprimir recibo</button>
-  </div>
+</div>
 
+<div class="button-container">
+  <button mat-raised-button class="custom-button" (click)="printReceipt()">Imprimir recibo</button>
 </div>
