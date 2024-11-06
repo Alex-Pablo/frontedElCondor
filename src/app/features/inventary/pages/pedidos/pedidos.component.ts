@@ -139,7 +139,7 @@ export class PedidosComponent implements OnInit {
       this._sBaseApi.receiveItems(id).subscribe({
         next: async (data: IResult<any>) => {
           if (data.isSuccess) {
-            const ok = await this._sSweetalert.showNotification("Se a actualizado el inventario de los productos recibidos");
+            const ok = await this._sSweetalert.showNotification("Se a actualizado el inventario con los productos recibidos");
             this.loadItems();
             console.log("dato a converit en pdf", data.value)
           } else {

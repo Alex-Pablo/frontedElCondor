@@ -167,7 +167,7 @@ export class OrderPopupComponent implements OnInit {
           next: async (data: IResult<any>) => {
             this._sSweetalert.closeLoading();
             if (data.isSuccess) {
-              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor y cambia el estado a 'En proceso'.")
+              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envía al proveedor y cambia el estado a 'En proceso'.")
               console.log("informacion a converir en pdf", data.value)
               this._MatDialgoRef.close(true);
             } else {
@@ -185,7 +185,7 @@ export class OrderPopupComponent implements OnInit {
         this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe({
           next: async (data: IResult<any>) => {
             if (data.isSuccess) {
-              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor para su notifacion");
+              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor para su notificacion");
               console.log("dato a converit en pdf", data.value)
               this._MatDialgoRef.close(true);
             } else {
