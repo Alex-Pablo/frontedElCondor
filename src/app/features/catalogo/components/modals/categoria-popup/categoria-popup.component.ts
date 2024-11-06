@@ -81,8 +81,9 @@ export class CategoriaPopupComponent {
             this.sSweetAlert.showError(data.error || "Error al crear la categoria")
           }
         })
-
       }
+    } else {
+      this.sSweetAlert.showError("Campos requeridos")
     }
   }
   getFormControl(controlName: string): FormControl | null {

@@ -210,9 +210,14 @@ export class VentasComponent implements OnInit {
       this._BaseApi.addItem('cashFlow', saleTransacction).subscribe((data: IResult<any>) => {
         if (data.isSuccess) {
           //aqui gneera un recivbo
-          //los datos que se uysar para el recibo estya en data.value
+          //los datos que se usar para el recibo estya en data.value
           this._sSweetAlet.showSuccess("venta realizado con exito")
+          this.selectCategory("all");
+          this.montoRecibido = 0;
+          this.transactionTotal = 0
         } else {
+          this.montoRecibido = 0;
+          this.transactionTotal = 0
           this._sSweetAlet.showError(data.error || "Error al registrar la venta");
         }
       })

@@ -128,6 +128,9 @@ export class ProductoPopupComponent {
 
       }
     }
+    else {
+
+    }
   }
 
   getCategory() {

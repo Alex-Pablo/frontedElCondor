@@ -93,6 +93,8 @@ export class ProveedorPopupComponent {
         })
 
       }
+    } else {
+      this.sSweetAlert.showError("Campos requeridos")
     }
   }
 

@@ -113,6 +113,7 @@ export class ProductComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       if (result) {
         // this.getProducts();
+        this.loadItems();
       }
     });
   }
@@ -131,7 +132,7 @@ export class ProductComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        // this.getProducts();
+        this.loadItems();
       }
     })
   }
