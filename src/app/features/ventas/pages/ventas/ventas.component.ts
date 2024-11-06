@@ -107,11 +107,11 @@ export class VentasComponent implements OnInit {
   mostrarModal(producto: Producto) {
     // Verificar si el producto tiene existencias
     if (producto.quantityInStock <= 0) {
-        // Mostrar el modal de advertencia de "Sin Stock"
-        this.productName = producto.productName; // Agregar esta línea para capturar el nombre
+      // Mostrar el modal de advertencia de "Sin Stock"
+      this.productName = producto.productName; // Agregar esta línea para capturar el nombre
 
-        this.isModalSinStockVisible = true;
-        return; // Salir de la función para evitar añadir el producto
+      this.isModalSinStockVisible = true;
+      return; // Salir de la función para evitar añadir el producto
     }
 
     const saleDetail: SaleDetail = {
@@ -150,21 +150,21 @@ export class VentasComponent implements OnInit {
     return this.selectedProducts.reduce((sum, product) => sum + (product.unit_price * product.quantity), 0);
   }
 
- 
+
 
   calcularTotal(): number {
     if (this.selectedProducts && this.selectedProducts.length > 0) {
-        this.total = this.selectedProducts.reduce((acc, product) => {
-            const subtotalProducto = product.unit_price * product.quantity;
-            const descuentoProducto = product.discount || 0;
-            return acc + (subtotalProducto - descuentoProducto);
-        }, 0);
+      this.total = this.selectedProducts.reduce((acc, product) => {
+        const subtotalProducto = product.unit_price * product.quantity;
+        const descuentoProducto = product.discount || 0;
+        return acc + (subtotalProducto - descuentoProducto);
+      }, 0);
     } else {
-        this.total = 0; 
+      this.total = 0;
     }
 
     return this.total;
-}
+  }
 
 
   calcularT() {

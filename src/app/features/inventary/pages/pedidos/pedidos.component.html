@@ -57,7 +57,10 @@
           En Proceso
           }@else if(pedido.status == 'C'){
           Completado
+          }@else if(pedido.status == 'N'){
+          No Pagado
           }
+
         </td>
       </ng-container>
 
@@ -66,7 +69,6 @@
         <th class="itemHeader" class="itemHeader" mat-header-cell *matHeaderCellDef>acciones</th>
         <td mat-cell *matCellDef="let item" class="actions-cell">
           <div class="actions-container">
-
 
             <button mat-icon-button class="btnVer" (click)="onViewDetails(item.id)">
               <mat-icon>visibility</mat-icon>
@@ -81,6 +83,12 @@
             <button mat-icon-button class="text-green-600 font-bold" (click)="reciveOrder(item.id)">
               <!-- <mat-icon>edit</mat-icon> -->
               Recibir
+            </button>
+            }
+            @if(item.status == 'N'){
+            <button mat-icon-button class="text-red-600 font-bold" (click)="reciveOrder(item.id)">
+              <!-- <mat-icon>edit</mat-icon> -->
+              Pagar
             </button>
             }
           </div>

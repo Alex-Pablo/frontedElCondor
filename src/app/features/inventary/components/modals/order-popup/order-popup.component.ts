@@ -12,6 +12,7 @@ import { InputFieldComponent } from '../../../../../shared/components/input-fiel
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { DocumentService } from '../../../../../core/services/generate-order.service';
+import { async } from 'rxjs';
 
 @Component({
   selector: 'app-order-popup',
@@ -81,7 +82,6 @@ export class OrderPopupComponent implements OnInit {
   editProduct(index: number) {
     const productsArray = this.fOrder.get('products') as FormArray;
     const product = productsArray.at(index).value;
-    console.log('editar', product)
     this.fOrder.patchValue({
       selectedProductId: product.productId,
       price: product.price,
@@ -106,52 +106,54 @@ export class OrderPopupComponent implements OnInit {
       this.editingIndex = null;
     }
   }
+
   onSubmit() {
-  //   if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
-  //     this._sSweetalert.showLoading();
-  //     const order = {
-  //       supplierId: this.fOrder.get('idSupplier')?.value,
-  //       products: this.fOrder.get('products')?.value.map((product: any) => ({
-  //         name: product.name,
-  //         quantity: product.quantity,
-  //         price: product.price
-  //       })),
-  //       status: this.fOrder.get('status')?.value
-  //     };
-  //     console.log('antes de enviar', order);
-  //     if (!this.isEditMode) {
-  //       this._sBaseApi.addItem('order', order).subscribe({
-  //         next: async (data: IResult<any>) => {
-  //           this._sSweetalert.closeLoading();
-  //           if (data.isSuccess) {
-  //             // Generar el PDF después de crear el pedido
-  //             this._documentService.generateOrderDocument(order);
-  //             const ok = await this._sSweetalert.showNotification("El PDF se ha descargado. Envíalo al proveedor y cambia el estado a 'En proceso'.");
-  //             this._MatDialgoRef.close(true);
-  //           } else {
-  //             this._sSweetalert.showError("Error al crear el pedido");
-  //             console.error('Error del servidor:', data); // Log adicional
-  //           }
-  //         },
-  //         error: (err) => {
-  //           this._sSweetalert.closeLoading();
-  //           this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
-  //           console.error('Error de comunicación:', err); // Log adicional
-  //         }
-  //       });
-  //     } else {
-  //       this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
-  //         if (data.isSuccess) {
-  //           this._MatDialgoRef.close(true);
-  //         } else {
-  //           console.log(data);
-  //         }
-  //       });
-  //     }
-  //   } else {
-  //     this._sSweetalert.showError("Formulario inválido o sin productos");
-  //   }
-  // }
+    //   if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
+    //     this._sSweetalert.showLoading();
+    //     const order = {
+    //       supplierId: this.fOrder.get('idSupplier')?.value,
+    //       products: this.fOrder.get('products')?.value.map((product: any) => ({
+    //         name: product.name,
+    //         quantity: product.quantity,
+    //         price: product.price
+    //       })),
+    //       status: this.fOrder.get('status')?.value
+    //     };
+    //     console.log('antes de enviar', order);
+    //     if (!this.isEditMode) {
+    //       this._sBaseApi.addItem('order', order).subscribe({
+    //         next: async (data: IResult<any>) => {
+    //           this._sSweetalert.closeLoading();
+    //           if (data.isSuccess) {
+    //             // Generar el PDF después de crear el pedido
+    //             this._documentService.generateOrderDocument(order);
+    //             const ok = await this._sSweetalert.showNotification("El PDF se ha descargado. Envíalo al proveedor y cambia el estado a 'En proceso'.");
+    //             this._MatDialgoRef.close(true);
+    //           } else {
+    //             this._sSweetalert.showError("Error al crear el pedido");
+    //             console.error('Error del servidor:', data); // Log adicional
+    //           }
+    //         },
+    //         error: (err) => {
+    //           this._sSweetalert.closeLoading();
+    //           this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
+    //           console.error('Error de comunicación:', err); // Log adicional
+    //         }
+    //       });
+    //     } else {
+    //       this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
+    //         if (data.isSuccess) {
+    //           this._MatDialgoRef.close(true);
+    //         } else {
+    //           console.log(data);
+    //         }
+    //       });
+    //     }
+    //   } else {
+    //     this._sSweetalert.showError("Formulario inválido o sin productos");
+    //   }
+    // }
+    //
     if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
       this._sSweetalert.showLoading();
       const order = {
@@ -159,13 +161,14 @@ export class OrderPopupComponent implements OnInit {
         products: this.fOrder.get('products')?.value,
         status: this.fOrder.get('status')?.value
       };
-      console.log('antes de enviar', order)
+      //nuevo pedido
       if (!this.isEditMode) {
         this._sBaseApi.addItem('order', order).subscribe({
           next: async (data: IResult<any>) => {
             this._sSweetalert.closeLoading();
             if (data.isSuccess) {
               const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor y cambia el estado a 'En proceso'.")
+              console.log("informacion a converir en pdf", data.value)
               this._MatDialgoRef.close(true);
             } else {
               this._sSweetalert.showError("Error al crear el pedido");
@@ -178,13 +181,32 @@ export class OrderPopupComponent implements OnInit {
         });
       }
       else {
-        this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
-          if (data.isSuccess) {
-            this._MatDialgoRef.close(true)
-          } else {
-            console.log(data)
+        ///editar pedido
+        this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe({
+          next: async (data: IResult<any>) => {
+            if (data.isSuccess) {
+              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor para su notifacion");
+              console.log("dato a converit en pdf", data.value)
+              this._MatDialgoRef.close(true);
+            } else {
+              this._sSweetalert.showError("Error al editar pedido");
+            }
+          },
+          error: (err) => {
+            this._sSweetalert.closeLoading();
+            this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
           }
         })
+
+
+        // this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
+        //   // if (data.isSuccess) {
+        //   //   const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor y cambia el estado a 'En proceso'.")
+        //   //   this._MatDialgoRef.close(true)
+        //   // } else {
+        //   //   console.log(data)
+        //   // }
+        // })
       }
     }
     else {
@@ -238,7 +260,6 @@ export class OrderPopupComponent implements OnInit {
 
 
   buildForm(data: any) {
-    console.log('en el build', this.data.payload)
     this.fOrder = this._fb.group({
       idSupplier: [data?.payload?.supplierId || null, [Validators.required]],
       status: [data?.payload?.status || 'P', [Validators.required]],

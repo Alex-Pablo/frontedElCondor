@@ -12,6 +12,7 @@ import { IResult } from '../../../../shared/models/IResult';
 import { SweealertService } from '../../../../core/services/sweealert.service';
 import { DateStartEndComponent } from '../../../../shared/components/date-start-end/date-start-end.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { async } from 'rxjs';
 
 @Component({
   selector: 'app-pedidos',
@@ -50,7 +51,7 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.sTitle.setTitle("Lista de pedidos");
-    this.getOrders();
+    // this.getOrders();
   }
   ngAfterViewInit() {
     this.paginatorSubscription = this.paginator.page.subscribe(() => this.loadItems());
@@ -72,14 +73,13 @@ export class PedidosComponent implements OnInit {
     this.selectedStartDate = null;
     this.paginator.pageIndex = 0;
     this.loadItems();
-
   }
 
   loadItems() {
     const pageIndex = this.paginator.pageIndex;
     const pageSize = this.paginator.pageSize;
 
-    this._sBaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize).subscribe((data: any) => {
+    this._sBaseApi.getItemsPagination('order', pageIndex + 1, pageSize).subscribe((data: any) => {
       console.log(data.items)
       this.dataSource.data = data.items;
       console.log(this.dataSource)
@@ -110,7 +110,7 @@ export class PedidosComponent implements OnInit {
       data: {}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.getOrders();
+        this.loadItems();
       }
     })
   }
@@ -127,23 +127,38 @@ export class PedidosComponent implements OnInit {
           data: { payload: data.value }
         }).afterClosed().subscribe((result) => {
           if (result) {
-            this.getOrders();
+            this.loadItems();
           }
         })
       }
     })
   }
   reciveOrder(id: number) {
+    this._sSweetalert.showConfirmation2(`¿Recibistes los productos realizados en el pedido: ${id}?`, 'Cancelar', 'Si, lo recibi', () => {
 
-    this._sSweetalert.showConfirmation2(`¿Recibistes los productos realizados en el pedido?: ${id}`, 'Cancelar', 'Ok', () => {
-      this._sBaseApi.removeItem('order', id).subscribe((data: IResult<any>) => {
-        if (data.isSuccess) {
-          this._sSweetalert.showSuccess('Producto agregados en el inventario');
-          this.getOrders();
-        } else {
-          this._sSweetalert.showError(data.error || 'No se pudo agregar los productos')
+      this._sBaseApi.receiveItems(id).subscribe({
+        next: async (data: IResult<any>) => {
+          if (data.isSuccess) {
+            const ok = await this._sSweetalert.showNotification("Se a actualizado el inventario de los productos recibidos");
+            this.loadItems();
+            console.log("dato a converit en pdf", data.value)
+          } else {
+            this._sSweetalert.showError("Error al editar pedido");
+          }
+        },
+        error: (error) => {
+          this._sSweetalert.closeLoading();
+          this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
         }
       })
+      // this._sBaseApi.removeItem('order', id).subscribe((data: IResult<any>) => {
+      //   if (data.isSuccess) {
+      //     this._sSweetalert.showSuccess('Producto agregados en el inventario');
+      //     this.getOrders();
+      //   } else {
+      //     this._sSweetalert.showError(data.error || 'No se pudo agregar los productos')
+      //   }
+      // })
     });
 
   }

@@ -79,22 +79,22 @@ export class OrderReportComponent implements OnInit {
   // Método para traducir el estado
   getStatusDescription(status: string): string {
     switch (status) {
-    case 'E':
+      case 'E':
         return 'En Proceso';
-    case 'P':
+      case 'P':
         return 'Pendiente';
-    case 'C':
+      case 'C':
         return 'Recibido';
-    case 'X':
+      case 'X':
         return 'Cancelado';
       default:
         return 'Desconocido'; // Valor por defecto si no coincide
     }
   }
-         /// "P" = "Pendiente",
-       /// "E" ="En proceso",
-       /// "C" = "Recibida",
-       /// "X" ="Cancelado"
+  /// "P" = "Pendiente",
+  /// "E" ="En proceso",
+  /// "C" = "Recibida",
+  /// "X" ="Cancelado"
 
   // Función para exportar la tabla a PDF
   exportToPDF() {
@@ -112,15 +112,15 @@ export class OrderReportComponent implements OnInit {
     const reportUser = document.getElementById('reportUser');
 
     if (reportMonth) {
-        reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
+      reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
     }
 
     if (reportDate) {
-        reportDate.textContent = ` ${date}, ${time}`;
+      reportDate.textContent = ` ${date}, ${time}`;
     }
 
     if (reportUser) {
-        reportUser.textContent = ` ${this.userInfo?.firstname} ${this.userInfo?.lastname}`;
+      reportUser.textContent = ` ${this.userInfo?.firstname} ${this.userInfo?.lastname}`;
     }
 
     html2canvas(DATA).then((canvas) => {
