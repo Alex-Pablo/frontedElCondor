@@ -14,6 +14,9 @@
       <span class="user-name">{{userInfor?.firstname}}</span>
       <span class="user-role">{{userInfor?.role}}</span>
     </div>
+    <button mat-icon-button matTooltip="Cerrar sesión" matTooltipPosition="above" (click)="logout()">
+      <mat-icon class=" cursor-pointer hover:scale-105">logout</mat-icon>
+    </button>
   </div>
 </mat-toolbar>
 

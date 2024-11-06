@@ -11,10 +11,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { IMenuitem } from '../../../shared/models/IMenuItem';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LocalStorageService } from '../../services/local-storage.service';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, RouterLink, MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, RouterLinkActive],
+  imports: [RouterOutlet, CommonModule, RouterLink, MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, RouterLinkActive,
+    MatTooltipModule
+  ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
@@ -24,13 +28,17 @@ export class MainLayoutComponent {
   collapsed = signal(false);
   sidenavWidth = computed(() => this.collapsed() ? '60px' : 'auto')
   titlePage: any = '';
-
+  authS = inject(AuthService);
+  localStorage = inject(LocalStorageService);
   logocondor: string = 'img/logo.png';
   constructor(private router: Router, public titleService: TitleService) { }
   userInfor: IUser | undefined;
   authService = inject(AuthService)
 
+
+
   logout() {
+    this.localStorage.remove("currentuser")
     this.router.navigate(['/'])
   }
 

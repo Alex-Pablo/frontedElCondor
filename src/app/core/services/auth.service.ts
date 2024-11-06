@@ -43,7 +43,6 @@ export class AuthService {
   }
 
   logout() {
-
   }
 
   getProfile() {
