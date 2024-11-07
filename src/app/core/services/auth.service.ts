@@ -15,7 +15,9 @@ import { IUserModifyDto } from '../../shared/models/IUserModify';
   providedIn: 'root'
 })
 export class AuthService {
-  baseurlApi: string = 'https://localhost:7059/api';
+
+  baseurlApi: string = environment.baseUrlApi;
+  // baseurlApi: string = 'https://localhost:7059/api';
 
   constructor(private http: HttpClient, private localStorageS: LocalStorageService) { }
 

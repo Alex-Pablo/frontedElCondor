@@ -10,7 +10,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class ReportsService {
-  baseApi: string = environment.baseUrlApi;
+  // baseApi: string = environment.baseUrlApi;
   constructor(private http: HttpClient, private localStorageS: LocalStorageService) { }
 
 
