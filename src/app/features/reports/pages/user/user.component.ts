@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
   resultsLength = 0;
   hoveredRow: IUserReportsDto | null = null
   ngOnInit(): void {
-     // Usar el método getProfile para obtener la información del usuario autenticado
+    // Usar el método getProfile para obtener la información del usuario autenticado
     this.authService.getProfile().subscribe((response) => {
       if (response.isSuccess) {
         this.userInfor = response.value; // Almacenar la información del usuario
@@ -54,72 +54,70 @@ export class UserComponent implements OnInit {
     this.reportsService.getUserReports().subscribe((data) => {
       if (data.isSuccess) {
         this.reportUsers = data.value ?? [];
-        console.log(this.reportUsers);
       }
     });
 
-  // Obtener información de la empresa con ID 1
-  this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
-    if (data.isSuccess) {
-      this.enterpriseInfor = data.value; // Accede a data.value
-      console.log('Datos de la empresa:', this.enterpriseInfor);
-    } else {
-      console.error('Error al obtener datos de la empresa:', data.error);
-    }
-  });
+    // Obtener información de la empresa con ID 1
+    this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
+      if (data.isSuccess) {
+        this.enterpriseInfor = data.value; // Accede a data.value
+      } else {
+        console.error('Error al obtener datos de la empresa:', data.error);
+      }
+    });
   }
 
-      // Método para traducir el estado
-      getStatusDescription(stateUser: string): string {
-        switch (stateUser) {
-          case 'A':
-            return 'Activo';
-          case 'I':
-            return 'Inactivo';
-          default:
-            return 'Desconocido'; // Valor por defecto si no coincide
-        }
-      }
+  // Método para traducir el estado
+  getStatusDescription(stateUser: string): string {
+    switch (stateUser) {
+      case 'A':
+        return 'Activo';
+      case 'I':
+        return 'Inactivo';
+      default:
+        return 'Desconocido'; // Valor por defecto si no coincide
+    }
+  }
 
   // Función para exportar la tabla junto con el título a PDF
   exportToPDF() {
     const DATA: any = document.getElementById('reportContent');
     const PDF = new jsPDF('p', 'mm', 'a4');
-  
+
     // Obtener fecha y hora actuales
     const now = new Date();
     const date = now.toLocaleDateString();
     const time = now.toLocaleTimeString();
-      // Obtener la URL del logo
-  const logoUrl = this.enterpriseInfor?.logo;
-  
+    // Obtener la URL del logo
+    const logoUrl = this.enterpriseInfor?.logo;
+
     // Actualizar contenido dinámico
     // Actualizar contenido dinámico
     const reportDate = document.getElementById('reportDate');
     const reportMonth = document.getElementById('reportMonth');
     const reportUser = document.getElementById('reportUser');
-    
+
     if (reportDate) {
       reportDate.textContent = ` ${date}, ${time}`;
     }
-    
+
     if (reportMonth) {
       reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
     }
-    
+
     if (reportUser) {
       reportUser.textContent = ` ${this.userInfor?.firstname} ${this.userInfor?.lastname}`
     }
-        html2canvas(DATA).then((canvas) => {
-          const fileWidth = 208;
-          const fileHeight = (canvas.height * fileWidth) / canvas.width;
-          const FILEURI = canvas.toDataURL('image/png');
-          
-          PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
-          PDF.save(`reporte-usuarios-${date}-${time}.pdf`);
-        });
-      }
-    }
+    html2canvas(DATA).then((canvas) => {
+      const fileWidth = 208;
+      const fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+
+      PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
+      PDF.save(`reporte-usuarios-${date}-${time}.pdf`);
+    });
+  }
+}
 
 //     // Crear una nueva imagen y cargar el logo
 //   const logoImage = new Image();
@@ -130,7 +128,7 @@ export class UserComponent implements OnInit {
 //       const fileWidth = 208;
 //       const fileHeight = (canvas.height * fileWidth) / canvas.width;
 //       const FILEURI = canvas.toDataURL('image/png');
-      
+
 //       // Añadir la imagen del logo al PDF
 //       PDF.addImage(logoImage, 'PNG', 10, 10, 30, 30); // Ajusta la posición y tamaño según sea necesario
 //       PDF.addImage(FILEURI, 'PNG', 0, 40, fileWidth, fileHeight); // Ajusta para no sobrescribir el logo

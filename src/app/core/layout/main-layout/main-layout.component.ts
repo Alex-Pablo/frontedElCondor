@@ -13,6 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { IMenuitem } from '../../../shared/models/IMenuItem';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { JwtTokenService } from '../../services/jwt-token.service';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
@@ -26,17 +28,24 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class MainLayoutComponent {
   nestedMenuOpen = signal(false);
   collapsed = signal(false);
+  role$ = signal<string>("none");
   sidenavWidth = computed(() => this.collapsed() ? '60px' : 'auto')
   titlePage: any = '';
   authS = inject(AuthService);
   localStorage = inject(LocalStorageService);
   logocondor: string = 'img/logo.png';
-  constructor(private router: Router, public titleService: TitleService) { }
   userInfor: IUser | undefined;
   authService = inject(AuthService)
+  jwt = inject(JwtTokenService)
 
-
-
+  constructor(private router: Router, public titleService: TitleService) {
+    const role = this.jwt.getRole();
+    if (role == null) {
+      this.router.navigate(['/'])
+    } else {
+      this.role$.set(role)
+    }
+  }
   logout() {
     this.localStorage.remove("currentuser")
     this.router.navigate(['/'])
@@ -59,6 +68,19 @@ export class MainLayoutComponent {
       item.isExpanded = !item.isExpanded;
     }
   }
+
+  authorizedMenuItems = computed(() => {
+    const items = this.menuItems();
+    const userRole = this.jwt.getRole();
+    if (userRole == 'Administrador') {
+      return items;
+    }
+    else if (userRole == 'Venta') {
+      const allowedLabels = ['venta', "Caja", 'Reportes'];
+      return items.filter(item => allowedLabels.includes(item.label));
+    }
+    return [];
+  });
 
   menuItems = signal<IMenuitem[]>([
     // {

@@ -102,7 +102,6 @@ export class HistorialVentasComponent implements OnInit {
   }
 
   filterItems() {
-    console.log("SearchInput: ", this.searchInput);
     this._BaseApi.filter('sale', this.searchInput, this.selectedStartDate, this.selectedEndDate)
       .subscribe((data: IResult<any>) => {
         this.dataSource.data = data.value;

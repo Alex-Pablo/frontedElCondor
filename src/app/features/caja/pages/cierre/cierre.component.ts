@@ -66,7 +66,6 @@ export class CierreComponent {
       if (data.isSuccess) {
         this.baseOpenCash = data.value.openingAmount;
         this.dateOpenCash = data.value.openDate
-        console.log(data.value)
       }
     })
 
@@ -76,13 +75,11 @@ export class CierreComponent {
   }
 
   onCloseCashSession() {
-    console.log("totall", this.totalAmount);
     const closeCashSession = {
       reportedClosingAmount: this.totalAmount
     };
 
     this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
-      console.log(data);
 
       if (data.isSuccess) {
         this._SweetAlert.showSuccess("La sesión de caja se cerró con éxito");

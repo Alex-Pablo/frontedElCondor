@@ -27,7 +27,6 @@ export class BaseApiService {
   }
 
   closeCashSession(data: any) {
-    console.log(data)
     return this.http.post<any>(`${environment.baseUrlApi}/cashSession/close`, data);
   }
 
@@ -60,12 +59,9 @@ export class BaseApiService {
     return this.http.get<any>(`${environment.baseUrlApi}/${service}`, { params, observe: 'response' })
       .pipe(
         map(response => {
-          console.log('HTTP Status Code:', response.status);  // Esto mostrará el código de estado
-          console.log(response);
 
           const paginationHeader = response.headers.get('X-Pagination') || response.headers.get('x-pagination');
           if (!paginationHeader) {
-            console.warn('X-Pagination header not found');
           }
 
           const pagination = paginationHeader ? JSON.parse(paginationHeader) : null;
@@ -91,7 +87,6 @@ export class BaseApiService {
       params = params.append('endDate', endDate.toISOString());
     }
 
-    console.log(params)
     return this.http.get<any>(`${this.baseApi}/${service}/filter`, { params });
   }
 }

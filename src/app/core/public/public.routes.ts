@@ -14,17 +14,6 @@ export const PUBLIC_ROUTES: Routes = [
       {
         path: 'iniciarSesion',
         component: LoginPageComponent,
-        canActivate: [
-          () => {
-            const jwt = inject(JwtTokenService);
-            if (jwt.isTokenExpired()) {
-              return true
-            }
-            const router = inject(Router);
-            router.navigate(['./admin/usuarios'])
-            return false
-          }
-        ],
       }
     ]
   }

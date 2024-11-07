@@ -81,7 +81,6 @@ export class ProductoPopupComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value)
     if (this.loginForm.valid) {
       this.sSweetAlert.showLoading();
       const formData = new FormData();
@@ -101,7 +100,6 @@ export class ProductoPopupComponent {
       formData.append('Img', this.loginForm.value.profileImg);
       if (this.isEditMode) {
 
-        console.log('editar');
         const idUser = this.data.payload.id;
         if (idUser > 0) {
           this.sBaseApi.updateItem('Product', formData, idUser).subscribe((data: IResult<string>) => {
@@ -116,7 +114,6 @@ export class ProductoPopupComponent {
 
       } else {
 
-        console.log('crear producto');
         this.sBaseApi.addItem('Product', formData).subscribe((data: IResult<boolean>) => {
           if (data.isSuccess) {
             this.sSweetAlert.closeLoading();
@@ -135,7 +132,6 @@ export class ProductoPopupComponent {
 
   getCategory() {
     this.sBaseApi.getItems('Category').subscribe((data: IResult<any>) => {
-      console.log(data.value);
       this.aCategories = data.value;
     })
   }

@@ -50,7 +50,6 @@ export class InventoryComponent implements OnInit {
   }
 
   filterItems() {
-    console.log(this.searchInput)
     this._BaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
       this.dataSource.data = data.value;
     })
@@ -74,9 +73,7 @@ export class InventoryComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._BaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log(data.items)
       this.dataSource.data = data.items;
-      console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
       this.paginator.pageIndex = data.pagination.CurrentPage - 1;
       this.paginator.length = this.totalItems;

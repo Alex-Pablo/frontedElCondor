@@ -34,7 +34,6 @@ export class AperturaComponent {
       openingAmount: this.saldoInicial
     }
     this._BaseApi.addItem("cashSession", oApertua).subscribe((data: IResult<any>) => {
-      console.log("resultado de apertura", data)
       if (data.isSuccess) {
         this._SweetAlert.showSuccess("Apertura Correcta")
       } else {

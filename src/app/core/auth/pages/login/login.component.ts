@@ -58,7 +58,7 @@ export class LoginPageComponent {
               showConfirmButton: false
             }).then(() => {
               //
-              this.router.navigate(['/venta/venta '])
+              this.router.navigate(['/venta/venta'])
             });
           } else {
             Swal.fire({

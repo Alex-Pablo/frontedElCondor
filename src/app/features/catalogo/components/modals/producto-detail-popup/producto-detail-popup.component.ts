@@ -28,9 +28,8 @@ export class ProductoDetailPopupComponent {
   }
 
   loadProductDetails(id: any): void {
-    this.sBaseApi.getDetail('product',id).subscribe((data: IResult<any>) => {
+    this.sBaseApi.getDetail('product', id).subscribe((data: IResult<any>) => {
       this.ProductDetail = data.value;
-      console.log(this.ProductDetail);
     });
   }
 }

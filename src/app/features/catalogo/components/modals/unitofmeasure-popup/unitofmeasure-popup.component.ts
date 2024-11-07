@@ -11,7 +11,7 @@ import { IResult } from '../../../../../shared/models/IResult';
 import { BaseApiService } from '../../../../../core/services/base-api.service';
 
 export interface UnitOfMeasure {
-  id: number; 
+  id: number;
   name: string;
   abbreviation: string;
   description: string;
@@ -48,45 +48,43 @@ export class UnitofmeasurePopupComponent {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit() {
     if (this.unitForm.valid) {
       this.sSweetAlert.showLoading();
-      
+
       // Cambiar las propiedades a minúsculas para coincidir con la API
       const unit = {
         name: this.unitForm.get('name')?.value,  // Cambiado a minúscula
         abbreviation: this.unitForm.get('abbreviation')?.value,  // Cambiado a minúscula
         description: this.unitForm.get('description')?.value  // Cambiado a minúscula
       };
-  
-      
-        console.log('enviando')
-        this.sBaseApi.addItem('unitOfMeasure', unit).subscribe(
 
-          (data: IResult<boolean>) => {
-            console.log('enviando2')
-            this.sSweetAlert.closeLoading(); // Cierra el loading
-  
-            if (data.isSuccess) {
-              this._MatDialgoRef.close(true); // Cierra el diálogo si es exitoso
-            } else {
-              this.sSweetAlert.showError(data.error || 'Error al crear la unidad de medida');
-            }
-          },
-          (error) => {
-            this.sSweetAlert.closeLoading(); // Cierra el loading en caso de error
-            console.error('Error al crear:', error); // Registro del error en la consola
-            this.sSweetAlert.showError('Error al crear la unidad de medida: ' + error.message);
+
+      this.sBaseApi.addItem('unitOfMeasure', unit).subscribe(
+
+        (data: IResult<boolean>) => {
+          this.sSweetAlert.closeLoading(); // Cierra el loading
+
+          if (data.isSuccess) {
+            this._MatDialgoRef.close(true); // Cierra el diálogo si es exitoso
+          } else {
+            this.sSweetAlert.showError(data.error || 'Error al crear la unidad de medida');
           }
-        );
-      }
+        },
+        (error) => {
+          this.sSweetAlert.closeLoading(); // Cierra el loading en caso de error
+          console.error('Error al crear:', error); // Registro del error en la consola
+          this.sSweetAlert.showError('Error al crear la unidad de medida: ' + error.message);
+        }
+      );
+    }
     else {
       this.sSweetAlert.showError('Por favor, completa todos los campos requeridos.'); // Mensaje si el formulario no es válido
     }
   }
-  
+
 
   // onSubmit() {
   //   if (this.unitForm.valid) {

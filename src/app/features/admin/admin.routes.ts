@@ -13,7 +13,8 @@ export const ADMIN_ROUTES: Routes = [
     canActivate: [
       () => {
         const jwt = inject(JwtTokenService);
-        if (!jwt.isTokenExpired()) {
+        const isTokenExpired = jwt.isTokenExpired();
+        if (!isTokenExpired) {
           return true
         }
         const router = inject(Router);

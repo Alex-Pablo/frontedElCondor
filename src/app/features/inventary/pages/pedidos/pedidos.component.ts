@@ -61,7 +61,6 @@ export class PedidosComponent implements OnInit {
   }
 
   filterItems() {
-    console.log(this.searchInput)
     this._sBaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
       this.dataSource.data = data.value;
     })
@@ -80,9 +79,7 @@ export class PedidosComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._sBaseApi.getItemsPagination('order', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log(data.items)
       this.dataSource.data = data.items;
-      console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
       this.paginator.pageIndex = data.pagination.CurrentPage - 1;
       this.paginator.length = this.totalItems;
@@ -141,7 +138,6 @@ export class PedidosComponent implements OnInit {
           if (data.isSuccess) {
             const ok = await this._sSweetalert.showNotification("Se a actualizado el inventario con los productos recibidos");
             this.loadItems();
-            console.log("dato a converit en pdf", data.value)
           } else {
             this._sSweetalert.showError("Error al editar pedido");
           }

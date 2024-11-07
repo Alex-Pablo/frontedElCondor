@@ -60,9 +60,9 @@ export class JwtTokenService {
     return this.decodedToken ? this.decodedToken['displayname'] : null;
   }
 
-  getEmailId() {
+  getRole() {
     this.decodeToken();
-    return this.decodedToken ? this.decodedToken['email'] : null;
+    return this.decodedToken ? this.decodedToken['role'] : null;
   }
 
   getExpiryTime() {
