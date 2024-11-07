@@ -49,7 +49,7 @@ export class LoginPageComponent {
         next: (res: IResult<string>) => {
           if (res.isSuccess) {
 
-            this.router.navigate(['/admin/usuarios'])
+            // this.router.navigate(['/admin/usuarios'])
             Swal.fire({
               icon: "success",
               title: "Acceso concedido",
@@ -58,7 +58,7 @@ export class LoginPageComponent {
               showConfirmButton: false
             }).then(() => {
               //
-              this.router.navigate(['/admin/usuarios'])
+              this.router.navigate(['/venta/venta'])
             });
           } else {
             Swal.fire({

@@ -77,7 +77,6 @@ export class UsersComponent implements OnInit {
   }
 
   filterItems() {
-    console.log(this.searchInput)
     this._BaseApi.filter('inventory', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
       this.dataSource.data = data.value;
     })
@@ -97,9 +96,7 @@ export class UsersComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._BaseApi.getItemsPagination('inventory', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log(data.items)
       this.dataSource.data = data.items;
-      console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
       this.paginator.pageIndex = data.pagination.CurrentPage - 1;
       this.paginator.length = this.totalItems;
@@ -113,7 +110,6 @@ export class UsersComponent implements OnInit {
       if (data.isSuccess) {
         this.users = data.value ?? [];
         this.sSweetalert.closeLoading();
-        console.log(this.users)
       }
     })
   }
@@ -123,7 +119,6 @@ export class UsersComponent implements OnInit {
   }
 
   onSearch(value: string) {
-    console.log(value);
   }
 
   openModalCreate() {
@@ -146,7 +141,6 @@ export class UsersComponent implements OnInit {
       disableClose: true,
       data: { payload: user }
     }).afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
         this.getAllUsers();
       }
@@ -169,7 +163,6 @@ export class UsersComponent implements OnInit {
 
   // habre el modal para ver los usuarios a detalle
   openUserDetail(selectedId: string) {
-    console.log('id', selectedId)
     this._matDialog.open(UserDetailPopupComponent, {
       data: { id: selectedId },
       width: '350px',

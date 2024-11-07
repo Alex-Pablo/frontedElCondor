@@ -60,22 +60,35 @@ export class JwtTokenService {
     return this.decodedToken ? this.decodedToken['displayname'] : null;
   }
 
-  getEmailId() {
+  getRole() {
     this.decodeToken();
-    return this.decodedToken ? this.decodedToken['email'] : null;
+    return this.decodedToken ? this.decodedToken['role'] : null;
   }
 
   getExpiryTime() {
     this.decodeToken();
     return this.decodedToken ? this.decodedToken['exp'] : null;
   }
+  //
+  // isTokenExpired(): boolean {
+  //   const expiryTime: number = this.getExpiryTime();
+  //   if (expiryTime) {
+  //     return ((1000 * expiryTime) - (new Date()).getTime()) < 5000;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
 
   isTokenExpired(): boolean {
-    const expiryTime: number = this.getExpiryTime();
-    if (expiryTime) {
-      return ((1000 * expiryTime) - (new Date()).getTime()) < 5000;
-    } else {
-      return false;
+    const token = localStorage.getItem('currentuser');
+    if (!token) {
+      return true;
     }
+
+    this.setToken(token);
+    const expiryTime: number = this.getExpiryTime();
+    return expiryTime ? ((1000 * expiryTime) - (new Date()).getTime()) < 5000 : true;
   }
+
 }

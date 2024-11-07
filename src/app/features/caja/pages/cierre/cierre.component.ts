@@ -31,6 +31,8 @@ export class CierreComponent {
   totalAmount: number = 0;
   _BaseApi = inject(BaseApiService)
   _SweetAlert = inject(SweealertService)
+  baseOpenCash = 0;
+  dateOpenCash = 0;
   private intervalId: any;
 
   denominations: Denomination[] = [
@@ -59,19 +61,25 @@ export class CierreComponent {
       }
     });
 
+
+    this._BaseApi.getItems("cashSession").subscribe((data: IResult<any>) => {
+      if (data.isSuccess) {
+        this.baseOpenCash = data.value.openingAmount;
+        this.dateOpenCash = data.value.openDate
+      }
+    })
+
     this.intervalId = setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
   }
 
   onCloseCashSession() {
-    console.log("totall", this.totalAmount);
     const closeCashSession = {
       reportedClosingAmount: this.totalAmount
     };
 
     this._BaseApi.closeCashSession(closeCashSession).subscribe((data: IResult<any>) => {
-      console.log(data);
 
       if (data.isSuccess) {
         this._SweetAlert.showSuccess("La sesión de caja se cerró con éxito");
@@ -103,67 +111,67 @@ export class CierreComponent {
   exportToPDF() {
     const DATA: HTMLElement | null = document.getElementById('reportContent');
     const PDF = new jsPDF('p', 'mm', 'a4');
-  
+
     if (!DATA) {
       console.error('El contenedor con ID "reportContent" no se encontró.');
       return;
     }
-  
-    
+
+
     const now = new Date();
     const date = now.toLocaleDateString('es-GT');
     const time = now.toLocaleTimeString('es-GT');
-  
-    
+
+
     const reportDate = document.getElementById('reportDate');
     const reportMonth = document.getElementById('reportMonth');
     const reportUser = document.getElementById('reportUser');
-  
+
     if (reportDate) {
       reportDate.textContent = ` ${date}, ${time}`;
     }
-  
+
     if (reportMonth) {
       reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
     }
-  
+
     if (reportUser) {
       reportUser.textContent = ` ${this.userInfor?.firstname} ${this.userInfor?.lastname}`;
     }
-  
+
 
     const actionButtons: HTMLElement | null = document.querySelector('.action-buttons');
     if (actionButtons) {
-      actionButtons.style.display = 'none'; 
+      actionButtons.style.display = 'none';
     }
-  
-    
-    html2canvas(DATA, { 
+
+
+    html2canvas(DATA, {
       useCORS: true,
-      allowTaint: true 
+      allowTaint: true
     }).then((canvas) => {
       const fileWidth = 208;
       const fileHeight = (canvas.height * fileWidth) / canvas.width;
-  
+
       const FILEURI = canvas.toDataURL('image/png');
       PDF.addImage(FILEURI, 'PNG', 0, 0, fileWidth, fileHeight);
-      
-    
+
+
       PDF.save(`reporte-usuarios-${date}-${time}.pdf`);
-  
-      
+
+
       if (actionButtons) {
-        actionButtons.style.display = 'flex'; 
+        actionButtons.style.display = 'flex';
       }
     }).catch(error => {
       console.error('Error al generar el PDF:', error);
-  
-      
+
+
       if (actionButtons) {
         actionButtons.style.display = 'flex';
       }
     });
   }
-  
-  
+
+
 }

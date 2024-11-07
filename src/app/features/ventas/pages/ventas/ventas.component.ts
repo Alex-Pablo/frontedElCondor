@@ -95,7 +95,6 @@ export class VentasComponent implements OnInit {
     this._BaseApi.getItemsById('inventory/category', id).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this.productos = data.value
-        console.log(this.productos)
         this._sSweetAlet.closeLoading();
       } else {
         this._sSweetAlet.showError("Error")
@@ -125,7 +124,6 @@ export class VentasComponent implements OnInit {
 
     // Agregar el producto a la lista de productos seleccionados
     this.selectedProducts.push(saleDetail);
-    console.log(this.selectedProducts);
 
     // Mostrar solo el modal de lista de productos
     // <<<<<<< HEAD
@@ -183,7 +181,6 @@ export class VentasComponent implements OnInit {
     this._BaseApi.addItem('sale', this.selectedProducts).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this._sSweetAlet.closeLoading();
-        console.log(data.value);
         this.transactionId = data.value.id;
         this.transactionTotal = data.value.total;
         this.close();

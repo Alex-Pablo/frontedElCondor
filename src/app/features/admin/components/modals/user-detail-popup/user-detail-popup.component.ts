@@ -32,7 +32,6 @@ export class UserDetailPopupComponent implements OnInit {
   loadUserDetails(id: any): void {
     this.sAuth.getUserDetail(id).subscribe((data: IResult<IUserDetailDto>) => {
       this.userDetail = data.value;
-      console.log(this.userDetail);
     });
   }
 

@@ -69,7 +69,6 @@ export class UserPopupComponent {
         formData.append('Status', this.loginForm.value.status)
       if (this.isEditMode) {
 
-        console.log('editar');
         const idUser = this.data.payload.id;
         if (idUser > 0) {
           this.sAuth.modifyUser(formData, idUser).subscribe((data: IResult<string>) => {
@@ -84,7 +83,6 @@ export class UserPopupComponent {
 
       } else {
 
-        console.log('crear usuario');
         this.sAuth.register(formData).subscribe((data: IResult<boolean>) => {
           if (data.isSuccess) {
             this.sSweetAlert.closeLoading();

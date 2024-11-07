@@ -51,39 +51,37 @@ export class InventoryReportComponent implements OnInit {
       }
     });
 
-// Cargar el reporte de inventario
-this.inventoryService.getInventoryReport().subscribe(
-    (reportInventory) => {
-      this.reportInventory = reportInventory; // Asigna directamente el arreglo
-      console.log('Reporte de inventario:', this.reportInventory); // Verifica que los datos estén aquí
-    },
-    (error) => {
-      console.error('Error en la llamada a la API:', error);
-    }
-  );
+    // Cargar el reporte de inventario
+    this.inventoryService.getInventoryReport().subscribe(
+      (reportInventory) => {
+        this.reportInventory = reportInventory; // Asigna directamente el arreglo
+      },
+      (error) => {
+        console.error('Error en la llamada a la API:', error);
+      }
+    );
 
     // Obtener información de la empresa con ID 1
     this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
       if (data.isSuccess) {
         this.enterpriseInfo = data.value; // Acceder a data.value
-        console.log('Datos de la empresa:', this.enterpriseInfo);
       } else {
         console.error('Error al obtener datos de la empresa:', data.error);
       }
     });
   }
 
-    // Método para traducir el estado
-    getStatusDescription(status: string): string {
-        switch (status) {
-          case 'S':
-            return 'Disponible';
-          case 'P':
-            return 'Registrado';
-          default:
-            return 'Desconocido'; // Valor por defecto si no coincide
-        }
-      }
+  // Método para traducir el estado
+  getStatusDescription(status: string): string {
+    switch (status) {
+      case 'S':
+        return 'Disponible';
+      case 'P':
+        return 'Registrado';
+      default:
+        return 'Desconocido'; // Valor por defecto si no coincide
+    }
+  }
 
   // Función para exportar la tabla a PDF
   exportToPDF() {
@@ -101,8 +99,8 @@ this.inventoryService.getInventoryReport().subscribe(
     const reportUser = document.getElementById('reportUser');
 
     if (reportMonth) {
-        reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
-      }
+      reportMonth.textContent = ` ${now.toLocaleString('default', { month: 'long' })} ${now.getFullYear()}`;
+    }
 
     if (reportDate) {
       reportDate.textContent = ` ${date}, ${time}`;

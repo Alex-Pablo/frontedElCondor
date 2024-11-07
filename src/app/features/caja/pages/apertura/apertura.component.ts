@@ -1,4 +1,4 @@
-import { Component, inject, NgModule } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { IUser } from '../../../../shared/models/IUser';
@@ -26,13 +26,14 @@ export class AperturaComponent {
   _BaseApi = inject(BaseApiService)
   _SweetAlert = inject(SweealertService)
 
+
+
   onSubmit() {
     this._SweetAlert.showLoading();
     const oApertua = {
       openingAmount: this.saldoInicial
     }
     this._BaseApi.addItem("cashSession", oApertua).subscribe((data: IResult<any>) => {
-      console.log("resultado de apertura", data)
       if (data.isSuccess) {
         this._SweetAlert.showSuccess("Apertura Correcta")
       } else {

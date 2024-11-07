@@ -53,7 +53,6 @@ export class HistorialDetailPopupComponent implements OnInit {
     this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
       if (data.isSuccess) {
         this.enterpriseInfor = data.value; // Accede a data.value
-        console.log('Datos de la empresa:', this.enterpriseInfor);
       } else {
         console.error('Error al obtener datos de la empresa:', data.error);
       }

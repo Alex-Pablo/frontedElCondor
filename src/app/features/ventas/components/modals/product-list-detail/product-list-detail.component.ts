@@ -22,7 +22,7 @@ interface Producto {
   styleUrl: './product-list-detail.component.scss'
 })
 export class ProductListDetailComponent {
-  
+
   productos: Producto[] = [
     { nombre: 'Pintura rojo', precio: 30, cantidad: 1, descuento: 5, disponible: 10 },
     { nombre: 'Martillo', precio: 20, cantidad: 3, descuento: 0, disponible: 15 }
@@ -31,7 +31,7 @@ export class ProductListDetailComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProductListDetailComponent>
-  ) {}
+  ) { }
 
   close() {
     this.dialogRef.close();
@@ -59,7 +59,6 @@ export class ProductListDetailComponent {
 
   confirmarVenta() {
     // Lógica para confirmar la venta
-    console.log('Venta confirmada', this.productos);
     this.close();
   }
 }

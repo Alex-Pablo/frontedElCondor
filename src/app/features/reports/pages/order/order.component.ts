@@ -55,7 +55,6 @@ export class OrderReportComponent implements OnInit {
       (response: ApiResponse<IOrderDto[]>) => {
         if (response.isSuccess) {
           this.orderReport = response.value || []; // Asigna directamente el arreglo
-          console.log('Reporte de órdenes:', this.orderReport); // Verifica que los datos estén aquí
         } else {
           console.error('Error al obtener el reporte:', response.error);
         }
@@ -69,7 +68,6 @@ export class OrderReportComponent implements OnInit {
     this.enterpriseService.getEnterpriseById(1).subscribe((data) => {
       if (data.isSuccess) {
         this.enterpriseInfo = data.value; // Acceder a data.value
-        console.log('Datos de la empresa:', this.enterpriseInfo);
       } else {
         console.error('Error al obtener datos de la empresa:', data.error);
       }

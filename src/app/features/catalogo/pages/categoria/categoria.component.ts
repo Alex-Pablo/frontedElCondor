@@ -49,7 +49,6 @@ export class CategoriaComponent implements OnInit {
   }
 
   onSearch(id: any) {
-    console.log(id)
   }
 
   onViewDetails(id: Categoria) {
@@ -104,7 +103,6 @@ export class CategoriaComponent implements OnInit {
       disableClose: true,
       data: { payload: categoria }
     }).afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
         this.getAllCategoria();
       }

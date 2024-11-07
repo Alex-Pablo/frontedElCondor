@@ -2,30 +2,33 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SaleDto, ApiResponse } from '../../shared/models/ISale';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaleService {
-  private baseUrl = 'https://localhost:7059/api/Sale'; // URL base de la API
+  // private baseUrl = 'https://localhost:7059/api/Sale'; // URL base de la API
 
-  constructor(private http: HttpClient) {}
+  baseUrl: string = environment.baseUrlApi;
+
+  constructor(private http: HttpClient) { }
 
   // Método para registrar una nueva venta
   registerSale(saleItems: SaleDto[]): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.baseUrl}/register`, saleItems);
+    return this.http.post<ApiResponse>(`${this.baseUrl}/Sale/register`, saleItems);
   }
 
   // Método para obtener el historial de ventas con paginación
   getSaleHistory(paginationParams: any): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}/inventory/history/GetItems`, {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/Sale/inventory/history/GetItems`, {
       params: paginationParams
     });
   }
 
   // Método para obtener detalles de una venta específica
   getSaleDetail(id: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}/detail/${id}`);
+    return this.http.get<ApiResponse>(`${this.baseUrl}/Sale/detail/${id}`);
   }
 
   // Método para filtrar las ventas
@@ -35,6 +38,6 @@ export class SaleService {
       .set('startDate', startDate || '')
       .set('endDate', endDate || '');
 
-    return this.http.get<ApiResponse>(`${this.baseUrl}/filter`, { params });
+    return this.http.get<ApiResponse>(`${this.baseUrl}/Sale/filter`, { params });
   }
 }

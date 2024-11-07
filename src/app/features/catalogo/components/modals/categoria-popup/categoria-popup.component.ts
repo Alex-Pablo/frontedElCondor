@@ -57,9 +57,7 @@ export class CategoriaPopupComponent {
         Name: this.loginForm.get('nombre')?.value,
         Description: this.loginForm.get('descripcion')?.value
       };
-      console.log(category)
       if (this.isEditMode) {
-        console.log('editar');
         const idUser = this.data.payload.id;
         if (idUser > 0) {
           this.sBaseApi.updateItem('Category', category, idUser).subscribe((data: IResult<string>) => {
@@ -72,7 +70,6 @@ export class CategoriaPopupComponent {
           })
         }
       } else {
-        console.log('crear categoria');
         this.sBaseApi.addItem('Category', category).subscribe((data: IResult<boolean>) => {
           if (data.isSuccess) {
             this.sSweetAlert.closeLoading();

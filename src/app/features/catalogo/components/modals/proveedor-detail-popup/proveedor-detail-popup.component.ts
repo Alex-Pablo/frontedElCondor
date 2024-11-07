@@ -18,11 +18,11 @@ import { IResult } from '../../../../../shared/models/IResult';
   templateUrl: './proveedor-detail-popup.component.html',
   styleUrl: './proveedor-detail-popup.component.scss'
 })
-export class ProveedorDetailPopupComponent implements OnInit{
+export class ProveedorDetailPopupComponent implements OnInit {
   _MatDialgoRef = inject(MatDialogRef<ProveedorDetailPopupComponent>)
   sBaseApi = inject(BaseApiService)
 
-proveedordetail:any
+  proveedordetail: any
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
   }
@@ -30,13 +30,12 @@ proveedordetail:any
     this.loadProveedoresDetails(this.data.id)
   }
   loadProveedoresDetails(id: any): void {
-    this.sBaseApi.getDetail('supplier',id).subscribe((data: IResult<any>) => {
-      this.proveedordetail=data.value
-    console.log(this.proveedordetail)
+    this.sBaseApi.getDetail('supplier', id).subscribe((data: IResult<any>) => {
+      this.proveedordetail = data.value
     });
   }
 
 
-  
+
 }
 

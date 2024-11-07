@@ -22,7 +22,6 @@ export class ImageUploaderComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    console.log(event);
     const file = event.target.files[0];
     if (file) {
       this.control?.setValue(file);

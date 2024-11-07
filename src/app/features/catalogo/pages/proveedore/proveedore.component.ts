@@ -37,7 +37,7 @@ export class ProveedoreComponent implements OnInit {
   sSweetalert = inject(SweealertService);
   sBaseApi = inject(BaseApiService);
   selectedId: any;
-  
+
   @ViewChild('sidenav') sidenav!: MatSidenav
   onSearch(event: any) {
   }
@@ -46,7 +46,7 @@ export class ProveedoreComponent implements OnInit {
     this.sTitle.setTitle("proveedores")
     this.getAllProveedores();
   }
-  
+
 
 
   closeSidenav() {
@@ -94,7 +94,6 @@ export class ProveedoreComponent implements OnInit {
   }
 
   onViewDetails(selectedId: string) {
-    console.log('id', selectedId)
     this._matDialog.open(ProveedorDetailPopupComponent, {
       data: { id: selectedId },
       width: '350px',

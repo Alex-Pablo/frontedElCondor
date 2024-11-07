@@ -63,7 +63,6 @@ export class ProductComponent implements OnInit {
   }
 
   filterItems() {
-    console.log(this.searchInput)
     this._BaseApi.filter('producto', this.searchInput, this.selectedStartDate, this.selectedEndDate).subscribe((data: IResult<any>) => {
       this.dataSource.data = data.value;
     })
@@ -83,9 +82,7 @@ export class ProductComponent implements OnInit {
     const pageSize = this.paginator.pageSize;
 
     this._BaseApi.getItemsPagination('product', pageIndex + 1, pageSize).subscribe((data: any) => {
-      console.log("datos que se mostrrta en ", data.items)
       this.dataSource.data = data.items;
-      console.log(this.dataSource)
       this.totalItems = data.pagination.TotalItemCount;
       this.paginator.pageIndex = data.pagination.CurrentPage - 1;
       this.paginator.length = this.totalItems;
@@ -101,7 +98,6 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getProducts();
-    console.log(this.dataSource);
   }
 
   onOpenModal() {
@@ -130,7 +126,6 @@ export class ProductComponent implements OnInit {
       disableClose: true,
       data: { payload: categoria }
     }).afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
         this.loadItems();
       }
@@ -143,7 +138,6 @@ export class ProductComponent implements OnInit {
 
 
   onViewDetails(selectedId: string) {
-    console.log('id', selectedId)
     this._matDialog.open(ProductoDetailPopupComponent, {
       data: { id: selectedId },
       width: '350px',
