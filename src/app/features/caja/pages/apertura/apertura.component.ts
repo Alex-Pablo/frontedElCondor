@@ -1,4 +1,4 @@
-import { Component, inject, NgModule } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { IUser } from '../../../../shared/models/IUser';
@@ -25,6 +25,8 @@ export class AperturaComponent {
   saldoInicial: number = 1000;
   _BaseApi = inject(BaseApiService)
   _SweetAlert = inject(SweealertService)
+
+
 
   onSubmit() {
     this._SweetAlert.showLoading();

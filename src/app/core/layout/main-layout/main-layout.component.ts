@@ -61,11 +61,11 @@ export class MainLayoutComponent {
   }
 
   menuItems = signal<IMenuitem[]>([
-    {
-      icon: 'home', // Icono para 'Inicio'
-      label: 'Inicio',
-      route: '/dashboard'
-    },
+    // {
+    //   icon: 'home', // Icono para 'Inicio'
+    //   label: 'Inicio',
+    //   route: '/dashboard'
+    // },
     {
       icon: 'attach_money', // Icono para 'Caja'
       label: 'Caja',
@@ -163,11 +163,11 @@ export class MainLayoutComponent {
         //   label: 'Roles',
         //   route: 'roles'
         // },
-        {
-          icon: 'store', // Icono para 'Negocio'
-          label: 'Negocio',
-          route: 'empresa'
-        }
+        // {
+        //   icon: 'store', // Icono para 'Negocio'
+        //   label: 'Negocio',
+        //   route: 'empresa'
+        // }
       ],
       isExpanded: false
     },
