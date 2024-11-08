@@ -22,6 +22,11 @@ export class BaseApiService {
     return this.http.get<any>(`${environment.baseUrlApi}/${service}/get/${id}`)
   }
 
+
+  getLastItem(service: any) {
+    return this.http.get<any>(`${environment.baseUrlApi}/${service}/getLast`)
+  }
+
   addItem(service: any, data: any) {
     return this.http.post<any>(`${environment.baseUrlApi}/${service}/register`, data);
   }

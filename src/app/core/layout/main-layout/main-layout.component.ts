@@ -185,11 +185,11 @@ export class MainLayoutComponent {
         //   label: 'Roles',
         //   route: 'roles'
         // },
-        // {
-        //   icon: 'store', // Icono para 'Negocio'
-        //   label: 'Negocio',
-        //   route: 'empresa'
-        // }
+        {
+          icon: 'store', // Icono para 'Negocio'
+          label: 'Negocio',
+          route: 'empresa'
+        }
       ],
       isExpanded: false
     },
