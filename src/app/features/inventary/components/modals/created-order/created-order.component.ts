@@ -5,6 +5,7 @@ import { InputSearchComponent } from '../../../../../shared/components/input-sea
 import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
 import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
 import { NgFor } from '@angular/common';
+import { OrderPreviewComponent } from '../order-preview/order-preview.component';
 
 @Component({
   selector: 'app-created-order',

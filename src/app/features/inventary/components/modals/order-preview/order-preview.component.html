@@ -1,0 +1,61 @@
+<div id="pdfContent">
+  <div class="head">
+    <section class="info-enterprise">
+      <img [src]="logocondor" alt="Logo" class="logo">
+      <p><strong>{{ enterpriseInfor?.name }}</strong></p>
+    </section>
+    <h2 mat-dialog-title>Orden de Pedido</h2>
+  </div>
+
+  <div class="header">
+    <p><strong>Teléfono:</strong> {{ enterpriseInfor?.phoneNumber }}</p>
+    <p><strong>E-mail:</strong> {{ enterpriseInfor?.email }}</p>
+    <p><strong>Dirección:</strong> {{ enterpriseInfor?.address }}</p>
+  </div>
+
+  <hr>
+
+  <mat-dialog-content class="orderinfo">
+
+    <div class="header">
+      <p><strong>Proveedor:</strong> {{ data.supplier }}</p>
+      <p><strong>Fecha y hora:</strong> {{ data.orderDate }}</p>
+    </div>
+
+    <h2>Productos:</h2>
+
+    <div class="product-table-container">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Nombre de Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>SubTotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of data.products">
+            <td>{{ product.name }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>Q. {{ product.price | number:'1.2-2' }}</td>
+            <td>Q. {{ product.quantity * product.price | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="total">
+      <strong>Total del Pedido: Q.{{ data.total | number:'1.2-2' }}</strong>
+    </div>
+  </mat-dialog-content>
+</div>
+
+<mat-dialog-actions>
+  
+<div class="button-container">
+    <button class="custom-button" mat-button (click)="cancel()">Regresar</button>
+    <button class="custom-button" mat-button color="primary" (click)="confirmOrder()">Confirmar Pedido</button>
+</div>
+
+</mat-dialog-actions>

@@ -1,0 +1,142 @@
+#pdfContent {
+  font-family: "PoppinsRegular";
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: "PoppinsBold";
+  padding-inline: 5%;
+
+  .info-enterprise {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .logo {
+      max-width: 80px; // Ajusta el tamaño del logo
+    }
+  }
+
+  h2 {
+    font-size: 2em;
+    color: var(--primary-color);
+    font-family: "PoppinsBold";
+  }
+}
+
+.header {
+  margin: 10px 0;
+  margin-left: 5%;
+
+  p {
+    margin: 5px 0; // Espaciado entre líneas
+
+    strong {
+      font-family: "PoppinsBold";
+    }
+  }
+}
+
+.orderinfo {
+  padding: 0;
+  font-family: "PoppinsRegular";
+
+  .header {
+    margin: 10px 0;
+    margin-left: 5%;
+    color: var(--black-txt-color);
+    font-size: 1.2em;
+
+    p {
+      margin: 5px 0; // Espaciado entre líneas
+
+      strong {
+        font-family: "PoppinsBold";
+      }
+    }
+  }
+
+  h2 {
+    font-size: 1.5em;
+    font-family: "PoppinsSemiBold";
+    color: var(--black-txt-color);
+    margin-left: 5%;
+  }
+
+  .product-table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .product-table {
+    width: 95%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      border: 1px solid var(--black-txt-color);
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(
+        --txt-second-color
+      ); // Color de fondo del encabezado
+      color: var(--black-txt-color);
+      font-family: "PoppinsBold";
+    }
+
+    td {
+      background-color: var(--blue-pale-color); // Color de fondo del encabezado
+      color: var(--black-txt-color);
+      font-family: "PoppinsSemiBold";
+    }
+  }
+
+  strong {
+    color: var(--black-txt-color);
+    margin-right: 5%;
+    padding-bottom: 20px;
+  }
+}
+
+hr {
+  margin-top: 0.3em;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.custom-button {
+  background-color: var(--txt-blue-color);
+  color: var(--white-color) !important;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.3em;
+  margin-inline: 10px;
+
+  &:hover {
+    background-color: var(--txt-color);
+    color: var(--white-color) !important;
+  }
+}
+
+.total {
+  margin-top: 16px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: right; // Alinear a la derecha
+  padding-bottom: 20px;
+}

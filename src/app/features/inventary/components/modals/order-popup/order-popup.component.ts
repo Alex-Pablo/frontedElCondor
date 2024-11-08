@@ -1,5 +1,5 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { BtnCloseComponent } from '../../../../../shared/components/btn-close/btn-close.component';
 import { BtnAcceptComponent } from '../../../../../shared/components/btn-accept/btn-accept.component';
 import { BaseApiService } from '../../../../../core/services/base-api.service';
@@ -12,7 +12,8 @@ import { InputFieldComponent } from '../../../../../shared/components/input-fiel
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { DocumentService } from '../../../../../core/services/generate-order.service';
-import { async } from 'rxjs';
+import { OrderPreviewComponent } from '../order-preview/order-preview.component'
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-order-popup',
@@ -26,7 +27,7 @@ import { async } from 'rxjs';
     InputSelectComponent,
     InputFieldComponent,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './order-popup.component.html',
   styleUrl: './order-popup.component.scss'
@@ -45,7 +46,7 @@ export class OrderPopupComponent implements OnInit {
   editingIndex: number | null = null
   isEditMode: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog) {
     this.isEditMode = !!data.payload;
     this.buildForm(this.data);
   }
@@ -108,109 +109,95 @@ export class OrderPopupComponent implements OnInit {
   }
 
   onSubmit() {
-    //   if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
-    //     this._sSweetalert.showLoading();
-    //     const order = {
-    //       supplierId: this.fOrder.get('idSupplier')?.value,
-    //       products: this.fOrder.get('products')?.value.map((product: any) => ({
-    //         name: product.name,
-    //         quantity: product.quantity,
-    //         price: product.price
-    //       })),
-    //       status: this.fOrder.get('status')?.value
-    //     };
-    //     console.log('antes de enviar', order);
-    //     if (!this.isEditMode) {
-    //       this._sBaseApi.addItem('order', order).subscribe({
-    //         next: async (data: IResult<any>) => {
-    //           this._sSweetalert.closeLoading();
-    //           if (data.isSuccess) {
-    //             // Generar el PDF después de crear el pedido
-    //             this._documentService.generateOrderDocument(order);
-    //             const ok = await this._sSweetalert.showNotification("El PDF se ha descargado. Envíalo al proveedor y cambia el estado a 'En proceso'.");
-    //             this._MatDialgoRef.close(true);
-    //           } else {
-    //             this._sSweetalert.showError("Error al crear el pedido");
-    //             console.error('Error del servidor:', data); // Log adicional
-    //           }
-    //         },
-    //         error: (err) => {
-    //           this._sSweetalert.closeLoading();
-    //           this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
-    //           console.error('Error de comunicación:', err); // Log adicional
-    //         }
-    //       });
-    //     } else {
-    //       this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
-    //         if (data.isSuccess) {
-    //           this._MatDialgoRef.close(true);
-    //         } else {
-    //           console.log(data);
-    //         }
-    //       });
-    //     }
-    //   } else {
-    //     this._sSweetalert.showError("Formulario inválido o sin productos");
-    //   }
-    // }
-    //
+    // Validar que el formulario es válido y que hay productos
     if (this.fOrder.valid && this.fOrder.get('products')?.value.length > 0) {
       this._sSweetalert.showLoading();
+
+      // Extraer productos del formulario
+      const products = this.fOrder.get('products')?.value;
+
       const order = {
         supplierId: this.fOrder.get('idSupplier')?.value,
         products: this.fOrder.get('products')?.value,
         status: this.fOrder.get('status')?.value
       };
-      //nuevo pedido
+
       if (!this.isEditMode) {
+
+        // Enviar el nuevo pedido al servidor
         this._sBaseApi.addItem('order', order).subscribe({
           next: async (data: IResult<any>) => {
-            this._sSweetalert.closeLoading();
             if (data.isSuccess) {
-              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envía al proveedor y cambia el estado a 'En proceso'.")
-              this._MatDialgoRef.close(true);
+              // Extraer y preparar los datos para la vista previa
+              const responseData = data.value;
+
+              // Obtener los detalles del proveedor
+              this._sBaseApi.getDetail('Supplier', responseData.supplierId).subscribe({
+                next: (supplierData: IResult<any>) => {
+                  if (supplierData.isSuccess) {
+                    const supplierInfo = supplierData.value;
+
+                    console.log("datos proveedor: ", supplierInfo)
+
+                    // Preparar los datos para la vista previa
+                    const previewData = {
+                      id: responseData.id,
+                      supplier: supplierInfo.name,
+                      supplierPhone: supplierInfo.phoneNumber,
+                      orderDate: new Date(responseData.orderDate).toLocaleString(),
+                      products: order.products,
+                      total: responseData.total
+                    };
+
+                    // Mostrar la vista previa del PDF
+                    const dialogRef = this.dialog.open(OrderPreviewComponent, {
+                      width: '650px', // Ancho del diálogo
+                      height: '90vh', // Alto del diálogo
+                      data: previewData
+                    });
+
+                    // Cerrar el loading después de abrir el diálogo
+                    this._sSweetalert.closeLoading();
+
+                    // Manejar el cierre del diálogo
+                    firstValueFrom(dialogRef.afterClosed()).then(async (confirmed) => {
+                      if (confirmed) {
+                        await this._sSweetalert.showNotification("El PDF se ha descargado. Envía al proveedor y cambia el estado a 'En proceso'.");
+                        this._MatDialgoRef.close(true);
+                      } else {
+                        console.log("El pedido fue cancelado.");
+                      }
+                    });
+                  } else {
+                    this._sSweetalert.showError("Error al obtener los datos del proveedor");
+                    this._sSweetalert.closeLoading();
+                  }
+                },
+                error: (err) => {
+                  this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor para obtener el proveedor");
+                  this._sSweetalert.closeLoading();
+                }
+              });
             } else {
               this._sSweetalert.showError("Error al crear el pedido");
+              this._sSweetalert.closeLoading(); // Cerrar loading en caso de error
             }
           },
           error: (err) => {
-            this._sSweetalert.closeLoading();
             this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
+            this._sSweetalert.closeLoading(); // Cerrar loading en caso de error
           }
         });
+      } else {
+        // Lógica para editar un pedido
+        console.log("Modo de edición: actualizando el pedido...");
+        // Similar al caso de creación, pero usando un método para actualizar
       }
-      else {
-        ///editar pedido
-        this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe({
-          next: async (data: IResult<any>) => {
-            if (data.isSuccess) {
-              const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor para su notificacion");
-              this._MatDialgoRef.close(true);
-            } else {
-              this._sSweetalert.showError("Error al editar pedido");
-            }
-          },
-          error: (err) => {
-            this._sSweetalert.closeLoading();
-            this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor");
-          }
-        })
-
-
-        // this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
-        //   // if (data.isSuccess) {
-        //   //   const ok = await this._sSweetalert.showNotification("El PDF se ha descargado.Envíalo al proveedor y cambia el estado a 'En proceso'.")
-        //   //   this._MatDialgoRef.close(true)
-        //   // } else {
-        //   //   console.log(data)
-        //   // }
-        // })
-      }
-    }
-    else {
+    } else {
       this._sSweetalert.showError("Formulario inválido o sin productos");
     }
   }
+
 
   addSupplier(id: number) {
     this.fOrder.patchValue({
