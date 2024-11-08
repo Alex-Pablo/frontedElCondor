@@ -176,45 +176,45 @@ export class PedidosComponent implements OnInit {
   }
 
   onViewDetails(pedido: any) {
-// Accede a la fecha del pedido directamente
-const orderDate = pedido.timeOrder || "Fecha no válida"; // Manejo de fecha
+    // Accede a la fecha del pedido directamente
+    const orderDate = pedido.timeOrder || "Fecha no válida"; // Manejo de fecha
 
     this._sBaseApi.getItemBy('order', pedido.id).subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         console.log("data:", data.value);
-  
+
         const responseData = data.value;
-  
+
         // Obtener los detalles del proveedor
         this._sBaseApi.getDetail('Supplier', responseData.supplierId).subscribe({
           next: (supplierData: IResult<any>) => {
             if (supplierData.isSuccess) {
               const supplierInfo = supplierData.value;
-  
-// Obtener los detalles de los productos
-const productRequests = responseData.products.map((product: { id: number; productId: number; price: number; quantity: number; }) => 
-  this._sBaseApi.getDetail('Product', product.productId).pipe(
-    map((productData: IResult<any>) => {
-      if (productData.isSuccess) {
-        console.log("productData: ", productData);
-        return { 
-          name: productData.value.name, // Asegúrate de acceder a la propiedad correcta
-          id: productData.value.id, // Asegúrate de incluir el ID también
-          quantity: product.quantity, // Usa la cantidad del producto original
-          price: product.price // Usa el precio del producto original
-        };
-      } else {
-        console.log("Error al obtener los datos del producto");
-        return null; // Devuelve null en caso de error
-      }
-    }),
-    catchError(err => {
-      console.error("Error en la llamada a la API para el producto con ID:", product.id, err);
-      return of(null); // Devuelve un observable con valor null en caso de error
-    })
-  )
-);
-  
+
+              // Obtener los detalles de los productos
+              const productRequests = responseData.products.map((product: { id: number; productId: number; price: number; quantity: number; }) =>
+                this._sBaseApi.getDetail('Product', product.productId).pipe(
+                  map((productData: IResult<any>) => {
+                    if (productData.isSuccess) {
+                      console.log("productData: ", productData);
+                      return {
+                        name: productData.value.name, // Asegúrate de acceder a la propiedad correcta
+                        id: productData.value.id, // Asegúrate de incluir el ID también
+                        quantity: product.quantity, // Usa la cantidad del producto original
+                        price: product.price // Usa el precio del producto original
+                      };
+                    } else {
+                      console.log("Error al obtener los datos del producto");
+                      return null; // Devuelve null en caso de error
+                    }
+                  }),
+                  catchError(err => {
+                    console.error("Error en la llamada a la API para el producto con ID:", product.id, err);
+                    return of(null); // Devuelve un observable con valor null en caso de error
+                  })
+                )
+              );
+
               // Ejecutar todas las llamadas a la API de productos en paralelo
               forkJoin(productRequests).subscribe({
                 next: (productsDetails) => {
@@ -223,13 +223,13 @@ const productRequests = responseData.products.map((product: { id: number; produc
                     id: responseData.id,
                     supplier: supplierInfo.name,
                     supplierPhone: supplierInfo.phoneNumber,
-                    orderDate: new Date(orderDate).toLocaleString()|| "Fecha no válida", // Manejo de fecha
+                    orderDate: new Date(orderDate).toLocaleString() || "Fecha no válida", // Manejo de fecha
                     products: productsDetails, // Asegúrate de incluir todos los productos
                     total: responseData.total
                   };
-              
+
                   console.log("PreviewData:", previewData);
-                  
+
                   // Mostrar el order Preview
                   this._matDialog.open(OrderPreviewComponent, {
                     width: '650px',
@@ -248,7 +248,8 @@ const productRequests = responseData.products.map((product: { id: number; produc
                   this._sSweetalert.closeLoading();
                 }
               });
-          }},
+            }
+          },
           error: (err) => {
             this._sSweetalert.showError("Ocurrió un error al comunicarse con el servidor para obtener el proveedor");
             this._sSweetalert.closeLoading();
