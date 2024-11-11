@@ -189,9 +189,14 @@ export class OrderPopupComponent implements OnInit {
           }
         });
       } else {
-        // Lógica para editar un pedido
-        console.log("Modo de edición: actualizando el pedido...");
-        // Similar al caso de creación, pero usando un método para actualizar
+        this._sBaseApi.updateItem('order', order, this.data.payload.id).subscribe((data: IResult<any>) => {
+          if (data.isSuccess) {
+            this._sSweetalert.showSuccess("Pedido actualizado")
+            this._MatDialgoRef.close(true);
+          } else {
+            this._sSweetalert.showError(data.error || "Error al actualizar el pedido")
+          }
+        })
       }
     } else {
       this._sSweetalert.showError("Formulario inválido o sin productos");

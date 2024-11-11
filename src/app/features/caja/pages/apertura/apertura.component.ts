@@ -9,6 +9,7 @@ import { AppComponent } from '../../../../app.component';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { SweealertService } from '../../../../core/services/sweealert.service';
+import { TitleService } from '../../../../core/services/title.service';
 
 
 @Component({
@@ -19,14 +20,18 @@ import { SweealertService } from '../../../../core/services/sweealert.service';
   styleUrl: './apertura.component.scss'
 })
 
-export class AperturaComponent {
+export class AperturaComponent implements OnInit {
   logocondor: string = '/img/logo.png';
   userInfor: IUser | undefined;
   saldoInicial: number = 1000;
   _BaseApi = inject(BaseApiService)
   _SweetAlert = inject(SweealertService)
+  sTitle = inject(TitleService);
 
+  ngOnInit(): void {
 
+    this.sTitle.setTitle('Apertura de caja');
+  }
 
   onSubmit() {
     this._SweetAlert.showLoading();

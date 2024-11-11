@@ -19,29 +19,28 @@
     <br />
     <div class="wrapperProducto">
       <div class="Categorias">
-        <h3>Categorias</h3>
-        <button>Todas</button>
-        @for (categoria of categorias; track categoria.id) {
-          <button type="button" (click)="getProducts(categoria.id)">
-            {{ categoria.name }}
-          </button>
+        <p class="font-bold text-lg">Categorias</p>
+        <button type="button" class="mb-4 text-left hover:font-medium" (click)="selectCategory('all')">Todos</button>
+        @for (categoria of aItemsCategory; track categoria.id) {
+        <button type="button" class="mb-4 text-left hover:font-medium" (click)="selectCategory(categoria.id)">
+          {{ categoria.name }}
+        </button>
         }
       </div>
 
-      <div class="product-container">
+      <div class=" product-container">
+        @for(item of productos; track item.id){
         <div class="product-card">
           <div class="wrapperImg">
-            <img
-              class="imagenProducto"
-              src="img/Cuchara.jpg"
-              alt="Herramienta"
-            />
+            <img class="imagenProducto" [src]="item.img" alt="Herramienta" />
           </div>
-          <h2 class="Titulo">Cuchara para albañil.</h2>
-          <p class="Precio">Q23</p>
-          <p class="Disponible">Disponible: <span>34</span></p>
-          <p class="Codigo">Código: <span>#323435</span></p>
+          <h2 class="Titulo">{{item.productName}}</h2>
+          <p class="-mb-8">Q{{item.salePrice}}</p>
+          <p class="">Disponible: <span>{{item.quantityInStock}}</span></p>
+          <p class="">Código: <span>{{item.code}}</span></p>
+          <p class="">Clave: <span>{{item.key}}</span></p>
         </div>
+        }
       </div>
     </div>
   </section>

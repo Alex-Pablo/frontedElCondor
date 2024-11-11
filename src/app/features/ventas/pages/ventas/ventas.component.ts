@@ -52,13 +52,14 @@ export class VentasComponent implements OnInit {
   productos: Producto[] = []
   selectedProducts: SaleDetail[] = []
   _sSweetAlet = inject(SweealertService)
+  sTitle = inject(TitleService);
 
   isModalSinStockVisible: boolean = false;
   isProductListModalVisible: boolean = false; // Controla la visibilidad del modal de productos
   isPaymentModalVisible: boolean = false; // Controla la visibilidad del modal de pago
 
   transactionId: string | null = null; // Almacena el ID de la transacción
-  transactionTotal: number | null = null; // Almacena el total de la venta
+  transactionTotal: number = 0; // Almacena el total de la venta
 
   montoRecibido: number = 0;
   cambio: number = 0;
@@ -81,6 +82,7 @@ export class VentasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.sTitle.setTitle('Productos');
     this._BaseApi.getItems('category').subscribe((data: IResult<any>) => {
       if (data.isSuccess) {
         this.aItemsCategory = data.value;
@@ -195,8 +197,8 @@ export class VentasComponent implements OnInit {
 
 
   confirmar() {
-    this._sSweetAlet.showLoading();
-    if (this.transactionTotal !== null && this.montoRecibido > 0) {
+    // this._sSweetAlet.showLoading();
+    if (this.transactionTotal != 0 && this.montoRecibido > 0) {
       this.cambio = this.montoRecibido - this.transactionTotal;
       const saleTransacction = {
         amount: this.transactionTotal,
@@ -204,25 +206,31 @@ export class VentasComponent implements OnInit {
         receiveAmount: this.montoRecibido,
         returnedAmount: this.cambio
       }
+
+      if (this.montoRecibido < this.transactionTotal) {
+        this._sSweetAlet.showError("Error, monto no coincide")
+        return
+      }
+
       this._BaseApi.addItem('cashFlow', saleTransacction).subscribe((data: IResult<any>) => {
         if (data.isSuccess) {
-          //aqui gneera un recivbo
-          //los datos que se usar para el recibo estya en data.value
           this._sSweetAlet.showSuccess("venta realizado con exito")
           this.selectCategory("all");
           this.montoRecibido = 0;
-          this.transactionTotal = 0
+          this.transactionTotal = 0;
+          this.transactionId = "";
+          this.cambio = 0;
         } else {
           this.montoRecibido = 0;
-          this.transactionTotal = 0
+          this._sSweetAlet.closeLoading();
           this._sSweetAlet.showError(data.error || "Error al registrar la venta");
         }
       })
-
+      this.isPaymentModalVisible = false;
     } else {
+      this._sSweetAlet.closeLoading();
       this._sSweetAlet.showError("Error, el total o la cantidad no son validos")
     }
-    this.isPaymentModalVisible = false;
   }
 
 

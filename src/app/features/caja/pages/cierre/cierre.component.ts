@@ -7,6 +7,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { IResult } from '../../../../shared/models/IResult';
 import { SweealertService } from '../../../../core/services/sweealert.service';
+import { TitleService } from '../../../../core/services/title.service';
 
 
 interface Denomination {
@@ -33,6 +34,8 @@ export class CierreComponent {
   _SweetAlert = inject(SweealertService)
   baseOpenCash = 0;
   dateOpenCash = 0;
+  sTitle = inject(TitleService);
+
   private intervalId: any;
 
   denominations: Denomination[] = [
@@ -55,6 +58,7 @@ export class CierreComponent {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.sTitle.setTitle('Cierre de caja');
     this.authService.getProfile().subscribe((response) => {
       if (response.isSuccess) {
         this.userInfor = response.value;

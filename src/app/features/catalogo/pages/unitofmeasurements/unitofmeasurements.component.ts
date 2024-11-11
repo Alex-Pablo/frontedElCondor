@@ -8,6 +8,7 @@ import { TitleService } from '../../../../core/services/title.service';
 import { UnitofmeasurePopupComponent, UnitOfMeasure } from '../../components/modals/unitofmeasure-popup/unitofmeasure-popup.component';
 import { InputSearchComponent } from "../../../../shared/components/input-search/input-search.component";
 import { MatIcon } from '@angular/material/icon';
+import { IResult } from '../../../../shared/models/IResult';
 
 @Component({
   selector: 'app-unitofmeasurements',
@@ -89,12 +90,12 @@ export class UnitofmeasurementsComponent implements OnInit {
 
   onDelete(unit: UnitOfMeasure) {
     this.sSweetalert.showConfirmation(`¿Quieres eliminar la unidad de medida: ${unit.name}?`, () => {
-      this.sBaseApi.removeItem('unitOfMeasure', unit.id).subscribe((data: any) => {
+      this.sBaseApi.removeItem('unitOfMeasure', unit.id).subscribe((data: IResult<any>) => {
         if (data.isSuccess) {
           this.sSweetalert.showSuccess('Unidad de medida eliminada');
           this.getAllUnitsOfMeasure();
         } else {
-          this.sSweetalert.showError('Error al eliminar la unidad de medida');
+          this.sSweetalert.showError(data.error || 'Error al eliminar la unidad de medida');
         }
       });
     });
