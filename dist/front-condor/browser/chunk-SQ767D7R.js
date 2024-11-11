@@ -1,0 +1,1 @@
+import{h as s}from"./chunk-MTNE5NEP.js";import{$ as r,W as e,gb as o}from"./chunk-X4DW4WN7.js";var l=class i{constructor(t){this.sTitle=t}title=o("");setTitle(t){this.title.set(t),this.sTitle.setTitle(t)}getTitle(){return this.title}static \u0275fac=function(n){return new(n||i)(r(s))};static \u0275prov=e({token:i,factory:i.\u0275fac,providedIn:"root"})};export{l as a};
